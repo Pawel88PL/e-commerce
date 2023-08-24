@@ -22,11 +22,13 @@ namespace MiodOdStaniula
 
             builder.Services.AddControllers();
 
+            /* builder.Services.AddMemoryCache();
+            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromDays(2);
             });
-
+            */
             builder.Services.AddScoped<IAddProductService, AddProductService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
@@ -65,7 +67,8 @@ namespace MiodOdStaniula
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddCors(options => {
+            builder.Services.AddCors(options =>
+            {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins("http://localhost:4200")
                     .AllowAnyMethod()
@@ -93,9 +96,9 @@ namespace MiodOdStaniula
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
-            app.UseAuthorization();
+            //app.UseSession();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCors("AllowSpecificOrigin");
             app.MapControllers();
 

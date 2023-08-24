@@ -1,36 +1,60 @@
-﻿using MiodOdStaniula.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Services
 {
     public class ProductService : IProductService
     {
+        private readonly DbStoreContext _context;
+        private readonly ILogger<ProductService> _logger;
 
-        public List<Product> Sort(IEnumerable<Product> products, string sortOrder)
+        public ProductService(DbStoreContext context, ILogger<ProductService> logger)
         {
-            return sortOrder switch
-            {
-                "category" => products.OrderBy(p => p.CategoryId).ToList(),
-                "name_asc" => products.OrderBy(p => p.Name).ToList(),
-                "price_asc" => products.OrderBy(p => p.Price).ToList(),
-                "price_desc" => products.OrderByDescending(p => p.Price).ToList(),
-                "date_asc" => products.OrderBy(p => p.DateAdded).ToList(),
-                "available-desc" => products.OrderByDescending(p => p.AmountAvailable).ToList(),
-                "popularity" => products.OrderByDescending(p => p.Popularity).ToList(),
-                _ => products.OrderBy(p => p.Priority).ToList(),
-            };
+            _context = context;
+            _logger = logger;
         }
 
-        public List<Product> Filter(IEnumerable<Product> products, string filterCondition)
+        public async Task<ServiceResult<IEnumerable<Product>>> GetAllProductsAsync()
         {
-            if (!string.IsNullOrEmpty(filterCondition))
+            try
             {
-                if (products.Any(p => p.Category != null && p.Category.Name != null && p.Category.Name.Equals(filterCondition)))
+                if (_context.Products != null)
                 {
-                    return products.Where(p => p.Category != null && p.Category.Name != null && p.Category.Name.Equals(filterCondition)).ToList();
+                    var products = await _context.Products.ToListAsync();
+                    return new ServiceResult<IEnumerable<Product>>
+                    {
+                        Data = products,
+                        Success = true
+                    };
+                }
+                else
+                {
+                    return new ServiceResult<IEnumerable<Product>>
+                    {
+                        Success = false
+                    };
                 }
             }
-            return products.ToList();
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "Błąd podczas pobierania produktów");
+
+                return new ServiceResult<IEnumerable<Product>>
+                {
+                    Success = false,
+                    ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."
+                };
+            }
         }
     }
+
+    public class ServiceResult<T>
+    {
+        public T? Data { get; set; }
+        public bool Success { get; set; }
+        public string? ErrorMessage { get; set; }
+    }
+
 }

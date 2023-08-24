@@ -28,36 +28,17 @@ namespace MiodOdStaniula.Controllers
             _productService = productService;
         }
 
-        private List<ProductViewModel> ConvertToViewModel(IEnumerable<Product> products)
-        {
-            
-            return products.Select(product => new ProductViewModel
-            {
-                ProductId = product.ProductId,
-                Name = product.Name,
-                Price = product.Price,
-                Weight = product.Weight,
-                Description = product.Description,
-                CategoryId = product.CategoryId,
-                Priority = product.Priority,
-                AmountAvailable = product.AmountAvailable,
-                ProductImageInfos = product.ProductImages?.Select(pi => new ProductImageInfo
-                {
-                    ImageId = pi.ImageId,
-                    ImagePath = pi.ImagePath
-                }).ToList() ?? new List<ProductImageInfo>()
-
-            }).ToList();
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetProducts(string? sortOrder = null, string? filterCondition = null)
+        public async Task<IActionResult> GetAllProducts()
         {
-            var products = await GetSortedAndFilteredProducts(sortOrder, filterCondition);
-            var viewModel = ConvertToViewModel(products);
-
-            return Ok(viewModel);
+            var result = await _productService.GetAllProductsAsync();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return StatusCode(500, new { message = result.ErrorMessage });
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
@@ -75,12 +56,5 @@ namespace MiodOdStaniula.Controllers
             }
         }
 
-        private async Task<IEnumerable<Product>> GetSortedAndFilteredProducts(string sortOrder, string filterCondition)
-        {
-            var products = await _warehouseService.GetAllProductsAsync();
-            products = _productService.Sort(products, sortOrder);
-            products = _productService.Filter(products, filterCondition);
-            return products;
-        }
     }
 }

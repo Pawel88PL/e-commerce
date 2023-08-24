@@ -30,7 +30,7 @@ namespace MiodOdStaniula.Controllers
                 return View(userLoginData);
             }
 
-            await _signInManager.PasswordSignInAsync(userLoginData.UserName, userLoginData.Password, true, false);
+            await _signInManager.PasswordSignInAsync(userLoginData.UserName!, userLoginData.Password!, true, false);
 
             return RedirectToAction("Index", "Products");
         }
@@ -55,7 +55,7 @@ namespace MiodOdStaniula.Controllers
                 UserName = userRegisterData.UserName
             };
 
-            await _userManager.CreateAsync(newUser, userRegisterData.Password);
+            await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
             return RedirectToAction("Login","Account");
         }

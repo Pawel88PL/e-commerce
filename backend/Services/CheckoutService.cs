@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MiodOdStaniula.Migrations;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
 

@@ -6,6 +6,8 @@ using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ProductsController : BaseController
     {
         private readonly IWarehouseService _warehouseService;
@@ -48,43 +50,29 @@ namespace MiodOdStaniula.Controllers
             }).ToList();
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> Index(string sortOrder, string filterCondition)
+        public async Task<IActionResult> GetProducts(string? sortOrder = null, string? filterCondition = null)
         {
             var products = await GetSortedAndFilteredProducts(sortOrder, filterCondition);
             var viewModel = ConvertToViewModel(products);
-            ViewBag.FilterCondition = string.IsNullOrEmpty(filterCondition) ? "NASZE PRODUKTY:" : filterCondition;
 
-            return View(viewModel);
+            return Ok(viewModel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(int id)
         {
             Product? product = await _warehouseService.GetProductAsync(id)!;
-            var cartId = HttpContext.Session.GetString("CartId");
-
-            ViewData["CartId"] = cartId;
 
             if (product == null)
             {
-                return View("_NotFound");
+                return NotFound(new { Message = "Product not found." });
             }
             else
             {
                 ProductViewModel productViewModel = await PrepareProductViewModel(product);
-                return View(productViewModel);
+                return Ok(productViewModel);
             }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetProducts(string sortOrder, string filterCondition)
-        {
-            var products = await GetSortedAndFilteredProducts(sortOrder, filterCondition);
-            var viewModel = ConvertToViewModel(products);
-            ViewBag.FilterCondition = filterCondition;
-            return PartialView("_ProductList", viewModel);
         }
 
         private async Task<IEnumerable<Product>> GetSortedAndFilteredProducts(string sortOrder, string filterCondition)

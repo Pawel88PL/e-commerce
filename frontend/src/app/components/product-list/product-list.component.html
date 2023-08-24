@@ -1,1 +1,6 @@
-<p>product-list works!</p>
+<div *ngFor="let product of products">
+    <h2>{{ product.name }}</h2>
+    <p>Cena: {{ product.price }}</p>
+    <img [src]="product.productImages?.[0]?.imagePath" alt="{{ product.name }}" />
+    <!-- Reszta kodu -->
+</div>

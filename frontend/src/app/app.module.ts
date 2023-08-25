@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProductListComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

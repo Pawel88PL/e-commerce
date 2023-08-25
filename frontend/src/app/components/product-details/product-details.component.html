@@ -1,1 +1,7 @@
-<p>product-details works!</p>
+<div *ngIf="product">
+    <h2>{{ product.name }}</h2>
+    <p>Cena: {{ product.price }} zł</p>
+    <p>Waga: {{ product.weight }} g</p>
+    <p>Opis: {{ product.description }}</p>
+    <!-- Możesz dodać więcej informacji o produkcie i np. karuzelę zdjęć produktu -->
+</div>

@@ -1,0 +1,31 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+    padding-top: 60px;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+}
+
+.main{
+  position: relative;
+  margin-bottom: 400px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .main {
+    margin-bottom: 600px;
+  }
+}
+
+@media (max-width: 575px) {
+  .main {
+    margin-bottom: 800px;
+  }
+}

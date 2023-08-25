@@ -15,22 +15,41 @@ namespace MiodOdStaniula.Services
             _logger = logger;
         }
 
-        public async Task<ServiceResult<IEnumerable<Product>>> GetAllProductsAsync()
+        public async Task<ServiceResult<IEnumerable<ProductDto>>> GetAllProductsAsync()
         {
             try
             {
                 if (_context.Products != null)
                 {
-                    var products = await _context.Products.ToListAsync();
-                    return new ServiceResult<IEnumerable<Product>>
+                    var products = await _context.Products
+                        .Include(p => p.Category)
+                        .Include(p => p.ProductImages)
+                        .ToListAsync();
+
+                    var productDtos = products.Select(p => new ProductDto
                     {
-                        Data = products,
+                        ProductId = p.ProductId,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Weight = p.Weight,
+                        AmountAvailable = p.AmountAvailable,
+                        // ... inne właściwości ...
+                        ProductImages = p.ProductImages!.Select(pi => new ProductImageDto
+                        {
+                            ImageId = pi.ImageId,
+                            ImagePath = pi.ImagePath
+                        }).ToList()
+                    }).ToList();
+
+                    return new ServiceResult<IEnumerable<ProductDto>>
+                    {
+                        Data = productDtos,
                         Success = true
                     };
                 }
                 else
                 {
-                    return new ServiceResult<IEnumerable<Product>>
+                    return new ServiceResult<IEnumerable<ProductDto>>
                     {
                         Success = false
                     };
@@ -41,7 +60,7 @@ namespace MiodOdStaniula.Services
 
                 _logger.LogError(ex, "Błąd podczas pobierania produktów");
 
-                return new ServiceResult<IEnumerable<Product>>
+                return new ServiceResult<IEnumerable<ProductDto>>
                 {
                     Success = false,
                     ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."

@@ -1,6 +1,59 @@
-<div *ngFor="let product of products">
-    <h2>{{ product.name }}</h2>
-    <p>Cena: {{ product.price }}</p>
-    <img [src]="product.productImages?.[0]?.imagePath" alt="{{ product.name }}" />
-    <!-- Reszta kodu -->
+<div>
+
 </div>
+
+<section class="container p-3 mb-5">
+    <div class="row">
+        <div class="col-md-9">
+            <h1 id="categories" class="text-center">@ViewBag.FilterCondition</h1>
+           
+        </div>
+        <div class="col-md-3">
+            <form asp-action="Index" method="get">
+                <select name="sortOrder" onchange="this.form.submit()" class="form-select">
+                    <option value="">Sortuj po ...</option>
+                    <option value="category">Kategoria</option>
+                    <option value="name_asc">Nazwa produktu</option>
+                    <option value="price_asc">Cena rosnąco</option>
+                    <option value="price_desc">Cena malejąco</option>
+                    <option value="date_asc">Data dodania</option>
+                    <option value="available-desc">Dostępność</option>
+                    <option value="popularity">Popularność</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="text-center container py-5">
+        <div class="row">
+            <div class="col-md-3 text-start border-end mb-4">
+                <h3>Kategorie:</h3>
+                <br />
+                <div class="list-group">
+                    <a asp-action="GetProducts" class="filter-link list-group-item list-group-item-action"><b><i
+                                class="bi bi-list-ul"></i> Wszystkie produkty</b></a>
+                    <a asp-action="GetProducts" asp-route-filterCondition="Miody naturalne"
+                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
+                        Miody
+                        naturalne</a>
+                    <a asp-action="GetProducts" asp-route-filterCondition="Miody smakowe"
+                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
+                        Miody
+                        smakowe</a>
+                    <a asp-action="GetProducts" asp-route-filterCondition="Zestawy miodów"
+                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
+                        Zestawy miodów</a>
+                    <a asp-action="GetProducts" asp-route-filterCondition="Produkty pszczele"
+                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
+                        Produkty pszczele</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row" id="products-container">
+                    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

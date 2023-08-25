@@ -1,0 +1,525 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/.DS_Store",
+      "PackagePath": "staticwebassets/.DS_Store"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/Checkout.css",
+      "PackagePath": "staticwebassets/css/Checkout.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/Layout.css",
+      "PackagePath": "staticwebassets/css/Layout.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/LoginRegister.css",
+      "PackagePath": "staticwebassets/css/LoginRegister.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/ProductDetails.css",
+      "PackagePath": "staticwebassets/css/ProductDetails.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/ProductList.css",
+      "PackagePath": "staticwebassets/css/ProductList.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/css/Warehouse.css",
+      "PackagePath": "staticwebassets/css/Warehouse.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/favicon-32x32.png",
+      "PackagePath": "staticwebassets/favicon-32x32.png"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/.DS_Store",
+      "PackagePath": "staticwebassets/images/.DS_Store"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691183092204.jpg",
+      "PackagePath": "staticwebassets/images/1691183092204.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691261030147.jpg",
+      "PackagePath": "staticwebassets/images/1691261030147.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691261030152.jpg",
+      "PackagePath": "staticwebassets/images/1691261030152.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691261030172.jpg",
+      "PackagePath": "staticwebassets/images/1691261030172.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691261030176.jpg",
+      "PackagePath": "staticwebassets/images/1691261030176.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/1691261030179.jpg",
+      "PackagePath": "staticwebassets/images/1691261030179.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Cynamon.jpg",
+      "PackagePath": "staticwebassets/images/Cynamon.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Cytryna mała.jpg",
+      "PackagePath": "staticwebassets/images/Cytryna mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Cytryna.jpg",
+      "PackagePath": "staticwebassets/images/Cytryna.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Gryka mała.jpg",
+      "PackagePath": "staticwebassets/images/Gryka mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Gryka.jpg",
+      "PackagePath": "staticwebassets/images/Gryka.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Jabłko z cynamonem.jpg",
+      "PackagePath": "staticwebassets/images/Jabłko z cynamonem.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Lipa mała.jpg",
+      "PackagePath": "staticwebassets/images/Lipa mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Lipa.jpg",
+      "PackagePath": "staticwebassets/images/Lipa.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Malina mała.jpg",
+      "PackagePath": "staticwebassets/images/Malina mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Malina.jpg",
+      "PackagePath": "staticwebassets/images/Malina.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Miód w plastrze.jpg",
+      "PackagePath": "staticwebassets/images/Miód w plastrze.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Pierzga mała.jpg",
+      "PackagePath": "staticwebassets/images/Pierzga mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Pierzga średnia.jpg",
+      "PackagePath": "staticwebassets/images/Pierzga średnia.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Porzeczka mała.jpg",
+      "PackagePath": "staticwebassets/images/Porzeczka mała.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Porzeczka.jpg",
+      "PackagePath": "staticwebassets/images/Porzeczka.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Rzepak.jpg",
+      "PackagePath": "staticwebassets/images/Rzepak.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Spadź duża.jpg",
+      "PackagePath": "staticwebassets/images/Spadź duża.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Wielokwiat.jpg",
+      "PackagePath": "staticwebassets/images/Wielokwiat.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Wosk.jpg",
+      "PackagePath": "staticwebassets/images/Wosk.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Zestaw samakowy.jpg",
+      "PackagePath": "staticwebassets/images/Zestaw samakowy.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/available.png",
+      "PackagePath": "staticwebassets/images/available.png"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/cytryna_0.9.jpg",
+      "PackagePath": "staticwebassets/images/cytryna_0.9.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/gryka_0.4.JPG",
+      "PackagePath": "staticwebassets/images/gryka_0.4.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/gryka_1.0.JPG",
+      "PackagePath": "staticwebassets/images/gryka_1.0.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/jarmark_1.jpeg",
+      "PackagePath": "staticwebassets/images/jarmark_1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/kłodzko_1.jpeg",
+      "PackagePath": "staticwebassets/images/kłodzko_1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/miody_1.jpeg",
+      "PackagePath": "staticwebassets/images/miody_1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/outOfOrder.png",
+      "PackagePath": "staticwebassets/images/outOfOrder.png"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/piotr_1.jpeg",
+      "PackagePath": "staticwebassets/images/piotr_1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/porzeczka duża.jpg",
+      "PackagePath": "staticwebassets/images/porzeczka duża.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/porzeczka_0.4.jpeg",
+      "PackagePath": "staticwebassets/images/porzeczka_0.4.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/porzeczka_0.9.JPG",
+      "PackagePath": "staticwebassets/images/porzeczka_0.9.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pyłek duży.jpg",
+      "PackagePath": "staticwebassets/images/pyłek duży.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pyłek mały.jpeg",
+      "PackagePath": "staticwebassets/images/pyłek mały.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak mały.jpg",
+      "PackagePath": "staticwebassets/images/rzepak mały.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak_0.4.JPG",
+      "PackagePath": "staticwebassets/images/rzepak_0.4.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak_1.0.JPG",
+      "PackagePath": "staticwebassets/images/rzepak_1.0.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/smakowe_3.jpg",
+      "PackagePath": "staticwebassets/images/smakowe_3.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/smallAmount.png",
+      "PackagePath": "staticwebassets/images/smallAmount.png"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/spadź mała.jpeg",
+      "PackagePath": "staticwebassets/images/spadź mała.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/tradycyjne_3.jpg",
+      "PackagePath": "staticwebassets/images/tradycyjne_3.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/unavaialable.jpeg",
+      "PackagePath": "staticwebassets/images/unavaialable.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/unavaialable1.jpeg",
+      "PackagePath": "staticwebassets/images/unavaialable1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiat_0.4.JPG",
+      "PackagePath": "staticwebassets/images/wielokwiat_0.4.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiat_1.0.JPG",
+      "PackagePath": "staticwebassets/images/wielokwiat_1.0.JPG"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",
+      "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpeg",
+      "PackagePath": "staticwebassets/images/wiktor.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor_1.jpeg",
+      "PackagePath": "staticwebassets/images/wiktor_1.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor_2.jpeg",
+      "PackagePath": "staticwebassets/images/wiktor_2.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor_3.jpeg",
+      "PackagePath": "staticwebassets/images/wiktor_3.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Świeczka.jpeg",
+      "PackagePath": "staticwebassets/images/Świeczka.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/js/alerts.js",
+      "PackagePath": "staticwebassets/js/alerts.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/js/cart.js",
+      "PackagePath": "staticwebassets/js/cart.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/js/productList.js",
+      "PackagePath": "staticwebassets/js/productList.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.backend.props",
+      "PackagePath": "build\\backend.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.backend.props",
+      "PackagePath": "buildMultiTargeting\\backend.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.backend.props",
+      "PackagePath": "buildTransitive\\backend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,12 +1,7 @@
-<div>
-
-</div>
-
-<section class="container p-3 mb-5">
+<div class="container p-3 mb-5">
     <div class="row">
         <div class="col-md-9">
             <h1 id="categories" class="text-center">Nasze produkty:</h1>
-           
         </div>
         <div class="col-md-3">
             <form asp-action="Index" method="get">
@@ -24,7 +19,7 @@
         </div>
     </div>
     <hr />
-    <div class="text-center container py-5">
+    <div class="text-center py-5">
         <div class="row">
             <div class="col-md-3 text-start border-end mb-4">
                 <h3>Kategorie:</h3>
@@ -51,9 +46,10 @@
 
             <div class="col-md-9">
                 <div class="row" id="products-container">
-                    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+                    <app-product-card class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let product of products"
+                        [product]="product"></app-product-card>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>

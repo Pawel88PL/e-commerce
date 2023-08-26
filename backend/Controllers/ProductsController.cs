@@ -8,23 +8,12 @@ namespace MiodOdStaniula.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController : BaseController
+    public class ProductsController : Controller
     {
-        private readonly IWarehouseService _warehouseService;
         private readonly IProductService _productService;
 
-        public ProductsController(
-            DbStoreContext context,
-                ICartService cartService,
-                ICheckoutService checkoutService,
-                ICustomerService customerService,
-                IProductService productService,
-                ITotalCostService totalCostService,
-                ILogger<IEditProductService> logger,
-                IWarehouseService warehouseService
-            ) : base(context, cartService, checkoutService, customerService, totalCostService)
+        public ProductsController(IProductService productService)
         {
-            _warehouseService = warehouseService;
             _productService = productService;
         }
 
@@ -43,17 +32,12 @@ namespace MiodOdStaniula.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            Product? product = await _warehouseService.GetProductAsync(id)!;
-
-            if (product == null)
+            var result = await _productService.GetProductAsync(id);
+            if (result.Success)
             {
-                return NotFound(new { Message = "Product not found." });
+                return Ok(result.Data);
             }
-            else
-            {
-                ProductViewModel productViewModel = await PrepareProductViewModel(product);
-                return Ok(productViewModel);
-            }
+            return StatusCode(500, new { message = result.ErrorMessage });
         }
 
     }

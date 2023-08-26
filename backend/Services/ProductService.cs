@@ -67,6 +67,67 @@ namespace MiodOdStaniula.Services
                 };
             }
         }
+
+        public async Task<ServiceResult<ProductDto>> GetProductAsync(int id)
+        {
+            try
+            {
+                if (_context.Products != null)
+                {
+                    var product = await _context.Products
+                        .Include(p => p.Category)
+                        .Include(p => p.ProductImages)
+                        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+                    if (product == null)
+                    {
+                        return new ServiceResult<ProductDto>
+                        {
+                            Success = false,
+                            ErrorMessage = "Nie znaleziono produktu."
+                        };
+                    }
+
+                    var productDto = new ProductDto
+                    {
+                        AmountAvailable = product.AmountAvailable,
+                        Description = product.Description,
+                        Name = product.Name,
+                        Price = product.Price,
+                        ProductId = product.ProductId,
+                        Category = product.Category!.Name,
+                        ProductImages = product.ProductImages!.Select(pi => new ProductImageDto
+                        {
+                            ImageId = pi.ImageId,
+                            ImagePath = pi.ImagePath
+                        }).ToList(),
+                        Weight = product.Weight,
+                    };
+
+                    return new ServiceResult<ProductDto>
+                    {
+                        Data = productDto,
+                        Success = true
+                    };
+                }
+                else
+                {
+                    return new ServiceResult<ProductDto>
+                    {
+                        Success = false
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Błąd podczas pobierania produktów");
+                return new ServiceResult<ProductDto>
+                {
+                    Success = false,
+                    ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."
+                };
+            }
+        }
     }
 
     public class ServiceResult<T>

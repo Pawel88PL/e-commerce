@@ -1,6 +1,9 @@
+
 .product-details{
     max-width: 1000px;
     margin: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 .cart{
     margin-bottom: 200px;

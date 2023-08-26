@@ -10,6 +10,9 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,17 @@ import { MatButtonModule } from '@angular/material/button';
     HomeComponent,
     ProductListComponent,
     ProductCardComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    FooterComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

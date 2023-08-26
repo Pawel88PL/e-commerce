@@ -39,15 +39,15 @@
             <br />
 
             <div class="text-center">
-                <h3 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.price }} zł</h3>
-                <h3 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.weight }} g</h3>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.price }} zł</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.weight }} g</h2>
             </div>
             <br />
             <div class="availability">
                 <ng-container *ngIf="product?.amountAvailable === 0">
                     <div class="row outOfOrder">
                         <div class="col-9">
-                            <h6>Sprzedany</h6>
+                            <h3>Sprzedany</h3>
                         </div>
                         <div class="col-3">
                             <img src="assets/images/outOfOrder.png" style="max-width: 40px">
@@ -58,7 +58,7 @@
                 <ng-container *ngIf="product.amountAvailable > 0 && product.amountAvailable < 10">
                     <div class="row smallAmount">
                         <div class="col-9">
-                            <h6>Ograniczona ilość</h6>
+                            <h3>Ograniczona ilość</h3>
                         </div>
                         <div class="col-3">
                             <img src="assets/images/smallAmount.png" style="max-width: 40px">
@@ -69,7 +69,7 @@
                 <ng-container *ngIf="product.amountAvailable >= 10">
                     <div class="row available">
                         <div class="col-9">
-                            <h6>Produkt dostępny!</h6>
+                            <h3>Produkt dostępny!</h3>
                         </div>
                         <div class="col-3">
                             <img src="assets/images/available.png" style="max-width: 40px">
@@ -80,14 +80,14 @@
             <br />
             <hr />
             <div>
-                <button type="submit" class="btn btn-dark btn-lg mb-3 addToCartButton w-100">
+                <button mat-raised-button color="primary" type="submit" class="mb-3 addToCartButton w-100">
                     <i class="bi bi-cart-plus"></i> Dodaj do koszyka
                 </button>
                 <div>
-                    <p>Lub zadzwoń i zamów pod nr tel:</p>
-                    <h3>+48 570 436 579</h3>
+                    <h3>Lub zadzwoń i zamów pod nr tel:</h3>
+                    <h2>+48 570 436 579</h2>
                 </div>
-                <a href="" class="btn btn-lg btn-danger mt-4 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
+                <a mat-raised-button color="warn" href="" class=" mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
             </div>
         </div>
     </div>

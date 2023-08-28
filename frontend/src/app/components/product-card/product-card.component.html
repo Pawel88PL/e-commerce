@@ -1,37 +1,34 @@
 <div *ngIf="product && product.productId">
     <div class="card rounded-3 shadow-lg mb-2">
-        <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
-            <div id="carouselForProduct{{product.productId}}" class="carousel slide carousel-fade w-100"
-                data-bs-ride="carousel">
-                <div *ngIf="product.productImages?.length > 1" class="carousel-indicators">
-                    <button *ngFor="let image of product.productImages; let i = index" type="button"
-                        [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
-                        [class.active]="i === 0">
-                    </button>
-                </div>
-                <div class="carousel-inner">
-                    <div *ngIf="!product.productImages?.length" class="productPhotoUnavailable">
-                        <img src="/images/unavailable1.jpeg" class="d-block w-100" alt="Zdjęcie produktu niedostępne" />
-                    </div>
-                    <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
-                        [class.active]="i === 0" data-bs-interval="4000">
-                        <img *ngIf="product.productImages?.[0]"
-                            [src]="'https://localhost:5047/' + product.productImages?.[0]?.imagePath"
-                            class="d-block w-100 rounded-3" alt="{{ product.name }}" />
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselForProduct' + product?.productId"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselForProduct' + product?.productId"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+        <div id="carouselForProduct{{product.productId}}" class="carousel slide carousel-fade w-100"
+            data-bs-ride="carousel">
+            <div *ngIf="product.productImages?.length > 1" class="carousel-indicators">
+                <button *ngFor="let image of product.productImages; let i = index" type="button"
+                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
+                    [class.active]="i === 0">
                 </button>
             </div>
-        </a>
+            <div class="carousel-inner">
+                <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
+                    <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
+                        [class.active]="i === 0" data-bs-interval="4000">
+                        <img *ngIf="image" [src]="'https://localhost:5047/' + image.imagePath"
+                            class="d-block w-100 rounded-3" alt="{{ product.name }}" />
+                    </div>
+                </a>
+            </div>
+            <button class="carousel-control-prev" type="button"
+                [attr.data-bs-target]="'#carouselForProduct' + product?.productId" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+                [attr.data-bs-target]="'#carouselForProduct' + product?.productId" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
         <div class="card-body">
             <div>
                 <h3 class="card-title mb-3">{{ product?.name }}</h3>
@@ -44,7 +41,7 @@
                 <div class="col-lg-6">
                     <p>Cena: <b>{{ product?.price }} zł</b></p>
                 </div>
-        
+
                 <ng-container *ngIf="product?.amountAvailable === 0">
                     <div class="row outOfOrder">
                         <div class="col-9">
@@ -55,7 +52,7 @@
                         </div>
                     </div>
                 </ng-container>
-        
+
                 <ng-container *ngIf="product?.amountAvailable > 0 && product?.amountAvailable < 10">
                     <div class="row smallAmount">
                         <div class="col-9">
@@ -66,7 +63,7 @@
                         </div>
                     </div>
                 </ng-container>
-        
+
                 <ng-container *ngIf="product?.amountAvailable >= 10">
                     <div class="row available">
                         <div class="col-9">
@@ -78,7 +75,8 @@
                     </div>
                 </ng-container>
             </div>
-            <button mat-raised-button color="primary" (click)="addToCart()" class="add-to-cart-btn m-1 w-100">Dodaj do koszyka</button>
+            <button mat-raised-button color="primary" (click)="addToCart()" class="add-to-cart-btn m-1 w-100">Dodaj do
+                koszyka</button>
         </div>
     </div>
 </div>

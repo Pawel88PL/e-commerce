@@ -1,22 +1,22 @@
-
-<div *ngIf="product && product.productId" class="product-details">
+<div class="product-details">
     <div class="row my-5">
-        <div class="col-sm-7">
-            <div id="carouselForProduct{{product.productId}}" class="carousel carousel-details slide carousel-fade"
+        <div *ngIf="product.productId" class="col-sm-7">
+            <div [attr.id]="'carouselForProduct' + product.productId" class="carousel carousel-details slide carousel-fade"
                 data-bs-ride="carousel">
-                <div *ngIf="product.productImages" class="carousel-indicators">
+                <div *ngIf="product.productImages && product.productImages.length > 1" class="carousel-indicators">
                     <button *ngFor="let image of product.productImages; let i = index" type="button"
                         [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
                         [class.active]="i === 0">
                     </button>
                 </div>
-                <div class="carousel-inner rounded-3 shadow-lg">
-                    <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
-                        [class.active]="i === 0" data-bs-interval="4000">
-                        <img *ngIf="product.productImages?.[0]"
-                            [src]="'https://localhost:5047/' + product.productImages?.[0]?.imagePath"
-                            class="d-block w-100" alt="{{ product.name }}" />
-                    </div>
+                <div class="carousel-inner">
+                    <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
+                        <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
+                            [class.active]="i === 0" data-bs-interval="4000">
+                            <img *ngIf="image" [src]="'https://localhost:5047/' + image.imagePath"
+                                class="d-block w-100 rounded-3" alt="{{ product.name }}" />
+                        </div>
+                    </a>
                 </div>
                 <button class="carousel-control-prev" type="button"
                     [attr.data-bs-target]="'#carouselForProduct' + product.productId" data-bs-slide="prev">
@@ -92,7 +92,7 @@
         </div>
     </div>
     <hr>
-    
+
     <div *ngIf="product" class="my-4 py-3 text-start" [innerHTML]="product.description">
     </div>
 

@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { WarehouseComponent } from './components/warehouse/warehouse.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     ProductCardComponent,
     ProductDetailsComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    WarehouseComponent
   ],
   imports: [
     BrowserModule,

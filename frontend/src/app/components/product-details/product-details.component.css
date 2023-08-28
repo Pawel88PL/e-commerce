@@ -7,8 +7,20 @@
     padding-right: 2rem;
 }
 
+.products-carousel{
+    margin-bottom: 10rem;
+}
+
+.description{
+    margin-bottom: 10rem;
+}
+
 h1{
     font-size: 2rem;
+}
+
+h2{
+    font-size: 1.5rem;
 }
 
 .outOfOrder {

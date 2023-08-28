@@ -1,0 +1,47 @@
+<div class="container border text-center shadow p-3 bg-white rounded">
+    <div class="row">
+        <div class="col-9">
+            <h3>Mój magazyn</h3>
+        </div>
+        <div class="col-3">
+            <a mat-raised-button color="primary" routerLink="/AddNewProduct">
+                <i class="bi bi-plus-circle"></i> Dodaj produkt</a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="smallScreenDisplayNone">Kategoria</th>
+                <th scope="col">Nazwa produktu</th>
+                <th scope="col">Cena</th>
+                <th scope="col" class="smallScreenDisplayNone">Waga</th>
+                <th scope="col">Dostępna ilość</th>
+                <th scope="col">Edytuj</th>
+                <th scope="col">Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td class="smallScreenDisplayNone">{{ product?.category}}</td>
+                <td><a mat-button [routerLink]="['/product', product.productId]"> {{ product?.name }}</a></td>
+                <td><b>{{ product?.price }}</b> zł</td>
+                <td class="smallScreenDisplayNone"><b>{{ product?.weight }}</b> gram</td>
+                <td>
+                    <strong *ngIf="product?.amountAvailable === 0">brak towaru</strong>
+                    <p *ngIf="product.amountAvailable > 0"><b>{{ product?.amountAvailable }}</b> sztuk</p>
+                </td>
+                <td>
+                    <!-- Zakładam, że Edit jest teraz ścieżką w Angularze -->
+                    <a mat-raised-button color="primary" [routerLink]="['/Edit', product?.productId]">EDYTUJ</a>
+                </td>
+                <td>
+                    <!-- W Angularze, zamiast formularza, możemy używać zdarzenia (click) -->
+                    <button mat-raised-button color="warn" type="button"
+                        (click)="confirmDeleteAlert(product.productId)">USUŃ</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

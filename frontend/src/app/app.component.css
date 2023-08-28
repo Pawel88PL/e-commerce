@@ -4,13 +4,10 @@ html {
   min-height: 100%;
 }
 
-body {
-    padding-top: 60px;
-}
-
-.main{
+main{
   position: relative;
-  margin-bottom: 400px;
+  margin-top: 3.5rem;
+  margin-bottom: 4rem;
 }
 
 footer{
@@ -19,13 +16,13 @@ footer{
 }
 
 @media (max-width: 767px) {
-  .main {
-    margin-bottom: 600px;
+  main {
+    margin-bottom: 6rem;
   }
 }
 
 @media (max-width: 575px) {
-  .main {
-    margin-bottom: 800px;
+  main {
+    margin-bottom: 8rem;
   }
 }

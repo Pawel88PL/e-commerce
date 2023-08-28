@@ -39,8 +39,8 @@
             <br />
 
             <div class="text-center">
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.price }} zł</h2>
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto"> {{ product.weight }} g</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto">Cena: {{ product.price }} zł</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto">Waga: {{ product.weight }} g</h2>
             </div>
             <br />
             <div class="availability">
@@ -91,6 +91,7 @@
             </div>
         </div>
     </div>
+    <hr>
     <div *ngIf="product" class="my-4 py-3 text-start" [innerHTML]="product.description">
     </div>
 </div>

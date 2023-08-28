@@ -2,42 +2,24 @@
 .product-details{
     max-width: 1000px;
     margin: auto;
+    margin-top: 8rem;
     padding-left: 2rem;
     padding-right: 2rem;
 }
-.cart{
-    margin-bottom: 200px;
-}
-.card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
+
+h1{
+    font-size: 2rem;
 }
 
-.btn-outline-dark,
-.btn-dark {
-    border-radius: 30px;
-    
-}
-
-.btn-dark:hover {
-    background-color: #495158;
-    color: white;
-}
-
-.btn-danger{
-    border-radius: 30px;
-}
-
-div.outOfOrder {
+.outOfOrder {
     color: red;
 }
 
-div.smallAmount {
+.smallAmount {
     color: orange;
 }
 
-div.available {
+.available {
     color: green;
 }
 

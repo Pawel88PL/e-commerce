@@ -17,7 +17,7 @@
                         [class.active]="i === 0" data-bs-interval="4000">
                         <img *ngIf="product.productImages?.[0]"
                             [src]="'https://localhost:5047/' + product.productImages?.[0]?.imagePath"
-                            class="d-block w-100" alt="{{ product.name }}" />
+                            class="d-block w-100 rounded-3" alt="{{ product.name }}" />
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselForProduct' + product?.productId"

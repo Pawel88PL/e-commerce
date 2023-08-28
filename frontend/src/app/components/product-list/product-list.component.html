@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row pt-4">
         <div class="col-md-9">
-            <h1 id="categories" class="text-center">Nasze produkty:</h1>
+            <h1 id="categories" class="text-center">
+                {{ getTitle() }}
+            </h1>
         </div>
         <div class="col-md-3">
             <form asp-action="Index" method="get">
@@ -25,28 +27,33 @@
                 <h3>Kategorie:</h3>
                 <br />
                 <div class="list-group">
-                    <a asp-action="GetProducts" class="filter-link list-group-item list-group-item-action"><b><i
-                                class="bi bi-list-ul"></i> Wszystkie produkty</b></a>
-                    <a asp-action="GetProducts" asp-route-filterCondition="Miody naturalne"
-                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
-                        Miody
-                        naturalne</a>
-                    <a asp-action="GetProducts" asp-route-filterCondition="Miody smakowe"
-                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
-                        Miody
-                        smakowe</a>
-                    <a asp-action="GetProducts" asp-route-filterCondition="Zestawy miodów"
-                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
-                        Zestawy miodów</a>
-                    <a asp-action="GetProducts" asp-route-filterCondition="Produkty pszczele"
-                        class="filter-link list-group-item list-group-item-action ps-5"><i class="bi bi-dash"></i>
-                        Produkty pszczele</a>
+                    <a (click)="selectedCategory = null" [ngClass]="{'active': selectedCategory === null}"
+                        class="list-group-item list-group-item-action">
+                        <i class="bi bi-list-ul"></i> Wszystkie produkty
+                    </a>
+                    <a (click)="selectedCategory = 1" [ngClass]="{'active': selectedCategory === 1}"
+                        class="list-group-item list-group-item-action">
+                        <i class="bi bi-dash"></i> Miody naturalne
+                    </a>
+                    <a (click)="selectedCategory = 2" [ngClass]="{'active': selectedCategory === 2}"
+                        class="list-group-item list-group-item-action">
+                        <i class="bi bi-dash"></i> Miody smakowe
+                    </a>
+                    <a (click)="selectedCategory = 3" [ngClass]="{'active': selectedCategory === 3}"
+                        class="list-group-item list-group-item-action">
+                        <i class="bi bi-dash"></i> Zestawy miodów
+                    </a>
+                    <a (click)="selectedCategory = 4" [ngClass]="{'active': selectedCategory === 4}"
+                        class="list-group-item list-group-item-action">
+                        <i class="bi bi-dash"></i> Produkty pszczele
+                    </a>
                 </div>
+
             </div>
 
             <div class="col-md-9">
                 <div class="row" id="products-container">
-                    <app-product-card class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let product of products"
+                    <app-product-card class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let product of filteredProducts"
                         [product]="product"></app-product-card>
                 </div>
             </div>

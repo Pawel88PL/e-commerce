@@ -33,6 +33,7 @@ namespace MiodOdStaniula.Services
                         Price = p.Price,
                         Weight = p.Weight,
                         AmountAvailable = p.AmountAvailable,
+                        CategoryId = p.CategoryId,
                         // ... inne właściwości ...
                         ProductImages = p.ProductImages!.Select(pi => new ProductImageDto
                         {

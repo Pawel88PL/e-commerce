@@ -92,6 +92,17 @@
         </div>
     </div>
     <hr>
+    
     <div *ngIf="product" class="my-4 py-3 text-start" [innerHTML]="product.description">
+    </div>
+
+    <div>
+        <ngx-slick-carousel [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let product of products" class="slide">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+            <button type="button" class="slick-prev" ngxSlickPrev>Previous</button>
+            <button type="button" class="slick-next" ngxSlickNext>Next</button>
+        </ngx-slick-carousel>
     </div>
 </div>

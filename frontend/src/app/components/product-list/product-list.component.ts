@@ -9,20 +9,36 @@ import { Product } from 'src/app/models/product.model';
 })
 
 export class ProductListComponent implements OnInit {
-  selectedCategory: number | null = null;
   products: Product[] = [];
-  
+
   constructor(private productService: ProductService) { }
-  
+
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-    });
+    this.productService.getProducts().subscribe(
+      data => {
+        this.products = data;
+      },
+      error => {
+        console.error("Błąd podczas pobierania produktów:", error);
+      });
   }
-  
+
+  selectedCategory: number | null = null;
+  selectedSorting: string | null = null;
+
   get filteredProducts(): Product[] {
-    const filtered = !this.selectedCategory ? this.products : this.products.filter(p => p.categoryId === this.selectedCategory);
-    console.log(filtered);
+    let filtered = !this.selectedCategory ? this.products : this.products.filter(p => p.categoryId === this.selectedCategory);
+
+    filtered = filtered.sort((a, b) => {
+      switch (this.selectedSorting) {
+        case 'category': return (a.category?.categoryId || 0) - (b.category?.categoryId || 0);
+        case 'name_asc': return a.name?.localeCompare(b.name || '') || 0;
+        case 'price_asc': return a.price - b.price;
+        case 'price_desc': return b.price - a.price;
+        case 'available-desc': return b.amountAvailable - a.amountAvailable;
+        default: return 0;
+      }
+    });
     return filtered;
   }
 

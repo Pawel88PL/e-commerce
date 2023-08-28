@@ -6,18 +6,16 @@
             </h1>
         </div>
         <div class="col-md-3">
-            <form asp-action="Index" method="get">
-                <select name="sortOrder" onchange="this.form.submit()" class="form-select">
-                    <option value="">Sortuj po ...</option>
-                    <option value="category">Kategoria</option>
-                    <option value="name_asc">Nazwa produktu</option>
-                    <option value="price_asc">Cena rosnąco</option>
-                    <option value="price_desc">Cena malejąco</option>
-                    <option value="date_asc">Data dodania</option>
-                    <option value="available-desc">Dostępność</option>
-                    <option value="popularity">Popularność</option>
-                </select>
-            </form>
+            <mat-form-field>
+                <mat-label>Sortuj po ...</mat-label>
+                <mat-select [(ngModel)]="selectedSorting">
+                    <mat-option value="category">Kategoria</mat-option>
+                    <mat-option value="name_asc">Nazwa produktu</mat-option>
+                    <mat-option value="price_asc">Cena rosnąco</mat-option>
+                    <mat-option value="price_desc">Cena malejąco</mat-option>
+                    <mat-option value="available-desc">Dostępność</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
     <hr />

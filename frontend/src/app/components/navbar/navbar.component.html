@@ -2,7 +2,11 @@
     <a mat-button routerLink="/home" class="home"><i class="bi bi-shop"></i> Miód od Staniula</a>
     <a mat-button routerLink="/products"><i class="bi bi-bag"></i> PRODUKTY</a>
     <div class="spacer"></div>
-    <a mat-button routerLink="/warehouse"><i class="bi bi-box-seam"></i> MÓJ MAGAZYN</a>
+    <button mat-button [matMenuTriggerFor]="menu"><i class="bi bi-person-gear"></i> PANEL ADMINISTRATORA</button>
+    <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/warehouse"><i class="bi bi-box-seam"></i> MAGAZYN</a>
+        <a mat-menu-item routerLink="/warehouse"><i class="bi bi-cart3"></i> ZAMÓWIENIA</a>
+    </mat-menu>
     <a mat-button><i class="bi bi-box-arrow-in-left"></i> MOJE KONTO</a>
     <a mat-button><i class="bi bi-cart"></i> KOSZYK</a>
 </mat-toolbar>

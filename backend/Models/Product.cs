@@ -32,7 +32,7 @@ namespace MiodOdStaniula.Models
 
         public DateTime DateAdded { get; set; }
 
-        public ICollection<ProductImage>? ProductImages { get; set; }
+        public ICollection<ProductImage>? ProductImages { get; set; } = new List<ProductImage>();
 
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
 

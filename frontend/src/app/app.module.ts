@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { AppComponent } from './app.component';
@@ -48,9 +49,11 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
     MatMenuModule,
     MatToolbarModule,
     MatSelectModule,
+    ReactiveFormsModule,
     SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

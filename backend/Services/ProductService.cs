@@ -15,7 +15,7 @@ namespace MiodOdStaniula.Services
             _logger = logger;
         }
 
-        public async Task<ServiceResult<IEnumerable<ProductDto>>> GetAllProductsAsync()
+        public async Task<ServiceResult<IEnumerable<ProductDisplayDto>>> GetAllProductsAsync()
         {
             try
             {
@@ -26,7 +26,7 @@ namespace MiodOdStaniula.Services
                         .Include(p => p.ProductImages)
                         .ToListAsync();
 
-                    var productDtos = products.Select(p => new ProductDto
+                    var productDtos = products.Select(p => new ProductDisplayDto
                     {
                         ProductId = p.ProductId,
                         Name = p.Name,
@@ -43,7 +43,7 @@ namespace MiodOdStaniula.Services
                         }).ToList()
                     }).ToList();
 
-                    return new ServiceResult<IEnumerable<ProductDto>>
+                    return new ServiceResult<IEnumerable<ProductDisplayDto>>
                     {
                         Data = productDtos,
                         Success = true
@@ -51,7 +51,7 @@ namespace MiodOdStaniula.Services
                 }
                 else
                 {
-                    return new ServiceResult<IEnumerable<ProductDto>>
+                    return new ServiceResult<IEnumerable<ProductDisplayDto>>
                     {
                         Success = false
                     };
@@ -62,7 +62,7 @@ namespace MiodOdStaniula.Services
 
                 _logger.LogError(ex, "Błąd podczas pobierania produktów");
 
-                return new ServiceResult<IEnumerable<ProductDto>>
+                return new ServiceResult<IEnumerable<ProductDisplayDto>>
                 {
                     Success = false,
                     ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."
@@ -70,7 +70,7 @@ namespace MiodOdStaniula.Services
             }
         }
 
-        public async Task<ServiceResult<ProductDto>> GetProductAsync(int id)
+        public async Task<ServiceResult<ProductDisplayDto>> GetProductAsync(int id)
         {
             try
             {
@@ -83,14 +83,14 @@ namespace MiodOdStaniula.Services
 
                     if (product == null)
                     {
-                        return new ServiceResult<ProductDto>
+                        return new ServiceResult<ProductDisplayDto>
                         {
                             Success = false,
                             ErrorMessage = "Nie znaleziono produktu."
                         };
                     }
 
-                    var productDto = new ProductDto
+                    var productDto = new ProductDisplayDto
                     {
                         AmountAvailable = product.AmountAvailable,
                         Description = product.Description,
@@ -106,7 +106,7 @@ namespace MiodOdStaniula.Services
                         Weight = product.Weight,
                     };
 
-                    return new ServiceResult<ProductDto>
+                    return new ServiceResult<ProductDisplayDto>
                     {
                         Data = productDto,
                         Success = true
@@ -114,7 +114,7 @@ namespace MiodOdStaniula.Services
                 }
                 else
                 {
-                    return new ServiceResult<ProductDto>
+                    return new ServiceResult<ProductDisplayDto>
                     {
                         Success = false
                     };
@@ -123,7 +123,7 @@ namespace MiodOdStaniula.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Błąd podczas pobierania produktów");
-                return new ServiceResult<ProductDto>
+                return new ServiceResult<ProductDisplayDto>
                 {
                     Success = false,
                     ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."

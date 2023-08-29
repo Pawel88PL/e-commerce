@@ -1,8 +1,7 @@
-using MiodOdStaniula.Models;
 
 namespace MiodOdStaniula
 {
-    public class ProductDto
+    public class ProductDisplayDto
     {
         public int ProductId { get; set; }
         public int Priority { get; set; }

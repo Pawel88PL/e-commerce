@@ -10,10 +10,12 @@ namespace MiodOdStaniula.Controllers
     [Route("[controller]")]
     public class ProductsController : Controller
     {
+        private readonly IAddNewProductService _addNewProductService;
         private readonly IProductService _productService;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IAddNewProductService addNewProductService, IProductService productService)
         {
+            _addNewProductService = addNewProductService;
             _productService = productService;
         }
 
@@ -28,7 +30,6 @@ namespace MiodOdStaniula.Controllers
             return StatusCode(500, new { message = result.ErrorMessage });
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
@@ -40,5 +41,22 @@ namespace MiodOdStaniula.Controllers
             return StatusCode(500, new { message = result.ErrorMessage });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(ProductAddDto productAddDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { message = "Nieprawidłowe dane produktu" });
+            }
+
+            var result = await _addNewProductService.AddNewProductAsync(productAddDto.Product!, productAddDto.ImagePaths!);
+
+            if (!result.Success)
+            {
+                return StatusCode(500, new { message = result.ErrorMessage });
+            }
+
+            return Ok(new { message = "Produkt został pomyślnie dodany", product = result.Data });
+        }
     }
 }

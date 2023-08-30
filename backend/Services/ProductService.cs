@@ -98,7 +98,7 @@ namespace MiodOdStaniula.Services
             }
             catch (Exception ex)
             {
-                return HandleError<ProductDisplayDto>(ex, "Błąd podczas pobierania produktów");
+                return HandleError<ProductDisplayDto>(ex, "Błąd podczas pobierania produktu.");
             }
         }
 

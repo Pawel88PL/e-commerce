@@ -29,7 +29,6 @@ namespace MiodOdStaniula
                 options.IdleTimeout = TimeSpan.FromDays(2);
             });
             */
-            builder.Services.AddScoped<IAddNewProductService, AddNewProductService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();

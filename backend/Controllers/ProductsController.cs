@@ -10,12 +10,10 @@ namespace MiodOdStaniula.Controllers
     [Route("products")]
     public class ProductsController : ControllerBase
     {
-        private readonly IAddNewProductService _addNewProductService;
         private readonly IProductService _productService;
 
-        public ProductsController(IAddNewProductService addNewProductService, IProductService productService)
+        public ProductsController(IProductService productService)
         {
-            _addNewProductService = addNewProductService;
             _productService = productService;
         }
 
@@ -49,7 +47,7 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _addNewProductService.AddNewProductAsync(productAddDto.Product!, productAddDto.ImagePaths!);
+            var result = await _productService.AddAsync(productAddDto.Product!, productAddDto.ImagePaths!);
             if (!result.Success)
             {
                 return StatusCode(500, new { message = result.ErrorMessage });

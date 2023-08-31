@@ -19,6 +19,10 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, payload);
   }
 
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl)
   }

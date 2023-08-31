@@ -19,7 +19,6 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
       this.initializeForm();
-      console.log('Jesteś w sekcji dodawania nowego produktu.')
   }
 
   initializeForm(): void {

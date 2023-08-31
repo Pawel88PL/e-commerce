@@ -37,7 +37,6 @@
                     <a mat-raised-button color="primary" [routerLink]="['/Edit', product?.productId]">EDYTUJ</a>
                 </td>
                 <td>
-                    <!-- W Angularze, zamiast formularza, możemy używać zdarzenia (click) -->
                     <button mat-raised-button color="warn" type="button"
                         (click)="confirmDeleteAlert(product.productId)">USUŃ</button>
                 </td>

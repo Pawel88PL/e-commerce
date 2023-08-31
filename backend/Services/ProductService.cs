@@ -26,7 +26,8 @@ namespace MiodOdStaniula.Services
                         product.ProductImages!.Add(new ProductImage { ImagePath = path });
                     }
                 }
-
+                
+                product.DateAdded = DateTime.Now;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
 
@@ -42,7 +43,42 @@ namespace MiodOdStaniula.Services
                 return new ServiceResult<Product>
                 {
                     Success = false,
-                    ErrorMessage = $"Błąd podczas dodawania produktu: {ex.Message}"
+                    ErrorMessage = $"Wystąpił błąd podczas dodawania produktu: {ex.Message}"
+                };
+            }
+        }
+
+        public async Task<ServiceResult<bool>> DeleteAsync(int id)
+        {
+            try
+            {
+                var product = await _context.Products!.FindAsync(id);
+                if (product == null)
+                {
+                    return new ServiceResult<bool>
+                    {
+                        Success = false,
+                        ErrorMessage = "Nie znaleziono produktu."
+                    };
+                }
+                else
+                {
+                    _context.Products.Remove(product);
+                    await _context.SaveChangesAsync();
+
+                    return new ServiceResult<bool>
+                    {
+                        Success = true,
+                    };
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<bool>
+                {
+                    Success = false,
+                    ErrorMessage = $"Wystąpił błąd podczas usuwania produktu: {ex.Message}"
                 };
             }
         }
@@ -106,14 +142,16 @@ namespace MiodOdStaniula.Services
         {
             return new ProductDisplayDto
             {
-                ProductId = product.ProductId,
+                AmountAvailable = product.AmountAvailable,
+                Category = product.Category?.Name,
+                CategoryId = product.CategoryId,
+                Description = product.Description,
+                DateAdded = product.DateAdded,
                 Name = product.Name,
                 Price = product.Price,
-                Weight = product.Weight,
-                AmountAvailable = product.AmountAvailable,
-                CategoryId = product.CategoryId,
-                Category = product.Category?.Name,
-                ProductImages = product.ProductImages!.Select(MapToProductImageDto).ToList()
+                ProductId = product.ProductId,
+                ProductImages = product.ProductImages!.Select(MapToProductImageDto).ToList(),
+                Weight = product.Weight
             };
         }
 

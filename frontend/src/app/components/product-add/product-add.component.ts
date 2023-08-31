@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-add',
@@ -11,35 +12,39 @@ export class ProductAddComponent implements OnInit {
   productForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
       this.initializeForm();
+      console.log('Jesteś w sekcji dodawania nowego produktu.')
   }
 
   initializeForm(): void {
-    this.productForm = this.formBuilder.group({
-      category: ['', Validators.required],
+    this.productForm = this.fb.group({
+      categoryId: ['', Validators.required],
       name: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       weight: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       amountAvailable: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      displayOrder: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      priority: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       description: [''],
-      images: [''] // Będziesz musiał obsłużyć przesyłanie plików w bardziej skomplikowany sposób
     })
   }
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      const newProduct = this.productForm.value;
-      // Tu możesz użyć serwisu productService, aby wysłać nowy produkt do backendu:
-      // this.productService.addProduct(newProduct).subscribe(response => {
-      //   // Obsłuż odpowiedź z backendu, np. wyświetl powiadomienie o sukcesie
-      // }, error => {
-      //   // Obsłuż błąd
-      // });
+      this.productService.createProduct(this.productForm.value).subscribe(
+        (product) => {
+          console.log('Produkt został dodany!', product);
+          this.router.navigate(['/product', product.productId]);
+        },
+        (error) => {
+          console.error('Wystąpił błąd podczas dodawania produktu', error)
+        }
+      )
     }
   }  
 }

@@ -41,7 +41,7 @@ namespace MiodOdStaniula.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]ProductAddDto productAddDto)
-        {
+        {            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -1,25 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
-import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
-  selector: 'app-product-add',
-  templateUrl: './product-add.component.html',
-  styleUrls: ['./product-add.component.css']
+  selector: 'app-product-update',
+  templateUrl: './product-update.component.html',
+  styleUrls: ['./product-update.component.css']
 })
 
-export class ProductAddComponent implements OnInit {
+export class ProductUpdateComponent implements OnInit {
+  product: Product = new Product();
   productForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
+    private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-      this.initializeForm();
+    this.getproduct();
+    this.initializeForm();
+  }
+
+  getproduct(): void {
+    const idParm: string | null = this.route.snapshot.paramMap.get('id');
+    if (idParm) {
+      const id = +idParm;
+      this.productService.getProductById(id).subscribe(product => { this.product = product }, error => console.log('Error fetching product:', error));
+    }
+    else {
+      this.router.navigate(['/']);
+    }
   }
 
   initializeForm(): void {

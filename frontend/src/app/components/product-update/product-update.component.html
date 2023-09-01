@@ -1,0 +1,65 @@
+<div class="container">
+    <div>
+        <h1 class="text-center">Edytuj produkt</h1>
+        <hr>
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{ product.category }}</mat-label>
+                    <mat-select formControlName="categoryId">
+                        <mat-option value="1">Miód naturalny</mat-option>
+                        <mat-option value="2">Miód samakowy</mat-option>
+                        <mat-option value="3">Zestaw miodów</mat-option>
+                        <mat-option value="4">Produkt pszczeli</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ product.name }}</mat-label>
+                    <input matInput formControlName="name" placeholder="{{ product.name }}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ product.price }}</mat-label>
+                    <input matInput formControlName="price" placeholder="{{ product.price }}">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Waga</mat-label>
+                    <input matInput formControlName="weight" placeholder="Waga">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Dostępna ilość</mat-label>
+                    <input matInput formControlName="amountAvailable" placeholder="Dostępna ilość">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Kolejność wyświetlania</mat-label>
+                    <input matInput formControlName="priority" placeholder="Kolejność wyświetlania">
+                </mat-form-field>
+
+                <div class="form-outline">
+                    <input type="file" id="file" class="form-control" multiple />
+                    <label class="form-label" for="file">Zdjęcia produktu</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Opis produktu</mat-label>
+                    <textarea matInput formControlName="description" placeholder="{{ product.description }}" rows="22">{{ product.description }}</textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="text-lg-end">
+            <button mat-raised-button color="primary" type="submit" class="mt-3">
+                <i class="bi bi-plus-circle"></i> DODAJ PRODUKT
+            </button>
+        </div>
+    </form>
+</div>

@@ -13,14 +13,18 @@ export class ProductDetailsComponent implements OnInit {
   product: Product = new Product();
   products: Product[] = [];
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     const idParm: string | null = this.route.snapshot.paramMap.get('id');
 
     if (idParm) {
       const id = +idParm;
-      this.productService.getProductById(id).subscribe(product => { this.product = product, console.log(product) }, error => console.log('Error fetching product:', error));
+      this.productService.getProductById(id).subscribe(product => { this.product = product }, error => console.log('Error fetching product:', error));
     }
     else {
       this.router.navigate(['/']);

@@ -26,7 +26,7 @@ namespace MiodOdStaniula.Services
                         product.ProductImages!.Add(new ProductImage { ImagePath = path });
                     }
                 }
-                
+
                 product.DateAdded = DateTime.Now;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
@@ -149,6 +149,7 @@ namespace MiodOdStaniula.Services
                 DateAdded = product.DateAdded,
                 Name = product.Name,
                 Price = product.Price,
+                Priority = product.Priority,
                 ProductId = product.ProductId,
                 ProductImages = product.ProductImages!.Select(MapToProductImageDto).ToList(),
                 Weight = product.Weight

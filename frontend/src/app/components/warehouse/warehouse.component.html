@@ -33,8 +33,7 @@
                     <p *ngIf="product.amountAvailable > 0"><b>{{ product?.amountAvailable }}</b> sztuk</p>
                 </td>
                 <td>
-                    <!-- Zakładam, że Edit jest teraz ścieżką w Angularze -->
-                    <a mat-raised-button color="primary" [routerLink]="['/Edit', product?.productId]">EDYTUJ</a>
+                    <a mat-raised-button color="primary" [routerLink]="['/update', product?.productId]">EDYTUJ</a>
                 </td>
                 <td>
                     <button mat-raised-button color="warn" type="button"

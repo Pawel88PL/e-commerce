@@ -25,7 +25,7 @@ namespace MiodOdStaniula.Controllers
             {
                 return Ok(result.Data);
             }
-            return NotFound( new { message = result.ErrorMessage });
+            return NotFound(new { message = result.ErrorMessage });
         }
 
         [HttpGet("{id}")]
@@ -36,12 +36,12 @@ namespace MiodOdStaniula.Controllers
             {
                 return Ok(result.Data);
             }
-            return NotFound( new { message = result.ErrorMessage });
+            return NotFound(new { message = result.ErrorMessage });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]ProductAddDto productAddDto)
-        {            
+        public async Task<IActionResult> Create([FromBody] ProductAddDto productAddDto)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -61,9 +61,24 @@ namespace MiodOdStaniula.Controllers
             var result = await _productService.DeleteAsync(id);
             if (!result.Success)
             {
-                return NotFound( new { message = result.ErrorMessage });
+                return NotFound(new { message = result.ErrorMessage });
             }
             return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product productData)
+        {
+            var result = await _productService.UpdateAsync(id, productData);
+            if (!result.Success)
+            {
+                if (result.ErrorMessage == "Nie znaleziono produktu.")
+                {
+                    return NotFound(result.ErrorMessage);
+                }
+                return BadRequest(result.ErrorMessage);
+            }
+            return Ok(result.Data);
         }
     }
 }

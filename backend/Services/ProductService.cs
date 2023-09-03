@@ -138,6 +138,48 @@ namespace MiodOdStaniula.Services
             }
         }
 
+        public async Task<ServiceResult<Product>> UpdateAsync(int id, Product updatedProduct)
+        {
+            try
+            {
+                var product = await _context.Products!.FindAsync(id);
+                if (product == null)
+                {
+                    return new ServiceResult<Product>
+                    {
+                        Success = false,
+                        ErrorMessage = "Nie znaleziono produktu."
+                    };
+                }
+
+                product.AmountAvailable = updatedProduct.AmountAvailable;
+                product.CategoryId = updatedProduct.CategoryId;
+                product.Description = updatedProduct.Description;
+                product.Name = updatedProduct.Name;
+                product.Price = updatedProduct.Price;
+                product.Priority = updatedProduct.Priority;
+                product.Weight = updatedProduct.Weight;
+
+                _context.Products.Update(product);
+                await _context.SaveChangesAsync();
+
+                return new ServiceResult<Product>
+                {
+                    Success = true,
+                    Data = product
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<Product>
+                {
+                    Success = false,
+                    ErrorMessage = $"Wystąpił błąd podczas aktualizacji produktu: {ex.Message}"
+                };
+            }
+        }
+
+
         private ProductDisplayDto MapToProductDisplayDto(Product product)
         {
             return new ProductDisplayDto

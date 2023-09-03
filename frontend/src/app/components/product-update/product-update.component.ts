@@ -23,14 +23,18 @@ export class ProductUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getproduct();
-    this.initializeForm();
   }
 
   getproduct(): void {
     const idParm: string | null = this.route.snapshot.paramMap.get('id');
     if (idParm) {
       const id = +idParm;
-      this.productService.getProductById(id).subscribe(product => { this.product = product }, error => console.log('Error fetching product:', error));
+      this.productService.getProductById(id).subscribe(
+        product => {
+          this.product = product;
+          this.initializeForm();
+        }, error => console.log('Błąd pobierania danych produktu:', error)
+      );
     }
     else {
       this.router.navigate(['/']);
@@ -39,25 +43,25 @@ export class ProductUpdateComponent implements OnInit {
 
   initializeForm(): void {
     this.productForm = this.fb.group({
-      categoryId: ['', Validators.required],
-      name: ['', Validators.required],
-      price: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      weight: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      amountAvailable: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      priority: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      description: ['', Validators.required],
+      categoryId: [this.product.categoryId, Validators.required],
+      name: [this.product.name, Validators.required],
+      price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      weight: [this.product.weight, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      priority: [this.product.priority, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      description: [this.product.description, Validators.required],
     })
   }
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      this.productService.createProduct(this.productForm.value).subscribe(
+      this.productService.updateProduct(this.product.productId, this.productForm.value).subscribe(
         (product) => {
-          console.log('Produkt został dodany!', product);
+          console.log('Pomyślnie zmieniono dane produktu!', product);
           this.router.navigate(['/product', product.productId]);
         },
         (error) => {
-          console.error('Wystąpił błąd podczas dodawania produktu', error)
+          console.error('Wystąpił błąd podczas aktualizacji produktu', error)
         }
       )
     }

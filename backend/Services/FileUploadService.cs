@@ -1,16 +1,25 @@
+using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Services
 {
     public class FileUploadService : IFileUploadService
     {
-        public async Task<string> UploadFileAsync(IFormFile file)
+        private readonly DbStoreContext _context;
+
+        public FileUploadService(DbStoreContext context)
         {
-            if (file == null || file.Length == 0)
+            _context = context;
+        }
+
+        public async Task<(bool IsSuccess, List<string>? FilePaths, string? ErrorMessage)> UploadFilesAsync(List<IFormFile> files)
+        {
+            if (files == null || !files.Any())
             {
-                return string.Empty;
+                return (false, null, "Brak jakichkolwiek zdjęć.");
             }
 
+            var uploadedPaths = new List<string>();
             var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
 
             if (!Directory.Exists(uploadPath))
@@ -18,27 +27,33 @@ namespace MiodOdStaniula.Services
                 Directory.CreateDirectory(uploadPath);
             }
 
-            var filePath = Path.Combine(uploadPath, file.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-
-            return $"/images/{file.FileName}";
-        }
-
-        public async Task<List<string>> UploadFilesAsync(List<IFormFile> files)
-        {
-            List<string> uploadedFilesPaths = new List<string>();
             foreach (var file in files)
             {
-                var filePath = await UploadFileAsync(file);
-                if (!string.IsNullOrEmpty(filePath))
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                var extension = Path.GetExtension(file.FileName);
+                var fileNumber = 1;
+
+                while (File.Exists(Path.Combine(uploadPath, $"{fileName}{extension}")))
                 {
-                    uploadedFilesPaths.Add(filePath);
+                    fileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}({fileNumber++})";
+                }
+
+                var filePath = Path.Combine(uploadPath, $"{fileName}{extension}");
+                
+                try
+                {
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    uploadedPaths.Add($"/images/{fileName}{extension}");
+                }
+                catch (Exception ex)
+                {
+                    return (false, null, ex.Message);
                 }
             }
-            return uploadedFilesPaths;
+            return (true, uploadedPaths, null);
         }
     }
 }

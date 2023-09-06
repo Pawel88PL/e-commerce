@@ -43,7 +43,7 @@
                 </mat-form-field>
                 
                 <div class="form-outline">
-                    <input type="file" id="file" class="form-control" multiple />
+                    <input type="file" id="file" class="form-control" multiple (change)="onFilesSelected($event)" />
                     <label class="form-label" for="file">Zdjęcia produktu</label>
                 </div>
             </div>
@@ -51,8 +51,16 @@
             <div class="col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Opis produktu</mat-label>
-                    <textarea matInput formControlName="description" placeholder="Opis produktu" rows="22"></textarea>
+                    <textarea matInput formControlName="description" placeholder="Opis produktu" rows="9"></textarea>
                 </mat-form-field>
+                
+                <div class=" p-3">
+                    <hr>
+                    <h3>Podgląd zdjęć:</h3>
+                    <div class="image-preview" *ngFor="let img of imagePreviews">
+                        <img [src]="img" alt="Podgląd zdjęcia" class="w-50 p-3"/>
+                    </div>
+                </div>
             </div>
         </div>
 

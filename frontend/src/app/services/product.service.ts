@@ -9,12 +9,14 @@ import { Product } from '../models/product.model';
 export class ProductService {
 
   private apiUrl = 'https://localhost:5047/Products';
+  private imageUploadUrl = 'https://localhost:5047/api/Media';
 
   constructor(private http: HttpClient) { }
 
-  createProduct(productData: any): Observable<Product> {
+  createProduct(productData: any, imagePaths?: string[]): Observable<Product> {
     const payload = {
-      Product: productData
+      ...productData,
+      ImagePaths: imagePaths
     }
     return this.http.post<Product>(this.apiUrl, payload);
   }
@@ -33,5 +35,9 @@ export class ProductService {
 
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
+  uploadProductImages(data: FormData): Observable<any> {
+    return this.http.post(this.imageUploadUrl, data);
   }
 }

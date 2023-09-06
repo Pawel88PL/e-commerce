@@ -47,7 +47,7 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _productService.AddAsync(productAddDto.Product!, productAddDto.ImagePaths!);
+            var result = await _productService.AddAsync(productAddDto);
             if (!result.Success)
             {
                 return StatusCode(500, new { message = result.ErrorMessage });

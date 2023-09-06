@@ -15,32 +15,46 @@ namespace MiodOdStaniula.Services
             _logger = logger;
         }
 
-        public async Task<ServiceResult<Product>> AddAsync(Product product, List<string> imagePaths)
+        public async Task<ServiceResult<ProductAddDto>> AddAsync(ProductAddDto productAddDto)
         {
             try
             {
-                if (imagePaths != null && imagePaths.Any())
+                Product product = new Product
                 {
-                    foreach (var path in imagePaths)
+                    Name = productAddDto.Name,
+                    Description = productAddDto.Description,
+                    Price = productAddDto.Price,
+                    Weight = productAddDto.Weight,
+                    AmountAvailable = productAddDto.AmountAvailable,
+                    Popularity = productAddDto.Popularity,
+                    Priority = productAddDto.Priority,
+                    DateAdded = DateTime.Now,
+                    CategoryId = productAddDto.CategoryId,
+                };
+
+                if (productAddDto.ImagePaths != null && productAddDto.ImagePaths.Any())
+                {
+                    product.ProductImages = new List<ProductImage>();
+                    foreach (var path in productAddDto.ImagePaths)
                     {
-                        product.ProductImages!.Add(new ProductImage { ImagePath = path });
+                        product.ProductImages!.Add(new ProductImage { ImagePath = path, ProductId = productAddDto!.ProductId });
                     }
                 }
 
-                product.DateAdded = DateTime.Now;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                productAddDto.ProductId = product.ProductId;
 
-                return new ServiceResult<Product>
+                return new ServiceResult<ProductAddDto>
                 {
                     Success = true,
-                    Data = product
+                    Data = productAddDto
                 };
             }
 
             catch (Exception ex)
             {
-                return new ServiceResult<Product>
+                return new ServiceResult<ProductAddDto>
                 {
                     Success = false,
                     ErrorMessage = $"Wystąpił błąd podczas dodawania produktu: {ex.Message}"

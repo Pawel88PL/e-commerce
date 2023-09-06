@@ -4,7 +4,6 @@ namespace MiodOdStaniula.Services.Interfaces
 {
     public interface IFileUploadService
     {
-        Task<string> UploadFileAsync(IFormFile file);
-        Task<List<string>> UploadFilesAsync(List<IFormFile> files);
+        Task<(bool IsSuccess, List<string>? FilePaths, string? ErrorMessage)> UploadFilesAsync(List<IFormFile> files);
     }
 }

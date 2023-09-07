@@ -25,8 +25,12 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  updateProduct(id: number, productData: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, productData);
+  updateProduct(id: number, productData: any, imagePaths?: string[]): Observable<Product> {
+    const payload = {
+      ...productData,
+      ImagePaths: imagePaths
+    }
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, payload);
   }
 
   getProducts(): Observable<Product[]> {

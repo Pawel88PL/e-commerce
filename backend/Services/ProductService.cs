@@ -15,46 +15,47 @@ namespace MiodOdStaniula.Services
             _logger = logger;
         }
 
-        public async Task<ServiceResult<ProductAddDto>> AddAsync(ProductAddDto productAddDto)
+        public async Task<ServiceResult<ProductDto>> AddAsync(ProductDto productDto)
         {
             try
             {
                 Product product = new Product
                 {
-                    Name = productAddDto.Name,
-                    Description = productAddDto.Description,
-                    Price = productAddDto.Price,
-                    Weight = productAddDto.Weight,
-                    AmountAvailable = productAddDto.AmountAvailable,
-                    Popularity = productAddDto.Popularity,
-                    Priority = productAddDto.Priority,
+                    Name = productDto.Name,
+                    Description = productDto.Description,
+                    Price = productDto.Price,
+                    Weight = productDto.Weight,
+                    AmountAvailable = productDto.AmountAvailable,
+                    Popularity = productDto.Popularity,
+                    Priority = productDto.Priority,
                     DateAdded = DateTime.Now,
-                    CategoryId = productAddDto.CategoryId,
+                    CategoryId = productDto.CategoryId,
                 };
-
-                if (productAddDto.ImagePaths != null && productAddDto.ImagePaths.Any())
-                {
-                    product.ProductImages = new List<ProductImage>();
-                    foreach (var path in productAddDto.ImagePaths)
-                    {
-                        product.ProductImages!.Add(new ProductImage { ImagePath = path, ProductId = productAddDto!.ProductId });
-                    }
-                }
-
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                productAddDto.ProductId = product.ProductId;
 
-                return new ServiceResult<ProductAddDto>
+                if (productDto.ImagePaths != null && productDto.ImagePaths.Any())
+                {
+                    product.ProductImages = new List<ProductImage>();
+                    foreach (var path in productDto.ImagePaths)
+                    {
+                        product.ProductImages!.Add(new ProductImage { ImagePath = path, ProductId = product.ProductId });
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
+                productDto.ProductId = product.ProductId;
+
+                return new ServiceResult<ProductDto>
                 {
                     Success = true,
-                    Data = productAddDto
+                    Data = productDto
                 };
             }
 
             catch (Exception ex)
             {
-                return new ServiceResult<ProductAddDto>
+                return new ServiceResult<ProductDto>
                 {
                     Success = false,
                     ErrorMessage = $"Wystąpił błąd podczas dodawania produktu: {ex.Message}"
@@ -97,7 +98,7 @@ namespace MiodOdStaniula.Services
             }
         }
 
-        public async Task<ServiceResult<IEnumerable<ProductDisplayDto>>> GetAllProductsAsync()
+        public async Task<ServiceResult<IEnumerable<ProductDto>>> GetAllProductsAsync()
         {
             try
             {
@@ -106,9 +107,9 @@ namespace MiodOdStaniula.Services
                     .Include(p => p.ProductImages)
                     .ToListAsync();
 
-                var productDtos = products.Select(MapToProductDisplayDto).ToList();
+                var productDtos = products.Select(MapToProductDto).ToList();
 
-                return new ServiceResult<IEnumerable<ProductDisplayDto>>
+                return new ServiceResult<IEnumerable<ProductDto>>
                 {
                     Data = productDtos,
                     Success = true
@@ -116,11 +117,11 @@ namespace MiodOdStaniula.Services
             }
             catch (Exception ex)
             {
-                return HandleError<IEnumerable<ProductDisplayDto>>(ex, "Błąd podczas pobierania produktów");
+                return HandleError<IEnumerable<ProductDto>>(ex, "Błąd podczas pobierania produktów");
             }
         }
 
-        public async Task<ServiceResult<ProductDisplayDto>> GetProductAsync(int id)
+        public async Task<ServiceResult<ProductDto>> GetProductAsync(int id)
         {
             try
             {
@@ -131,16 +132,16 @@ namespace MiodOdStaniula.Services
 
                 if (product == null)
                 {
-                    return new ServiceResult<ProductDisplayDto>
+                    return new ServiceResult<ProductDto>
                     {
                         Success = false,
                         ErrorMessage = "Nie znaleziono produktu."
                     };
                 }
 
-                var productDto = MapToProductDisplayDto(product);
+                var productDto = MapToProductDto(product);
 
-                return new ServiceResult<ProductDisplayDto>
+                return new ServiceResult<ProductDto>
                 {
                     Data = productDto,
                     Success = true
@@ -148,18 +149,18 @@ namespace MiodOdStaniula.Services
             }
             catch (Exception ex)
             {
-                return HandleError<ProductDisplayDto>(ex, "Błąd podczas pobierania produktu.");
+                return HandleError<ProductDto>(ex, "Błąd podczas pobierania produktu.");
             }
         }
 
-        public async Task<ServiceResult<Product>> UpdateAsync(int id, Product updatedProduct)
+        public async Task<ServiceResult<ProductDto>> UpdateAsync(int id, ProductDto updatedProduct)
         {
             try
             {
                 var product = await _context.Products!.FindAsync(id);
                 if (product == null)
                 {
-                    return new ServiceResult<Product>
+                    return new ServiceResult<ProductDto>
                     {
                         Success = false,
                         ErrorMessage = "Nie znaleziono produktu."
@@ -177,15 +178,26 @@ namespace MiodOdStaniula.Services
                 _context.Products.Update(product);
                 await _context.SaveChangesAsync();
 
-                return new ServiceResult<Product>
+                if (updatedProduct.ImagePaths != null && updatedProduct.ImagePaths.Any())
+                {
+                    product.ProductImages = new List<ProductImage>();
+                    foreach (var path in updatedProduct.ImagePaths)
+                    {
+                        product.ProductImages!.Add(new ProductImage { ImagePath = path, ProductId = product!.ProductId });
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
+                updatedProduct.ProductId = product.ProductId;
+                return new ServiceResult<ProductDto>
                 {
                     Success = true,
-                    Data = product
+                    Data = updatedProduct
                 };
             }
             catch (Exception ex)
             {
-                return new ServiceResult<Product>
+                return new ServiceResult<ProductDto>
                 {
                     Success = false,
                     ErrorMessage = $"Wystąpił błąd podczas aktualizacji produktu: {ex.Message}"
@@ -193,16 +205,15 @@ namespace MiodOdStaniula.Services
             }
         }
 
-
-        private ProductDisplayDto MapToProductDisplayDto(Product product)
+        private ProductDto MapToProductDto(Product product)
         {
-            return new ProductDisplayDto
+            return new ProductDto
             {
                 AmountAvailable = product.AmountAvailable,
-                Category = product.Category?.Name,
                 CategoryId = product.CategoryId,
-                Description = product.Description,
+                CategoryName = product.Category?.Name,
                 DateAdded = product.DateAdded,
+                Description = product.Description,
                 Name = product.Name,
                 Price = product.Price,
                 Priority = product.Priority,
@@ -217,7 +228,8 @@ namespace MiodOdStaniula.Services
             return new ProductImageDto
             {
                 ImageId = productImage.ImageId,
-                ImagePath = productImage.ImagePath
+                ImagePath = productImage.ImagePath,
+                ProductId = productImage.ProductId,
             };
         }
 
@@ -231,7 +243,6 @@ namespace MiodOdStaniula.Services
                 ErrorMessage = "Wystąpił problem podczas pobierania produktów. Spróbuj ponownie później."
             };
         }
-
     }
 
     public class ServiceResult<T>
@@ -240,5 +251,4 @@ namespace MiodOdStaniula.Services
         public bool Success { get; set; }
         public string? ErrorMessage { get; set; }
     }
-
 }

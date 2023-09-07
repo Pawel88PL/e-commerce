@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <td class="smallScreenDisplayNone">{{ product?.category}}</td>
+                <td class="smallScreenDisplayNone">{{ product?.categoryName}}</td>
                 <td><a mat-button [routerLink]="['/product', product.productId]"> {{ product?.name }}</a></td>
                 <td><b>{{ product?.price }}</b> zł</td>
                 <td class="smallScreenDisplayNone"><b>{{ product?.weight }}</b> gram</td>

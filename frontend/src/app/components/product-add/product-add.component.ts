@@ -66,7 +66,7 @@ export class ProductAddComponent implements OnInit {
           (response: any) => {
             console.log('Zdjęcia zostały przesłane pomyślnie!', response);
 
-            const ImagePaths = response.files
+            const ImagePaths = response.files;
             
             this.productService.createProduct(this.productForm.value, ImagePaths).subscribe(
               (product) => {

@@ -40,14 +40,14 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProductAddDto productAddDto)
+        public async Task<IActionResult> Create([FromBody] ProductDto productDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await _productService.AddAsync(productAddDto);
+            var result = await _productService.AddAsync(productDto);
             if (!result.Success)
             {
                 return StatusCode(500, new { message = result.ErrorMessage });
@@ -67,9 +67,9 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product productData)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
         {
-            var result = await _productService.UpdateAsync(id, productData);
+            var result = await _productService.UpdateAsync(id, productDto);
             if (!result.Success)
             {
                 if (result.ErrorMessage == "Nie znaleziono produktu.")

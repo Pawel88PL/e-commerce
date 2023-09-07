@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MiodOdStaniula.Models
 {
-    public class ProductImageAdd
+    public class ProductImageDto
     {
         [Key]
         public int ImageId { get; set; }

@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
 
     filtered = filtered.sort((a, b) => {
       switch (this.selectedSorting) {
-        case 'category': return (a.category?.categoryId || 0) - (b.category?.categoryId || 0);
+        case 'category': return (a.categoryId || 0) - (b.categoryId || 0);
         case 'name_asc': return a.name?.localeCompare(b.name || '') || 0;
         case 'price_asc': return a.price - b.price;
         case 'price_desc': return b.price - a.price;

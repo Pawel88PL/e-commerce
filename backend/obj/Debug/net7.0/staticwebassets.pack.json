@@ -201,6 +201,10 @@
       "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
     },
     {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor(1).jpg",
+      "PackagePath": "staticwebassets/images/wiktor(1).jpg"
+    },
+    {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpg",
       "PackagePath": "staticwebassets/images/wiktor.jpg"
     },

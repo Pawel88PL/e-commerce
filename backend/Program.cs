@@ -32,8 +32,7 @@ namespace MiodOdStaniula
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();
-            builder.Services.AddScoped<IEditProductService, EditProductService>();
-            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+            builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ITotalCostService, TotalCostService>();
 

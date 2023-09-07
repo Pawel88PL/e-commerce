@@ -137,6 +137,10 @@
       "PackagePath": "staticwebassets/images/pszczoly(3).jpg"
     },
     {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly(4).jpg",
+      "PackagePath": "staticwebassets/images/pszczoly(4).jpg"
+    },
+    {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly.jpg",
       "PackagePath": "staticwebassets/images/pszczoly.jpg"
     },
@@ -147,6 +151,10 @@
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pyłek mały.jpeg",
       "PackagePath": "staticwebassets/images/pyłek mały.jpeg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka.jpg",
+      "PackagePath": "staticwebassets/images/ramka.jpg"
     },
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka_miodu.jpg",
@@ -171,6 +179,14 @@
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",
       "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor(1).jpg",
+      "PackagePath": "staticwebassets/images/wiktor(1).jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpg",
+      "PackagePath": "staticwebassets/images/wiktor.jpg"
     },
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Świeczka.jpeg",

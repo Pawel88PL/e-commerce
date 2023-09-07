@@ -8,8 +8,8 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  private apiUrl = 'https://localhost:5047/Products';
-  private imageUploadUrl = 'https://localhost:5047/api/Media';
+  private productsUrl = 'https://localhost:5047/Products';
+  private mediaUrl = 'https://localhost:5047/api/Media';
 
   constructor(private http: HttpClient) { }
 
@@ -18,30 +18,34 @@ export class ProductService {
       ...productData,
       ImagePaths: imagePaths
     }
-    return this.http.post<Product>(this.apiUrl, payload);
+    return this.http.post<Product>(this.productsUrl, payload);
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.productsUrl}/${id}`);
   }
 
+  deleteImage(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.mediaUrl}/${id}`);
+  }
+
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.productsUrl}/${id}`);
+  }
+  
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productsUrl)
+  }
+  
   updateProduct(id: number, productData: any, imagePaths?: string[]): Observable<Product> {
     const payload = {
       ...productData,
       ImagePaths: imagePaths
     }
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, payload);
+    return this.http.put<Product>(`${this.productsUrl}/${id}`, payload);
   }
-
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl)
-  }
-
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
-  }
-
+  
   uploadProductImages(data: FormData): Observable<any> {
-    return this.http.post(this.imageUploadUrl, data);
+    return this.http.post(this.mediaUrl, data);
   }
 }

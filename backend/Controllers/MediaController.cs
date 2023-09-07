@@ -7,12 +7,24 @@ namespace MiodOdStaniula;
 [Route("api/[controller]")]
 public class MediaController : ControllerBase
 {
-    private readonly IFileUploadService _fileUploadService;
+    private readonly IImageService _imageService;
 
-    public MediaController(IFileUploadService fileUploadService)
+    public MediaController(IImageService imageService)
     {
-        _fileUploadService = fileUploadService;
+        _imageService = imageService;
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteFile(int id)
+    {
+        var result = await _imageService.DeleteImageAsync(id);
+        if (!result.Success)
+        {
+            return NotFound(new { message = result.ErrorMessage });
+        }
+        return NoContent();
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> UploadFiles([FromForm] List<IFormFile> images)
@@ -20,7 +32,7 @@ public class MediaController : ControllerBase
         if (images == null || images.Count == 0)
             return BadRequest("No files received");
 
-        var result = await _fileUploadService.UploadFilesAsync(images);
+        var result = await _imageService.UploadImageAsync(images);
 
         if (result.IsSuccess)
         {

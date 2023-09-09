@@ -49,10 +49,6 @@
       "PackagePath": "staticwebassets/images/DSC_0328.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/DSC_0330.jpg",
-      "PackagePath": "staticwebassets/images/DSC_0330.jpg"
-    },
-    {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Gryka mała.jpg",
       "PackagePath": "staticwebassets/images/Gryka mała.jpg"
     },
@@ -125,22 +121,6 @@
       "PackagePath": "staticwebassets/images/porzeczka duża.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly(1).jpg",
-      "PackagePath": "staticwebassets/images/pszczoly(1).jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly(2).jpg",
-      "PackagePath": "staticwebassets/images/pszczoly(2).jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly(3).jpg",
-      "PackagePath": "staticwebassets/images/pszczoly(3).jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly(4).jpg",
-      "PackagePath": "staticwebassets/images/pszczoly(4).jpg"
-    },
-    {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pszczoly.jpg",
       "PackagePath": "staticwebassets/images/pszczoly.jpg"
     },
@@ -151,14 +131,6 @@
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/pyłek mały.jpeg",
       "PackagePath": "staticwebassets/images/pyłek mały.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka.jpg",
-      "PackagePath": "staticwebassets/images/ramka.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka_miodu.jpg",
-      "PackagePath": "staticwebassets/images/ramka_miodu.jpg"
     },
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak mały.jpg",
@@ -179,14 +151,6 @@
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",
       "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor(1).jpg",
-      "PackagePath": "staticwebassets/images/wiktor(1).jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpg",
-      "PackagePath": "staticwebassets/images/wiktor.jpg"
     },
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Świeczka.jpeg",

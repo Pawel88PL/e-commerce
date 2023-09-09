@@ -24,6 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ProductUpdateComponent } from './components/product-update/product-upda
     NavbarComponent,
     WarehouseComponent,
     ProductAddComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

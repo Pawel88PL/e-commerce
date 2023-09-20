@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,10 +15,15 @@ export class ProductDetailsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(
+    private cartService: CartService,
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) { }
+
+  onAddToCart() {
+    this.cartService.addToCart(this.product);
+  }
 
   ngOnInit() {
     const idParm: string | null = this.route.snapshot.paramMap.get('id');
@@ -34,7 +40,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   slideConfig = {
-    "slidesToShow": 3,  // Ilość widocznych produktów jednocześnie
+    "slidesToShow": 3,
     "slidesToScroll": 1,
     "dots": true,
     "infinite": true,

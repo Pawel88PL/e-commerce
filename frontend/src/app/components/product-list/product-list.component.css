@@ -7,6 +7,12 @@ h1{
     transform: translateX(30%);
     font-size: 4rem;
 }
+
+.list-group-item.active {
+    background-color: black;
+    border-color: black;
+}
+
 .welcome-carousel{
     max-width: 1600px;
     margin: auto;

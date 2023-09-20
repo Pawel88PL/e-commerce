@@ -1,3 +1,7 @@
+.addToCartButton{
+    background-color: black;
+    color: white;
+}
 
 .product-details{
     max-width: 1000px;

@@ -14,29 +14,33 @@ export class CartService {
   private items: CartItem[] = [];
 
   private cartUrl = 'https://localhost:5047/api/Cart';
-  private cartItemUrl = 'https://localhost:5047/api/CartItem';
+  private cartItemUrl = 'https://localhost:5047/api/Cart/items';
 
   constructor(private http: HttpClient) {
     this.cartId = localStorage.getItem('cartId');
   }
 
-  async addToCart(product: Product): Promise<void> {
+  async addToCart(product: Product): Promise<any> {
     if (!this.cartId) {
       this.cartId = this.generateUUID();
       localStorage.setItem('cartId', this.cartId);
       await this.createCart(this.cartId)
     }
-    
+
     const data = {
       cartId: this.cartId,
       productId: product.productId,
       quantity: 1,
-      price: product.price
     };
-    await firstValueFrom(this.http.post(this.cartItemUrl, data));
+    
+    try {
+      return await firstValueFrom(this.http.post(this.cartItemUrl, data));
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
-  private async createCart(cartId: string): Promise<void>{
+  private async createCart(cartId: string): Promise<void> {
     const data = {
       shopingCartId: cartId
     };

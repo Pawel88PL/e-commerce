@@ -35,55 +35,51 @@ namespace MiodOdStaniula.Services
 
         public async Task AddItemToCart(Guid cartId, int productId, int quantity)
         {
-            if (_context.ShopingCarts != null)
+            var cart = await _context.ShopingCarts!
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(p => p.ShopingCartId == cartId);
+
+            if (cart == null)
             {
-                var cart = await _context.ShopingCarts
-                    .Include(c => c.CartItems)
-                    .ThenInclude(i => i.Product)
-                    .FirstOrDefaultAsync(p => p.ShopingCartId == cartId);
-
-                if (cart != null)
+                cart = new ShopingCart
                 {
-                    if (_context.Products != null)
-                    {
-                        var product = await _context.Products
-                            .FirstOrDefaultAsync(p => p.ProductId == productId);
-
-
-                        if (product != null && product.AmountAvailable >= 1)
-                        {
-                            
-                            var cartItem = cart.CartItems
-                                .FirstOrDefault(i => i.Product?.ProductId == productId);
-
-                            if (cartItem != null)
-                            {
-                                cartItem.Quantity += quantity;
-                            }
-                            else
-                            {
-                                cart.CartItems.Add(new CartItem
-                                {
-                                    ProductId = product.ProductId,
-                                    Product = product,
-                                    Quantity = quantity,
-                                    Price = product.Price,
-                                });
-                            }
-                            await _context.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            _logger.LogError("Niestety brak produktu w magazynie.");
-                        }
-                    }
-                }
-                else
-                {
-                    throw new Exception("Nie znaleziono koszyka.");
-                }
+                    ShopingCartId = cartId,
+                    CreateCartDate = DateTime.Now,
+                    CartItems = new List<CartItem>()
+                };
+                _context.ShopingCarts!.Add(cart);
+                await _context.SaveChangesAsync();
             }
+
+            var product = await _context.Products!.FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product == null)
+            {
+                throw new Exception("Nie znaleziono produktu.");
+            }
+
+            if (product.AmountAvailable < 1)
+            {
+                throw new Exception("Niestety brak produktu w magazynie."); 
+            }
+
+            var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
+            if (cartItem != null)
+            {
+                cartItem.Quantity += quantity;
+            }
+            else
+            {
+                cart.CartItems.Add(new CartItem
+                {
+                    ProductId = product.ProductId,
+                    Quantity = quantity,
+                    Price = product.Price,
+                });
+            }
+
+            await _context.SaveChangesAsync();
         }
+
 
         public async Task<int> GetCartItemCount(Guid cartId)
         {

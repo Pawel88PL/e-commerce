@@ -133,6 +133,10 @@
       "PackagePath": "staticwebassets/images/pyłek mały.jpeg"
     },
     {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka_miodu.jpg",
+      "PackagePath": "staticwebassets/images/ramka_miodu.jpg"
+    },
+    {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak mały.jpg",
       "PackagePath": "staticwebassets/images/rzepak mały.jpg"
     },
@@ -151,6 +155,10 @@
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",
       "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
+    },
+    {
+      "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpg",
+      "PackagePath": "staticwebassets/images/wiktor.jpg"
     },
     {
       "Id": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Świeczka.jpeg",

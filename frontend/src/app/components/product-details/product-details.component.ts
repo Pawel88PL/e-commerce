@@ -22,7 +22,13 @@ export class ProductDetailsComponent implements OnInit {
   ) { }
 
   onAddToCart() {
-    this.cartService.addToCart(this.product);
+    this.cartService.addToCart(this.product)
+    .then(() => {
+      alert(`'Produkt ${this.product.name} został dodany do koszyka.'`);
+    })
+    .catch(error => {
+      alert(`Błąd: ${error.message || 'Nie udało się dodać produktu do koszyka.'}`);
+    });
   }
 
   ngOnInit() {

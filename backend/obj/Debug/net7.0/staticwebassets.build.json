@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JKs7Mr0QJH2gAvvBggKTvPJJ6FqEQNvCk/25ZL6Kw5E=",
+  "Hash": "oBW9q1vlXNy2vZXkxislL+I9+ZrHQ7zeEs+KZLUy91Y=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -1513,6 +1513,23 @@
       "OriginalItemSpec": "wwwroot/images/pyłek mały.jpeg"
     },
     {
+      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/ramka_miodu.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/ramka_miodu.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/ramka_miodu.jpg"
+    },
+    {
       "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/rzepak mały.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -1664,6 +1681,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/wielokwiatowy.jpg"
+    },
+    {
+      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wiktor.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/wiktor.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/wiktor.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Wosk.jpg",

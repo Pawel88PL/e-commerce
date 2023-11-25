@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using MiodOdStaniula.Models;
-using MiodOdStaniula.Services;
 using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers

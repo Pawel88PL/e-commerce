@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oBW9q1vlXNy2vZXkxislL+I9+ZrHQ7zeEs+KZLUy91Y=",
+  "Hash": "mFS9jFjK1KYvGPprSgP8+tS4msueW+4seTXwNXWgaLk=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -1309,12 +1309,12 @@
       "OriginalItemSpec": "wwwroot/images/Lipa mała.jpg"
     },
     {
-      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Lipa.jpg",
+      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Lipa_duża.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/",
       "BasePath": "_content/backend",
-      "RelativePath": "images/Lipa.jpg",
+      "RelativePath": "images/Lipa_duża.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1323,7 +1323,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Lipa.jpg"
+      "OriginalItemSpec": "wwwroot/images/Lipa_duża.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Malina mała.jpg",
@@ -1343,12 +1343,12 @@
       "OriginalItemSpec": "wwwroot/images/Malina mała.jpg"
     },
     {
-      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Malina.jpg",
+      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Malina_duża.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/",
       "BasePath": "_content/backend",
-      "RelativePath": "images/Malina.jpg",
+      "RelativePath": "images/Malina_duża.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1357,7 +1357,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Malina.jpg"
+      "OriginalItemSpec": "wwwroot/images/Malina_duża.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Miód w plastrze.jpg",
@@ -1649,12 +1649,12 @@
       "OriginalItemSpec": "wwwroot/images/tradycyjne_3.jpg"
     },
     {
-      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Wielokwiat.jpg",
+      "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/Wielokwiat_duży.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/",
       "BasePath": "_content/backend",
-      "RelativePath": "images/Wielokwiat.jpg",
+      "RelativePath": "images/Wielokwiat_duży.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1663,7 +1663,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Wielokwiat.jpg"
+      "OriginalItemSpec": "wwwroot/images/Wielokwiat_duży.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/Desktop/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",

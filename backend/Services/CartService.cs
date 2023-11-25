@@ -59,7 +59,7 @@ namespace MiodOdStaniula.Services
 
             if (product.AmountAvailable < 1)
             {
-                throw new Exception("Niestety brak produktu w magazynie."); 
+                throw new Exception("Niestaty wybrany produkt został sprzedany. Przepraszamy.");
             }
 
             var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);

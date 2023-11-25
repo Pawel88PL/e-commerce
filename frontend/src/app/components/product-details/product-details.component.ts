@@ -1,8 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
+import { CartItemDialogComponent } from '../cart-item-dialog/cart-item-dialog.component';
 
 @Component({
   selector: 'app-product-details',
@@ -18,16 +20,20 @@ export class ProductDetailsComponent implements OnInit {
     private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    public dialog: MatDialog,
   ) { }
 
   onAddToCart() {
-    this.cartService.addToCart(this.product)
-    .then(() => {
-      alert(`'Produkt ${this.product.name} został dodany do koszyka.'`);
-    })
-    .catch(error => {
-      alert(`Błąd: ${error.message || 'Nie udało się dodać produktu do koszyka.'}`);
+    this.cartService.addToCart(this.product).subscribe((result) => {
+      const firstImage = this.product.productImages?.[0]?.imagePath;
+      this.dialog.open(CartItemDialogComponent, {
+        data: {
+          image: firstImage ? 'https://localhost:5047/' + firstImage : null,
+          name: this.product.name,
+          price: this.product.price
+        }
+      });
     });
   }
 

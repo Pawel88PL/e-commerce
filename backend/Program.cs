@@ -6,6 +6,10 @@ using Microsoft.Extensions.Options;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services;
 using MiodOdStaniula.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 namespace MiodOdStaniula
 {
@@ -22,13 +26,6 @@ namespace MiodOdStaniula
 
             builder.Services.AddControllers();
 
-            /* builder.Services.AddMemoryCache();
-            builder.Services.AddDistributedMemoryCache();
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromDays(2);
-            });
-            */
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -45,12 +42,30 @@ namespace MiodOdStaniula
             builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireUppercase = true;
 
             }).AddEntityFrameworkStores<DbStoreContext>();
+
+            var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.Key ?? throw new InvalidOperationException("JWT Key is not set.")))
+                };
+            });
+
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -92,7 +107,6 @@ namespace MiodOdStaniula
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors("AllowSpecificOrigin");

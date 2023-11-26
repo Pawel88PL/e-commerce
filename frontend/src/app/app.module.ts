@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MatSelectModule } from '@angular/material/select';
     ProductCardComponent,
     ProductDetailsComponent,
     ProductUpdateComponent,
-    WarehouseComponent
+    WarehouseComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -48,14 +48,5 @@ export class ProductDetailsComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
-    this.productService.getProducts().subscribe(data => { this.products = data; });
   }
-
-  slideConfig = {
-    "slidesToShow": 3,
-    "slidesToScroll": 1,
-    "dots": true,
-    "infinite": true,
-    "arrows": true
-  };
 }

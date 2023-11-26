@@ -1,0 +1,22 @@
+<div class="loginForm text-center shadow bg-white rounded-3 col-sm-8 col-md-8 col-lg-6 col-xxl-4">
+    <mat-form-field appearance="fill">
+        <mat-label>Login</mat-label>
+        <input matInput [(ngModel)]="loginData.username" name="UserName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" [(ngModel)]="loginData.password" name="Password">
+    </mat-form-field>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <button mat-raised-button color="primary" class="w-100 m-2" (click)="onSubmit()"><i
+                    class="bi bi-box-arrow-in-left"></i> Zaloguj</button>
+        </div>
+        <div class="col-md-6">
+            <button mat-stroked-button color="primary" class="w-100 m-2" (click)="onRegister()"><i
+                    class="bi bi-box-arrow-in-left"></i> Zarejestruj się</button>
+        </div>
+    </div>
+</div>

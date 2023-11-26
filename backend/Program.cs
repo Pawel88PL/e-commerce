@@ -107,9 +107,9 @@ namespace MiodOdStaniula
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("AllowSpecificOrigin");
             app.MapControllers();
 
             app.Run();

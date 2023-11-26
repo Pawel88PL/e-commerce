@@ -18,6 +18,7 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.loginData.username, this.loginData.password).subscribe(
       success => {
+        localStorage.setItem('token', success.token);
         this.router.navigate(['/warehouse']);
       },
       error => {

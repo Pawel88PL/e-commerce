@@ -23,10 +23,12 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -55,10 +57,12 @@ import { LoginComponent } from './components/login/login.component';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatMenuModule,
     MatToolbarModule,
     MatSelectModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     SlickCarouselModule
   ],

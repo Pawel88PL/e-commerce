@@ -9,6 +9,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
+import { authGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'addproduct', component: ProductAddComponent },
@@ -18,7 +20,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'update/:id', component: ProductUpdateComponent },
-  { path: 'warehouse', component: WarehouseComponent }
+  { path: 'warehouse', component: WarehouseComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

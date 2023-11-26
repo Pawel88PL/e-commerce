@@ -65,14 +65,6 @@ namespace MiodOdStaniula.Controllers
             return Ok();
         }
 
-
-        [HttpPost("logout")]
-        public async Task<IActionResult> LogOut()
-        {
-            await _signInManager.SignOutAsync();
-            return Ok();
-        }
-
         private string GenerateJwtTokenForUser(string userName)
         {
             var jwtKey = _configuration["Jwt:Key"];
@@ -93,7 +85,7 @@ namespace MiodOdStaniula.Controllers
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(120), // Na przykład 120 minut ważności tokenu
+                expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

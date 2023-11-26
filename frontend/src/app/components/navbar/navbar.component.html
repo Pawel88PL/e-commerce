@@ -1,12 +1,36 @@
-<mat-toolbar class="bg-white shadow">
-    <a mat-button routerLink="/home" class="home"><i class="bi bi-shop"></i> Miód od Staniula</a>
-    <a mat-button routerLink="/products"><i class="bi bi-bag"></i> PRODUKTY</a>
-    <div class="spacer"></div>
-    <button mat-button [matMenuTriggerFor]="menu"><i class="bi bi-person-gear"></i> PANEL ADMINISTRATORA</button>
-    <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/warehouse"><i class="bi bi-box-seam"></i> MAGAZYN</a>
-        <a mat-menu-item><i class="bi bi-cart3"></i> ZAMÓWIENIA</a>
-    </mat-menu>
-    <a mat-button routerLink="/login"><i class="bi bi-box-arrow-in-left"></i> MOJE KONTO</a>
-    <a mat-button routerLink="/cart"><i class="bi bi-cart"></i> KOSZYK</a>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/home"><i class="bi bi-shop"></i> Miód od Staniula</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/products" (click)="closeNavbar()"><i class="bi bi-bag"></i> Produkty</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-gear"></i> Panel Administratora
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="/warehouse" (click)="closeNavbar()"><i class="bi bi-box-seam"></i> Magazyn</a>
+                        </li>
+                        <li><a class="dropdown-item" (click)="closeNavbar()"><i class="bi bi-cart3"></i> Zamówienia</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" (click)="closeNavbar()"><i class="bi bi-box-arrow-in-left"></i> Moje Konto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" (click)="closeNavbar()"><i class="bi bi-box-arrow-right"></i> Wyloguj</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/cart" (click)="closeNavbar()"><i class="bi bi-cart"></i> Koszyk</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -80,16 +80,17 @@
             <br />
             <hr />
             <div>
-                <button mat-raised-button type="submit" class="mb-3 addToCartButton w-100"
-                    (click)="onAddToCart()">
+                <button mat-raised-button type="submit" class="mb-3 addToCartButton w-100" (click)="onAddToCart()">
                     <i class="bi bi-cart-plus"></i> Dodaj do koszyka
                 </button>
                 <div>
                     <h3>Lub zadzwoń i zamów pod nr tel:</h3>
                     <h2>+48 570 436 579</h2>
                 </div>
-                <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]" class="mt-2 w-100"><i
-                        class="bi bi-pen"></i> EDYTUJ</a>
+                <div *ngIf="authService.isLoggedIn()">
+                    <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]"
+                        class="mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
+                </div>
             </div>
         </div>
     </div>

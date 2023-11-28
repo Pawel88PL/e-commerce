@@ -13,13 +13,13 @@ import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'addproduct', component: ProductAddComponent },
+  { path: 'addproduct', component: ProductAddComponent, canActivate: [authGuard] },
   { path: 'cart', component: CartComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
-  { path: 'update/:id', component: ProductUpdateComponent },
+  { path: 'update/:id', component: ProductUpdateComponent, canActivate: [authGuard] },
   { path: 'warehouse', component: WarehouseComponent, canActivate: [authGuard] }
 ];
 

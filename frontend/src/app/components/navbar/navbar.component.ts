@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 })
 
 export class NavbarComponent {
-  constructor(private authService: AuthService) {}
+  
+  constructor(public authService: AuthService) {}
 
   logout() {
     this.authService.logout();

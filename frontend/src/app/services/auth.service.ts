@@ -14,6 +14,10 @@ export class AuthService {
     return this.http.post<any>('https://localhost:5047/login', { username, password });
   }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);

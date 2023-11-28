@@ -1,4 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,11 +18,12 @@ export class ProductDetailsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(
+    public authService: AuthService,
     private cartService: CartService,
+    public dialog: MatDialog,
+    private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService,
-    public dialog: MatDialog,
   ) { }
 
   onAddToCart() {

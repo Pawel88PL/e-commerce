@@ -30,6 +30,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './components/login/login.component';
+import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { LoginComponent } from './components/login/login.component';
     ProductDetailsComponent,
     ProductUpdateComponent,
     WarehouseComponent,
-    LoginComponent
+    LoginComponent,
+    GenericDialogComponent
   ],
   imports: [
     BrowserModule,

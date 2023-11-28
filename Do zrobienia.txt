@@ -1,28 +1,3 @@
-1. Zabezpieczyć moduł magazynowy przed nieuprawnionym dostępem poprzez wprowadzenie autoryzacji użytkownika.
-
-#### 1. **Konfiguracja ASP.NET Core Identity:**
-
-- Skonfigurowanie usług Identity w `Startup.cs` (metody `ConfigureServices` i `Configure`).
-- Utworzenie kont użytkowników i ról, jeśli są potrzebne.
-
-#### 2. **Endpointy API do Logowania i Rejestracji:**
-Musisz stworzyć endpointy API, które będą obsługiwać logowanie i rejestrację użytkowników. ASP.NET Core Identity oferuje metody ułatwiające te operacje.
-
-- **Logowanie:** Twój endpoint logowania będzie musiał obsługiwać odbieranie danych logowania (np. username i password), sprawdzanie poprawności tych danych, a następnie, w przypadku sukcesu, wydawanie tokena JWT lub innego mechanizmu sesji.
-- **Rejestracja:** Endpoint rejestracji będzie musiał obsługiwać odbieranie danych rejestracyjnych i tworzenie nowego użytkownika w systemie.
-
-#### 3. **Token JWT (JSON Web Token):**
-Zaleca się użycie JWT do zarządzania sesjami użytkowników po stronie API. JWT umożliwia przesyłanie informacji o tożsamości użytkownika między frontendem a backendem w sposób bezpieczny.
-
-- Musisz skonfigurować generowanie i walidację tokenów JWT w Twojej aplikacji ASP.NET Core.
-
-#### 4. **Integracja z Frontendem Angular:**
-Po stronie Angulara będziesz musiał:
-
-- Stworzyć formularze do logowania i rejestracji.
-- Stworzyć serwis do komunikacji z API (logowanie/rejestracja).
-- Przechowywać token JWT po stronie klienta (zwykle w `localStorage`).
-- Używać tokena JWT w nagłówkach żądań HTTP do uwierzytelnienia w API.
-
-#### 5. **Ochrona Ścieżek w Angularze:**
-Użyj `AuthGuard` w Angular Router, aby chronić trasy dostępne tylko dla zalogowanych użytkowników.
+1. Utworzyć rolę administratora dla zarządzania magazynem i zamówieniami.
+2. Umożliwić klientom założenie konta.
+3. Utworzyć koszyk zakupowy.

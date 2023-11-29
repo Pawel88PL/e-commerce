@@ -54,7 +54,12 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newUser = new UserModel { UserName = userRegisterData.UserName };
+            var newUser = new UserModel
+            {
+                UserName = userRegisterData.UserName,
+                Email = userRegisterData.Email,
+            };
+            
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
             if (!result.Succeeded)
@@ -62,6 +67,7 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(result.Errors);
             }
 
+            await _userManager.AddToRoleAsync(newUser, "Client");
             return Ok();
         }
 

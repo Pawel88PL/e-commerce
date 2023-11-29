@@ -10,6 +10,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 import { authGuard } from './guards/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'update/:id', component: ProductUpdateComponent, canActivate: [authGuard] },
+  { path: 'register', component: RegisterComponent },
   { path: 'warehouse', component: WarehouseComponent, canActivate: [authGuard] }
 ];
 

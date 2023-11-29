@@ -19,12 +19,12 @@
                     <button mat-button routerLink="/login" (click)="closeNavbar()"><i
                             class="bi bi-box-arrow-in-left"></i> Moje Konto</button>
                 </li>
-                <li class="nav-item" *ngIf="authService.isLoggedIn()">
-                    <button mat-button (click)="logout(); closeNavbar()"><i class="bi bi-box-arrow-right"></i>
-                        Wyloguj</button>
-                </li>
                 <li class="nav-item">
                     <button mat-button routerLink="/cart" (click)="closeNavbar()"><i class="bi bi-cart"></i> Koszyk</button>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <button mat-button (click)="logout(); closeNavbar()"><i class="bi bi-box-arrow-right"></i>
+                        {{ username}} </button>
                 </li>
             </ul>
         </div>

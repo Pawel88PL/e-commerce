@@ -12,7 +12,7 @@ namespace MiodOdStaniula.Migrations
 {
     [DbContext(typeof(DbStoreContext))]
     [Migration("20230424092027_init")]
-    partial class init
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

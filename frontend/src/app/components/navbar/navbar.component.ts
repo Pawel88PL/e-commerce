@@ -15,6 +15,10 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
+  get username(): string {
+    return this.authService.getUsername() ?? '';
+  }
+
   closeNavbar() {
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarMenu = document.querySelector('#navbarNav');

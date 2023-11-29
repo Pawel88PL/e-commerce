@@ -1,0 +1,36 @@
+<div class="loginForm text-center shadow bg-white rounded-3 col-sm-8 col-md-8 col-lg-6 col-xxl-4">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwa użytkownika</mat-label>
+            <input matInput type="text" formControlName="username">
+            <mat-error *ngIf="registerForm.controls['username'].hasError('required')">Nazwa użytkownika jest
+                wymagana</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Email jest wymagany</mat-error>
+            <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Nieprawidłowy format email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Hasło jest wymagane</mat-error>
+            <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Hasło musi zawierać co najmniej 6
+                znaków</mat-error>
+        </mat-form-field>
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <button mat-raised-button color="black" class="w-100 m-2" type="submit"><i class="bi bi-box-arrow-in-left"></i>
+                    Zarejestruj się</button>
+            </div>
+            <div class="col-md-6">
+                <button mat-stroked-button color="black" class="w-100 m-2" type="button" routerLink="/login"><i
+                        class="bi bi-box-arrow-in-left"></i> Mam już konto się</button>
+            </div>
+        </div>
+    </form>
+</div>

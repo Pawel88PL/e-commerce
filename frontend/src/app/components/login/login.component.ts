@@ -16,7 +16,7 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private authService: AuthService, public dialog: MatDialog,private router: Router) {}
+  constructor(private authService: AuthService, public dialog: MatDialog, private router: Router) { }
 
   onSubmit() {
     this.authService.login(this.loginData.username, this.loginData.password).subscribe(

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services;
@@ -39,6 +40,7 @@ namespace MiodOdStaniula.Controllers
             return NotFound(new { message = result.ErrorMessage });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductDto productDto)
         {
@@ -55,6 +57,7 @@ namespace MiodOdStaniula.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = result.Data!.ProductId }, result.Data);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
@@ -66,6 +69,7 @@ namespace MiodOdStaniula.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
         {

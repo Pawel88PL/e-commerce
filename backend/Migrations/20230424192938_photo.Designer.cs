@@ -12,7 +12,7 @@ namespace MiodOdStaniula.Migrations
 {
     [DbContext(typeof(DbStoreContext))]
     [Migration("20230424192938_photo")]
-    partial class photo
+    partial class Photo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

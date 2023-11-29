@@ -15,7 +15,7 @@ namespace MiodOdStaniula
 {
     public class Program
     {
-        private static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +45,7 @@ namespace MiodOdStaniula
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
 
             }).AddEntityFrameworkStores<DbStoreContext>();
 
@@ -87,6 +87,21 @@ namespace MiodOdStaniula
             });
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+                try
+                {
+                    // Wywołanie metody do inicjalizacji ról
+                    await RoleInitializer.CreateRoles(serviceProvider);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Wystąpił błąd podczas inicjalizacji ról");
+                }
+            }
 
             if (app.Environment.IsDevelopment())
             {

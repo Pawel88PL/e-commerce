@@ -29,8 +29,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginComponent } from './components/login/login.component';
 import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -39,23 +41,24 @@ import { GenericDialogComponent } from './components/generic-dialog/generic-dial
     CartComponent,
     CartItemDialogComponent,
     FooterComponent,
+    GenericDialogComponent,
     HomeComponent,
+    LoginComponent,
     NavbarComponent,
     ProductAddComponent,
     ProductListComponent,
     ProductCardComponent,
     ProductDetailsComponent,
     ProductUpdateComponent,
-    WarehouseComponent,
-    LoginComponent,
-    GenericDialogComponent
+    RegisterComponent,
+    WarehouseComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    BrowserModule,
     FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -65,6 +68,7 @@ import { GenericDialogComponent } from './components/generic-dialog/generic-dial
     MatToolbarModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     SlickCarouselModule
   ],

@@ -4,7 +4,7 @@
 
 namespace MiodOdStaniula.Migrations
 {
-    public partial class photo : Migration
+    public partial class Photo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

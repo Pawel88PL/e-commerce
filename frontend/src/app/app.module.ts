@@ -1,3 +1,5 @@
+import { AdminGuard } from './guards/admin.guard';
+
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -72,7 +74,7 @@ import { RegisterComponent } from './components/register/register.component';
     ReactiveFormsModule,
     SlickCarouselModule
   ],
-  providers: [],
+  providers: [AdminGuard],
   bootstrap: [AppComponent]
 })
 

@@ -30,19 +30,23 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(userLoginData.UserName!, userLoginData.Password!, isPersistent: true, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(userLoginData.Email!, userLoginData.Password!, isPersistent: true, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
                 return Unauthorized();
             }
 
-            if (string.IsNullOrEmpty(userLoginData.UserName))
+            if (string.IsNullOrEmpty(userLoginData.Email))
             {
                 return BadRequest(ModelState);
             }
-            var token = GenerateJwtTokenForUser(userLoginData.UserName);
-            return Ok(new { Token = token });
+
+            var user = await _userManager.FindByEmailAsync(userLoginData.Email);
+            var roles = await _userManager.GetRolesAsync(user!);
+
+            var token = GenerateJwtTokenForUser(userLoginData.Email);
+            return Ok(new { Token = token, Roles = roles });
         }
 
 
@@ -54,12 +58,20 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
+            var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("Użytkownik o podanym adresie email jest już zarejestrowany.");
+            }
+
             var newUser = new UserModel
             {
-                UserName = userRegisterData.UserName,
+                UserName = userRegisterData.Email,
                 Email = userRegisterData.Email,
+                Name = userRegisterData.Name,
+                Surname = userRegisterData.Surname
             };
-            
+
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
             if (!result.Succeeded)

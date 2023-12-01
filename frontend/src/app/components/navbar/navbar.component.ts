@@ -15,8 +15,8 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
-  get username(): string {
-    return this.authService.getUsername() ?? '';
+  get email(): string {
+    return this.authService.getEmail() ?? '';
   }
 
   closeNavbar() {

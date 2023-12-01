@@ -6,11 +6,11 @@ namespace MiodOdStaniula.Models
     public class UserModel: IdentityUser
     {
         [Required(ErrorMessage = "Wpisz swoje imię")]
-        [StringLength(50, ErrorMessage = "Imię jest za długie.")]
+        [StringLength(30, ErrorMessage = "Imię jest za długie.")]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wpisz swoje nazwisko")]
-        [StringLength(50, ErrorMessage = "Nazwisko jest za długie.")]
+        [StringLength(30, ErrorMessage = "Nazwisko jest za długie.")]
         public string Surname { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wpisz miejscowość")]

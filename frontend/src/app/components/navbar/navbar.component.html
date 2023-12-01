@@ -11,7 +11,7 @@
                     <button mat-button routerLink="/products" (click)="closeNavbar()"><i class="bi bi-bag"></i>
                         Produkty</button>
                 </li>
-                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.isAdmin()">
                     <button mat-button routerLink="/warehouse" (click)="closeNavbar()"><i
                             class="bi bi-box-seam"></i> Magazyn</button>
                 </li>
@@ -24,7 +24,7 @@
                 </li>
                 <li class="nav-item" *ngIf="authService.isLoggedIn()">
                     <button mat-button (click)="logout(); closeNavbar()"><i class="bi bi-box-arrow-right"></i>
-                        {{ username}} </button>
+                        {{ email }} </button>
                 </li>
             </ul>
         </div>

@@ -1,4 +1,6 @@
 1. Utworzyć rolę administratora dla zarządzania magazynem i zamówieniami.
+    - zabezpieczyć magazyn, dodawanie, usuwanie i edycję produktów przed nieautoryzowanym dostępem.
+    
 2. Umożliwić klientom założenie konta.
 3. Utworzyć koszyk zakupowy.
 4. Dodać moduł płatności.

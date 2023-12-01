@@ -1,15 +1,19 @@
 <div class="loginForm text-center shadow bg-white rounded-3 col-sm-8 col-md-8 col-lg-6 col-xxl-4">
-    <form (ngSubmit)="onSubmit()">
+    <h2>Formularz logowania</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
-            <mat-label>Login</mat-label>
-            <input matInput [(ngModel)]="loginData.username" name="UserName">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Twój adres email jest wymagany do prawidłowej
+                rejestracji</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Nieprawidłowy format adresu email</mat-error>
         </mat-form-field>
-
+    
         <mat-form-field appearance="fill">
             <mat-label>Hasło</mat-label>
-            <input matInput type="password" [(ngModel)]="loginData.password" name="Password">
+            <input matInput type="password" formControlName="password">
         </mat-form-field>
-
+    
         <div class="row mt-2">
             <div class="col-md-6">
                 <button mat-raised-button color="black" class="w-100 m-2" type="submit"><i

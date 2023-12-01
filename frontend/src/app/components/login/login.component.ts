@@ -1,8 +1,8 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -10,37 +10,47 @@ import { GenericDialogComponent } from '../generic-dialog/generic-dialog.compone
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
-  loginData = {
-    username: '',
-    password: ''
-  };
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
 
-  constructor(private authService: AuthService, public dialog: MatDialog, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
+  }
 
   onSubmit() {
-    this.authService.login(this.loginData.username, this.loginData.password).subscribe(
-      success => {
-        localStorage.setItem('token', success.token);
-        this.router.navigate(['/warehouse']);
-      },
-      error => {
-        console.error(error);
-      }
-    )
-  }
+    if (this.loginForm.valid) {
+      const loginData = this.loginForm.value;
 
-  onRegister() {
-    this.openDialog();
-  }
-
-  openDialog() {
-    this.dialog.open(GenericDialogComponent, {
-      data: {
-        title: 'Rejestracja użytkownika',
-        message: 'Funkcja będzie dosępna wkrótce.',
-        showCancelButton: false
-      }
-    });
+      this.authService.login(loginData.email, loginData.password).subscribe(
+        success => {
+          const roles = this.authService.getRoles();
+          if (roles.includes('Admin')) {
+            this.router.navigate(['/warehouse']);
+          } else {
+            this.router.navigate(['/products']);
+          }
+        },
+        error => {
+          console.error(error);
+          let message = 'Błąd logowania: sprawdź swój email i hasło.';
+          if (error.error && typeof error.error === 'string') {
+            message = error.error;
+          }
+          this.snackBar.open(message, 'Zamknij', {
+            duration: 3000,
+          });
+        }
+      );
+    }
   }
 }

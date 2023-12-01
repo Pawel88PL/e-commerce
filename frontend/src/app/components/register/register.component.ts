@@ -22,8 +22,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
+      surname: ['', [Validators.required, Validators.maxLength(30)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(
         success => {
-          this.authService.login(this.registerForm.value.username, this.registerForm.value.password).subscribe(
+          this.authService.login(this.registerForm.value.email, this.registerForm.value.password).subscribe(
             loginSuccess => {
               localStorage.setItem('token', loginSuccess.token);
               this.router.navigate(['/products']);
@@ -44,7 +45,11 @@ export class RegisterComponent implements OnInit {
         },
         error => {
           console.error(error);
-          this.snackBar.open('Wystąpił błąd podczas próby rejestracji!', 'Zamknij', { duration: 3000 });
+          let errorMsg = 'Wystąpił błąd podczas próby rejestracji!';
+          if (error.error && typeof error.error === 'string') {
+            errorMsg = error.error;
+          }
+          this.snackBar.open(errorMsg, 'Zamknij', { duration: 3000 });
         }
       );
     }

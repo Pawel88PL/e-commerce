@@ -1,0 +1,9 @@
+1. **Informacja o Plikach Cookie i Zbieraniu Danych:** Twoja strona powinna wyświetlać wyraźne i zrozumiałe powiadomienie o użyciu plików cookie i gromadzeniu danych osobowych. To powiadomienie powinno być widoczne dla użytkowników przy ich pierwszej wizycie na stronie.
+
+2. **Zgoda Użytkownika:** Musisz uzyskać świadomą zgodę użytkownika na przetwarzanie jego danych osobowych i używanie plików cookie. Zgoda ta nie może być domyślnie zaznaczona ani ukryta w długich dokumentach polityki prywatności.
+
+3. **Polityka Prywatności:** Twoja strona internetowa powinna zawierać łatwo dostępną i zrozumiałą politykę prywatności, która opisuje, jakie dane są zbierane, w jakim celu, jak są przechowywane i przetwarzane, oraz jak użytkownik może zarządzać swoimi danymi (np. żądanie ich usunięcia).
+
+4. **Prawa Użytkownika:** Użytkownicy mają określone prawa w odniesieniu do swoich danych, takie jak prawo do dostępu, sprostowania, usunięcia („prawo do bycia zapomnianym”) oraz prawo do przenoszenia danych. Twoja polityka prywatności powinna opisywać te prawa i sposób ich realizacji.
+
+5. **Bezpieczeństwo Danych:** Powinieneś również zadbać o odpowiednie zabezpieczenia, aby chronić dane osobowe przed nieautoryzowanym dostępem, utratą czy kradzieżą.

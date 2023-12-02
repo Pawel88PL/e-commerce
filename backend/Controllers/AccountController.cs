@@ -69,7 +69,12 @@ namespace MiodOdStaniula.Controllers
                 UserName = userRegisterData.Email,
                 Email = userRegisterData.Email,
                 Name = userRegisterData.Name,
-                Surname = userRegisterData.Surname
+                Surname = userRegisterData.Surname,
+                City = userRegisterData.City,
+                PostalCode = userRegisterData.PostalCode,
+                Street = userRegisterData.Street,
+                Address = userRegisterData.Address,
+                PhoneNumber = userRegisterData.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);

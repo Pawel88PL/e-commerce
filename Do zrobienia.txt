@@ -2,10 +2,12 @@
     - zabezpieczyć magazyn, dodawanie, usuwanie i edycję produktów przed nieautoryzowanym dostępem. --> ZROBIONE.
     
 2. Umożliwić klientom założenie konta.
-    - utworzyć formularz rejestracji ze wszystkimi potrzebnymi polami,
-    - zadbać o walidację wprowadzanych danych
+    - utworzyć formularz rejestracji ze wszystkimi potrzebnymi polami, --> ZROBIONE
+    - zadbać o walidację wprowadzanych danych --> ZROBIONE
     - formularz logowania, żeby pamiętał poprzedni, wpisany adres email
 
-3. Utworzyć koszyk zakupowy.
-4. Dodać moduł płatności.
-5. Utworzyć moduł do zarządzania zamówieniami.
+3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę.
+
+4. Utworzyć koszyk zakupowy.
+5. Dodać moduł płatności.
+6. Utworzyć moduł do zarządzania zamówieniami.

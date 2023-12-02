@@ -23,8 +23,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', [Validators.required, Validators.maxLength(30)]],
-      surname: ['', [Validators.required, Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      surname: ['', [Validators.required, Validators.maxLength(50)]],
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      postalCode: ['', [Validators.required, Validators.pattern(/^\d{2}-\d{3}$/)]],
+      street: ['', [Validators.required, Validators.maxLength(50)]],
+      address: ['', [Validators.required, Validators.maxLength(50)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }

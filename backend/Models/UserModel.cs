@@ -6,11 +6,11 @@ namespace MiodOdStaniula.Models
     public class UserModel: IdentityUser
     {
         [Required(ErrorMessage = "Wpisz swoje imię")]
-        [StringLength(30, ErrorMessage = "Imię jest za długie.")]
+        [StringLength(50, ErrorMessage = "Imię jest za długie.")]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wpisz swoje nazwisko")]
-        [StringLength(30, ErrorMessage = "Nazwisko jest za długie.")]
+        [StringLength(50, ErrorMessage = "Nazwisko jest za długie.")]
         public string Surname { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wpisz miejscowość")]
@@ -22,7 +22,7 @@ namespace MiodOdStaniula.Models
         public string Street { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wpisz nr domu")]
-        [StringLength(20, ErrorMessage = "Numer domu jest za długi.")]
+        [StringLength(50, ErrorMessage = "Numer domu jest za długi.")]
         public string Address { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Podaj kod pocztowy")]

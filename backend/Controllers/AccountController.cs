@@ -34,7 +34,7 @@ namespace MiodOdStaniula.Controllers
 
             if (!result.Succeeded)
             {
-                return Unauthorized();
+                return Unauthorized("Podany email lub hasło są nieprawidłowe.");
             }
 
             if (string.IsNullOrEmpty(userLoginData.Email))
@@ -46,7 +46,7 @@ namespace MiodOdStaniula.Controllers
             var roles = await _userManager.GetRolesAsync(user!);
 
             var token = GenerateJwtTokenForUser(userLoginData.Email);
-            return Ok(new { Token = token, Roles = roles });
+            return Ok(new { Token = token, Roles = roles, user!.Name });
         }
 
 

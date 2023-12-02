@@ -17,17 +17,16 @@ export class AuthService {
       tap(res => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('roles', JSON.stringify(res.roles));
-        this.setEmail(email);
+        if (res.name) {
+          this.setName(res.name);
+        }
       }),
       catchError(error => {
         let message = 'Wystąpił błąd podczas logowania';
-        if (error.error && typeof error.error === 'string') {
+        if (error.status === 401) {
           message = error.error;
         }
-        this.snackBar.open(message, 'Zamknij', {
-          duration: 3000,
-        });
-        return throwError(() => error);
+        return throwError(() => new Error(message));
       })
     );
   }
@@ -35,6 +34,11 @@ export class AuthService {
   isAdmin(): boolean {
     const roles = this.getRoles();
     return roles.includes('Admin');
+  }
+
+  isClient(): boolean {
+    const roles = this.getRoles();
+    return roles.includes('Client');
   }
 
   getRoles(): string[] {
@@ -56,11 +60,11 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  setEmail(email: string) {
-    localStorage.setItem('email', email);
+  setName(name: string) {
+    localStorage.setItem('name', name);
   }
 
-  getEmail(): string | null {
-    return localStorage.getItem('email');
+  getName(): string | null {
+    return localStorage.getItem('name');
   }
 }

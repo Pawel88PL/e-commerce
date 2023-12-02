@@ -4,14 +4,16 @@
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email">
-            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Twój adres email jest wymagany do prawidłowej
-                rejestracji</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Adres email jest wymagany</mat-error>
             <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Nieprawidłowy format adresu email</mat-error>
         </mat-form-field>
     
         <mat-form-field appearance="fill">
             <mat-label>Hasło</mat-label>
             <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Hasło jest wymagane</mat-error>
+            <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Hasło musi zawierać co najmniej 6
+                znaków</mat-error>
         </mat-form-field>
     
         <div class="row mt-2">

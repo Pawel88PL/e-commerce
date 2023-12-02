@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
@@ -41,13 +41,8 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          console.error(error);
-          let message = 'Błąd logowania: sprawdź swój email i hasło.';
-          if (error.error && typeof error.error === 'string') {
-            message = error.error;
-          }
-          this.snackBar.open(message, 'Zamknij', {
-            duration: 3000,
+          this.snackBar.open(error.message, 'Zamknij', {
+            duration: 5000,
           });
         }
       );

@@ -12,6 +12,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item-dialog.component';
+import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -42,6 +43,7 @@ import { RegisterComponent } from './components/register/register.component';
     AppComponent,
     CartComponent,
     CartItemDialogComponent,
+    CookieConsentComponent,
     FooterComponent,
     GenericDialogComponent,
     HomeComponent,
@@ -53,7 +55,7 @@ import { RegisterComponent } from './components/register/register.component';
     ProductDetailsComponent,
     ProductUpdateComponent,
     RegisterComponent,
-    WarehouseComponent
+    WarehouseComponent,
   ],
   imports: [
     AppRoutingModule,

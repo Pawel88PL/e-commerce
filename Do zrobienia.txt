@@ -1,13 +1,21 @@
 1. Utworzyć rolę administratora dla zarządzania magazynem i zamówieniami.
-    - zabezpieczyć magazyn, dodawanie, usuwanie i edycję produktów przed nieautoryzowanym dostępem. --> ZROBIONE.
+
+    - zabezpieczyć magazyn, dodawanie, usuwanie i edycję produktów przed nieautoryzowanym dostępem. --> ZROBIONE
     
 2. Umożliwić klientom założenie konta.
+
     - utworzyć formularz rejestracji ze wszystkimi potrzebnymi polami, --> ZROBIONE
     - zadbać o walidację wprowadzanych danych --> ZROBIONE
     - formularz logowania, żeby pamiętał poprzedni, wpisany adres email
 
-3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę.
+3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę. --> ZROBIONE
 
-4. Utworzyć koszyk zakupowy.
+4. Rozszerzenie API kontrolera koszyka o dodatkowe endpointy:
+
+    - pobieranie zawartości koszyka.
+    - aktualizowanie ilości produktu w koszyku.
+    - usuwanie produktu z koszyka.
+    - czyszczenie koszyka.
+
 5. Dodać moduł płatności.
 6. Utworzyć moduł do zarządzania zamówieniami.

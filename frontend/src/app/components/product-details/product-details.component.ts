@@ -30,6 +30,7 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addToCart(this.product).subscribe((result) => {
       const firstImage = this.product.productImages?.[0]?.imagePath;
       this.dialog.open(CartItemDialogComponent, {
+        panelClass: 'custom-dialog',
         data: {
           image: firstImage ? 'https://localhost:5047/' + firstImage : null,
           name: this.product.name,

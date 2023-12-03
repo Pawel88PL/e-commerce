@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItemDialogComponent } from '../cart-item-dialog/cart-item-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-card',
@@ -9,9 +12,18 @@ export class ProductCardComponent {
   
   @Input() product: any;
 
-  constructor() {}
+  constructor(private cartService: CartService, private dialog: MatDialog) {}
 
-  addToCart() {
-    console.log('Produkt ${ this.product.name } dodany do koszyka')
+  onAddToCart() {
+    this.cartService.addToCart(this.product).subscribe((result) => {
+      const firstImage = this.product.productImages?.[0]?.imagePath;
+      this.dialog.open(CartItemDialogComponent, {
+        data: {
+          image: firstImage ? 'https://localhost:5047/' + firstImage : null,
+          name: this.product.name,
+          price: this.product.price
+        }
+      });
+    });
   }
 }

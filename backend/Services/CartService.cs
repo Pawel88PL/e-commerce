@@ -16,22 +16,34 @@ namespace MiodOdStaniula.Services
             _logger = logger;
         }
 
-        public async Task<ShopingCart?> GetCartAsync(Guid cartId)
+        public async Task<CartDto?> GetCartAsync(Guid cartId)
         {
-            if (_context.ShopingCarts != null)
-            {
-                if (_context.Products != null)
-                {
-                    var cart = await _context.ShopingCarts
-                        .Include(p => p.CartItems)
-                        .ThenInclude(p => p.Product!.ProductImages)
-                        .FirstOrDefaultAsync(p => p.ShopingCartId == cartId);
+            var cart = await _context.ShopingCarts!
+                .Include(c => c.CartItems)
+                .ThenInclude(i => i.Product)
+                .ThenInclude(p => p!.ProductImages)
+                .FirstOrDefaultAsync(c => c.ShopingCartId == cartId);
 
-                    return cart;
-                }
-            }
-            return null;
+            if (cart == null)
+                return null;
+
+            var cartDto = new CartDto
+            {
+                ShopingCartId = cart.ShopingCartId,
+                CartItems = cart.CartItems.Select(i => new CartItemDto
+                {
+                    ProductId = i.ProductId,
+                    Name = i.Product!.Name!,
+                    Price = i.Price,
+                    Quantity = i.Quantity,
+                    ImagePaths = i.Product!.ProductImages!.Select(img => img!.ImagePath!).ToList()
+                }).ToList(),
+                TotalValue = cart.GetTotalValue()
+            };
+
+            return cartDto;
         }
+
 
         public async Task AddItemToCart(Guid cartId, int productId, int quantity)
         {
@@ -149,6 +161,22 @@ namespace MiodOdStaniula.Services
                 }
             }
             return false;
+        }
+
+        public async Task<bool> ClearCartAsync(Guid cartId)
+        {
+            var cart = await _context.ShopingCarts!
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.ShopingCartId == cartId);
+
+            if (cart == null)
+            {
+                return false;
+            }
+
+            _context.CartItem!.RemoveRange(cart.CartItems);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

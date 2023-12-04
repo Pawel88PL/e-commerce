@@ -25,8 +25,8 @@
                                     </div>
                                     <div class="col-4 col-sm-5">
                                         <select (change)="updateQuantity(item.productId, $event)">
-                                            <option *ngFor="let qty of [].constructor(maxQuantity(item.amountAvailable)); let i = index"
-                                                [value]="i + 1" [selected]="item.quantity === i + 1">{{ i + 1 }}</option>
+                                            <option *ngFor="let qty of maxQuantity(item.amountAvailable)" [value]="qty" [selected]="item.quantity === qty">{{
+                                                qty }}</option>
                                         </select>
                                     </div>
                                 </div>

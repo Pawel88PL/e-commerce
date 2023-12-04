@@ -60,11 +60,12 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpPut("{cartId}/items/{productId}")]
-        public async Task<IActionResult> UpdateCartItemQuantity(Guid cartId, int productId, [FromBody] int quantity)
+        public async Task<IActionResult> UpdateCartItemQuantity(Guid cartId, int productId, [FromBody] UpdateCartItemQuantityModel model)
         {
             try
             {
-                var result = await _cartService.UpdateCartItemQuantityAsync(cartId, productId, quantity);
+                
+                var result = await _cartService.UpdateCartItemQuantityAsync(cartId, productId, model.Quantity);
                 if (!result)
                 {
                     return NotFound("Produkt lub koszyk nie został znaleziony.");
@@ -78,6 +79,7 @@ namespace MiodOdStaniula.Controllers
                 return StatusCode(500, "Wystąpił błąd serwera.");
             }
         }
+
 
         [HttpDelete("{cartId}/items/{productId}")]
         public async Task<IActionResult> DeleteItemFromCart(Guid cartId, int productId)

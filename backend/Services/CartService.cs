@@ -32,6 +32,7 @@ namespace MiodOdStaniula.Services
                 ShopingCartId = cart.ShopingCartId,
                 CartItems = cart.CartItems.Select(i => new CartItemDto
                 {
+                    AmountAvailable = i.Product!.AmountAvailable,
                     ProductId = i.ProductId,
                     Name = i.Product!.Name!,
                     Price = i.Price,
@@ -56,6 +57,7 @@ namespace MiodOdStaniula.Services
                 cart = new ShopingCart
                 {
                     ShopingCartId = cartId,
+                    CustomerId = Guid.NewGuid(),
                     CreateCartDate = DateTime.Now,
                     CartItems = new List<CartItem>()
                 };
@@ -131,7 +133,6 @@ namespace MiodOdStaniula.Services
                 return false;
             }
             return false;
-
         }
 
 

@@ -8,4 +8,11 @@ namespace MiodOdStaniula.Models
         public int Quantity { get; set; }
     }
 
+
+    public class UpdateCartItemQuantityModel
+    {
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+    }
+
 }

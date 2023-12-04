@@ -10,7 +10,7 @@ import { Product } from '../models/product.model';
 })
 
 export class CartService {
-  private cartId: string | null = localStorage.getItem('cartId')
+  public cartId: string | null = localStorage.getItem('cartId')
   private cartUrl = 'https://localhost:5047/api/Cart';
   private cartItemUrl = 'https://localhost:5047/api/Cart/items';
 
@@ -20,18 +20,8 @@ export class CartService {
     if (!this.cartId) {
       this.cartId = uuidv4();
       localStorage.setItem('cartId', this.cartId);
-      return this.createCart(this.cartId).pipe(
-        switchMap(() => this.addItemToCart(product))
-      );
     }
-
     return this.addItemToCart(product);
-  }
-
-  private createCart(cartId: string): Observable<void> {
-    return this.http.post<void>(this.cartUrl, { shopingCartId: cartId }).pipe(
-      catchError(this.handleError)
-    );
   }
 
   private addItemToCart(product: Product): Observable<any> {
@@ -54,11 +44,9 @@ export class CartService {
     );
   }
 
-  updateItemQuantity(productId: number, quantity: number): Observable<any> {
-    return this.http.put(`${this.cartItemUrl}/${productId}`, {
-      cartId: this.cartId,
-      quantity
-    }).pipe(
+  updateItemQuantity(cartId: string, productId: number, quantity: number): Observable<any> {
+    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    return this.http.put(url, { quantity }).pipe(
       catchError(this.handleError)
     );
   }
@@ -77,10 +65,6 @@ export class CartService {
     return this.http.delete(`${this.cartUrl}/${this.cartId}`).pipe(
       catchError(this.handleError)
     );
-  }
-
-  private generateUUID(): string {
-    return uuidv4();
   }
 
   private handleError(error: any) {

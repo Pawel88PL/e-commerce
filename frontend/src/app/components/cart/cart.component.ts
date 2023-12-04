@@ -43,14 +43,18 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(productId: number, event: Event) {
-    const element = event.target as HTMLSelectElement
-    const newQuantity = parseInt(element.value, 10);
-    this.cartService.updateItemQuantity(productId, newQuantity).subscribe(
-      () => {
-        this.loadCartItems();
-      },
-      error => console.error('Błąd aktualizacji ilości!', error)
-    );
+    const selectElement = event.target as HTMLSelectElement;
+    const newQuantity = parseInt(selectElement.value, 10);
+    if (this.cartService.cartId) {
+      this.cartService.updateItemQuantity(this.cartService.cartId, productId, newQuantity).subscribe(
+        () => {
+          this.loadCartItems();
+        },
+        error => console.error('Błąd aktualizacji ilości!', error)
+      );
+    } else {
+      console.error('Brak identyfikatora koszyka!');
+    }
   }
 
   removeFromCart(productId: number) {

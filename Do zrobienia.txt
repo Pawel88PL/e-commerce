@@ -12,7 +12,7 @@
 
 4. Rozszerzenie API kontrolera koszyka o dodatkowe endpointy:
 
-    - pobieranie zawartości koszyka.
+    - pobieranie zawartości koszyka. --> ZROBIONE
     - aktualizowanie ilości produktu w koszyku.
     - usuwanie produktu z koszyka.
     - czyszczenie koszyka.

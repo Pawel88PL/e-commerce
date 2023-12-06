@@ -32,7 +32,6 @@ export class CartComponent implements OnInit {
     );
   }
 
-
   calculateCosts() {
     if (Array.isArray(this.items)) {
       this.productCost = this.items.reduce((acc, item) => acc + item.price * item.quantity, 0);

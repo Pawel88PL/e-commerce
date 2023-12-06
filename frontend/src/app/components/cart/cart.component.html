@@ -1,51 +1,40 @@
 <div class="container">
     <div class="cart row mt-5">
         <div class="col-md-8">
-            <h4>Koszyk</h4>
+            <h1>Koszyk</h1>
             <div *ngIf="items && items.length; else emptyCart">
-                <div class="row mt-3" *ngFor="let item of items">
-                    <div class="col-6 col-sm-3">
+                <div class="row mb-4" *ngFor="let item of items">
+                    <div class="col-2">
                         <a [routerLink]="['/product', item.productId]">
                             <img [src]="'https://localhost:5047/' + item.imagePaths![0]" [alt]="item.name"
-                                class="w-75 shadow rounded-3" />
+                                class="w-100 rounded-3" />
                         </a>
                     </div>
-                    <div class="col-6 col-sm-6">
-                        <div>
-                            <a [routerLink]="['/products', item.productId]"
-                                style="text-decoration: none; color: black">
-                                <h5>{{ item.name }}</h5>
-                            </a>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-4">
-                                <div class="row">
-                                    <div class="col-8 col-sm-7">
-                                        <p>Ilość:</p>
-                                    </div>
-                                    <div class="col-4 col-sm-5">
-                                        <select (change)="updateQuantity(item.productId, $event)">
-                                            <option *ngFor="let qty of maxQuantity(item.amountAvailable)" [value]="qty" [selected]="item.quantity === qty">{{
-                                                qty }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <button (click)="removeFromCart(item.productId)" class="btn"><i
-                                        class="bi bi-trash3"></i></button>
-                            </div>
+                    <div class="col-6">
+                        <a [routerLink]="['/products', item.productId]" style="text-decoration: none; color: black">
+                            <h2>{{ item.name }}</h2>
+                        </a>
+                        <div class="form-group col-sm-3 col-md-4">
+                            <select class="form-select" id="quantitySelect"
+                                (change)="updateQuantity(item.productId, $event)">
+                                <option *ngFor="let qty of maxQuantity(item.amountAvailable)" [value]="qty"
+                                    [selected]="item.quantity === qty">
+                                    {{ qty }}
+                                </option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-3">
-                        <h5>{{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h5>
+                    <div class="col-2">
+                        <h3>{{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h3>
+                        <button mat-raised-button (click)="removeFromCart(item.productId)" class="btn btn-lg"><i
+                                class="bi bi-trash3"></i></button>
                     </div>
                 </div>
                 <hr />
             </div>
         </div>
         <div class="col-md-4">
-            <h4>Podsumowanie</h4>
+            <h1>Podsumowanie</h1>
             <br>
             <div class="row mt-1">
                 <div class="col-7">

@@ -1,3 +1,4 @@
+import { CartService } from './cart.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, observeOn, tap, catchError, throwError } from 'rxjs';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private cartService: CartService, private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>('https://localhost:5047/login', { email, password }).pipe(
@@ -19,6 +20,9 @@ export class AuthService {
         localStorage.setItem('roles', JSON.stringify(res.roles));
         if (res.name) {
           this.setName(res.name);
+        };
+        if (this.cartService.cartId) {
+          this.cartService.assignCartToUser(res.userId).subscribe();
         }
       }),
       catchError(error => {

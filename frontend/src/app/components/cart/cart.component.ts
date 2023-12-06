@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +15,7 @@ export class CartComponent implements OnInit {
   shippingCost: number = 0;
   totalCost: number = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loadCartItems();
@@ -88,6 +90,10 @@ export class CartComponent implements OnInit {
 
 
   proceedToCheckout() {
-    // Implementacja przekierowania do kasy
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/order']);
+    } else {
+      this.router.navigate(['/checkout']);
+    }
   }
 }

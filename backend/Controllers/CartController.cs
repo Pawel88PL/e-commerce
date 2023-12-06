@@ -39,6 +39,27 @@ namespace MiodOdStaniula.Controllers
             }
         }
 
+        [HttpPost("assign/{cartId}")]
+        public async Task<IActionResult> AssignCartToUser(Guid cartId, [FromBody] AssignCartModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _cartService.AssignCartToUser(cartId, model.UserId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Błąd podczas przypisania koszyka do użytkownika.");
+                return StatusCode(500, "Wystąpił błąd serwera");
+            }
+        }
+
+
         [HttpGet("{cartId}/items")]
         public async Task<IActionResult> GetCart(Guid cartId)
         {

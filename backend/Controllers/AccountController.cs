@@ -44,9 +44,9 @@ namespace MiodOdStaniula.Controllers
 
             var user = await _userManager.FindByEmailAsync(userLoginData.Email);
             var roles = await _userManager.GetRolesAsync(user!);
-
             var token = GenerateJwtTokenForUser(userLoginData.Email);
-            return Ok(new { Token = token, Roles = roles, user!.Name });
+
+            return Ok(new { Token = token, Roles = roles, user!.Name, UserId = user.Id });
         }
 
 

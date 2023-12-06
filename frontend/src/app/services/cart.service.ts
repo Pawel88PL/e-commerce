@@ -34,6 +34,12 @@ export class CartService {
     );
   }
 
+  assignCartToUser(userId: string): Observable<any> {
+    return this.http.post(`https://localhost:5047/api/Cart/assign/${this.cartId}`, { userId }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getItems(): Observable<CartItem[]> {
     if (!this.cartId) {
       return throwError(() => new Error('Brak identyfikatora koszyka'));

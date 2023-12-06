@@ -57,7 +57,6 @@ namespace MiodOdStaniula.Services
                 cart = new ShopingCart
                 {
                     ShopingCartId = cartId,
-                    CustomerId = Guid.NewGuid(),
                     CreateCartDate = DateTime.Now,
                     CartItems = new List<CartItem>()
                 };
@@ -92,6 +91,16 @@ namespace MiodOdStaniula.Services
             }
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AssignCartToUser(Guid cartId, Guid userId)
+        {
+            var cart = await _context.ShopingCarts!.FindAsync(cartId);
+            if (cart != null)
+            {
+                cart.CustomerId = userId;
+                await _context.SaveChangesAsync();
+            }
         }
 
 

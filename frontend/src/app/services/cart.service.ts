@@ -51,8 +51,9 @@ export class CartService {
     );
   }
 
-  removeItem(productId: number): Observable<any> {
-    return this.http.delete(`${this.cartItemUrl}/${productId}?cartId=${this.cartId}`).pipe(
+  removeItem(cartId: string ,productId: number): Observable<any> {
+    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    return this.http.delete(url).pipe(
       catchError(this.handleError)
     );
   }

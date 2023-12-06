@@ -57,13 +57,16 @@ export class CartComponent implements OnInit {
   }
 
   removeFromCart(productId: number) {
-    // Logika usuwania produktu z koszyka
-    this.cartService.removeItem(productId).subscribe(
-      () => {
-        this.loadCartItems(); // Ponowne załadowanie koszyka po usunięciu produktu
-      },
-      error => console.error('Błąd podczas usuwania produktu!', error)
-    );
+    if (this.cartService.cartId) {
+      this.cartService.removeItem(this.cartService.cartId, productId).subscribe(
+        () => {
+          this.loadCartItems();
+        },
+        error => console.error('Błąd podczas usuwania produktu!', error)
+      );
+    } else {
+      console.error('Angular: Brak identyfikatora koszyka');
+    }
   }
 
   clearCart() {

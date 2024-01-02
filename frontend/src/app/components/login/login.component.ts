@@ -33,11 +33,16 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(loginData.email, loginData.password).subscribe(
         success => {
-          const roles = this.authService.getRoles();
-          if (roles.includes('Admin')) {
-            this.router.navigate(['/warehouse']);
+          if (localStorage.getItem('inCheckoutProcess')) {
+            this.router.navigate(['/order']);
+            localStorage.removeItem('inCheckoutProcess');
           } else {
-            this.router.navigate(['/products']);
+            const roles = this.authService.getRoles();
+            if (roles.includes('Admin')) {
+              this.router.navigate(['/warehouse']);
+            } else {
+              this.router.navigate(['/products']);
+            }
           }
         },
         error => {

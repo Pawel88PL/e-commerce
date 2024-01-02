@@ -1,17 +1,13 @@
-<div class="checkout-container">
-    <h2>Przekierowanie...</h2>
-    <p>Trwa przetwarzanie Twojego zamówienia. Prosimy o chwilę cierpliwości.</p>
+<div class="checkout-options">
+    <h2>Przejdź do kasy</h2>
 
-    <!-- Możesz dodać spinner lub animację ładowania -->
-    <div class="spinner">
-        <img src="ścieżka/do/spinnera.gif" alt="Ładowanie...">
-    </div>
+    <!-- Przycisk dla nowych użytkowników -->
+    <button type="button" class="btn btn-primary btn-lg w-100 my-3" (click)="navigateToRegister()">
+        Nie mam konta - zarejestruj się
+    </button>
 
-    <p>Jeśli nie jesteś automatycznie przekierowany, kliknij poniższe przyciski.</p>
-
-    <!-- Opcjonalne przyciski do ręcznego przekierowania -->
-    <div class="buttons">
-        <button >Logowanie</button>
-        <button >Rejestracja</button>
-    </div>
+    <!-- Przycisk dla powracających użytkowników -->
+    <button type="button" class="btn btn-secondary btn-lg w-100 my-3" (click)="navigateToLogin()">
+        Mam konto - zaloguj się
+    </button>
 </div>

@@ -1,0 +1,10 @@
+.checkout-options {
+    text-align: center;
+    padding: 20px;
+}
+
+.btn {
+    padding: 15px;
+    font-size: 1.2em;
+    /* Większa czcionka dla lepszej widoczności */
+}

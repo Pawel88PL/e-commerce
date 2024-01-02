@@ -19,9 +19,9 @@
 
 5. Utworzyć moduł zamówień.
 
+    - powiązać cartId z userId po pomyślnym zalogowaniu użytkownika
     - po naciśnięciu przycisku 'Przejdź do kasy' przekierowanie do strony z wyborem opcji: 'Mam już konto' i 'Jestem nowym użytkownikiem',
-        a do zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia,
-    - powiązać id koszyka z id użytkownika po pomyślnym zalogowaniu
+      a do zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia,
 
 6. Dodać moduł płatności.
 7. Utworzyć moduł do zarządzania zamówieniami.

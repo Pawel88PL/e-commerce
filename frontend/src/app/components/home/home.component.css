@@ -5,6 +5,7 @@
     font-size: 4rem;
 }
 .welcome-carousel{
-    max-width: 1600px;
+    max-width: 1800px;
     margin: auto;
+    margin-top: -1rem;
 }

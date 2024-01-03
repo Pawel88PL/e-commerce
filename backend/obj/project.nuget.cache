@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "zHXoLD8VzdsTAGmkaq725JSCCyAykBQNrxaxYKCFjrdkJR2fN9l/Qlt3XMUm0iGSaCTE4RUbSkcBb3cS+B3VBw==",
+  "dgSpecHash": "u8/yFe7ARFP4aTbjovsMcnhaiucmLj+2QuTME3cDlQP6ZEvLsmL/Ng+ys7z0Xi/Gp+DSxlV/TRs3qGCXOWLkbQ==",
   "success": true,
   "projectFilePath": "/Users/pawelstaniul/Desktop/e-commerce/backend/backend.csproj",
   "expectedPackageFiles": [
     "/Users/pawelstaniul/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/pawelstaniul/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.0/microsoft.aspnetcore.authentication.jwtbearer.7.0.0.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.10/microsoft.aspnetcore.cryptography.internal.7.0.10.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.10/microsoft.aspnetcore.cryptography.keyderivation.7.0.10.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.10/microsoft.aspnetcore.identity.entityframeworkcore.7.0.10.nupkg.sha512",

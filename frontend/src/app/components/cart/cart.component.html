@@ -1,77 +1,76 @@
 <div class="container">
     <div class="cart row mt-5">
         <div class="col-md-8">
-            <h2>Koszyk</h2>
-            <div class="row mt-3">
-                <div class="col-6 col-sm-3">
-                    <a href="">
-                        <img src="" alt="" class="w-75 shadow rounded-3" />
-                    </a>
-                </div>
-                <div class="col-6 col-sm-6">
-                    <div>
-                        <a href="" style="text-decoration: none; color: black">
-                            <h5>Product.Name</h5>
+            <h1>Koszyk</h1>
+            <div *ngIf="items && items.length; else emptyCart">
+                <div class="row mb-4" *ngFor="let item of items">
+                    <div class="col-2">
+                        <a [routerLink]="['/product', item.productId]">
+                            <img [src]="'https://localhost:5047/' + item.imagePaths![0]" [alt]="item.name"
+                                class="w-100 rounded-3" />
                         </a>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-4">
-                            <div class="row">
-                                <div class="col-8 col-sm-7">
-                                    <p>Ilość: </p>
-                                </div>
-                                <div class="col-4 col-sm-5 ">
-                                    <select name="quantity" onchange="this.form.submit()">
-                                        <option value=""></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <button type="submit" class="btn"><i class="bi bi-trash3"></i></button>
-                            </div>
+                    <div class="col-6">
+                        <a [routerLink]="['/product', item.productId]" style="text-decoration: none; color: black">
+                            <h2>{{ item.name }}</h2>
+                        </a>
+                        <div class="form-group col-sm-3 col-md-4">
+                            <select class="form-select" id="quantitySelect"
+                                (change)="updateQuantity(item.productId, $event)">
+                                <option *ngFor="let qty of maxQuantity(item.amountAvailable)" [value]="qty"
+                                    [selected]="item.quantity === qty">
+                                    {{ qty }}
+                                </option>
+                            </select>
                         </div>
                     </div>
+                    <div class="col-2">
+                        <h3>{{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h3>
+                        <button mat-raised-button (click)="removeFromCart(item.productId)" class="btn btn-lg"><i
+                                class="bi bi-trash3"></i></button>
+                    </div>
                 </div>
-                <div class="col-12 col-sm-3">
-                    
-                    <h5>totalItemPrice</h5>
-                </div>
+                <hr />
             </div>
-            <hr />
         </div>
         <div class="col-md-4">
-            <h2>Podsumowanie</h2>
-                <br>
-                <div class="row mt-1">
-                    <div class="col-7">
-                        <p>Suma częściowa:</p>
-                        <p>Szacowany koszt wysyłki:</p>
+            <h1>Podsumowanie</h1>
+            <br>
+            <div class="row mt-1">
+                <div class="col-7">
+                    <p>Suma częściowa:</p>
+                    <p>Szacowany koszt wysyłki:</p>
+                </div>
+                <div class="col-5 d-flex flex-column align-items-end">
+                    <div>
+                        <p>{{ productCost | currency: 'PLN': 'symbol' }}</p>
                     </div>
-                    <div class="col-5 d-flex flex-column align-items-end">
-                        <div>
-                            <p>ProductCost</p>
-                        </div>
-                        <div>
-                            <p>ShippingCost</p>
-                        </div>
+                    <div>
+                        <p>{{ shippingCost | currency: 'PLN': 'symbol' }}</p>
                     </div>
                 </div>
+            </div>
 
-                <hr>
-                <div class="row">
-                    <div class="col-7">
-                        <h4>Suma:</h4>
-                    </div>
-                    <div class="col-5 d-flex flex-column align-items-end">
-                        <h4>TotalCost</h4>
-                    </div>
+            <hr>
+            <div class="row">
+                <div class="col-7">
+                    <h4>Suma:</h4>
                 </div>
-                <hr>
-                <div class="col-sm-12">
-                    <button mat-raised-button color="primary" type="button" class="mt-2 w-100">
-                        Przejdź do kasy
-                    </button>
+                <div class="col-5 d-flex flex-column align-items-end">
+                    <h4>{{ totalCost | currency: 'PLN': 'symbol' }}</h4>
                 </div>
+            </div>
+            <hr>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-lg btn-dark mt-2 w-100" [disabled]="!items.length"
+                    (click)="proceedToCheckout()">
+                    Przejdź do kasy
+                </button>
+            </div>
         </div>
     </div>
 </div>
+
+<ng-template #emptyCart>
+    <p>Koszyk jest pusty.</p>
+</ng-template>

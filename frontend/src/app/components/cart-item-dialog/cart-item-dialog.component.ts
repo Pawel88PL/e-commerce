@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-item-dialog',
@@ -9,7 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class CartItemDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CartItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router
   ) {}
 
   onCheckout(): void {
@@ -17,6 +19,7 @@ export class CartItemDialogComponent {
   }
 
   onViewCart(): void {
+    this.router.navigate(['/cart']);
     this.dialogRef.close();
   }
 }

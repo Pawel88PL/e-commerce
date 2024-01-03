@@ -1,12 +1,49 @@
-<mat-toolbar class="bg-white shadow">
-    <a mat-button routerLink="/home" class="home"><i class="bi bi-shop"></i> Miód od Staniula</a>
-    <a mat-button routerLink="/products"><i class="bi bi-bag"></i> PRODUKTY</a>
-    <div class="spacer"></div>
-    <button mat-button [matMenuTriggerFor]="menu"><i class="bi bi-person-gear"></i> PANEL ADMINISTRATORA</button>
-    <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/warehouse"><i class="bi bi-box-seam"></i> MAGAZYN</a>
-        <a mat-menu-item><i class="bi bi-cart3"></i> ZAMÓWIENIA</a>
-    </mat-menu>
-    <a mat-button><i class="bi bi-box-arrow-in-left"></i> MOJE KONTO</a>
-    <a mat-button routerLink="/cart"><i class="bi bi-cart"></i> KOSZYK</a>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+    <div class="container-fluid">
+        <button mat-button routerLink="/home"><i class="bi bi-shop"></i> Miód od Staniula</button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button mat-button routerLink="/products" (click)="closeNavbar()"><i class="bi bi-bag"></i>
+                        Produkty</button>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown" *ngIf="authService.isLoggedIn() && authService.isAdmin()">
+                    <button mat-button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Witaj {{ name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="/warehouse"><i class="bi bi-box-seam"></i> Magazyn</a></li>
+                        <li><a class="dropdown-item" routerLink="/orders"><i class="bi bi-cart3"></i> Zamówienia</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.isClient()">
+                    <button mat-button (click)="closeNavbar()"><i class="bi bi-box-arrow-right"></i>
+                        Witaj {{ name }} </button>
+                </li>
+                <li class="nav-item">
+                    <button mat-button routerLink="/cart" (click)="closeNavbar()"><i class="bi bi-cart"></i>
+                        Koszyk</button>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <button mat-button (click)="logout(); closeNavbar()"><i class="bi bi-box-arrow-in-left"></i>
+                        Wyloguj</button>
+                </li>
+                <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                    <button mat-button routerLink="/register" (click)="closeNavbar()"><i
+                            class="bi bi-box-arrow-in-left"></i> Zarejestruj się</button>
+                </li>
+                <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                    <button mat-button routerLink="/login" (click)="closeNavbar()"><i
+                            class="bi bi-box-arrow-in-left"></i> Zaloguj się</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

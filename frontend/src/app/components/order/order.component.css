@@ -1,0 +1,21 @@
+.order {
+    margin-top: 8rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10rem;
+}
+
+.product-image {
+    width: 50%;
+}
+
+@media (max-width: 576px) {
+    .order {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .product-image {
+        width: 100%;
+    }
+}

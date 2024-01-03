@@ -1,0 +1,69 @@
+<div class="container">
+
+
+    <div class="order">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Twoje dane:</h1>
+                <!-- Tutaj musimy wyświetlić dane i adres naszego klienta-->
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h1>Podsumowanie</h1>
+                    </div>
+                    <div class="col-sm-4">
+                        <button mat-button routerLink="/cart" class="w-100"><i class="bi bi-pencil"></i> Edytuj</button>
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="items && items.length">
+                    <div class="row mb-4" *ngFor="let item of items">
+                        <div class="col-4">
+                            <img [src]="'https://localhost:5047/' + item.imagePaths![0]" [alt]="item.name"
+                                class="product-image rounded-3" />
+                        </div>
+                        <div class="col-8">
+                            <h3>{{ item.name }}</h3>
+                            <h3>{{ item.quantity }} * {{ item.price }} = {{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h3>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+                <br>
+                <div class="row mt-1">
+                    <div class="col-7">
+                        <p>Produkty:</p>
+                        <p>Koszt wysyłki:</p>
+                    </div>
+                    <div class="col-5 d-flex flex-column align-items-end">
+                        <div>
+                            <p>{{ productCost | currency: 'PLN': 'symbol' }}</p>
+                        </div>
+                        <div>
+                            <p>{{ shippingCost | currency: 'PLN': 'symbol' }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col-7">
+                        <h4>Suma:</h4>
+                    </div>
+                    <div class="col-5 d-flex flex-column align-items-end">
+                        <h4>{{ totalCost | currency: 'PLN': 'symbol' }}</h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-lg btn-dark mt-2 w-100" [disabled]="!items.length"
+                        (click)="placeOrder()">
+                        Złóż zamówienie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+1. Utworzyć rolę administratora dla zarządzania magazynem i zamówieniami.
+
+    - zabezpieczyć magazyn, dodawanie, usuwanie i edycję produktów przed nieautoryzowanym dostępem. --> ZROBIONE
+    
+2. Umożliwić klientom założenie konta.
+
+    - utworzyć formularz rejestracji ze wszystkimi potrzebnymi polami, --> ZROBIONE
+    - zadbać o walidację wprowadzanych danych --> ZROBIONE
+    - formularz logowania, żeby pamiętał poprzedni, wpisany adres email
+
+3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę. --> ZROBIONE
+
+4. Rozszerzenie API kontrolera koszyka o dodatkowe endpointy:
+
+    - pobieranie zawartości koszyka. --> ZROBIONE
+    - aktualizowanie ilości produktu w koszyku. --> ZROBIONE
+    - usuwanie produktu z koszyka. --> ZROBIONE
+    - czyszczenie koszyka.
+
+5. Utworzyć moduł zamówień.
+
+    - powiązać cartId z userId po pomyślnym zalogowaniu użytkownika
+    - po naciśnięciu przycisku 'Przejdź do kasy' przekierowanie do strony z wyborem opcji: 'Mam już konto' i 'Jestem nowym użytkownikiem',
+      a do zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia,
+
+6. Dodać moduł płatności.
+7. Utworzyć moduł do zarządzania zamówieniami.

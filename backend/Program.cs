@@ -6,12 +6,16 @@ using Microsoft.Extensions.Options;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services;
 using MiodOdStaniula.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 namespace MiodOdStaniula
 {
     public class Program
     {
-        private static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -22,16 +26,8 @@ namespace MiodOdStaniula
 
             builder.Services.AddControllers();
 
-            /* builder.Services.AddMemoryCache();
-            builder.Services.AddDistributedMemoryCache();
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromDays(2);
-            });
-            */
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
-            builder.Services.AddScoped<ICustomerService, CustomerService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ITotalCostService, TotalCostService>();
@@ -45,12 +41,30 @@ namespace MiodOdStaniula
             builder.Services.AddIdentity<UserModel, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
 
             }).AddEntityFrameworkStores<DbStoreContext>();
+
+            var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.Key ?? throw new InvalidOperationException("JWT Key is not set.")))
+                };
+            });
+
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -73,6 +87,21 @@ namespace MiodOdStaniula
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+                try
+                {
+                    // Wywołanie metody do inicjalizacji ról
+                    await RoleInitializer.CreateRoles(serviceProvider);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Wystąpił błąd podczas inicjalizacji ról");
+                }
+            }
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -92,10 +121,9 @@ namespace MiodOdStaniula
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseSession();
+            app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("AllowSpecificOrigin");
             app.MapControllers();
 
             app.Run();

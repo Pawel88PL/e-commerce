@@ -1,0 +1,14 @@
+.checkout-options {
+    text-align: center;
+    margin-top: 13rem;
+    margin-bottom: 17rem;
+    max-width: 800px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    padding: 15px;
+    font-size: 1.2em;
+}

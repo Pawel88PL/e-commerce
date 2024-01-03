@@ -10,66 +10,72 @@ import { Product } from '../models/product.model';
 })
 
 export class CartService {
-  private cartId: string | null = null;
-  private items: CartItem[] = [];
-  private product: Product = new Product();
-
+  public cartId: string | null = localStorage.getItem('cartId')
   private cartUrl = 'https://localhost:5047/api/Cart';
   private cartItemUrl = 'https://localhost:5047/api/Cart/items';
 
-  constructor(private http: HttpClient) {
-    this.cartId = localStorage.getItem('cartId');
-  }
+  constructor(private http: HttpClient) { }
 
   addToCart(product: Product): Observable<any> {
     if (!this.cartId) {
-      this.cartId = this.generateUUID();
+      this.cartId = uuidv4();
       localStorage.setItem('cartId', this.cartId);
-      return this.createCart(this.cartId).pipe(
-        switchMap(() => this.addItemToCart(product))
-      );
     }
-
     return this.addItemToCart(product);
   }
 
   private addItemToCart(product: Product): Observable<any> {
-    const data = {
+    return this.http.post(this.cartItemUrl, {
       cartId: this.cartId,
       productId: product.productId,
-      quantity: 1,
-    };
-
-    return this.http.post(this.cartItemUrl, data);
-  }
-
-  private createCart(cartId: string): Observable<void> {
-    const data = {
-      shopingCartId: cartId
-    };
-
-    return this.http.post<void>(this.cartUrl, data).pipe(
-      catchError(error => {
-        console.error('Wystąpił błąd podczas tworzenia nowego koszyka!', error);
-        return throwError(() => error);
-      })
+      quantity: 1
+    }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  clearCart() {
-    this.items = [];
+  assignCartToUser(userId: string): Observable<any> {
+    return this.http.post(`https://localhost:5047/api/Cart/assign/${this.cartId}`, { userId }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  private async fetchUUIDFromServer(): Promise<string> {
-    const response: any = await firstValueFrom(this.http.get(this.cartUrl));
-    return response.cartId;
+  getItems(): Observable<CartItem[]> {
+    if (!this.cartId) {
+      return throwError(() => new Error('Brak identyfikatora koszyka'));
+    }
+
+    return this.http.get<CartItem[]>(`${this.cartUrl}/${this.cartId}/items`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  private generateUUID(): string {
-    return uuidv4();
+  updateItemQuantity(cartId: string, productId: number, quantity: number): Observable<any> {
+    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    return this.http.put(url, { quantity }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getItems(): CartItem[] {
-    return this.items;
+  removeItem(cartId: string ,productId: number): Observable<any> {
+    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  clearCart(): Observable<any> {
+    if (!this.cartId) {
+      return throwError(() => new Error('Brak identyfikatora koszyka'));
+    }
+
+    return this.http.delete(`${this.cartUrl}/${this.cartId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: any) {
+    console.error('Wystąpił błąd!', error);
+    return throwError(() => new Error('Błąd serwera'));
   }
 }

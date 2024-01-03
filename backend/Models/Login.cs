@@ -4,10 +4,12 @@ namespace MiodOdStaniula.Models
 {
     public class Login
     {
-        [Required(ErrorMessage = "Podaj nazwę użytkownika")]
-        public string? UserName { get; set; }
+        [Required(ErrorMessage = "Adres email jest wymagany.")]
+        [EmailAddress(ErrorMessage = "Niepoprawny format adresu email.")]
+        public string Email { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Podaj hasło")]
-        public string? Password { get; set; }
+        [Required(ErrorMessage = "Hasło jest wymagane.")]
+        [StringLength(100, ErrorMessage = "Hasło musi zawierać przynajmniej {2} znaków.", MinimumLength = 6)]
+        public string Password { get; set; } = string.Empty;
     }
 }

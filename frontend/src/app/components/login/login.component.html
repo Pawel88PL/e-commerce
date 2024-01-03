@@ -1,0 +1,30 @@
+<div class="loginForm text-center shadow bg-white rounded-3 col-sm-8 col-md-8 col-lg-6 col-xxl-4">
+    <h2>Formularz logowania</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Adres email jest wymagany</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Nieprawidłowy format adresu email</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Hasło jest wymagane</mat-error>
+            <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Hasło musi zawierać co najmniej 6
+                znaków</mat-error>
+        </mat-form-field>
+    
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <button mat-raised-button color="black" class="w-100 m-2" type="submit"><i
+                        class="bi bi-box-arrow-in-left"></i> Zaloguj</button>
+            </div>
+            <div class="col-md-6">
+                <button mat-stroked-button color="black" class="w-100 m-2" type="button" routerLink="/register"><i
+                        class="bi bi-box-arrow-in-left"></i> Zarejestruj się</button>
+            </div>
+        </div>
+    </form>
+</div>

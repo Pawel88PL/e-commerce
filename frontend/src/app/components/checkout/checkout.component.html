@@ -1,0 +1,22 @@
+
+<div class="checkout-options">
+    <h1>Aby przejść do kasy wybierz jedną z poniższych opcji</h1>
+    <br>
+    <div class="row">
+        <div class="col-sm-6 border-end">
+            <p>Jeśli nie masz jeszcze założonego konta, kliknij w przycisk poniżej</p>
+            <br>
+            <button type="button" class="btn btn-dark btn-lg my-3 w-100" (click)="navigateToRegister()">
+                Zarejestruj się
+            </button>
+
+        </div>
+        <div class="col-sm-6">
+            <p>Jeśli jesteś naszym stałym klientem, zaloguj się do swojego konta</p>
+            <br>
+            <button type="button" class="btn btn-dark btn-lg my-3 w-100" (click)="navigateToLogin()">
+                Zaloguj się
+            </button>
+        </div>
+    </div>    
+</div>

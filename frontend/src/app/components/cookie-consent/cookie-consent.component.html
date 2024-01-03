@@ -1,0 +1,17 @@
+<div class="cookie-consent-banner" *ngIf="showBanner">
+    <p>Aby zapewnić najlepsze doświadczenia podczas przeglądania naszej strony
+        internetowej korzystamy z plików cookie, używamy ich do personalizacji treści i analizowania ruchu na naszej
+        stronie.</p>
+
+    <p>Twoja prywatność jest dla nas ważna. W związku z tym, możesz wybrać, czy zgadzasz się lub nie na używanie przez
+        nas
+        plików cookie. Klikając „Akceptuję”, wyrażasz zgodę na używanie przez nas plików cookie zgodnie z naszą
+        polityką prywatności. Jeśli nie zgadzasz się na używanie plików cookie,
+        możesz kliknąć „Odmawiam” lub zmodyfikować swoje ustawienia w dowolnym momencie.</p>
+
+    <div class="cookie-buttons">
+        <button mat-raised-button color="primary" class="m-2" (click)="accept()">Akceptuję</button>
+        <button mat-raised-button color="warn" class="m-2" (click)="decline()">Odmawiam</button>
+        <button mat-raised-button class="m-2" routerLink="/privacy">Polityka prywatności</button>
+    </div>
+</div>

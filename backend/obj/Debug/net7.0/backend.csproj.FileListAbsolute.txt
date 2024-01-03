@@ -89,3 +89,4 @@
 /Users/pawelstaniul/Desktop/e-commerce/backend/bin/Debug/net7.0/StackExchange.Redis.dll
 /Users/pawelstaniul/Desktop/e-commerce/backend/bin/Debug/net7.0/System.Diagnostics.PerformanceCounter.dll
 /Users/pawelstaniul/Desktop/e-commerce/backend/bin/Debug/net7.0/runtimes/win/lib/netcoreapp2.0/System.Diagnostics.PerformanceCounter.dll
+/Users/pawelstaniul/Desktop/e-commerce/backend/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

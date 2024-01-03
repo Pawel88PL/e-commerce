@@ -1,70 +1,117 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MiodOdStaniula.Models;
 
 namespace MiodOdStaniula.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
 
-        public AccountController(UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
+        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
+            _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(Login userLoginData)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] Login userLoginData)
         {
             if (!ModelState.IsValid)
             {
-                return View(userLoginData);
+                return BadRequest(ModelState);
             }
 
-            await _signInManager.PasswordSignInAsync(userLoginData.UserName!, userLoginData.Password!, true, false);
+            var result = await _signInManager.PasswordSignInAsync(userLoginData.Email!, userLoginData.Password!, isPersistent: true, lockoutOnFailure: false);
 
-            return RedirectToAction("Index", "Products");
+            if (!result.Succeeded)
+            {
+                return Unauthorized("Podany email lub hasło są nieprawidłowe.");
+            }
+
+            if (string.IsNullOrEmpty(userLoginData.Email))
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _userManager.FindByEmailAsync(userLoginData.Email);
+            var roles = await _userManager.GetRolesAsync(user!);
+            var token = GenerateJwtTokenForUser(userLoginData.Email);
+
+            return Ok(new { Token = token, Roles = roles, user!.Name, UserId = user.Id });
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(Register userRegisterData)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Register userRegisterData)
         {
             if (!ModelState.IsValid)
             {
-                return View(userRegisterData);
+                return BadRequest(ModelState);
+            }
+
+            var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("Użytkownik o podanym adresie email jest już zarejestrowany.");
             }
 
             var newUser = new UserModel
             {
-                UserName = userRegisterData.UserName
+                UserName = userRegisterData.Email,
+                Email = userRegisterData.Email,
+                Name = userRegisterData.Name,
+                Surname = userRegisterData.Surname,
+                City = userRegisterData.City,
+                PostalCode = userRegisterData.PostalCode,
+                Street = userRegisterData.Street,
+                Address = userRegisterData.Address,
+                PhoneNumber = userRegisterData.PhoneNumber
             };
 
-            await _userManager.CreateAsync(newUser, userRegisterData.Password!);
+            var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
-            return RedirectToAction("Login","Account");
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            await _userManager.AddToRoleAsync(newUser, "Client");
+            return Ok();
         }
 
-
-        public async Task<IActionResult> LogOut()
+        private string GenerateJwtTokenForUser(string userName)
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Products");
+            var jwtKey = _configuration["Jwt:Key"];
+            if (string.IsNullOrEmpty(jwtKey))
+            {
+                throw new InvalidOperationException("JWT Key is not set in the configuration.");
+            }
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userName),
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(120),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

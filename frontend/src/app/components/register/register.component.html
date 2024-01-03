@@ -1,0 +1,94 @@
+<div class="loginForm text-center shadow bg-white rounded-3 col-sm-8 col-md-8 col-lg-6 col-xxl-4">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h2>Formularz rejestracji</h2>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Twój adres email jest wymagany do
+                prawidłowej rejestracji</mat-error>
+            <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Nieprawidłowy format adresu
+                email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Imię</mat-label>
+            <input matInput type="name" formControlName="name">
+            <mat-error *ngIf="registerForm.controls['name'].hasError('required')">Imię jest wymagane</mat-error>
+            <mat-error *ngIf="registerForm.controls['name'].hasError('maxlength')">Imię może zawierać maksymalnie 30
+                znaków</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput type="surname" formControlName="surname">
+            <mat-error *ngIf="registerForm.controls['surname'].hasError('required')">Nazwisko jest wymagane</mat-error>
+            <mat-error *ngIf="registerForm.controls['surname'].hasError('maxlength')">Nazwisko może zawierać maksymalnie
+                30
+                znaków</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Miasto</mat-label>
+            <input matInput type="city" formControlName="city">
+            <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Miasto jest wymagane</mat-error>
+            <mat-error *ngIf="registerForm.controls['city'].hasError('maxlength')">Miasto może zawierać maksymalnie 30
+                znaków</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Kod pocztowy</mat-label>
+            <input matInput type="text" formControlName="postalCode">
+            <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Kod pocztowy jest
+                wymagany</mat-error>
+            <mat-error *ngIf="registerForm.controls['postalCode'].hasError('pattern')">Nieprawidłowy format kodu
+                pocztowego</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Ulica</mat-label>
+            <input matInput type="street" formControlName="street">
+            <mat-error *ngIf="registerForm.controls['street'].hasError('required')">Ulica jest wymagana</mat-error>
+            <mat-error *ngIf="registerForm.controls['street'].hasError('maxlength')">Ulica może zawierać maksymalnie 50
+                znaków</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Adres (nr domu/mieszkania)</mat-label>
+            <input matInput type="text" formControlName="address">
+            <mat-error *ngIf="registerForm.controls['address'].hasError('required')">Adres jest wymagany</mat-error>
+            <mat-error *ngIf="registerForm.controls['address'].hasError('maxLength')">Adres jest zbyt długi</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Numer telefonu</mat-label>
+            <input matInput type="tel" formControlName="phoneNumber">
+            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Numer telefonu jest
+                wymagany</mat-error>
+            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('pattern')">Nieprawidłowy format numeru
+                telefonu</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Hasło jest wymagane</mat-error>
+            <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Hasło musi zawierać co najmniej 6
+                znaków</mat-error>
+        </mat-form-field>
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <button mat-raised-button color="black" class="w-100 m-2" type="submit"><i
+                        class="bi bi-box-arrow-in-left"></i>
+                    Zarejestruj się</button>
+            </div>
+            <div class="col-md-6">
+                <button mat-stroked-button color="black" class="w-100 m-2" type="button" routerLink="/login"><i
+                        class="bi bi-box-arrow-in-left"></i> Mam już konto</button>
+            </div>
+        </div>
+    </form>
+</div>

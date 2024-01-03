@@ -80,16 +80,19 @@
             <br />
             <hr />
             <div>
-                <button mat-raised-button type="submit" class="mb-3 addToCartButton w-100"
-                    (click)="onAddToCart()">
-                    <i class="bi bi-cart-plus"></i> Dodaj do koszyka
-                </button>
+                <div>
+                    <button mat-raised-button type="submit" class="mb-3 addToCartButton w-100" (click)="onAddToCart()">
+                        <i class="bi bi-cart-plus"></i> Dodaj do koszyka
+                    </button>
+                </div>
                 <div>
                     <h3>Lub zadzwoń i zamów pod nr tel:</h3>
                     <h2>+48 570 436 579</h2>
                 </div>
-                <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]" class="mt-2 w-100"><i
-                        class="bi bi-pen"></i> EDYTUJ</a>
+                <div *ngIf="authService.isLoggedIn() && authService.isAdmin()">
+                    <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]"
+                        class="mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
+                </div>
             </div>
         </div>
     </div>
@@ -99,13 +102,4 @@
     </div>
     <hr>
 
-    <div class="products-carousel">
-        <ngx-slick-carousel [config]="slideConfig">
-            <div ngxSlickItem *ngFor="let product of products" class="slide">
-                <app-product-card [product]="product"></app-product-card>
-            </div>
-            <button type="button" class="slick-prev" ngxSlickPrev>Previous</button>
-            <button type="button" class="slick-next" ngxSlickNext>Next</button>
-        </ngx-slick-carousel>
-    </div>
 </div>

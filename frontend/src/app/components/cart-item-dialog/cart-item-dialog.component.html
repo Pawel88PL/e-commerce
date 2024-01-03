@@ -1,16 +1,18 @@
-<h2 mat-dialog-title>Produkt dodany do koszyka!</h2>
-<mat-dialog-content>
-    <div class="row">
-        <div class="col-4">
-            <img *ngIf="data.image" [src]="data.image" alt="{{ data.name }}" class="w-50" />
+<div class="container">
+    <h2 mat-dialog-title>Produkt dodany do koszyka!</h2>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-6">
+                <img *ngIf="data.image" [src]="data.image" alt="{{ data.name }}" class="w-75" />
+            </div>
+            <div class="col-6">
+                <h1>{{ data.name }}</h1>
+                <p>cena: {{ data.price }} zł</p>
+            </div>
         </div>
-        <div class="col-8">
-            <h1>{{ data.name }}</h1>
-            <p>cena: {{ data.price }} zł</p>
-        </div>
-    </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-raised-button (click)="onViewCart()">Wyświetl koszyk</button>
-    <button mat-raised-button (click)="onCheckout()">Przejdź do kasy</button>
-</mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="onViewCart()">Wyświetl koszyk</button>
+        <button mat-raised-button (click)="onCheckout()">Przejdź do kasy</button>
+    </mat-dialog-actions>
+</div>

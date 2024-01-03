@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u8/yFe7ARFP4aTbjovsMcnhaiucmLj+2QuTME3cDlQP6ZEvLsmL/Ng+ys7z0Xi/Gp+DSxlV/TRs3qGCXOWLkbQ==",
+  "dgSpecHash": "GhuwDnAtGBi+Svw1i+IXfghxIOFcKivFIbjlC1+sd1MIs64QHKzVCl0tfMyMJuL41IIdHZtJg3RHt2Pt1Phj+g==",
   "success": true,
-  "projectFilePath": "/Users/pawelstaniul/Desktop/e-commerce/backend/backend.csproj",
+  "projectFilePath": "/Users/pawelstaniul/e-commerce/backend/backend.csproj",
   "expectedPackageFiles": [
     "/Users/pawelstaniul/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/pawelstaniul/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",

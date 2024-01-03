@@ -1,6 +1,6 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -30,11 +30,31 @@ export class RegisterComponent implements OnInit {
       street: ['', [Validators.required, Validators.maxLength(50)]],
       address: ['', [Validators.required, Validators.maxLength(50)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    })
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validator: this.passwordMatchValidator })
   }
 
+  passwordMatchValidator(form: FormGroup): ValidationErrors | null {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (password && confirmPassword && password !== confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
+    } else if (password && !confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
+    } else {
+      form.get('confirmPassword')?.setErrors(null);
+      return null;
+    }
+  }
+
+
+
   onSubmit() {
+    console.log(this.registerForm.valid);
+    console.log(this.registerForm.errors);
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(
         success => {

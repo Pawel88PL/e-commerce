@@ -4580,11 +4580,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pawelstaniul/Desktop/e-commerce/backend/backend.csproj",
+      "projectUniqueName": "/Users/pawelstaniul/e-commerce/backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "/Users/pawelstaniul/Desktop/e-commerce/backend/backend.csproj",
+      "projectPath": "/Users/pawelstaniul/e-commerce/backend/backend.csproj",
       "packagesPath": "/Users/pawelstaniul/.nuget/packages/",
-      "outputPath": "/Users/pawelstaniul/Desktop/e-commerce/backend/obj/",
+      "outputPath": "/Users/pawelstaniul/e-commerce/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/pawelstaniul/.nuget/NuGet/NuGet.Config"

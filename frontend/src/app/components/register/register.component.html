@@ -79,6 +79,18 @@
                 znaków</mat-error>
         </mat-form-field>
 
+        <mat-form-field appearance="fill">
+            <mat-label>Potwierdź hasło</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required')">
+                Potwierdzenie hasła jest wymagane
+            </mat-error>
+            <mat-error
+                *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.value">
+                Hasła nie są identyczne
+            </mat-error>
+        </mat-form-field>
+
         <div class="row mt-2">
             <div class="col-md-6">
                 <button mat-raised-button color="black" class="w-100 m-2" type="submit"><i

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MiodOdStaniula.Models;
+using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers
 {
@@ -16,12 +17,14 @@ namespace MiodOdStaniula.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
+        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailService emailService)
         {
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         [HttpGet("activate")]
@@ -110,7 +113,7 @@ namespace MiodOdStaniula.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, "Client");
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-                await SendActivationEmail(newUser.Email, newUser.Id, token);
+                await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
                 return Ok();
             }
             else
@@ -143,32 +146,6 @@ namespace MiodOdStaniula.Controllers
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        private async Task SendActivationEmail(string email, string userId, string token)
-        {
-            var encodedToken = WebUtility.UrlEncode(token);
-            var activationLink = $"https://localhost:5047/activate?userId={userId}&token={encodedToken}";
-            string emailBody = $"Proszę kliknąć na poniższy link, aby aktywować swoje konto: <a href='{activationLink}'>Aktywuj Konto</a>";
-
-            var mailMessage = new MailMessage()
-            {
-                From = new MailAddress("kontakt@miododstaniula.pl"),
-                Subject = "Aktywacja Konta",
-                Body = emailBody,
-                IsBodyHtml = true,
-            };
-            mailMessage.To.Add(email);
-
-            // Konfiguracja klienta SMTP
-            var smtpClient = new SmtpClient("smtp.webio.pl") // Serwer SMTP dostawcy
-            {
-                Port = 587, // Port dla połączenia standardowego z TLS
-                Credentials = new NetworkCredential("kontakt@miododstaniula.pl", "Pasieka@21"), // Twoje dane logowania
-                EnableSsl = true, // Włączenie SSL dla bezpieczeństwa
-            };
-
-            await smtpClient.SendMailAsync(mailMessage);
         }
     }
 }

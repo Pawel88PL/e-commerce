@@ -25,8 +25,9 @@
     - po naciśnięciu przycisku 'Przejdź do kasy' przekierowanie do strony z wyborem opcji: 'Mam już konto' i 'Jestem nowym użytkownikiem',
       a dla zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia, --> ZROBIONE
 
-6. W API utworzyć serwis mailService:
-    - przenieść metodę wysyłającą email do klienta po zarejestrowaniu się do tego serwisu,
+6. W API utworzyć serwis odpowiadający za wysyłanie wiadomości email:
+    - metodę wysyłającą email do klienta po pomyślnym zarejestrowaniu się przenieść do serwisu 'EmailService.cs', --> ZROBIONE
+    - przenieść dane logowania konta mailowego do pliku appsetings.json,
 
 7. Dodać moduł płatności.
 8. Utworzyć moduł do zarządzania zamówieniami.

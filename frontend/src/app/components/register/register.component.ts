@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   lettersOnly(control: AbstractControl): ValidationErrors | null {
-    const letters = /^[A-Za-z]+$/;
+    const letters = /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/;
     return letters.test(control.value) ? null : { 'lettersOnly': true };
   }
 

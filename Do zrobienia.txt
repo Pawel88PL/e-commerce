@@ -7,6 +7,8 @@
     - utworzyć formularz rejestracji ze wszystkimi potrzebnymi polami, --> ZROBIONE
     - zadbać o walidację wprowadzanych danych --> ZROBIONE
     - formularz logowania, żeby pamiętał poprzedni, wpisany adres email
+    - dodać potwierdzenie wpisanego hasła, --> ZROBIONE
+    - dodać funkcję wysyłającą link do aktywacji konta po pomyślnym zarejestrowaniu użytkownika --> ZROBIONE
 
 3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę. --> ZROBIONE
 
@@ -19,9 +21,12 @@
 
 5. Utworzyć moduł zamówień.
 
-    - powiązać cartId z userId po pomyślnym zalogowaniu użytkownika
+    - powiązać cartId z userId po pomyślnym zalogowaniu użytkownika, --> ZROBIONE
     - po naciśnięciu przycisku 'Przejdź do kasy' przekierowanie do strony z wyborem opcji: 'Mam już konto' i 'Jestem nowym użytkownikiem',
-      a do zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia,
+      a dla zalogowanego użytkownika przekierowanie do strony z potwierdzeniem zamówienia, --> ZROBIONE
 
-6. Dodać moduł płatności.
-7. Utworzyć moduł do zarządzania zamówieniami.
+6. W API utworzyć serwis mailService:
+    - przenieść metodę wysyłającą email do klienta po zarejestrowaniu się do tego serwisu,
+
+7. Dodać moduł płatności.
+8. Utworzyć moduł do zarządzania zamówieniami.

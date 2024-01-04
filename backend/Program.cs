@@ -46,7 +46,8 @@ namespace MiodOdStaniula
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
 
-            }).AddEntityFrameworkStores<DbStoreContext>();
+            }).AddEntityFrameworkStores<DbStoreContext>()
+            .AddDefaultTokenProviders();
 
             var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 

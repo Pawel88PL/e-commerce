@@ -1,4 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
@@ -22,6 +24,27 @@ namespace MiodOdStaniula.Controllers
             _signInManager = signInManager;
         }
 
+        [HttpGet("activate")]
+        public async Task<IActionResult> ActivateAccount(string userId, string token)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("Nie znaleziono użytkownika.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return Redirect("https://miododstaniula.pl/");
+            }
+            else
+            {
+                return BadRequest("Nie udało się aktywować konta.");
+            }
+        }
+
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login userLoginData)
         {
@@ -43,6 +66,10 @@ namespace MiodOdStaniula.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(userLoginData.Email);
+            if (user == null || !user.EmailConfirmed)
+            {
+                return Unauthorized("Konto nie istnieje lub e-mail nie został potwierdzony.");
+            }
             var roles = await _userManager.GetRolesAsync(user!);
             var token = GenerateJwtTokenForUser(userLoginData.Email);
 
@@ -61,7 +88,7 @@ namespace MiodOdStaniula.Controllers
             var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
             if (existingUser != null)
             {
-                return BadRequest("Użytkownik o podanym adresie email jest już zarejestrowany.");
+                return BadRequest("PODANY ADRES EMAIL JEST JUŻ ZAREJESTROWANY.");
             }
 
             var newUser = new UserModel
@@ -79,13 +106,17 @@ namespace MiodOdStaniula.Controllers
 
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(newUser, "Client");
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                await SendActivationEmail(newUser.Email, newUser.Id, token);
+                return Ok();
+            }
+            else
             {
                 return BadRequest(result.Errors);
             }
-
-            await _userManager.AddToRoleAsync(newUser, "Client");
-            return Ok();
         }
 
         private string GenerateJwtTokenForUser(string userName)
@@ -112,6 +143,32 @@ namespace MiodOdStaniula.Controllers
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task SendActivationEmail(string email, string userId, string token)
+        {
+            var encodedToken = WebUtility.UrlEncode(token);
+            var activationLink = $"https://localhost:5047/activate?userId={userId}&token={encodedToken}";
+            string emailBody = $"Proszę kliknąć na poniższy link, aby aktywować swoje konto: <a href='{activationLink}'>Aktywuj Konto</a>";
+
+            var mailMessage = new MailMessage()
+            {
+                From = new MailAddress("kontakt@miododstaniula.pl"),
+                Subject = "Aktywacja Konta",
+                Body = emailBody,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(email);
+
+            // Konfiguracja klienta SMTP
+            var smtpClient = new SmtpClient("smtp.webio.pl") // Serwer SMTP dostawcy
+            {
+                Port = 587, // Port dla połączenia standardowego z TLS
+                Credentials = new NetworkCredential("kontakt@miododstaniula.pl", "Pasieka@21"), // Twoje dane logowania
+                EnableSsl = true, // Włączenie SSL dla bezpieczeństwa
+            };
+
+            await smtpClient.SendMailAsync(mailMessage);
         }
     }
 }

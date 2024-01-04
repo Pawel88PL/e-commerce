@@ -11,6 +11,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { RegisterComponent } from './components/register/register.component';
+import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'update/:id', component: ProductUpdateComponent, canActivate: [AdminGuard] },
   { path: 'register', component: RegisterComponent },
+  { path: 'waitingForActivation', component: WaitingForActivationComponent },
   { path: 'warehouse', component: WarehouseComponent, canActivate: [AdminGuard] }
 ];
 

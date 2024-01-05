@@ -3,7 +3,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email">
+            <input matInput type="email" formControlName="email" #autoFocusInput>
             <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Adres email jest wymagany</mat-error>
             <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Nieprawidłowy format adresu email</mat-error>
         </mat-form-field>

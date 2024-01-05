@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
-                        <input matInput type="email" formControlName="email">
+                        <input matInput type="email" formControlName="email" #autoFocusInput>
                         <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Twój adres email jest
                             wymagany do
                             prawidłowej rejestracji</mat-error>

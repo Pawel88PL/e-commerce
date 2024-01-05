@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   loginForm!: FormGroup;
+  @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -25,6 +26,12 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.autoFocusInput.nativeElement.focus();
+    });
   }
 
   onSubmit() {
@@ -53,4 +60,5 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+  
 }

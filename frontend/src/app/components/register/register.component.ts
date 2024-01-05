@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -33,6 +34,12 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validator: this.passwordMatchValidator })
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.autoFocusInput.nativeElement.focus();
+    });
   }
 
   lettersOnly(control: AbstractControl): ValidationErrors | null {

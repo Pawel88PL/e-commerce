@@ -41,6 +41,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderComponent } from './components/order/order.component';
+import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 
 registerLocaleData(localePl);
 
@@ -64,6 +65,7 @@ registerLocaleData(localePl);
     WarehouseComponent,
     CheckoutComponent,
     OrderComponent,
+    WaitingForActivationComponent,
   ],
   imports: [
     AppRoutingModule,

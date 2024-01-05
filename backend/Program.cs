@@ -28,6 +28,7 @@ namespace MiodOdStaniula
 
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ITotalCostService, TotalCostService>();
@@ -46,7 +47,8 @@ namespace MiodOdStaniula
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
 
-            }).AddEntityFrameworkStores<DbStoreContext>();
+            }).AddEntityFrameworkStores<DbStoreContext>()
+            .AddDefaultTokenProviders();
 
             var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 

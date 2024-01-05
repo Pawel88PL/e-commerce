@@ -1,4 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MiodOdStaniula.Models;
+using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers
 {
@@ -14,13 +17,36 @@ namespace MiodOdStaniula.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
+        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailService emailService)
         {
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
+
+        [HttpGet("activate")]
+        public async Task<IActionResult> ActivateAccount(string userId, string token)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("Nie znaleziono użytkownika.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return Redirect("https://miododstaniula.pl/");
+            }
+            else
+            {
+                return BadRequest("Nie udało się aktywować konta.");
+            }
+        }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login userLoginData)
@@ -43,6 +69,10 @@ namespace MiodOdStaniula.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(userLoginData.Email);
+            if (user == null || !user.EmailConfirmed)
+            {
+                return Unauthorized("Konto nie istnieje lub e-mail nie został potwierdzony.");
+            }
             var roles = await _userManager.GetRolesAsync(user!);
             var token = GenerateJwtTokenForUser(userLoginData.Email);
 
@@ -61,7 +91,7 @@ namespace MiodOdStaniula.Controllers
             var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
             if (existingUser != null)
             {
-                return BadRequest("Użytkownik o podanym adresie email jest już zarejestrowany.");
+                return BadRequest("PODANY ADRES EMAIL JEST JUŻ ZAREJESTROWANY.");
             }
 
             var newUser = new UserModel
@@ -79,13 +109,17 @@ namespace MiodOdStaniula.Controllers
 
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(newUser, "Client");
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
+                return Ok();
+            }
+            else
             {
                 return BadRequest(result.Errors);
             }
-
-            await _userManager.AddToRoleAsync(newUser, "Client");
-            return Ok();
         }
 
         private string GenerateJwtTokenForUser(string userName)

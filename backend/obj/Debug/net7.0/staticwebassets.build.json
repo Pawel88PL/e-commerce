@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3ZPykszseiOSe6IWO+mf8OUQAD43mfWqJaP2OjtPlYg=",
+  "Hash": "c2rJrMnGtAWcs+8yvAPOMY5Ie/2+PLFMQHNDEjXrvIk=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -1479,23 +1479,6 @@
       "OriginalItemSpec": "wwwroot/images/Malina_duża.jpg"
     },
     {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/miody_1.jpeg",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
-      "BasePath": "_content/backend",
-      "RelativePath": "images/miody_1.jpeg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/miody_1.jpeg"
-    },
-    {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Miód w plastrze.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -1511,6 +1494,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/Miód w plastrze.jpg"
+    },
+    {
+      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/miody_1.jpeg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/miody_1.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/miody_1.jpeg"
     },
     {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Nawłoć mała.jpg",
@@ -1819,23 +1819,6 @@
       "OriginalItemSpec": "wwwroot/images/smallAmount.png"
     },
     {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadziowy mały2.jpg",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
-      "BasePath": "_content/backend",
-      "RelativePath": "images/Spadziowy mały2.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Spadziowy mały2.jpg"
-    },
-    {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadź twarda.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -1851,6 +1834,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/Spadź twarda.jpg"
+    },
+    {
+      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadziowy mały2.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/Spadziowy mały2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/Spadziowy mały2.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Świeczka.jpeg",

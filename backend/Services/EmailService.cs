@@ -2,14 +2,25 @@ using System.Net;
 using System.Net.Mail;
 using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Services{
-    public class EmailService: IEmailService
+namespace MiodOdStaniula.Services
+{
+    public class EmailService : IEmailService
     {
+
+        private readonly IConfiguration _configuration;
+        private ILogger<EmailService> _logger;
+
+        public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
+        {
+            _configuration = configuration;
+            _logger = logger;
+        }
+
         public async Task SendActivationEmail(string email, string userId, string name, string token)
         {
             var encodedToken = WebUtility.UrlEncode(token);
             var activationLink = $"https://localhost:5047/activate?userId={userId}&token={encodedToken}";
-            
+
             string emailBody = $@"
             
             <h1>Witaj {name}!</h1>
@@ -22,24 +33,37 @@ namespace MiodOdStaniula.Services{
             <hr>
             <p>Pozdrawiamy,</p>
             <p>Rodzina Staniul</p>";
-                                
+
+            var emailSettings = _configuration.GetSection("EmailSettings");
+            var smtpServer = emailSettings["SmtpServer"];
+            var smtpPort = Convert.ToInt32(emailSettings["SmtpPort"]);
+            var smtpUsername = emailSettings["SmtpUsername"];
+            var smtpPassword = emailSettings["SmtpPassword"];
+
             var mailMessage = new MailMessage()
             {
-                From = new MailAddress("kontakt@miododstaniula.pl"),
+                From = new MailAddress(smtpUsername ?? string.Empty),
                 Subject = "Aktywacja Konta",
                 Body = emailBody,
                 IsBodyHtml = true,
             };
             mailMessage.To.Add(email);
-            
-            var smtpClient = new SmtpClient("smtp.webio.pl")
+
+            var smtpClient = new SmtpClient(smtpServer)
             {
-                Port = 587,
-                Credentials = new NetworkCredential("kontakt@miododstaniula.pl", "Pasieka@21"),
+                Port = smtpPort,
+                Credentials = new NetworkCredential(smtpUsername, smtpPassword),
                 EnableSsl = true,
             };
 
-            await smtpClient.SendMailAsync(mailMessage);
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Wystąpił błąd przy wysyłaniu emaila aktywacyjnego.");
+            }
         }
     }
 }

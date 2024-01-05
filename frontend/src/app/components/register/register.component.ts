@@ -55,13 +55,19 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  loading = false;
+
   onSubmit() {
     if (this.registerForm.valid) {
+      this.loading = true;
       this.authService.register(this.registerForm.value).subscribe(
         success => {
+          this.loading = true;
+          this.snackBar.open('Trwa przetwarzanie Twojej rejestracji...', 'OK', { duration: 2000 });
           this.router.navigate(['/waitingForActivation']);
         },
         error => {
+          this.loading = false;
           console.error(error);
           let errorMsg = 'Wystąpił błąd podczas próby rejestracji!';
           if (error.error && typeof error.error === 'string') {

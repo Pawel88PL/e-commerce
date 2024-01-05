@@ -4,3 +4,16 @@
     margin-bottom: 20rem;
     padding: 2rem;
 }
+
+.btn{
+    width: 50%;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 767px) {
+    .btn {
+        width: 100%;
+    }
+}

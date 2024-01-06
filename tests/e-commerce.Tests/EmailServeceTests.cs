@@ -26,7 +26,7 @@ public class EmailServiceTests
     public async Task SendActivationEmail_Sends_RealEmail()
     {
         // Arrange
-        var email = "pstaniul@gmail.com";
+        var email = "pstaniul1@gmail.com";
         var userId = "user-id-123";
         var name = "Test Paweł";
         var token = "test-token";

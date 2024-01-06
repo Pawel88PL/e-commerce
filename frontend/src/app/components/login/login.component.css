@@ -1,6 +1,13 @@
 .loginForm{
     margin: auto;
     margin-top: 8rem;
-    margin-bottom: 20rem;
+    margin-bottom: 4rem;
     padding: 2rem;
+}
+
+@media (max-width: 576px) {
+    .loginForm {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }

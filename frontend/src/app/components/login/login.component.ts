@@ -40,9 +40,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
       this.authService.login(loginData.email, loginData.password).subscribe(
         success => {
-          if (localStorage.getItem('inCheckoutProcess')) {
+          if (this.authService.getInCheckoutProcess()) {
             this.router.navigate(['/order']);
-            localStorage.removeItem('inCheckoutProcess');
+            this.authService.removeInCheckoutProcess();
           } else {
             const roles = this.authService.getRoles();
             if (roles.includes('Admin')) {
@@ -55,10 +55,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
         error => {
           this.snackBar.open(error.message, 'Zamknij', {
             duration: 5000,
+            verticalPosition: 'top'
           });
         }
       );
     }
   }
-  
 }

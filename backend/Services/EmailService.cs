@@ -25,9 +25,9 @@ namespace MiodOdStaniula.Services
             
             <h1>Witaj {name}!</h1>
             <p>Twoje konto zostało utworzone.</p>
-            <p>Aby aktywować swoje konto kliknij proszę na link obok: <a href='{activationLink}'>Aktywuj Konto</a>
+            <p>Aby aktywować swoje konto kliknij na link: <a href='{activationLink}'>Aktywuj Konto</a>
             <br>
-            <p>W razie problemów z aktywacją konta prosimy o napisz do nas na adres kontakt@miododstaniula.pl</p>
+            <p>W razie problemów z aktywacją konta napisz do nas na adres kontakt@miododstaniula.pl</p>
             <p>lub zadzwoń pod numer telefonu: 570 436 579</p>
             <br>
             <hr>

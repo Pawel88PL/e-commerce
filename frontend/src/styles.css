@@ -1,9 +1,14 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-
-/* styles.css */
-mat-form-field {
-    width: 100%;
-    /* Lub inna preferowana szerokość */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+mat-form-field {
+    width: 100%;
+}

@@ -1,18 +1,5 @@
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-main{
-  position: relative;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-}
-
-footer{
-  position: relative;
-  bottom: 0;
+.main{
+  flex: 1;
 }
 
 @media (max-width: 767px) {

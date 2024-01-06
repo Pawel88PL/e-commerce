@@ -90,7 +90,7 @@ export class CartComponent implements OnInit {
 
 
   proceedToCheckout() {
-    localStorage.setItem('inCheckoutProcess', 'true');
+    this.authService.setInCheckoutProcess();
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/order']);
     } else {

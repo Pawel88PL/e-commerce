@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 
@@ -8,8 +9,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  private productsUrl = 'https://localhost:5047/Products';
-  private mediaUrl = 'https://localhost:5047/api/Media';
+  private apiBaseUrl = environment.apiUrl;
+  private productsUrl = `${this.apiBaseUrl}/products`;
+  private mediaUrl = `${this.apiBaseUrl}/media`;
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +36,7 @@ export class ProductService {
   }
   
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl)
+    return this.http.get<Product[]>(`${this.productsUrl}`);
   }
   
   updateProduct(id: number, productData: any, imagePaths?: string[]): Observable<Product> {

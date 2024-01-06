@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    return this.http.post('https://localhost:5047/register', user);
+    return this.http.post(`${this.apiBaseUrl}/register`, user);
   }
 
   removeInCheckoutProcess() {

@@ -40,7 +40,7 @@ public class MediaController : ControllerBase
         }
         else
         {
-            return BadRequest($"Error uploading files. Reason: {result.ErrorMessage}");
+            return BadRequest($"Wysąpił błąd podczas udostępniania zdjęcia. Treśc błędu: {result.ErrorMessage}");
         }
     }
 }

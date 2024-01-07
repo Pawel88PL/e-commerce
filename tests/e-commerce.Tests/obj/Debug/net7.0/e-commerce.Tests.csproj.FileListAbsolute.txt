@@ -166,3 +166,4 @@
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Debug/net7.0/Castle.Core.dll
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Debug/net7.0/Moq.dll
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll
+/Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Debug/net7.0/appsettings.Production.json

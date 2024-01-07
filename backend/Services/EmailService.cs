@@ -9,17 +9,19 @@ namespace MiodOdStaniula.Services
 
         private readonly IConfiguration _configuration;
         private ILogger<EmailService> _logger;
+        private readonly string? _baseUrl;
 
         public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
         {
             _configuration = configuration;
             _logger = logger;
+            _baseUrl = _configuration["ApplicationSettings:BaseUrl"];
         }
 
         public async Task SendActivationEmail(string email, string userId, string name, string token)
         {
             var encodedToken = WebUtility.UrlEncode(token);
-            var activationLink = $"https://localhost:5047/activate?userId={userId}&token={encodedToken}";
+            var activationLink = $"{_baseUrl}/activate?userId={userId}&token={encodedToken}";
 
             string emailBody = $@"
             

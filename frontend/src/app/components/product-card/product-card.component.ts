@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItemDialogComponent } from '../cart-item-dialog/cart-item-dialog.component';
+import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -11,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ProductCardComponent {
   
   @Input() product: any;
+  protected apiBaseUrl = environment.apiUrl;
 
   constructor(private cartService: CartService, private dialog: MatDialog) {}
 
@@ -20,7 +22,7 @@ export class ProductCardComponent {
       this.dialog.open(CartItemDialogComponent, {
         maxWidth: '500px',
         data: {
-          image: firstImage ? 'https://localhost:5047/' + firstImage : null,
+          image: firstImage ? this.apiBaseUrl + firstImage : null,
           name: this.product.name,
           price: this.product.price
         }

@@ -12,7 +12,7 @@
                 <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
                     <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
                         [class.active]="i === 0" data-bs-interval="4000">
-                        <img *ngIf="image" [src]="'https://localhost:5047/' + image.imagePath"
+                        <img *ngIf="image" [src]="apiBaseUrl + image.imagePath"
                             class="d-block w-100 rounded-3" alt="{{ product.name }}" />
                     </div>
                 </a>

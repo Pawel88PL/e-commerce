@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 
@@ -11,10 +12,11 @@ import { Product } from 'src/app/models/product.model';
 })
 
 export class ProductUpdateComponent implements OnInit {
+  apiBaseUrl: string = environment.apiUrl;
+  imagePreviews: string[] = [];
   product: Product = new Product();
   productForm!: FormGroup;
   selectedFiles: FileList | null = null;
-  imagePreviews: string[] = [];
 
   constructor(
     private fb: FormBuilder,

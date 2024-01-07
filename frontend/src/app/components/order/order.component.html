@@ -20,7 +20,7 @@
                 <div *ngIf="items && items.length">
                     <div class="row mb-4" *ngFor="let item of items">
                         <div class="col-4">
-                            <img [src]="'https://localhost:5047/' + item.imagePaths![0]" [alt]="item.name"
+                            <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name"
                                 class="product-image rounded-3" />
                         </div>
                         <div class="col-8">

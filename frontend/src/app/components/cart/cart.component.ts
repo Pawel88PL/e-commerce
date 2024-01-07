@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  apiBaseUrl: string = environment.apiUrl;
   items: CartItem[] = [];
   productCost: number = 0;
   shippingCost: number = 0;
@@ -23,13 +25,12 @@ export class CartComponent implements OnInit {
 
   loadCartItems() {
     this.cartService.getItems().subscribe(
-      (response: any) => { // Użyj odpowiedniego typu zamiast 'any', jeśli jest dostępny
-        this.items = response.cartItems; // Zmienione przypisanie
+      (response: any) => {
+        this.items = response.cartItems;
         this.calculateCosts();
       },
       error => {
         console.error('Błąd podczas ładowania danych koszyka!', error);
-        // Można tutaj dodać wyświetlanie błędu w UI
       }
     );
   }
@@ -76,7 +77,6 @@ export class CartComponent implements OnInit {
       () => {
         this.items = [];
         this.totalCost = 0;
-        // Informacja zwrotna dla użytkownika
         alert('Koszyk został opróżniony.');
       },
       error => console.error('Błąd podczas opróżniania koszyka!', error)

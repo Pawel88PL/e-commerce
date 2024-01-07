@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { CartItem } from '../models/cart.model';
-import { Observable, catchError, firstValueFrom, switchMap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -10,9 +11,10 @@ import { Product } from '../models/product.model';
 })
 
 export class CartService {
+  apiBaseUrl: string = environment.apiUrl;
   public cartId: string | null = localStorage.getItem('cartId')
-  private cartUrl = 'https://localhost:5047/api/Cart';
-  private cartItemUrl = 'https://localhost:5047/api/Cart/items';
+  private cartUrl = this.apiBaseUrl + '/api/Cart';
+  private cartItemUrl = this.apiBaseUrl + '/api/Cart/items';
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +37,7 @@ export class CartService {
   }
 
   assignCartToUser(userId: string): Observable<any> {
-    return this.http.post(`https://localhost:5047/api/Cart/assign/${this.cartId}`, { userId }).pipe(
+    return this.http.post(`${this.cartUrl}/assign/${this.cartId}`, { userId }).pipe(
       catchError(this.handleError)
     );
   }
@@ -51,14 +53,14 @@ export class CartService {
   }
 
   updateItemQuantity(cartId: string, productId: number, quantity: number): Observable<any> {
-    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    const url = `${this.cartUrl}/${cartId}/items/${productId}`;
     return this.http.put(url, { quantity }).pipe(
       catchError(this.handleError)
     );
   }
 
   removeItem(cartId: string ,productId: number): Observable<any> {
-    const url = `https://localhost:5047/api/Cart/${cartId}/items/${productId}`;
+    const url = `${this.cartUrl}/${cartId}/items/${productId}`;
     return this.http.delete(url).pipe(
       catchError(this.handleError)
     );

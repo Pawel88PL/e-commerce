@@ -2,7 +2,6 @@
 /Users/pawelstaniul/publish/backend.runtimeconfig.json
 /Users/pawelstaniul/publish/appsettings.Development.json
 /Users/pawelstaniul/publish/appsettings.json
-/Users/pawelstaniul/publish/appsettings.Production.json
 /Users/pawelstaniul/publish/xunit.runner.visualstudio.dotnetcore.testadapter.dll
 /Users/pawelstaniul/publish/xunit.runner.reporters.netcoreapp10.dll
 /Users/pawelstaniul/publish/xunit.runner.utility.netcoreapp10.dll

@@ -1,7 +1,6 @@
 /Users/pawelstaniul/publish/backend
 /Users/pawelstaniul/publish/appsettings.Development.json
 /Users/pawelstaniul/publish/appsettings.json
-/Users/pawelstaniul/publish/appsettings.Production.json
 /Users/pawelstaniul/publish/backend.dll
 /Users/pawelstaniul/publish/backend.runtimeconfig.json
 /Users/pawelstaniul/publish/backend.pdb

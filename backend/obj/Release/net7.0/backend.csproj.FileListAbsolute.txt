@@ -1,6 +1,5 @@
 /Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/appsettings.Development.json
 /Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/appsettings.json
-/Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/appsettings.Production.json
 /Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/backend.staticwebassets.runtime.json
 /Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/backend
 /Users/pawelstaniul/e-commerce/backend/bin/Release/net7.0/backend.deps.json

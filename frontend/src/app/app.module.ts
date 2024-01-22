@@ -10,17 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item-dialog.component';
 import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { OrderComponent } from './components/order/order.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -28,6 +29,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { RegisterComponent } from './components/register/register.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
+import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -39,9 +41,6 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { OrderComponent } from './components/order/order.component';
-import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 
 registerLocaleData(localePl);
 
@@ -84,7 +83,6 @@ registerLocaleData(localePl);
     MatSidenavModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    SlickCarouselModule
   ],
   providers: [
     AdminGuard,

@@ -90,4 +90,3 @@
 /Users/pawelstaniul/e-commerce/backend/obj/Debug/net7.0/backend.pdb
 /Users/pawelstaniul/e-commerce/backend/obj/Debug/net7.0/backend.genruntimeconfig.cache
 /Users/pawelstaniul/e-commerce/backend/obj/Debug/net7.0/ref/backend.dll
-/Users/pawelstaniul/e-commerce/backend/bin/Debug/net7.0/appsettings.Production.json

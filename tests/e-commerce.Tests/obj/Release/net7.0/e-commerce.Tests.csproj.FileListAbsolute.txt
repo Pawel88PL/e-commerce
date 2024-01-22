@@ -3,7 +3,6 @@
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/backend.runtimeconfig.json
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/appsettings.Development.json
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/appsettings.json
-/Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/appsettings.Production.json
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/backend.staticwebassets.runtime.json
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/backend
 /Users/pawelstaniul/e-commerce/tests/e-commerce.Tests/bin/Release/net7.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll

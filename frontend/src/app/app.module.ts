@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AppComponent } from './app.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item-dialog.component';
@@ -46,6 +47,7 @@ registerLocaleData(localePl);
 
 @NgModule({
   declarations: [
+    AboutUsComponent,
     AppComponent,
     CartComponent,
     CartItemDialogComponent,

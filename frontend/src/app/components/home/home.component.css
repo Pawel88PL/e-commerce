@@ -1,11 +1,10 @@
-.carousel-caption {
-    left: 1%;
-    padding: 1px;
-    transform: translateX(30%);
-    font-size: 4rem;
+.pasieka-image-container {
+    width: 100%;
+    overflow: hidden;
 }
-.welcome-carousel{
-    max-width: 1800px;
-    margin: auto;
-    margin-top: -1rem;
+
+.pasieka-panoramic-image {
+    width: 100%;
+    height: auto;
+    display: block;
 }

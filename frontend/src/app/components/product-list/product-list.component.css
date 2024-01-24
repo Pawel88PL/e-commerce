@@ -1,22 +1,14 @@
+
 h1{
     font-size: 2.5rem;
 }
-.carousel-caption {
-    left: 1%;
-    padding: 1px;
-    transform: translateX(30%);
-    font-size: 4rem;
-}
+
 
 .list-group-item.active {
     background-color: black;
     border-color: black;
 }
 
-.welcome-carousel{
-    max-width: 1600px;
-    margin: auto;
-}
 
 #categories{
     margin-left: 6rem;

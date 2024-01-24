@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         error => {
           this.snackBar.open(error.message, 'Zamknij', {
             duration: 5000,
-            verticalPosition: 'top'
           });
         }
       );

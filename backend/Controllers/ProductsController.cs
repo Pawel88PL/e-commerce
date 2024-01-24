@@ -19,15 +19,16 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _productService.GetAllProductsAsync();
+            var result = await _productService.GetAllProductsAsync(page, pageSize);
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return NotFound(new { message = result.ErrorMessage });
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)

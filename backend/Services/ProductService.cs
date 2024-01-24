@@ -121,7 +121,7 @@ namespace MiodOdStaniula.Services
             }
         }
 
-        public async Task<ServiceResult<PaginatedList<ProductDto>>> GetAllProductsAsync(int page = 1, int itemsPerPage = 10)
+        public async Task<ServiceResult<PaginatedList<ProductDto>>> GetAllProductsAsync(int page, int itemsPerPage)
         {
             try
             {

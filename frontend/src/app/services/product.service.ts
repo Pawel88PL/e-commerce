@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { PaginatedResult } from '../models/paginated-result.model';
+import { DEFAULT_ITEMS_PER_PAGE } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.productsUrl}`);
   }
 
-  getProductsByPage(page: number, itemsPerPage: number = 10): Observable<PaginatedResult<Product[]>> {
+  getProductsByPage(page: number, itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE): Observable<PaginatedResult<Product[]>> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('itemsPerPage', itemsPerPage.toString());

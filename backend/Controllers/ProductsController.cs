@@ -19,9 +19,9 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAllProducts([FromQuery] int page, [FromQuery] int itemsPerPage)
         {
-            var result = await _productService.GetAllProductsAsync(page, pageSize);
+            var result = await _productService.GetAllProductsAsync(page, itemsPerPage);
             if (result.Success)
             {
                 return Ok(result.Data);

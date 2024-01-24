@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { PaginatedResult } from 'src/app/models/paginated-result.model';
+import { DEFAULT_ITEMS_PER_PAGE } from 'src/app/config/config';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +13,7 @@ import { PaginatedResult } from 'src/app/models/paginated-result.model';
 export class ProductListComponent implements OnInit {
   currentPage = 1;
   isLoading = false;
-  itemsPerPage = 10;
+  itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
   products: Product[] = [];
   totalPages = 1;
   totalProducts = 0;

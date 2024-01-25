@@ -2,8 +2,8 @@
     <div class="card rounded-3 shadow-lg mb-2">
         <div *ngIf="product.productImages && product.productImages.length > 0">
             <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
-                <img [src]="apiBaseUrl + product.productImages[0].imagePath" loading="lazy" class="d-block w-100 rounded-3"
-                    alt="{{ product.name }}">
+                <img [src]="apiBaseUrl + product.productImages[0].imagePath" loading="lazy"
+                    class="d-block w-100 rounded-3" alt="{{ product.name }}">
             </a>
         </div>
 

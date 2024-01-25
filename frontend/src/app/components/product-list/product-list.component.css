@@ -12,10 +12,14 @@ h1{
     cursor: pointer;
 }
 
-.product-list{
+.product-list {
+    background-color: white;
+    border-radius: 10px;
+    margin: 5rem auto 10rem;
     max-width: 1400px;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding: 2rem;
+    width: 90%;
+    
 }
 
 #categories{

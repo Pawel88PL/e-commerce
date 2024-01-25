@@ -1,4 +1,4 @@
-<div class="product-details">
+<div class="product-details pt-3">
     <div class="row my-5">
         <div *ngIf="product.productId" class="col-sm-7">
             <div [attr.id]="'carouselForProduct' + product.productId"
@@ -13,8 +13,8 @@
                     <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
                         <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
                             [class.active]="i === 0" data-bs-interval="4000">
-                            <img *ngIf="image" [src]=" apiBaseUrl + image.imagePath"
-                                class="d-block w-100 rounded-3" alt="{{ product.name }}" />
+                            <img *ngIf="image" [src]=" apiBaseUrl + image.imagePath" class="d-block w-100 rounded-3"
+                                alt="{{ product.name }}" />
                         </div>
                     </a>
                 </div>

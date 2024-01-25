@@ -4,11 +4,13 @@
 }
 
 .product-details{
+    background-color: white;
+    border-radius: 10px;
+    margin: 5rem auto;
     max-width: 1000px;
-    margin: auto;
-    margin-top: 8rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    width: 90%;
 }
 
 .description{
@@ -41,7 +43,6 @@ h2{
 
 @media (max-width: 768px) {
   .carousel-details{
-    width: 90%;
-    margin: auto;
+    width: 100%;
   }
 }

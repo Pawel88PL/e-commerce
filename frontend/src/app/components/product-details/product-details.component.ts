@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { CartItemDialogComponent } from '../cart-item-dialog/cart-item-dialog.component';
+import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-product-details',
@@ -44,6 +45,16 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     const idParm: string | null = this.route.snapshot.paramMap.get('id');
+
+    gsap.from('.product-details', {
+      duration: 1,
+      x: '-100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 0.5,
+      ease: "power1.out"
+    });
+
 
     if (idParm) {
       const id = +idParm;

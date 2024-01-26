@@ -9,30 +9,6 @@
       "PackagePath": "staticwebassets/images/.DS_Store"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691183092204.jpg",
-      "PackagePath": "staticwebassets/images/1691183092204.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691261030147.jpg",
-      "PackagePath": "staticwebassets/images/1691261030147.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691261030152.jpg",
-      "PackagePath": "staticwebassets/images/1691261030152.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691261030172.jpg",
-      "PackagePath": "staticwebassets/images/1691261030172.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691261030176.jpg",
-      "PackagePath": "staticwebassets/images/1691261030176.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/1691261030179.jpg",
-      "PackagePath": "staticwebassets/images/1691261030179.jpg"
-    },
-    {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Cynamon.jpg",
       "PackagePath": "staticwebassets/images/Cynamon.jpg"
     },
@@ -105,10 +81,6 @@
       "PackagePath": "staticwebassets/images/Porzeczka mała.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Rzepak.jpg",
-      "PackagePath": "staticwebassets/images/Rzepak.jpg"
-    },
-    {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadziowy mały2.jpg",
       "PackagePath": "staticwebassets/images/Spadziowy mały2.jpg"
     },
@@ -145,24 +117,8 @@
       "PackagePath": "staticwebassets/images/gryka_1.0.JPG"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/jarmark_1.jpeg",
-      "PackagePath": "staticwebassets/images/jarmark_1.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/kłodzko_1.jpeg",
-      "PackagePath": "staticwebassets/images/kłodzko_1.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/miody_1.jpeg",
-      "PackagePath": "staticwebassets/images/miody_1.jpeg"
-    },
-    {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/outOfOrder.png",
       "PackagePath": "staticwebassets/images/outOfOrder.png"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/piotr_1.jpeg",
-      "PackagePath": "staticwebassets/images/piotr_1.jpeg"
     },
     {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/porzeczka duża.jpg",
@@ -185,16 +141,12 @@
       "PackagePath": "staticwebassets/images/pyłek mały.jpeg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/rzepak mały.jpg",
-      "PackagePath": "staticwebassets/images/rzepak mały.jpg"
+      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/rzepak_big.jpeg",
+      "PackagePath": "staticwebassets/images/rzepak_big.jpeg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/rzepak_0.4.JPG",
-      "PackagePath": "staticwebassets/images/rzepak_0.4.JPG"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/rzepak_1.0.JPG",
-      "PackagePath": "staticwebassets/images/rzepak_1.0.JPG"
+      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/rzepak_small.jpeg",
+      "PackagePath": "staticwebassets/images/rzepak_small.jpeg"
     },
     {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/smakowe_3.jpg",
@@ -209,14 +161,6 @@
       "PackagePath": "staticwebassets/images/tradycyjne_3.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/unavaialable.jpeg",
-      "PackagePath": "staticwebassets/images/unavaialable.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/unavaialable1.jpeg",
-      "PackagePath": "staticwebassets/images/unavaialable1.jpeg"
-    },
-    {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_0.4.JPG",
       "PackagePath": "staticwebassets/images/wielokwiat_0.4.JPG"
     },
@@ -227,22 +171,6 @@
     {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",
       "PackagePath": "staticwebassets/images/wielokwiatowy.jpg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wiktor.jpeg",
-      "PackagePath": "staticwebassets/images/wiktor.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wiktor_1.jpeg",
-      "PackagePath": "staticwebassets/images/wiktor_1.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wiktor_2.jpeg",
-      "PackagePath": "staticwebassets/images/wiktor_2.jpeg"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wiktor_3.jpeg",
-      "PackagePath": "staticwebassets/images/wiktor_3.jpeg"
     },
     {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Świeczka.jpeg",

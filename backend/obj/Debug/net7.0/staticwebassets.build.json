@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hJKEqwdWlGSCf/uk7Glj0nkOoKTRuG946IrcESULQjY=",
+  "Hash": "oA+35TQC0466xBzYCgbmcXUlHQdj5T4ITyU9Fk8djVc=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -1615,23 +1615,6 @@
       "OriginalItemSpec": "wwwroot/images/smallAmount.png"
     },
     {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadź twarda.jpg",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
-      "BasePath": "_content/backend",
-      "RelativePath": "images/Spadź twarda.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Spadź twarda.jpg"
-    },
-    {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadziowy mały2.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -1647,6 +1630,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/Spadziowy mały2.jpg"
+    },
+    {
+      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Spadź twarda.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/Spadź twarda.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/Spadź twarda.jpg"
     },
     {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Świeczka.jpeg",
@@ -1683,12 +1683,12 @@
       "OriginalItemSpec": "wwwroot/images/tradycyjne_3.jpg"
     },
     {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_0.4.JPG",
+      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_big.jpeg",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
       "BasePath": "_content/backend",
-      "RelativePath": "images/wielokwiat_0.4.JPG",
+      "RelativePath": "images/wielokwiat_big.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1697,41 +1697,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/wielokwiat_0.4.JPG"
-    },
-    {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_1.0.JPG",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
-      "BasePath": "_content/backend",
-      "RelativePath": "images/wielokwiat_1.0.JPG",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/wielokwiat_1.0.JPG"
-    },
-    {
-      "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Wielokwiat_duży.jpg",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/pawelstaniul/e-commerce/backend/wwwroot/",
-      "BasePath": "_content/backend",
-      "RelativePath": "images/Wielokwiat_duży.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Wielokwiat_duży.jpg"
+      "OriginalItemSpec": "wwwroot/images/wielokwiat_big.jpeg"
     },
     {
       "Identity": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",

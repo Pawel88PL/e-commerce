@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using MiodOdStaniula.Models;
-using MiodOdStaniula.Services;
 using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers
@@ -18,8 +15,19 @@ namespace MiodOdStaniula.Controllers
             _productService = productService;
         }
 
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            var result = await _productService.GetAllProductsAsync();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return NotFound(new { message = result.ErrorMessage });
+        }
+
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts([FromQuery] int page, [FromQuery] int itemsPerPage)
+        public async Task<IActionResult> GetAllProductsByPage([FromQuery] int page, [FromQuery] int itemsPerPage)
         {
             var result = await _productService.GetAllProductsAsync(page, itemsPerPage);
             if (result.Success)
@@ -41,7 +49,6 @@ namespace MiodOdStaniula.Controllers
             return NotFound(new { message = result.ErrorMessage });
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductDto productDto)
         {
@@ -58,7 +65,6 @@ namespace MiodOdStaniula.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = result.Data!.ProductId }, result.Data);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
@@ -70,7 +76,6 @@ namespace MiodOdStaniula.Controllers
             return NoContent();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
         {

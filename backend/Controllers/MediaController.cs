@@ -1,46 +1,47 @@
 using Microsoft.AspNetCore.Mvc;
-using MiodOdStaniula.Controllers;
 using MiodOdStaniula.Services.Interfaces;
-namespace MiodOdStaniula;
 
-[ApiController]
-[Route("api/[controller]")]
-public class MediaController : ControllerBase
+namespace MiodOdStaniula.Controllers
 {
-    private readonly IImageService _imageService;
-
-    public MediaController(IImageService imageService)
+    [ApiController]
+    [Route("media")]
+    public class MediaController : ControllerBase
     {
-        _imageService = imageService;
-    }
+        private readonly IImageService _imageService;
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteFile(int id)
-    {
-        var result = await _imageService.DeleteImageAsync(id);
-        if (!result.Success)
+        public MediaController(IImageService imageService)
         {
-            return NotFound(new { message = result.ErrorMessage });
+            _imageService = imageService;
         }
-        return NoContent();
-    }
 
-
-    [HttpPost]
-    public async Task<IActionResult> UploadFiles([FromForm] List<IFormFile> images)
-    {
-        if (images == null || images.Count == 0)
-            return BadRequest("No files received");
-
-        var result = await _imageService.UploadImageAsync(images);
-
-        if (result.IsSuccess)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFile(int id)
         {
-            return Ok(new { files = result.FilePaths });
+            var result = await _imageService.DeleteImageAsync(id);
+            if (!result.Success)
+            {
+                return NotFound(new { message = result.ErrorMessage });
+            }
+            return NoContent();
         }
-        else
+
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFiles([FromForm] List<IFormFile> images)
         {
-            return BadRequest($"Wysąpił błąd podczas udostępniania zdjęcia. Treśc błędu: {result.ErrorMessage}");
+            if (images == null || images.Count == 0)
+                return BadRequest("No files received");
+
+            var result = await _imageService.UploadImageAsync(images);
+
+            if (result.IsSuccess)
+            {
+                return Ok(new { files = result.FilePaths });
+            }
+            else
+            {
+                return BadRequest($"Wysąpił błąd podczas udostępniania zdjęcia. Treśc błędu: {result.ErrorMessage}");
+            }
         }
     }
 }

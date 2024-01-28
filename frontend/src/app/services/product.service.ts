@@ -38,7 +38,7 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.productsUrl}`);
+    return this.http.get<Product[]>(`${this.productsUrl}/all`);
   }
 
   getProductsByPage(page: number, itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE): Observable<PaginatedResult<Product[]>> {
@@ -48,7 +48,6 @@ export class ProductService {
 
     return this.http.get<PaginatedResult<Product[]>>(`${this.productsUrl}`, { params });
   }
-
 
   updateProduct(id: number, productData: any, imagePaths?: string[]): Observable<Product> {
     const payload = {

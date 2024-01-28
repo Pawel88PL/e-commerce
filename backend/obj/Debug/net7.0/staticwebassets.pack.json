@@ -89,10 +89,6 @@
       "PackagePath": "staticwebassets/images/Spadź twarda.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Wielokwiat_duży.jpg",
-      "PackagePath": "staticwebassets/images/Wielokwiat_duży.jpg"
-    },
-    {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/Wosk.jpg",
       "PackagePath": "staticwebassets/images/Wosk.jpg"
     },
@@ -161,12 +157,8 @@
       "PackagePath": "staticwebassets/images/tradycyjne_3.jpg"
     },
     {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_0.4.JPG",
-      "PackagePath": "staticwebassets/images/wielokwiat_0.4.JPG"
-    },
-    {
-      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_1.0.JPG",
-      "PackagePath": "staticwebassets/images/wielokwiat_1.0.JPG"
+      "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiat_big.jpeg",
+      "PackagePath": "staticwebassets/images/wielokwiat_big.jpeg"
     },
     {
       "Id": "/Users/pawelstaniul/e-commerce/backend/wwwroot/images/wielokwiatowy.jpg",

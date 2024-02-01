@@ -14,7 +14,7 @@ namespace MiodOdStaniula.Controllers
             _imageService = imageService;
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("delete/{id}")]
         public async Task<IActionResult> DeleteFile(int id)
         {
             var result = await _imageService.DeleteImageAsync(id);

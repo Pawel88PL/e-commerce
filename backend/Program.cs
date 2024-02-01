@@ -84,7 +84,8 @@ namespace MiodOdStaniula
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins("https://miododstaniula.pl", "https://angular.miododstaniula.pl", "http://localhost:4200")
                     .AllowAnyMethod()
-                    .AllowAnyHeader());
+                    .AllowAnyHeader()
+                    .AllowCredentials());
             });
 
             var app = builder.Build();
@@ -121,9 +122,10 @@ namespace MiodOdStaniula
                 app.UseRequestLocalization(locOptions.Value);
             }
 
+            app.UseRouting();
+            app.UseCors("AllowSpecificOrigin");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

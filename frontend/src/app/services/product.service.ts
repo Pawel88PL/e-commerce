@@ -26,11 +26,11 @@ export class ProductService {
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.productsUrl}/${id}`);
+    return this.http.post<void>(`${this.productsUrl}/delete/${id}`, {});
   }
 
   deleteImage(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.mediaUrl}/${id}`);
+    return this.http.post<void>(`${this.mediaUrl}/delete/${id}`, {});
   }
 
   getProductById(id: number): Observable<Product> {
@@ -54,7 +54,7 @@ export class ProductService {
       ...productData,
       ImagePaths: imagePaths
     }
-    return this.http.put<Product>(`${this.productsUrl}/${id}`, payload);
+    return this.http.post<Product>(`${this.productsUrl}/${id}`, payload);
   }
 
   uploadProductImages(data: FormData): Observable<any> {

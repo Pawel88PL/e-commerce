@@ -4,8 +4,8 @@ using MiodOdStaniula.Services.Interfaces;
 
 namespace MiodOdStaniula.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("cart")]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
@@ -80,7 +80,7 @@ namespace MiodOdStaniula.Controllers
             }
         }
 
-        [HttpPut("{cartId}/items/{productId}")]
+        [HttpPost("{cartId}/items/{productId}")]
         public async Task<IActionResult> UpdateCartItemQuantity(Guid cartId, int productId, [FromBody] UpdateCartItemQuantityModel model)
         {
             try
@@ -102,12 +102,12 @@ namespace MiodOdStaniula.Controllers
         }
 
 
-        [HttpDelete("{cartId}/items/{productId}")]
-        public async Task<IActionResult> DeleteItemFromCart(Guid cartId, int productId)
+        [HttpPost("{cartId}/delete/{productId}")]
+        public async Task<IActionResult> DeleteItemFromCart(Guid cartId, [FromBody] DeleteItemFromCartModel model)
         {
             try
             {
-                var result = await _cartService.DeleteItemFromCartAsync(cartId, productId);
+                var result = await _cartService.DeleteItemFromCartAsync(cartId, model.ProductId);
                 if (!result)
                 {
                     return NotFound("Produkt lub koszyk nie został znaleziony.");
@@ -121,6 +121,7 @@ namespace MiodOdStaniula.Controllers
                 return StatusCode(500, "Wystąpił błąd serwera.");
             }
         }
+
 
         [HttpDelete("{cartId}/clear")]
         public async Task<IActionResult> ClearCart(Guid cartId)

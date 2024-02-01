@@ -65,7 +65,7 @@ namespace MiodOdStaniula.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = result.Data!.ProductId }, result.Data);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("delete/{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             var result = await _productService.DeleteAsync(id);
@@ -76,7 +76,7 @@ namespace MiodOdStaniula.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
         {
             var result = await _productService.UpdateAsync(id, productDto);

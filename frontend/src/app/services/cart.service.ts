@@ -13,8 +13,8 @@ import { Product } from '../models/product.model';
 export class CartService {
   apiBaseUrl: string = environment.apiUrl;
   public cartId: string | null = localStorage.getItem('cartId')
-  private cartUrl = this.apiBaseUrl + '/api/Cart';
-  private cartItemUrl = this.apiBaseUrl + '/api/Cart/items';
+  private cartUrl = this.apiBaseUrl + '/cart';
+  private cartItemUrl = this.apiBaseUrl + '/cart/items';
 
   constructor(private http: HttpClient) { }
 
@@ -54,14 +54,14 @@ export class CartService {
 
   updateItemQuantity(cartId: string, productId: number, quantity: number): Observable<any> {
     const url = `${this.cartUrl}/${cartId}/items/${productId}`;
-    return this.http.put(url, { quantity }).pipe(
+    return this.http.post(url, { quantity }).pipe(
       catchError(this.handleError)
     );
   }
 
-  removeItem(cartId: string ,productId: number): Observable<any> {
-    const url = `${this.cartUrl}/${cartId}/items/${productId}`;
-    return this.http.delete(url).pipe(
+  removeItem(cartId: string, productId: number): Observable<any> {
+    const payload = { productId: productId, cartId: cartId};
+    return this.http.post(`${this.cartUrl}/${cartId}/delete/${productId}`, payload).pipe(
       catchError(this.handleError)
     );
   }

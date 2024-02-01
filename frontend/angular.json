@@ -27,20 +27,23 @@
             "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "./node_modules/slick-carousel/slick/slick.css",
-              "./node_modules/slick-carousel/slick/slick-theme.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/slick-carousel/slick/slick.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -56,6 +59,12 @@
               "outputHashing": "all"
             },
             "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -99,13 +108,9 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "./node_modules/slick-carousel/slick/slick.css",
-              "./node_modules/slick-carousel/slick/slick-theme.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/slick-carousel/slick/slick.min.js"
-            ]
+            "scripts": []
           }
         }
       }

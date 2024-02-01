@@ -121,6 +121,35 @@ namespace MiodOdStaniula.Services
             }
         }
 
+        public async Task<ServiceResult<PaginatedList<ProductDto>>> GetAllProductsAsync(int page, int itemsPerPage)
+        {
+            try
+            {
+                var query = _context.Products!
+                    .Include(p => p.Category)
+                    .Include(p => p.ProductImages)
+                    .OrderBy(p => p.ProductId);
+
+                var totalItems = await query.CountAsync();
+                var products = await query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToListAsync();
+
+                var productDtos = products.Select(MapToProductDto).ToList();
+
+                var paginatedData = new PaginatedList<ProductDto>(productDtos, totalItems, page, itemsPerPage);
+
+                return new ServiceResult<PaginatedList<ProductDto>>
+                {
+                    Data = paginatedData,
+                    Success = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return HandleError<PaginatedList<ProductDto>>(ex, "Błąd podczas pobierania produktów.");
+            }
+        }
+
+
         public async Task<ServiceResult<ProductDto>> GetProductAsync(int id)
         {
             try

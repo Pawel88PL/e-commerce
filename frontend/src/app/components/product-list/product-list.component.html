@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row pt-4">
+<div class="product-list shadow-lg">
+    <div class="row m-1 pt-4">
         <div class="col-md-9">
             <h1 id="categories" class="text-center">
                 {{ getTitle() }}
@@ -22,6 +22,9 @@
     <div class="text-center py-5">
         <div class="row">
             <div class="col-md-3 text-start border-end mb-4">
+                <div class="mb-5">
+                    <img src="../../../assets/images/logo.jpeg" alt="Pasieka rodzinna" class="w-100">
+                </div>
                 <h3>Kategorie:</h3>
                 <br />
                 <div class="list-group">
@@ -52,9 +55,19 @@
             <div class="col-md-9">
                 <div class="row" id="products-container">
                     <app-product-card class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let product of filteredProducts"
-                        [product]="product"></app-product-card>
+                        [product]="product">
+                    </app-product-card>
+
+                    <div *ngIf="isLoading" class="loading-spinner">
+                        <mat-spinner></mat-spinner>
+                    </div>
+
+                    <div *ngIf="!isLoading && currentPage > totalPages">
+                        Wszystkie produkty zostały załadowane.
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

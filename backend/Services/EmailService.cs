@@ -9,25 +9,27 @@ namespace MiodOdStaniula.Services
 
         private readonly IConfiguration _configuration;
         private ILogger<EmailService> _logger;
+        private readonly string? _baseUrl;
 
         public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
         {
             _configuration = configuration;
             _logger = logger;
+            _baseUrl = _configuration["ApplicationSettings:BaseUrl"];
         }
 
         public async Task SendActivationEmail(string email, string userId, string name, string token)
         {
             var encodedToken = WebUtility.UrlEncode(token);
-            var activationLink = $"https://localhost:5047/activate?userId={userId}&token={encodedToken}";
+            var activationLink = $"{_baseUrl}/activate?userId={userId}&token={encodedToken}";
 
             string emailBody = $@"
             
             <h1>Witaj {name}!</h1>
             <p>Twoje konto zostało utworzone.</p>
-            <p>Aby aktywować swoje konto kliknij proszę na link obok: <a href='{activationLink}'>Aktywuj Konto</a>
+            <p>Aby aktywować swoje konto kliknij na link: <a href='{activationLink}'>Aktywuj Konto</a>
             <br>
-            <p>W razie problemów z aktywacją konta prosimy o napisz do nas na adres kontakt@miododstaniula.pl</p>
+            <p>W razie problemów z aktywacją konta napisz do nas na adres kontakt@miododstaniula.pl</p>
             <p>lub zadzwoń pod numer telefonu: 570 436 579</p>
             <br>
             <hr>

@@ -1,0 +1,16 @@
+.carousel-caption {
+    left: 1%;
+    padding: 1px;
+    transform: translateX(30%);
+    font-size: 4rem;
+}
+
+.welcome-carousel {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+
+    margin: 5rem auto;
+    max-width: 1400px;
+    width: 90%;
+}

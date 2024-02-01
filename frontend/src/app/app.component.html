@@ -1,12 +1,13 @@
-<header>
-  <app-navbar class="fixed-top"></app-navbar>
-</header>
+<div class="header sticky-top">
+  <app-navbar></app-navbar>
+</div>
 
-<main>
-  <app-cookie-consent></app-cookie-consent>
+<div class="main">
   <router-outlet></router-outlet>
-</main>
+</div>
 
-<footer>
+<div class="footer">
   <app-footer></app-footer>
-</footer>
+</div>
+
+<app-cookie-consent></app-cookie-consent>

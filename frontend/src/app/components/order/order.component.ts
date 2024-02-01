@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+  apiBaseUrl: string = environment.apiUrl;
   items: CartItem[] = [];
   productCost: number = 0;
   shippingCost: number = 0;
@@ -45,5 +47,4 @@ export class OrderComponent implements OnInit {
   placeOrder(): void {
     // Logika wysłłaniaia zamówienia
   }
-
 }

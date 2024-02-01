@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   loginForm!: FormGroup;
+  @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -27,15 +28,21 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.autoFocusInput.nativeElement.focus();
+    });
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
 
       this.authService.login(loginData.email, loginData.password).subscribe(
         success => {
-          if (localStorage.getItem('inCheckoutProcess')) {
+          if (this.authService.getInCheckoutProcess()) {
             this.router.navigate(['/order']);
-            localStorage.removeItem('inCheckoutProcess');
+            this.authService.removeInCheckoutProcess();
           } else {
             const roles = this.authService.getRoles();
             if (roles.includes('Admin')) {

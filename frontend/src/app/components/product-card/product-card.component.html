@@ -1,32 +1,10 @@
 <div *ngIf="product && product.productId">
     <div class="card rounded-3 shadow-lg mb-2">
-        <div id="carouselForProduct{{product.productId}}" class="carousel slide carousel-fade w-100"
-            data-bs-ride="carousel">
-            <div *ngIf="product.productImages?.length > 1" class="carousel-indicators">
-                <button *ngFor="let image of product.productImages; let i = index" type="button"
-                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
-                    [class.active]="i === 0">
-                </button>
-            </div>
-            <div class="carousel-inner">
-                <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
-                    <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
-                        [class.active]="i === 0" data-bs-interval="4000">
-                        <img *ngIf="image" [src]="'https://localhost:5047/' + image.imagePath"
-                            class="d-block w-100 rounded-3" alt="{{ product.name }}" />
-                    </div>
-                </a>
-            </div>
-            <button class="carousel-control-prev" type="button"
-                [attr.data-bs-target]="'#carouselForProduct' + product?.productId" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button"
-                [attr.data-bs-target]="'#carouselForProduct' + product?.productId" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        <div *ngIf="product.productImages && product.productImages.length > 0">
+            <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
+                <img [src]="apiBaseUrl + product.productImages[0].imagePath" loading="lazy"
+                    class="d-block w-100 rounded-3" alt="{{ product.name }}">
+            </a>
         </div>
 
         <div class="card-body">

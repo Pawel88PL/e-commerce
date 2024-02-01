@@ -8,7 +8,8 @@
     - zadbać o walidację wprowadzanych danych --> ZROBIONE
     - formularz logowania, żeby pamiętał poprzedni, wpisany adres email
     - dodać potwierdzenie wpisanego hasła, --> ZROBIONE
-    - dodać funkcję wysyłającą link do aktywacji konta po pomyślnym zarejestrowaniu użytkownika --> ZROBIONE
+    - dodać funkcję wysyłającą link do aktywacji konta po pomyślnym zarejestrowaniu użytkownika, --> ZROBIONE
+    - ustawić autofocus na pierwsze pole w formularzu rejestracji i logowania, --> ZROBIONE
 
 3. Powiadomić użytkownika o gromadzeniu danych osobowych i używaniu plików cookie, uzyskać zgodę. --> ZROBIONE
 
@@ -27,7 +28,12 @@
 
 6. W API utworzyć serwis odpowiadający za wysyłanie wiadomości email:
     - metodę wysyłającą email do klienta po pomyślnym zarejestrowaniu się przenieść do serwisu 'EmailService.cs', --> ZROBIONE
-    - przenieść dane logowania konta mailowego do pliku appsetings.json,
+    - przenieść dane logowania konta mailowego do pliku appsetings.json, --> ZROBIONE
+
+7. Utworzyć moduł klienta:
+    - umożliwić klientom przeglądanie i edycję swoich danych,
+    - możliwość zmiany hasła,
+    - przeglądanie swoich zamówień,
 
 7. Dodać moduł płatności.
 8. Utworzyć moduł do zarządzania zamówieniami.

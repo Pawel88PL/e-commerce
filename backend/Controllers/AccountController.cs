@@ -71,7 +71,7 @@ namespace MiodOdStaniula.Controllers
             var user = await _userManager.FindByEmailAsync(userLoginData.Email);
             if (user == null || !user.EmailConfirmed)
             {
-                return Unauthorized("Konto nie istnieje lub e-mail nie został potwierdzony.");
+                return Unauthorized("Konto nie zostało aktywowane.");
             }
             var roles = await _userManager.GetRolesAsync(user!);
             var token = GenerateJwtTokenForUser(userLoginData.Email);

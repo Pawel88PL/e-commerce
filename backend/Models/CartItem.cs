@@ -20,4 +20,10 @@ namespace MiodOdStaniula.Models
         public int Quantity { get; set; }
     }
 
+    public class DeleteItemFromCartModel
+    {
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+    }
+
 }

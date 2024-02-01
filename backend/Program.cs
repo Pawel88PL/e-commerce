@@ -82,7 +82,12 @@ namespace MiodOdStaniula
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("https://miododstaniula.pl", "https://angular.miododstaniula.pl", "http://localhost:4200")
+                    builder => builder.WithOrigins(
+                        "https://www.miododstaniula.pl",
+                        "https://miododstaniula.pl",
+                        "https://www.angular.miododstaniula.pl",
+                        "https://angular.miododstaniula.pl",
+                        "http://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

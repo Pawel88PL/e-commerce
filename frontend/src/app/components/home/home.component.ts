@@ -17,16 +17,5 @@ export class HomeComponent {
       delay: 0.5,
       ease: "power1.out" 
     });
-
-    gsap.from('.product-list', {
-      duration: 1,
-      x: 100,
-      opacity: 0,
-      scale: 0.5,
-      delay: 1,
-      ease: "slow",
-      yoyo: true
-    });
   }
-
 }

@@ -48,7 +48,7 @@ export class ProductDetailsComponent implements OnInit {
 
     gsap.from('.product-details', {
       duration: 1,
-      x: '-100%',
+      y: '-100%',
       opacity: 0,
       scale: 0.5,
       delay: 0.5,

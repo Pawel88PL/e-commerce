@@ -88,14 +88,4 @@ export class ProductListComponent implements OnInit {
     });
     return filtered;
   }
-
-  getTitle(): string {
-    switch (this.selectedCategory) {
-      case 1: return 'Miody naturalne:';
-      case 2: return 'Miody smakowe:';
-      case 3: return 'Zestawy miodów:';
-      case 4: return 'Produkty pszczele:';
-      default: return 'Nasze produkty:';
-    }
-  }
 }

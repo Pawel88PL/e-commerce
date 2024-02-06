@@ -1,55 +1,46 @@
 <div class="product-list shadow-lg">
-    <div class="row m-1 pt-4">
-        <div class="col-md-9">
-            <h1 id="categories" class="text-center">
-                {{ getTitle() }}
-            </h1>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Sortuj po ...</mat-label>
-                <mat-select [(ngModel)]="selectedSorting">
-                    <mat-option value="category">Kategoria</mat-option>
-                    <mat-option value="name_asc">Nazwa produktu</mat-option>
-                    <mat-option value="price_asc">Cena rosnąco</mat-option>
-                    <mat-option value="price_desc">Cena malejąco</mat-option>
-                    <mat-option value="available-desc">Dostępność</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <hr />
-    <div class="text-center py-5">
+    <div class="text-center py-4">
         <div class="row">
             <div class="col-md-3 text-start border-end mb-4">
                 <div class="mb-5">
                     <img src="../../../assets/images/logo.jpeg" alt="Pasieka rodzinna" class="w-100">
                 </div>
-                <h3>Kategorie:</h3>
-                <br />
+
+                <div class="mb-5">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Sortuj po ...</mat-label>
+                        <mat-select [(ngModel)]="selectedSorting">
+                            <mat-option value="category">Kategoria</mat-option>
+                            <mat-option value="name_asc">Nazwa produktu</mat-option>
+                            <mat-option value="price_asc">Cena rosnąco</mat-option>
+                            <mat-option value="price_desc">Cena malejąco</mat-option>
+                            <mat-option value="available-desc">Dostępność</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
                 <div class="list-group">
                     <a (click)="selectedCategory = null" [ngClass]="{'active': selectedCategory === null}"
                         class="list-group-item list-group-item-action">
-                        <i class="bi bi-list-ul"></i> Wszystkie produkty
+                        <h3><i class="bi bi-list-ul"></i> Wszystkie produkty</h3>
                     </a>
                     <a (click)="selectedCategory = 1" [ngClass]="{'active': selectedCategory === 1}"
                         class="list-group-item list-group-item-action">
-                        <i class="bi bi-dash"></i> Miody naturalne
+                        <h3><i class="bi bi-dash"></i> Miody naturalne</h3>
                     </a>
                     <a (click)="selectedCategory = 2" [ngClass]="{'active': selectedCategory === 2}"
                         class="list-group-item list-group-item-action">
-                        <i class="bi bi-dash"></i> Miody smakowe
+                        <h3><i class="bi bi-dash"></i> Miody smakowe</h3>
                     </a>
                     <a (click)="selectedCategory = 3" [ngClass]="{'active': selectedCategory === 3}"
                         class="list-group-item list-group-item-action">
-                        <i class="bi bi-dash"></i> Zestawy miodów
+                        <h3><i class="bi bi-dash"></i> Zestawy miodów</h3>
                     </a>
                     <a (click)="selectedCategory = 4" [ngClass]="{'active': selectedCategory === 4}"
                         class="list-group-item list-group-item-action">
-                        <i class="bi bi-dash"></i> Produkty pszczele
+                        <h3><i class="bi bi-dash"></i> Produkty pszczele</h3>
                     </a>
                 </div>
-
             </div>
 
             <div class="col-md-9">

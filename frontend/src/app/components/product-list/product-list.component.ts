@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { PaginatedResult } from 'src/app/models/paginated-result.model';
 import { DEFAULT_ITEMS_PER_PAGE } from 'src/app/config/config';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-product-list',
@@ -24,6 +25,14 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    gsap.from('.product-list', {
+      duration: 1,
+      x: '100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 0.5,
+      ease: "power1.out"
+    });
     this.loadProducts();
   }
 
@@ -78,15 +87,5 @@ export class ProductListComponent implements OnInit {
       }
     });
     return filtered;
-  }
-
-  getTitle(): string {
-    switch (this.selectedCategory) {
-      case 1: return 'Miody naturalne:';
-      case 2: return 'Miody smakowe:';
-      case 3: return 'Zestawy miodów:';
-      case 4: return 'Produkty pszczele:';
-      default: return 'Nasze produkty:';
-    }
   }
 }

@@ -6,7 +6,7 @@
 .product-details{
     background-color: white;
     border-radius: 10px;
-    margin: 5rem auto;
+    margin: 3rem auto;
     max-width: 1000px;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -44,5 +44,8 @@ h2{
 @media (max-width: 768px) {
   .carousel-details{
     width: 100%;
+  }
+  .mobile{
+    display: none;
   }
 }

@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +22,15 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.loadCartItems();
+    
+    gsap.from('.container', {
+      duration: 1,
+      x: '-100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 0.5,
+      ease: "power1.out"
+    });
   }
 
   loadCartItems() {

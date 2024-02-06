@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
   product: Product = new Product();
   products: Product[] = [];
+  formattedPrice: string = '';
 
   constructor(
     public authService: AuthService,
@@ -48,7 +49,7 @@ export class ProductDetailsComponent implements OnInit {
 
     gsap.from('.product-details', {
       duration: 1,
-      x: '-100%',
+      y: '-100%',
       opacity: 0,
       scale: 0.5,
       delay: 0.5,
@@ -61,6 +62,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.getProductById(id).subscribe(
         product => {
           this.product = product
+          this.formattedPrice = this.product.price.toFixed(2) + ' zł';
         },
         error => console.log('Wystąpił problem ze znalezieniem:', error));
     }

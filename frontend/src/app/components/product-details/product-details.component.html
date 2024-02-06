@@ -1,5 +1,5 @@
 <div class="product-details shadow-lg pt-3">
-    <div class="row my-5">
+    <div class="row my-4">
         <div *ngIf="product.productId" class="col-sm-7">
             <div [attr.id]="'carouselForProduct' + product.productId"
                 class="carousel carousel-details slide carousel-fade" data-bs-ride="carousel">
@@ -39,8 +39,8 @@
             <br />
 
             <div class="text-center">
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto">Cena: {{ product.price }} zł</h2>
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-50 mx-auto">Waga: {{ product.weight }} g</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Cena:</span> {{ formattedPrice }}</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Waga:</span> {{ product.weight }} g</h2>
             </div>
             <br />
             <div class="availability">

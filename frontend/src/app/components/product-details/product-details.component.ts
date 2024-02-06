@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
   product: Product = new Product();
   products: Product[] = [];
+  formattedPrice: string = '';
 
   constructor(
     public authService: AuthService,
@@ -61,6 +62,7 @@ export class ProductDetailsComponent implements OnInit {
       this.productService.getProductById(id).subscribe(
         product => {
           this.product = product
+          this.formattedPrice = this.product.price.toFixed(2) + ' zł';
         },
         error => console.log('Wystąpił problem ze znalezieniem:', error));
     }

@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { SHIPPING_COST } from 'src/app/config/config';
 
 @Component({
   selector: 'app-order',
@@ -14,7 +15,7 @@ export class OrderComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
   items: CartItem[] = [];
   productCost: number = 0;
-  shippingCost: number = 0;
+  shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
 
   constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }

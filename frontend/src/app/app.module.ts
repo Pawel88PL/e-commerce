@@ -18,7 +18,6 @@ import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item
 import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -54,7 +53,6 @@ registerLocaleData(localePl);
     CartItemDialogComponent,
     CookieConsentComponent,
     FooterComponent,
-    GenericDialogComponent,
     HomeComponent,
     LoginComponent,
     NavbarComponent,

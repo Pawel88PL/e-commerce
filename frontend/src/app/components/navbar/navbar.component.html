@@ -24,7 +24,7 @@
                     </ul>
                 </li>
                 <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.isClient()">
-                    <button mat-button (click)="closeNavbar()"><i class="bi bi-box-arrow-right"></i>
+                    <button mat-button routerLink="/customerPanel" (click)="closeNavbar()"><i class="bi bi-box-arrow-right"></i>
                         Moje konto </button>
                 </li>
                 <li class="nav-item">

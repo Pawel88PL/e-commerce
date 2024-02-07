@@ -4,6 +4,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'addproduct', component: ProductAddComponent, canActivate: [AdminGuard] },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'customerPanel', component: CustomerPanelComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'order', component: OrderComponent },

@@ -42,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 
 registerLocaleData(localePl);
 
@@ -66,6 +67,7 @@ registerLocaleData(localePl);
     CheckoutComponent,
     OrderComponent,
     WaitingForActivationComponent,
+    CustomerPanelComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -4,6 +4,8 @@
 
 Opis projektu: Aplikacja `Miód od Staniula` to proste narzędzie e-commerce dla sklepu internetowego oferującego podstawowy zakres produktów. Aplikacja umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz realizację zamówień. Dzięki responsywnemu interfejsowi użytkownika, aplikacja zapewnia płynne i intuicyjne doświadczenie zakupowe na różnych urządzeniach.
 
+![Strona główna](screenShots/mainpage.png)
+
 ## Technologie
 
 Projekt został zbudowany przy użyciu następujących technologii:
@@ -13,6 +15,8 @@ Projekt został zbudowany przy użyciu następujących technologii:
 - **Baza danych**: SQL Server
 - **Autentykacja i autoryzacja**: JWT (JSON Web Tokens)
 - **Inne narzędzia**: Entity Framework Core, AutoMapper, Swagger UI
+
+![Koszyk zakupowy](screenShots/shoppingCart.png)
 
 ## Funkcje
 
@@ -24,6 +28,8 @@ Aplikacja oferuje następujące funkcje:
 - Proces składania zamówienia z formularzem adresowym.
 - Autentykacja i rejestracja użytkownika.
 - Panel administracyjny do zarządzania produktami, kategoriami i zamówieniami (opcjonalnie).
+
+![Formularz rejestracji](screenShots/register.png)
 
 ## Instalacja i uruchomienie
 
@@ -45,7 +51,36 @@ cd nazwa-aplikacji
 ### Konfiguracja bazy danych
 
 1. Utwórz bazę danych w SQL Server.
-2. Zaktualizuj connection string w pliku `appsettings.json` w projekcie backendowym.
+2. Zaktualizuj plik `appsettings.json` w projekcie backendowym:
+
+```
+{
+  "Jwt": {
+    "Key": "NazwaTwojegoKlucza",
+    "Issuer": "http://localhost:5046",
+    "Audience": "http://localhost:4200",
+    "ExpireMinutes": 120
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "nazwaTwojegoConnectionString": "Data Source=serwerBazyDanych;Database=NazwaBazyDanych;Uid=TwójLogin;Password=TwojeHasło;TrustServerCertificate=True"
+  },
+  "EmailSettings": {
+    "SmtpServer": "serwerTwojejPoczty",
+    "SmtpPort": 587,
+    "SmtpUsername": "adresEmail",
+    "SmtpPassword": "hasłoDoKontaEmail"
+  },
+    "ApplicationSettings": {
+      "BaseUrl": "UrlDoTwojegoApi"
+    }
+}
+```
 
 ### Uruchomienie backendu
 
@@ -65,6 +100,12 @@ ng serve
 ```
 
 Otwórz przeglądarkę i przejdź do `http://localhost:4200/` aby zobaczyć działającą aplikację.
+
+![Oczekiwanie na aktywację konta](screenShots/waitingForActivation.png)
+
+<br>
+
+![Szczegóły produktu](screenShots/productDetails.png)
 
 ## Wsparcie
 

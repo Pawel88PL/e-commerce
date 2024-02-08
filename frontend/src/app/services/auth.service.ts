@@ -24,6 +24,7 @@ export class AuthService {
         if (res.name) {
           this.setName(res.name);
         };
+        localStorage.setItem('userId', res.userId);
         if (this.cartService.cartId) {
           this.cartService.assignCartToUser(res.userId).subscribe();
         }

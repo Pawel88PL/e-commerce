@@ -1,1 +1,139 @@
-<p>customer-panel works!</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Panel Klienta</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'accountInfo'"
+                    (click)="setActiveSection('accountInfo')">Informacje o Koncie
+                </button>
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'addresses'" (click)="setActiveSection('addresses')">Adres
+                    do wysyłki
+                </button>
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'changePassword'"
+                    (click)="setActiveSection('changePassword')">Zmiana
+                    Hasła
+                </button>
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'orderHistory'"
+                    (click)="setActiveSection('orderHistory')">Historia
+                    Zamówień
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div *ngIf="activeSection === 'accountInfo'" class="card">
+                <div class="card-header">
+                    Informacje o Koncie
+                </div>
+                <div class="card-body">
+                    <form>
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" [value]="customer.email">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Imię</mat-label>
+                            <input matInput placeholder="Imię" [value]="customer.name">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Nazwisko</mat-label>
+                            <input matInput placeholder="Nazwisko" [value]="customer.surname">
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="activeSection === 'addresses'" class="card">
+                <div class="card-header">
+                    Adres do wysyłki
+                </div>
+                <div class="card-body">
+                    <form>
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Miasto</mat-label>
+                            <input matInput placeholder="City" [value]="customer.city">
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Ulica</mat-label>
+                            <input matInput placeholder="Street" [value]="customer.street">
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Numer domu / mieszkania</mat-label>
+                            <input matInput placeholder="Address" [value]="customer.address">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Kod pocztowy</mat-label>
+                            <input matInput placeholder="PostalCode" [value]="customer.postalCode">
+                        </mat-form-field>
+                    
+                        <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="activeSection === 'changePassword'" class="card">
+                <div class="card-header">
+                    Zmiana Hasła
+                </div>
+                <div class="card-body">
+                    <form>
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Stare Hasło</mat-label>
+                            <input matInput placeholder="Stare Hasło" type="password">
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Nowe Hasło</mat-label>
+                            <input matInput placeholder="Nowe Hasło" type="password">
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Powtórz Nowe Hasło</mat-label>
+                            <input matInput placeholder="Powtórz Nowe Hasło" type="password">
+                        </mat-form-field>
+                    
+                        <button mat-raised-button color="primary" type="submit">Zmień Hasło</button>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="activeSection === 'orderHistory'" class="card">
+                <div class="card-header">
+                    Historia Zamówień
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Numer Zamówienia</th>
+                                <th>Data</th>
+                                <th>Wartość</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orders">
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.date }}</td>
+                                <td>{{ order.value }}</td>
+                                <td>{{ order.status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

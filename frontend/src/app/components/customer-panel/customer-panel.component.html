@@ -1,5 +1,5 @@
 <div class="container my-4">
-    <h2 class="mb-4">Panel Klienta</h2>
+    <h2 class="mb-4">Cześć {{ customerFirstName }}</h2>
     <div class="row mb-5">
         <div class="col-md-3">
             <div class="list-group mb-5">
@@ -9,14 +9,13 @@
                 </button>
                 <button mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'addresses'" (click)="setActiveSection('addresses')">Adres
-                    do wysyłki
                 </button>
                 <button mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'changePassword'"
                     (click)="setActiveSection('changePassword')">Zmiana
                     Hasła
                 </button>
-                <button mat-stroked-button class="list-group-item list-group-item-action"
+                <button *ngIf="authService.isClient()" mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'orderHistory'"
                     (click)="setActiveSection('orderHistory')">Historia
                     Zamówień

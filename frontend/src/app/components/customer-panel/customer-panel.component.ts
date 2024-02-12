@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -14,12 +15,14 @@ export class CustomerPanelComponent implements OnInit {
   customer: Customer = {};
   customerForm!: FormGroup;
   orders: any[] = [];
+  customerFirstName: string = '';
 
-  constructor(private customerService: CustomerService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(public authService: AuthService, private customerService: CustomerService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initializeForm();
     this.loadCustomerData();
+
   }
 
   initializeForm() {
@@ -46,6 +49,7 @@ export class CustomerPanelComponent implements OnInit {
       this.customerService.getCustomer(userId).subscribe(
         customer => {
           this.customerForm.patchValue(customer);
+          this.customerFirstName = customer.name || '';
         },
         (error) => {
           console.log('Wystąpił błąd podczas pobierania danych klienta', error);

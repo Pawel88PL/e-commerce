@@ -21,6 +21,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" routerLink="/warehouse"><i class="bi bi-box-seam"></i> Magazyn</a></li>
                         <li><a class="dropdown-item" routerLink="/orders"><i class="bi bi-cart3"></i> Zamówienia</a></li>
+                        <li><a class="dropdown-item" routerLink="/customerPanel"><i class="bi bi-person"></i> Moje konto</a></li>
                     </ul>
                 </li>
                 <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.isClient()">

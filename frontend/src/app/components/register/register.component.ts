@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator })
+    }, { validator: this.passwordMatchValidator });
   }
 
   ngAfterViewInit() {

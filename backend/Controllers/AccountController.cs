@@ -91,7 +91,7 @@ namespace MiodOdStaniula.Controllers
             var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
             if (existingUser != null)
             {
-                return BadRequest("PODANY ADRES EMAIL JEST JUŻ ZAREJESTROWANY.");
+                return BadRequest("Podany adres email jest już zarejestrowany.");
             }
 
             var newUser = new UserModel

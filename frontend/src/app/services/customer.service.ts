@@ -14,11 +14,11 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCustomer(customerId: string): Observable<Customer> {
-    return this.http.get<Customer>(`${this.apiBaseUrl}/customer/${customerId}`).pipe(
-      catchError(error => {
-        console.error('Wystąpił błąd podczas pobierania danych klienta', error);
-        return throwError(() => new Error('Wystąpił problem z połączeniem do serwera.'));
-      })
-    );
+    return this.http.get<Customer>(`${this.apiBaseUrl}/customer/${customerId}`);
   }
+
+  updateCustomer(customerId: string, customerData: Customer): Observable<Customer> {
+    return this.http.post<Customer>(`${this.apiBaseUrl}/customer/${customerId}`, customerData);
+  }
+
 }

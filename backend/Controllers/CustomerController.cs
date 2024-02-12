@@ -21,6 +21,36 @@ namespace MiodOdStaniula.Controllers
             _userManager = userManager;
         }
 
+        [HttpPost("{userId}/change-password")]
+        public async Task<IActionResult> ChangePassword(string userId, [FromBody] ChangePasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("Nie znaleziono użytkownika.");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                var incorrectPasswordError = changePasswordResult.Errors.FirstOrDefault(e => e.Code == "PasswordMismatch");
+                if (incorrectPasswordError != null)
+                {
+                    return BadRequest(new { Message = "Nieprawidłowe aktualne hasło." });
+                }
+
+                return BadRequest(new { Message = "Nie udało się zmienić hasła. Spróbuj ponownie." });
+            }
+
+            return Ok( new {Message = "Hasło zostało pomyślnie zmienione." });
+        }
+
+
         [HttpGet("{userId}")]
         public async Task<ActionResult<UserDto>> GetUser(string userId)
         {

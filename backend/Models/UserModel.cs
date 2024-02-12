@@ -41,4 +41,11 @@ namespace MiodOdStaniula.Models
         public string PostalCode { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
     }
+
+    public class ChangePasswordModel
+    {
+        public string OldPassword { get; set; } = string.Empty;
+        public string NewPassword { get; set; } = string.Empty;
+        public string ConfirmNewPassword { get; set; } = string.Empty;
+    }
 }

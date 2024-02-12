@@ -13,6 +13,10 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
+  changePassword(customerId:string, passwordChangeRequest: any): Observable<any> {
+    return this.http.post(`${this.apiBaseUrl}/customer/${customerId}/change-password`, passwordChangeRequest);
+  }
+
   getCustomer(customerId: string): Observable<Customer> {
     return this.http.get<Customer>(`${this.apiBaseUrl}/customer/${customerId}`);
   }

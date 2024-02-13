@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SHIPPING_COST } from 'src/app/config/config';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-order',
@@ -31,6 +32,24 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.loadCartItems();
     this.loadCustomerData();
+
+    gsap.from('.personal-data', {
+      duration: 1,
+      x: '-100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 0.5,
+      ease: "power1.out"
+    });
+
+    gsap.from('.cart', {
+      duration: 1,
+      x: '100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 0.5,
+      ease: "power1.out"
+    });
   }
 
   loadCartItems() {

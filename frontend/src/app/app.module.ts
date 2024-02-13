@@ -32,6 +32,7 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -76,6 +77,7 @@ registerLocaleData(localePl);
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,

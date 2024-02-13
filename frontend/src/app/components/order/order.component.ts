@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SHIPPING_COST } from 'src/app/config/config';
+import { Customer } from 'src/app/models/customer.model';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-order',
@@ -13,15 +15,22 @@ import { SHIPPING_COST } from 'src/app/config/config';
 })
 export class OrderComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
+  customer: Customer = {};
   items: CartItem[] = [];
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
 
-  constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private customerService: CustomerService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadCartItems();
+    this.loadCustomerData();
   }
 
   loadCartItems() {
@@ -34,6 +43,20 @@ export class OrderComponent implements OnInit {
         console.error('Błąd podczas ładowania danych koszyka!', error);
       }
     );
+  }
+
+  loadCustomerData() {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.customerService.getCustomer(userId).subscribe(
+        (customer: Customer) => {
+          this.customer = customer;
+        },
+        (error) => {
+          console.error('Wystąpił błąd podczas pobierania danych klienta', error);
+        }
+      );
+    }
   }
 
   calculateCosts() {

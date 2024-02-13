@@ -18,7 +18,6 @@ import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item
 import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -43,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 
 registerLocaleData(localePl);
 
@@ -54,7 +54,6 @@ registerLocaleData(localePl);
     CartItemDialogComponent,
     CookieConsentComponent,
     FooterComponent,
-    GenericDialogComponent,
     HomeComponent,
     LoginComponent,
     NavbarComponent,
@@ -68,6 +67,7 @@ registerLocaleData(localePl);
     CheckoutComponent,
     OrderComponent,
     WaitingForActivationComponent,
+    CustomerPanelComponent,
   ],
   imports: [
     AppRoutingModule,

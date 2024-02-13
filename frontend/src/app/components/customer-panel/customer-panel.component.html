@@ -1,0 +1,231 @@
+<div class="container">
+    <h2 class="mb-4">Cześć {{ customerFirstName }}</h2>
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="list-group mb-5">
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'accountInfo'"
+                    (click)="setActiveSection('accountInfo')">Informacje o Koncie
+                </button>
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'addresses'" (click)="setActiveSection('addresses')">Adres
+                </button>
+                <button mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'changePassword'"
+                    (click)="setActiveSection('changePassword')">Zmiana
+                    Hasła
+                </button>
+                <button *ngIf="authService.isClient()" mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'orderHistory'"
+                    (click)="setActiveSection('orderHistory')">Historia
+                    Zamówień
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div *ngIf="activeSection === 'accountInfo'" class="card">
+                <div class="card-header">
+                    Informacje o Koncie
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="customerDataForm" (ngSubmit)="updateCustomerData()">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Imię</mat-label>
+                            <input matInput type="name" formControlName="name">
+                            <mat-error *ngIf="customerDataForm.controls['name'].hasError('required')">Imię jest
+                                wymagane</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['name'].hasError('minlength')">Imię jest za
+                                krótkie</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['name'].hasError('maxlength')">Imię może
+                                zawierać
+                                maksymalnie 50
+                                znaków</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['name'].hasError('lettersOnly')">Imię może
+                                zawierać
+                                tylko
+                                litery</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nazwisko</mat-label>
+                            <input matInput type="surname" formControlName="surname">
+                            <mat-error *ngIf="customerDataForm.controls['surname'].hasError('required')">Nazwisko jest
+                                wymagane</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['surname'].hasError('minlength')">Nazwisko jest
+                                za
+                                krótkie</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['surname'].hasError('maxlength')">Nazwisko może
+                                zawierać
+                                maksymalnie
+                                50 znaków</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['surname'].hasError('lettersOnly')">Nazwisko
+                                może
+                                zawierać tylko
+                                litery</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" formControlName="email">
+                            <mat-error *ngIf="customerDataForm.get('email')?.errors?.['required']">
+                                Email jest wymagany.
+                            </mat-error>
+                            <mat-error *ngIf="customerDataForm.get('email')?.errors?.['email']">
+                                Proszę wprowadzić poprawny adres email.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Numer telefonu</mat-label>
+                            <input matInput type="tel" formControlName="phoneNumber">
+                            <mat-error *ngIf="customerDataForm.controls['phoneNumber'].hasError('required')">Numer
+                                telefonu jest
+                                wymagany</mat-error>
+                            <mat-error
+                                *ngIf="customerDataForm.controls['phoneNumber'].hasError('pattern')">Nieprawidłowy
+                                format
+                                numeru
+                                telefonu</mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div *ngIf="activeSection === 'addresses'" class="card">
+                <div class="card-header">
+                    Adres do wysyłki
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="customerDataForm" (ngSubmit)="updateCustomerData()">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Miasto</mat-label>
+                            <input matInput type="city" formControlName="city">
+                            <mat-error *ngIf="customerDataForm.controls['city'].hasError('required')">Miasto jest
+                                wymagane</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['city'].hasError('minlength')">Nazwa miasta jest
+                                za
+                                krótka</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['city'].hasError('maxlength')">Nazwa miasta może
+                                zawierać
+                                maksymalnie 50
+                                znaków</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['city'].hasError('lettersOnly')">Nazwa miasta
+                                może
+                                zawierać tylko
+                                litery</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Kod pocztowy</mat-label>
+                            <input matInput type="text" formControlName="postalCode">
+                            <mat-error *ngIf="customerDataForm.controls['postalCode'].hasError('required')">Kod pocztowy
+                                jest
+                                wymagany</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['postalCode'].hasError('pattern')">Nieprawidłowy
+                                format
+                                kodu
+                                pocztowego</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Ulica</mat-label>
+                            <input matInput type="street" formControlName="street">
+                            <mat-error *ngIf="customerDataForm.controls['street'].hasError('required')">Ulica jest
+                                wymagana</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['street'].hasError('maxlength')">Ulica może
+                                zawierać
+                                maksymalnie 50
+                                znaków</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Adres (nr domu/mieszkania)</mat-label>
+                            <input matInput type="text" formControlName="address">
+                            <mat-error *ngIf="customerDataForm.controls['address'].hasError('required')">Numer
+                                domu/mieszkania
+                                jest
+                                wymagany</mat-error>
+                            <mat-error *ngIf="customerDataForm.controls['address'].hasError('maxLength')">Zbyt długi
+                                adres</mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="activeSection === 'changePassword'" class="card mb-5">
+                <div class="card-header">
+                    Zmiana Hasła
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Stare Hasło</mat-label>
+                            <input matInput formControlName="oldPassword" type="password">
+                            <mat-error *ngIf="changePasswordForm.controls['oldPassword'].hasError('required')">Wprowadź
+                                aktualne hasło</mat-error>
+                            <mat-error *ngIf="changePasswordForm.controls['oldPassword'].hasError('minlength')">Hasło
+                                jest za krótkie</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Nowe Hasło</mat-label>
+                            <input matInput formControlName="newPassword" type="password">
+                            <mat-error *ngIf="changePasswordForm.controls['newPassword'].hasError('required')">Wprowadź
+                                nowe hasło</mat-error>
+                            <mat-error *ngIf="changePasswordForm.controls['newPassword'].hasError('minlength')">Nowe
+                                hasło musi zawierać co najmniej 6 znaków</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-100 mb-3">
+                            <mat-label>Powtórz Nowe Hasło</mat-label>
+                            <input matInput formControlName="confirmNewPassword" type="password">
+                            <mat-error
+                                *ngIf="changePasswordForm.controls['confirmNewPassword'].hasError('required')">Potwierdź
+                                nowe hasło</mat-error>
+                            <mat-error
+                                *ngIf="changePasswordForm.controls['confirmNewPassword'].hasError('minlength')">Nowe
+                                hasło musi zawierać co najmniej 6 znaków</mat-error>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit">Zmień Hasło</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <div *ngIf="activeSection === 'orderHistory'" class="card">
+                <div class="card-header">
+                    Historia Zamówień
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Numer Zamówienia</th>
+                                <th>Data</th>
+                                <th>Wartość</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orders">
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.date }}</td>
+                                <td>{{ order.value }}</td>
+                                <td>{{ order.status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

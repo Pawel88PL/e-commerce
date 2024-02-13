@@ -29,4 +29,23 @@ namespace MiodOdStaniula.Models
         [RegularExpression(@"^\d{2}-\d{3}$", ErrorMessage = "Niepoprawny format kodu pocztowego.")]
         public string PostalCode { get; set; } = string.Empty;
     }
+
+    public class UserDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string Street { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string PostalCode { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+    }
+
+    public class ChangePasswordModel
+    {
+        public string OldPassword { get; set; } = string.Empty;
+        public string NewPassword { get; set; } = string.Empty;
+        public string ConfirmNewPassword { get; set; } = string.Empty;
+    }
 }

@@ -1,0 +1,11 @@
+.active-section {
+    background-color: #007bff;
+    /* Niebieski kolor tła, dostosuj według potrzeb */
+    color: white;
+    /* Biały tekst */
+}
+
+.container {
+    margin-top: 3rem;
+    margin-bottom: 10rem;
+}

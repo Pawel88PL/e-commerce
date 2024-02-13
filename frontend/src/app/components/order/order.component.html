@@ -5,8 +5,13 @@
         <div class="row">
             <div class="col-md-7">
                 <h1>Twoje dane:</h1>
-                <!-- Tutaj musimy wyświetlić dane i adres naszego klienta-->
+                <p>Imię: {{ customer.name }}</p>
+                <p>Nazwisko: {{ customer.surname }}</p>
+                <p>Email: {{ customer.email }}</p>
+                <!-- Dodaj więcej danych klienta zgodnie z potrzebami -->
+                <button mat-button routerLink="/customer-panel" class="btn btn-primary">Edytuj dane</button>
             </div>
+
             <div class="col-md-5">
                 <div class="row">
                     <div class="col-sm-8">

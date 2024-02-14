@@ -44,6 +44,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 registerLocaleData(localePl);
 
@@ -69,6 +70,7 @@ registerLocaleData(localePl);
     OrderComponent,
     WaitingForActivationComponent,
     CustomerPanelComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     AppRoutingModule,

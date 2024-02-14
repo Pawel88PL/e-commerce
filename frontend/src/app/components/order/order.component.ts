@@ -2,11 +2,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import { SHIPPING_COST } from 'src/app/config/config';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SHIPPING_COST } from 'src/app/config/config';
 import gsap from 'gsap';
 
 @Component({
@@ -26,6 +28,7 @@ export class OrderComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService,
     private customerService: CustomerService,
+    public dialog: MatDialog,
     private router: Router
   ) { }
 
@@ -87,7 +90,18 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  placeOrder(): void {
-    // Logika wysłłaniaia zamówienia
+  placeOrder() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { totalCost: this.totalCost }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Zamówienie potwierdzone');
+        // tutaj logika zapisu zamówienia
+      } else {
+        console.log('Zamówienie anulowane');
+      }
+    });
   }
 }

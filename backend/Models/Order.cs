@@ -8,10 +8,11 @@ namespace MiodOdStaniula.Models
         [Key]
         public int OrderId { get; set; }
 
-        public Guid? CustomerId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
-        [ForeignKey("CustomerId")]
-        public virtual Customer? Customer { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual UserModel User { get; set; } = null!;
 
         [Required]
         public DateTime OrderDate { get; set; }

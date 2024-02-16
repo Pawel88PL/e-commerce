@@ -34,7 +34,6 @@ namespace MiodOdStaniula.Controllers
             return Ok(order);
         }
 
-        // Definicja klasy pomocniczej do odbierania danych z żądania
         public class CreateOrderRequest
         {
             public Guid CartId { get; set; }

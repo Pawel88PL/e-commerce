@@ -7,15 +7,15 @@ namespace MiodOdStaniula.Services
     public class OrderService : IOrderService
     {
         private readonly DbStoreContext _context;
+        private decimal shippingCost = 18.99m;
 
         public OrderService(DbStoreContext context)
         {
             _context = context;
         }
 
-        public async Task<Order?> CreateOrderFromCart(Guid cartId, string userId)
+        public async Task<OrderDTO?> CreateOrderFromCart(Guid cartId, string userId)
         {
-            // Sprawdź, czy koszyk istnieje i ma pozycje
             var cart = await _context.ShopingCarts!
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
@@ -23,16 +23,15 @@ namespace MiodOdStaniula.Services
 
             if (cart == null || !cart.CartItems.Any())
             {
-                return null; // Nie ma takiego koszyka lub jest pusty
+                return null;
             }
 
-            // Utwórz nowe zamówienie
             var order = new Order
             {
                 UserId = userId,
                 OrderDate = DateTime.UtcNow,
-                Status = "Nowe", // Możesz dostosować statusy zamówień zgodnie z potrzebami aplikacji
-                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price), // Oblicz całkowitą cenę
+                Status = "Nowe",
+                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                 {
                     ProductId = ci.ProductId,
@@ -44,11 +43,37 @@ namespace MiodOdStaniula.Services
             _context.Orders!.Add(order);
             await _context.SaveChangesAsync();
 
-            // Opcjonalnie: Możesz chcieć usunąć pozycje z koszyka po utworzeniu zamówienia
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            return order;
+            var orderDto = MapOrderToDto(order);
+
+            return orderDto;
+
+        }
+
+        public OrderDTO? MapOrderToDto(Order order)
+        {
+            if (order == null) return null;
+
+            var orderDto = new OrderDTO
+            {
+                OrderId = order.OrderId,
+                OrderDate = order.OrderDate,
+                TotalPrice = order.TotalPrice,
+                Status = order.Status!,
+                UserId = order.UserId,
+                OrderDetails = order.OrderDetails!.Select(od => new OrderDetailDTO
+                {
+                    OrderDetailId = od.OrderDetailId,
+                    OrderId = od.OrderId,
+                    ProductId = od.ProductId,
+                    Quantity = od.Quantity,
+                    UnitPrice = od.UnitPrice,
+                }).ToList()
+            };
+
+            return orderDto;
         }
 
     }

@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
         this.calculateCosts();
       },
       error => {
-        console.error('Błąd podczas ładowania danych koszyka!', error);
+        console.error('Wystąpił błąd podczas próby załadowania danych z koszyka', error);
       }
     );
   }
@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeFromCart(productId: number) {
+  removeItemFromCart(productId: number) {
     if (this.cartService.cartId) {
       this.cartService.removeItem(this.cartService.cartId, productId).subscribe(
         () => {
@@ -83,22 +83,10 @@ export class CartComponent implements OnInit {
     }
   }
 
-  clearCart() {
-    this.cartService.clearCart().subscribe(
-      () => {
-        this.items = [];
-        this.totalCost = 0;
-        alert('Koszyk został opróżniony.');
-      },
-      error => console.error('Błąd podczas opróżniania koszyka!', error)
-    );
-  }
-
   maxQuantity(amountAvailable: number): number[] {
     const max = Math.min(10, amountAvailable);
     return Array.from({ length: max }, (_, i) => i + 1);
   }
-
 
   proceedToCheckout() {
     this.authService.setInCheckoutProcess();

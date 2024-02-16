@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-2">
                         <h3>{{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h3>
-                        <button mat-raised-button (click)="removeFromCart(item.productId)" class="btn btn-lg"><i
+                        <button mat-raised-button (click)="removeItemFromCart(item.productId)" class="btn btn-lg"><i
                                 class="bi bi-trash3"></i></button>
                     </div>
                 </div>

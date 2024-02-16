@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SHIPPING_COST } from 'src/app/config/config';
 import gsap from 'gsap';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-order',
@@ -18,6 +19,8 @@ import gsap from 'gsap';
 })
 export class OrderComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
+  cartId: string = localStorage.getItem('cartId') || '';
+  userId: string = localStorage.getItem('userId') || '';
   customer: Customer = {};
   items: CartItem[] = [];
   productCost: number = 0;
@@ -29,6 +32,7 @@ export class OrderComponent implements OnInit {
     private cartService: CartService,
     private customerService: CustomerService,
     public dialog: MatDialog,
+    private orderService: OrderService,
     private router: Router
   ) { }
 
@@ -98,7 +102,17 @@ export class OrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Zamówienie potwierdzone');
-        // tutaj logika zapisu zamówienia
+        // Wywołanie metody serwisu do zapisu zamówienia
+        this.orderService.createOrder(this.cartId, this.userId).subscribe({
+          next: (order) => {
+            console.log('Zamówienie zapisane', order);
+            // Tutaj możesz dodać dodatkową logikę po pomyślnym utworzeniu zamówienia, np. przekierowanie lub wyświetlenie komunikatu
+          },
+          error: (error) => {
+            console.error('Błąd przy tworzeniu zamówienia', error);
+            // Tutaj obsługa błędów, np. wyświetlenie komunikatu o błędzie
+          }
+        });
       } else {
         console.log('Zamówienie anulowane');
       }

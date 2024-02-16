@@ -101,20 +101,17 @@ export class OrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Zamówienie potwierdzone');
-        // Wywołanie metody serwisu do zapisu zamówienia
         this.orderService.createOrder(this.cartId, this.userId).subscribe({
           next: (order) => {
-            console.log('Zamówienie zapisane', order);
-            // Tutaj możesz dodać dodatkową logikę po pomyślnym utworzeniu zamówienia, np. przekierowanie lub wyświetlenie komunikatu
+            console.log('Zamówienie zostało złożone', order);
+            localStorage.removeItem('cartId');
           },
           error: (error) => {
-            console.error('Błąd przy tworzeniu zamówienia', error);
-            // Tutaj obsługa błędów, np. wyświetlenie komunikatu o błędzie
+            console.error('Wystąpił błąd przy tworzeniu zamówienia', error);
           }
         });
       } else {
-        console.log('Zamówienie anulowane');
+        console.log('Zamówienie zostało anulowane.');
       }
     });
   }

@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
+  userId: string = localStorage.getItem('userId') || '';
 
   constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
 
@@ -91,6 +92,7 @@ export class CartComponent implements OnInit {
   proceedToCheckout() {
     this.authService.setInCheckoutProcess();
     if (this.authService.isLoggedIn()) {
+      this.cartService.assignCartToUser(this.userId).subscribe();
       this.router.navigate(['/order']);
     } else {
       this.router.navigate(['/checkout']);

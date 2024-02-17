@@ -1,4 +1,3 @@
-import { Product } from "./product.model";
 import { Order } from "./order.model";
 
 export class OrderDetail {
@@ -6,7 +5,7 @@ export class OrderDetail {
     orderId?: number;
     order?: Order;
     productId?: number;
-    product?: Product;
-    quantity?: number;
-    unitPric?: number;
+    quantity: number = 0;
+    unitPrice: number = 0;
+    productName: string = '';
 }

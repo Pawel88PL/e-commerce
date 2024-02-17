@@ -34,6 +34,19 @@ namespace MiodOdStaniula.Controllers
             return Ok(order);
         }
 
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetOrderDetails(int orderId)
+        {
+            var orderDetails = await _orderService.GetOrderDetails(orderId);
+
+            if (orderDetails == null)
+            {
+                return NotFound("Nie znaleziono zamówienia o podanym identyfikatorze.");
+            }
+
+            return Ok(orderDetails);
+        }
+
         public class CreateOrderRequest
         {
             public Guid CartId { get; set; }

@@ -6,7 +6,7 @@ export class Order {
     customerId?: string;
     customer?: Customer;
     orderDate?: Date;
-    totalPrice?: number;
+    totalPrice: number = 0;
     status?: string;
-    orderDetails?: OrderDetail[];
+    orderDetails: OrderDetail[] = [];
 }

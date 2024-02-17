@@ -14,7 +14,7 @@ namespace MiodOdStaniula.Services
             _context = context;
         }
 
-        public async Task<OrderDTO?> CreateOrderFromCart(Guid cartId, string userId)
+        public async Task<int?> CreateOrderFromCart(Guid cartId, string userId)
         {
             var cart = await _context.ShopingCarts!
                 .Include(c => c.CartItems)
@@ -29,7 +29,7 @@ namespace MiodOdStaniula.Services
             var order = new Order
             {
                 UserId = userId,
-                OrderDate = DateTime.UtcNow,
+                OrderDate = DateTime.Now,
                 Status = "Nowe",
                 TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
@@ -46,14 +46,17 @@ namespace MiodOdStaniula.Services
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            var orderDto = MapOrderToDto(order);
-
-            return orderDto;
+            return order.OrderId;
 
         }
 
-        public OrderDTO? MapOrderToDto(Order order)
+        public async Task<OrderDTO?> GetOrderDetails(int orderId)
         {
+            var order = await _context.Orders!
+                .Include(o => o.OrderDetails!)
+                .ThenInclude(od => od.Product)
+                .SingleOrDefaultAsync(o => o.OrderId == orderId);
+
             if (order == null) return null;
 
             var orderDto = new OrderDTO
@@ -70,11 +73,11 @@ namespace MiodOdStaniula.Services
                     ProductId = od.ProductId,
                     Quantity = od.Quantity,
                     UnitPrice = od.UnitPrice,
+                    ProductName = od.Product?.Name ?? string.Empty,
                 }).ToList()
             };
 
             return orderDto;
         }
-
     }
 }

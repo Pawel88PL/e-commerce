@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { SHIPPING_COST } from 'src/app/config/config';
 import gsap from 'gsap';
 import { OrderService } from 'src/app/services/order.service';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-order',
@@ -105,6 +106,7 @@ export class OrderComponent implements OnInit {
           next: (order) => {
             console.log('Zamówienie zostało złożone', order);
             localStorage.removeItem('cartId');
+            this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order }});
           },
           error: (error) => {
             console.error('Wystąpił błąd przy tworzeniu zamówienia', error);

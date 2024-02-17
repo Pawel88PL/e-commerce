@@ -4,6 +4,7 @@ namespace MiodOdStaniula.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<OrderDTO?> CreateOrderFromCart(Guid cartId, string userId);
+        Task<int?> CreateOrderFromCart(Guid cartId, string userId);
+        Task<OrderDTO?> GetOrderDetails(int orderId);
     }
 }

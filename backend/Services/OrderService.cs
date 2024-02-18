@@ -7,11 +7,13 @@ namespace MiodOdStaniula.Services
     public class OrderService : IOrderService
     {
         private readonly DbStoreContext _context;
+        private readonly IEmailService _emailService;
         private decimal shippingCost = 18.99m;
 
-        public OrderService(DbStoreContext context)
+        public OrderService(DbStoreContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId)
@@ -46,8 +48,19 @@ namespace MiodOdStaniula.Services
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            return order.OrderId;
+            var orderDetails = await GetOrderDetails(order.OrderId);
+            var user = await _context.Users!.SingleOrDefaultAsync(u => u.Id == userId);
+            if (user != null && orderDetails != null)
+            {
+                string userEmail = user.Email ?? "";
+                string name = user.Name ?? "";
 
+                await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
+                await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
+            }
+
+
+            return order.OrderId;
         }
 
         public async Task<OrderDTO?> GetOrderDetails(Guid orderId)

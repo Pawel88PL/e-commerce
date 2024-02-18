@@ -6,7 +6,7 @@ namespace MiodOdStaniula.Models
     public class Order
     {
         [Key]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public string UserId { get; set; } = string.Empty;
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; } = null!;
@@ -20,7 +20,8 @@ namespace MiodOdStaniula.Models
 
     public class OrderDTO
     {
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
+        public string ShortOrderId { get; set; } = string.Empty;
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } = string.Empty;
@@ -34,7 +35,7 @@ namespace MiodOdStaniula.Models
         [Key]
         public int OrderDetailId { get; set; }
         [Required]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         [ForeignKey("OrderId")]
         public virtual Order? Order { get; set; }
         [Required]
@@ -50,7 +51,7 @@ namespace MiodOdStaniula.Models
     public class OrderDetailDTO
     {
         public int OrderDetailId { get; set; }
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }

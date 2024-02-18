@@ -35,7 +35,7 @@ namespace MiodOdStaniula.Controllers
         }
 
         [HttpGet("{orderId}")]
-        public async Task<IActionResult> GetOrderDetails(int orderId)
+        public async Task<IActionResult> GetOrderDetails(Guid orderId)
         {
             var orderDetails = await _orderService.GetOrderDetails(orderId);
 

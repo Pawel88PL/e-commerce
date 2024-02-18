@@ -12,6 +12,7 @@ import { SHIPPING_COST } from 'src/app/config/config';
 })
 export class OrderConfirmationComponent implements OnInit {
   orderId: string | null = null;
+  shortOrderId: string | null = null;
   orderDetails: Order | null = null;
   shippingCost: number = SHIPPING_COST;
   
@@ -24,6 +25,7 @@ export class OrderConfirmationComponent implements OnInit {
       this.orderService.getOrderDetails(this.orderId).subscribe({
         next: (details) => {
           this.orderDetails = details;
+          this.shortOrderId = details.shortOrderId;
         },
         error: (error) => {
           console.error('Wystąpił błąd podczas pobierania szczegółów zamówienia.', error);

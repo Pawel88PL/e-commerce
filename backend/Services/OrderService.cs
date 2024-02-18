@@ -14,7 +14,7 @@ namespace MiodOdStaniula.Services
             _context = context;
         }
 
-        public async Task<int?> CreateOrderFromCart(Guid cartId, string userId)
+        public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId)
         {
             var cart = await _context.ShopingCarts!
                 .Include(c => c.CartItems)
@@ -50,7 +50,7 @@ namespace MiodOdStaniula.Services
 
         }
 
-        public async Task<OrderDTO?> GetOrderDetails(int orderId)
+        public async Task<OrderDTO?> GetOrderDetails(Guid orderId)
         {
             var order = await _context.Orders!
                 .Include(o => o.OrderDetails!)
@@ -62,6 +62,7 @@ namespace MiodOdStaniula.Services
             var orderDto = new OrderDTO
             {
                 OrderId = order.OrderId,
+                ShortOrderId = order.OrderId.ToString()[..8],
                 OrderDate = order.OrderDate,
                 TotalPrice = order.TotalPrice,
                 Status = order.Status!,

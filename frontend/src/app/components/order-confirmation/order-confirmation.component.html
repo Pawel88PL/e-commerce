@@ -32,7 +32,7 @@
                                 </tr>
                                 <tr>
                                     <th>Tytuł przelewu:</th>
-                                    <td>Zamówienie nr: {{ orderId }}</td>
+                                    <td>Zamówienie nr: {{ shortOrderId }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kwota:</th>
@@ -57,7 +57,7 @@
                 <mat-card class="mb-3 order-details">
                     <mat-card-header>
                         <mat-card-title>Szczegóły zamówienia</mat-card-title>
-                        <mat-card-subtitle>Numer zamówienia: {{ orderId }}</mat-card-subtitle>
+                        <mat-card-subtitle>Numer zamówienia: {{ shortOrderId }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                         <div *ngIf="orderDetails" class="table-responsive mt-4">

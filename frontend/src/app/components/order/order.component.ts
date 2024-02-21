@@ -3,6 +3,7 @@ import { CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { OrderProcessingDialogComponent } from '../order-processing-dialog/order-processing-dialog.component';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { environment } from 'src/environments/environment';
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit {
   userId: string = localStorage.getItem('userId') || '';
   customer: Customer = {};
   items: CartItem[] = [];
+  isLoading = false;
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
@@ -102,14 +104,20 @@ export class OrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        const processingDialogRef = this.dialog.open(OrderProcessingDialogComponent, {
+          disableClose: true
+        });
+
         this.orderService.createOrder(this.cartId, this.userId).subscribe({
           next: (order) => {
             console.log('Zamówienie zostało złożone', order);
             localStorage.removeItem('cartId');
             this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order }});
+            processingDialogRef.close();
           },
           error: (error) => {
             console.error('Wystąpił błąd przy tworzeniu zamówienia', error);
+            processingDialogRef.close();
           }
         });
       } else {

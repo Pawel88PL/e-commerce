@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
@@ -8,12 +9,16 @@ namespace MiodOdStaniula.Services
     {
         private readonly DbStoreContext _context;
         private readonly IEmailService _emailService;
-        private decimal shippingCost = 18.99m;
+        private readonly IConfiguration _configuration;
+        private readonly decimal _shippingCost;
 
-        public OrderService(DbStoreContext context, IEmailService emailService)
+        public OrderService(DbStoreContext context, IEmailService emailService, IConfiguration configuration)
         {
             _context = context;
             _emailService = emailService;
+            _configuration = configuration;
+            _shippingCost = decimal.Parse(_configuration["ApplicationSettings:ShippingCost"]!, CultureInfo.InvariantCulture);
+
         }
 
         public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId)
@@ -33,7 +38,7 @@ namespace MiodOdStaniula.Services
                 UserId = userId,
                 OrderDate = DateTime.Now,
                 Status = "Nowe",
-                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + shippingCost,
+                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + _shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                 {
                     ProductId = ci.ProductId,

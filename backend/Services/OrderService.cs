@@ -37,7 +37,7 @@ namespace MiodOdStaniula.Services
             {
                 UserId = userId,
                 OrderDate = DateTime.Now,
-                Status = "Nowe",
+                Status = "Oczekuje na płatność",
                 TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + _shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                 {
@@ -97,6 +97,23 @@ namespace MiodOdStaniula.Services
             };
 
             return orderDto;
+        }
+
+        public async Task<List<OrderHistoryDTO>> GetOrdersHistory(string userId)
+        {
+            var orders = await _context.Orders!
+                .Where(o => o.UserId == userId)
+                .Select(order => new OrderHistoryDTO
+                {
+                    OrderId = order.OrderId.ToString().Substring(0, 8),
+                    OrderDate = order.OrderDate,
+                    TotalPrice = order.TotalPrice,
+                    Status = order.Status!
+                })
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            return orders;
         }
     }
 }

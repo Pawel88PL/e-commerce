@@ -2,8 +2,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { OrderService } from 'src/app/services/order.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OrderHistory } from 'src/app/models/order-history.model';
 
 @Component({
   selector: 'app-customer-panel',
@@ -11,18 +13,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./customer-panel.component.css']
 })
 export class CustomerPanelComponent implements OnInit {
-  activeSection: 'accountInfo' | 'addresses' | 'changePassword' | 'orderHistory' = 'accountInfo';
+  activeSection: 'accountInfo' | 'addresses' | 'changePassword' | 'orderHistory' = 'orderHistory';
   customer: Customer = {};
   changePasswordForm!: FormGroup;
   customerDataForm!: FormGroup;
-  orders: any[] = [];
   customerFirstName: string = '';
+  orders: OrderHistory[] = [];
 
-  constructor(public authService: AuthService, private customerService: CustomerService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(public authService: AuthService, private customerService: CustomerService, private fb: FormBuilder, private orderService: OrderService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initializeCustomerDataForm();
     this.loadCustomerData();
+    this.loadOrdersHistory();
     this.initializeChangePasswordForm();
   }
 
@@ -92,6 +95,23 @@ export class CustomerPanelComponent implements OnInit {
           console.log('Wystąpił błąd podczas pobierania danych klienta', error);
         }
       );
+    }
+  }
+
+  loadOrdersHistory() {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.orderService.getOrdersHistory(userId).subscribe({
+        next: (orders) => {
+          this.orders = orders;
+          if (orders.length === 0) {
+            console.log('Nie znaleziono historii zamówień.');
+          }
+        },
+        error: (error) => {
+          console.error('Wystąpił błąd podczas pobierania historii zamówień.', error);
+        }
+      });
     }
   }
 

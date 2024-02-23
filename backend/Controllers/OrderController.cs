@@ -47,6 +47,20 @@ namespace MiodOdStaniula.Controllers
             return Ok(orderDetails);
         }
 
+        [HttpGet("history/{userId}")]
+        public async Task<IActionResult> GetOrdersHistory([FromRoute] Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                return BadRequest("Nieprawidłowy identyfikator użytkownika.");
+            }
+
+            var ordersHistory = await _orderService.GetOrdersHistory(userId.ToString());
+
+            return Ok(ordersHistory ?? new List<OrderHistoryDTO>());
+        }
+
+
         public class CreateOrderRequest
         {
             public Guid CartId { get; set; }

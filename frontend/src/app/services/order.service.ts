@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/order.model';
+import { OrderHistory } from '../models/order-history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,8 @@ export class OrderService {
     return throwError(() => new Error('Błąd serwera'));
   }
 
-  // Tutaj możesz dodać więcej metod związanych z zamówieniami, np. anulowanie zamówienia itd.
+  getOrdersHistory(userId: string): Observable<OrderHistory[]> {
+    return this.http.get<OrderHistory[]>(`${this.orderUrl}/history/${userId}`)
+      .pipe(catchError(this.handleError));
+  }
 }

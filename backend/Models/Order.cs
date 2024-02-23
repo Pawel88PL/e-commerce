@@ -57,4 +57,12 @@ namespace MiodOdStaniula.Models
         public decimal UnitPrice { get; set; }
         public string ProductName { get; set; } = string.Empty;
     }
+
+    public class OrderHistoryDTO
+    {
+        public string OrderId { get; set; } = string.Empty;
+        public DateTime OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string Status { get; set; } = string.Empty;
+    }
 }

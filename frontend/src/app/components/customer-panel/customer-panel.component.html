@@ -3,22 +3,23 @@
     <div class="row mb-5">
         <div class="col-md-3">
             <div class="list-group mb-5">
+                <button *ngIf="authService.isClient()" mat-stroked-button class="list-group-item list-group-item-action"
+                    [class.active-section]="activeSection === 'orderHistory'"
+                    (click)="setActiveSection('orderHistory')">Historia
+                    Zamówień
+                </button>
                 <button mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'accountInfo'"
                     (click)="setActiveSection('accountInfo')">Informacje o Koncie
                 </button>
                 <button mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'addresses'" (click)="setActiveSection('addresses')">Adres
+                    do wysyłki
                 </button>
                 <button mat-stroked-button class="list-group-item list-group-item-action"
                     [class.active-section]="activeSection === 'changePassword'"
                     (click)="setActiveSection('changePassword')">Zmiana
                     Hasła
-                </button>
-                <button *ngIf="authService.isClient()" mat-stroked-button class="list-group-item list-group-item-action"
-                    [class.active-section]="activeSection === 'orderHistory'"
-                    (click)="setActiveSection('orderHistory')">Historia
-                    Zamówień
                 </button>
             </div>
         </div>
@@ -205,26 +206,43 @@
                     Historia Zamówień
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Numer Zamówienia</th>
-                                <th>Data</th>
-                                <th>Wartość</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let order of orders">
-                                <td>{{ order.id }}</td>
-                                <td>{{ order.date }}</td>
-                                <td>{{ order.value }}</td>
-                                <td>{{ order.status }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Sprawdzamy, czy lista zamówień jest pusta -->
+                    <div *ngIf="orders.length > 0; else noOrders">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Numer Zamówienia</th>
+                                    <th>Data</th>
+                                    <th>Wartość</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of orders">
+                                    <td>{{ order.orderId }}</td>
+                                    <td>{{ order.orderDate | date:'medium' }}</td>
+                                    <td>{{ order.totalPrice | currency:'PLN' }}</td>
+                                    <td>{{ order.status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+            <!-- Szablon wyświetlany, gdy użytkownik nie ma zamówień -->
+            <ng-template #noOrders>
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Nie masz jeszcze żadnych zamówień!</h4>
+                    <p>Wygląda na to, że nie złożyłeś jeszcze żadnego zamówienia w naszym sklepie. Odkryj naszą ofertę i
+                        zrób zakupy
+                        już dziś!</p>
+                    <hr>
+                    <p class="mb-0">Przejdź do <a href="/products" class="alert-link">strony produktów</a> i znajdź coś
+                        dla siebie.</p>
+                </div>
+            </ng-template>
+
         </div>
 
     </div>

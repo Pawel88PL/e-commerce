@@ -6,5 +6,6 @@ namespace MiodOdStaniula.Services.Interfaces
     {
         Task<Guid?> CreateOrderFromCart(Guid cartId, string userId);
         Task<OrderDTO?> GetOrderDetails(Guid orderId);
+        Task<List<OrderHistoryDTO>> GetOrdersHistory(string userId);
     }
 }

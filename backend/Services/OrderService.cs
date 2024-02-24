@@ -105,7 +105,7 @@ namespace MiodOdStaniula.Services
                 .Where(o => o.UserId == userId)
                 .Select(order => new OrderHistoryDTO
                 {
-                    OrderId = order.OrderId.ToString().Substring(0, 8),
+                    OrderId = order.OrderId.ToString(),
                     OrderDate = order.OrderDate,
                     TotalPrice = order.TotalPrice,
                     Status = order.Status!

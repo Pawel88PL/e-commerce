@@ -6,6 +6,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrderHistory } from 'src/app/models/order-history.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-panel',
@@ -19,8 +20,15 @@ export class CustomerPanelComponent implements OnInit {
   customerDataForm!: FormGroup;
   customerFirstName: string = '';
   orders: OrderHistory[] = [];
+  shortOrderId: string = '';
 
-  constructor(public authService: AuthService, private customerService: CustomerService, private fb: FormBuilder, private orderService: OrderService, private snackBar: MatSnackBar) { }
+  constructor(
+    public authService: AuthService,
+    private customerService: CustomerService,
+    private fb: FormBuilder,
+    private orderService: OrderService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initializeCustomerDataForm();
@@ -104,6 +112,7 @@ export class CustomerPanelComponent implements OnInit {
       this.orderService.getOrdersHistory(userId).subscribe({
         next: (orders) => {
           this.orders = orders;
+          this.shortOrderId = orders.map(order => order.orderId!.slice(0, 8)).join(', ');
           if (orders.length === 0) {
             console.log('Nie znaleziono historii zamówień.');
           }
@@ -163,5 +172,9 @@ export class CustomerPanelComponent implements OnInit {
         duration: 5000,
       });
     }
+  }
+
+  viewOrderDetails(orderId: string) {
+    this.router.navigate(['/order-details', orderId]);
   }
 }

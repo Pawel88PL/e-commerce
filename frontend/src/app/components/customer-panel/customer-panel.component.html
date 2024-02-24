@@ -206,7 +206,6 @@
                     Historia Zamówień
                 </div>
                 <div class="card-body">
-                    <!-- Sprawdzamy, czy lista zamówień jest pusta -->
                     <div *ngIf="orders.length > 0; else noOrders">
                         <table class="table">
                             <thead>
@@ -218,8 +217,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let order of orders">
-                                    <td>{{ order.orderId }}</td>
+                                <tr *ngFor="let order of orders" (click)="viewOrderDetails(order.orderId!)">
+                                    <td>{{ shortOrderId }}</td>
                                     <td>{{ order.orderDate | date:'medium' }}</td>
                                     <td>{{ order.totalPrice | currency:'PLN' }}</td>
                                     <td>{{ order.status }}</td>
@@ -230,7 +229,6 @@
                 </div>
             </div>
 
-            <!-- Szablon wyświetlany, gdy użytkownik nie ma zamówień -->
             <ng-template #noOrders>
                 <div class="alert alert-warning" role="alert">
                     <h4 class="alert-heading">Nie masz jeszcze żadnych zamówień!</h4>

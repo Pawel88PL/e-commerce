@@ -1,5 +1,5 @@
 import { Customer } from "./customer.model";
-import { OrderDetail } from "./order-details.model";
+import { OrderDetails } from "./order-details.model";
 
 export class Order {
     orderId: string = '';
@@ -9,5 +9,5 @@ export class Order {
     orderDate: Date = new Date();
     totalPrice: number = 0;
     status: string = '';
-    orderDetails: OrderDetail[] = [];
+    orderDetails: OrderDetails[] = [];
 }

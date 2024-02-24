@@ -1,6 +1,6 @@
 import { Category } from "./category.model";
 import { ProductImage } from "./product-image.model";
-import { OrderDetail } from "./order-details.model";
+import { OrderDetails } from "./order-details.model";
 
 export class Product {
     amountAvailable = 0;
@@ -9,7 +9,7 @@ export class Product {
     dateAdded?: Date;
     description?: string;
     name?: string;
-    orderDetails?: OrderDetail[];
+    orderDetails?: OrderDetails[];
     popularity = 0;
     price = 0;
     priority = 0;

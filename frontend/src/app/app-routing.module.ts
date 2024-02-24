@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'order', component: OrderComponent, canActivate: [authGuard]},
   { path: 'orderConfirmation', component: OrderConfirmationComponent, canActivate: [authGuard] },
+  { path: 'order-details/:orderId', component: OrderDetailsComponent, canActivate: [authGuard] },
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'update/:id', component: ProductUpdateComponent, canActivate: [adminGuard] },

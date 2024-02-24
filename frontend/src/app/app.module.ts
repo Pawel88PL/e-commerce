@@ -45,7 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { OrderProcessingDialogComponent } from './components/order-processing-dialog/order-processing-dialog.component'
+import { OrderProcessingDialogComponent } from './components/order-processing-dialog/order-processing-dialog.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component'
 
 registerLocaleData(localePl);
 
@@ -74,6 +75,7 @@ registerLocaleData(localePl);
     WarehouseComponent,
     WaitingForActivationComponent,
     OrderProcessingDialogComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,6 +1,6 @@
 import { Order } from "./order.model";
 
-export class OrderDetail {
+export class OrderDetails {
     orderDetailId: number = 0;
     orderId: string = '';
     order: Order = new Order();

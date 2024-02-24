@@ -1,17 +1,19 @@
 <div *ngIf="order.orderDetails" class="order-details-container">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>Szczegóły zamówienia: {{ order.orderId }}</mat-card-title>
+        <mat-card-header class="mb-3">
+            <mat-card-title>Szczegóły zamówienia: {{ order.shortOrderId }}</mat-card-title>
             <mat-card-subtitle>Data zamówienia: {{ order.orderDate | date:'medium' }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-            <p>Status zamówienia: <strong>{{ order.status }}</strong></p>
-            <p>Łączna wartość zamówienia: <strong>{{ order.totalPrice | currency:'PLN' }}</strong></p>
+        <mat-card-content class="mb-5">
+            <div class="mb-3">
+                <p>Status zamówienia: <strong>{{ order.status }}</strong></p>
+                <p>Łączna wartość zamówienia: <strong>{{ order.totalPrice | currency:'PLN' }}</strong></p>
+            </div>
 
             <div *ngIf="order.orderDetails && order.orderDetails.length > 0">
-                <h3>Pozycje zamówienia:</h3>
-                <table class="mat-elevation-z8">
-                    <thead>
+                <h3>Zamówione produkty:</h3>
+                <table class="table table-responsive">
+                    <thead class="table-secondary">
                         <tr>
                             <th>Nazwa produktu</th>
                             <th>Ilość</th>
@@ -26,12 +28,19 @@
                             <td>{{ item.unitPrice | currency:'PLN' }}</td>
                             <td>{{ (item.unitPrice * item.quantity) | currency:'PLN' }}</td>
                         </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Koszt dostawy:</td>
+                            <td>{{ shippingCost | currency:'PLN' }}</td>
+                        <tr class="table-secondary">
+                            <td colspan="3" class="text-right"><strong>Łączna wartość zamówienia:</strong></td>
+                            <td><strong>{{ order.totalPrice | currency:'PLN' }}</strong></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button routerLink="/customerPanel">Powrót do historii zamówień</button>
+            <button mat-raised-button routerLink="/customerPanel">Powrót do historii zamówień</button>
         </mat-card-actions>
     </mat-card>
 </div>

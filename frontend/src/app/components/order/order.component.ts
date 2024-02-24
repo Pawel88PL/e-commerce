@@ -48,7 +48,7 @@ export class OrderComponent implements OnInit {
       x: '-100%',
       opacity: 0,
       scale: 0.5,
-      delay: 0.5,
+      delay: 1,
       ease: "power1.out"
     });
 

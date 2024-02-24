@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderDetails } from 'src/app/models/order-details.model';
 import { Order } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
+import { SHIPPING_COST } from 'src/app/config/config';
 
 @Component({
   selector: 'app-order-details',
@@ -12,6 +13,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderDetailsComponent {
   orderId: string | null = null;
   order: Order = new Order();
+  shippingCost = SHIPPING_COST;
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 

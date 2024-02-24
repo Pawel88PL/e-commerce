@@ -1,6 +1,7 @@
 export class OrderHistory {
-    orderId: string | null = null;
-    orderDate: string | null = null;
+    orderId: string = '';
+    shortOrderId: string = '';
+    orderDate: string = '';
     totalPrice: number = 0;
-    status: string | null = null;
+    status: string = '';
 }

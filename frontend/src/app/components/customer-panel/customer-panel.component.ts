@@ -20,7 +20,6 @@ export class CustomerPanelComponent implements OnInit {
   customerDataForm!: FormGroup;
   customerFirstName: string = '';
   orders: OrderHistory[] = [];
-  shortOrderId: string = '';
 
   constructor(
     public authService: AuthService,
@@ -111,8 +110,10 @@ export class CustomerPanelComponent implements OnInit {
     if (userId) {
       this.orderService.getOrdersHistory(userId).subscribe({
         next: (orders) => {
-          this.orders = orders;
-          this.shortOrderId = orders.map(order => order.orderId!.slice(0, 8)).join(', ');
+          this.orders = orders.map(order => ({
+            ...order,
+            shortOrderId: order.orderId.slice(0, 8)
+          }));
           if (orders.length === 0) {
             console.log('Nie znaleziono historii zamówień.');
           }

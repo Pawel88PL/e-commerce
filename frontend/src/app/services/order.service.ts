@@ -9,6 +9,7 @@ import { OrderHistory } from '../models/order-history.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class OrderService {
   apiBaseUrl: string = environment.apiUrl;
   private orderUrl = `${this.apiBaseUrl}/order`;
@@ -26,13 +27,13 @@ export class OrderService {
       .pipe(catchError(this.handleError));
   }
 
-  private handleError(error: any) {
-    console.error('Wystąpił błąd!', error);
-    return throwError(() => new Error('Błąd serwera'));
-  }
-
   getOrdersHistory(userId: string): Observable<OrderHistory[]> {
     return this.http.get<OrderHistory[]>(`${this.orderUrl}/history/${userId}`)
       .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any) {
+    console.error('Wystąpił błąd!', error);
+    return throwError(() => new Error('Błąd serwera'));
   }
 }

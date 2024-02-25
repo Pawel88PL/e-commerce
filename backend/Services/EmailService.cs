@@ -12,7 +12,7 @@ namespace MiodOdStaniula.Services
         private readonly IConfiguration _configuration;
         private readonly ILogger<EmailService> _logger;
         private readonly string? _baseUrl;
-        private readonly decimal _shippingCost;
+        private decimal _shippingCost;
 
         public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
         {
@@ -74,10 +74,19 @@ namespace MiodOdStaniula.Services
 
         public async Task SendOrderConfirmationEmail(string email, string name, OrderDTO order)
         {
+
+            var deliveryMethod = order.IsPickupInStore ? "Odbiór osobisty" : "Kurier";
+
+            if (order.IsPickupInStore)
+            {
+                _shippingCost = 0;
+            }
+
             string emailBody = $@"
+            <div style=""max-width: 800px;"">
             <h1>{name} dziękujemy za zakupy z naszej rodzinnej pasieki!</h1>
             <p>Nr zamówienia: <strong> {order.ShortOrderId} </strong></p>
-            <p>Oto szczegóły Twojego zamówienia:</p>
+            <p>Wybrany sposób dostawy: <strong> {deliveryMethod} </strong></p>
             <h2>Szczegóły zamówionych produktów</h2>
             <table style=""width: 100%; border-collapse: collapse;"">
                 <thead>
@@ -157,18 +166,23 @@ namespace MiodOdStaniula.Services
             <p>kontakt@miododstaniula.pl</p>
             <hr>
             <p>Pozdrawiamy,</p>
-            <p>Rodzina Staniul</p>";
+            <p>Rodzina Staniul</p>
+            </div>";
 
             await SendEmail(email, "Potwierdzenie zamówienia", emailBody);
     }
 
     public async Task SendNewOrderNotificationToOwner(OrderDTO order, UserModel user)
     {
+        
+        var deliveryMethod = order.IsPickupInStore ? "Odbiór osobisty" : "Kurier";
+        
         var emailSettings = _configuration.GetSection("EmailSettings");
         string ownerEmail = emailSettings["OwnerEmail"] ?? " ";
         string subject = "Nowe zamówienie w sklepie Miód Od Staniula";
 
         string emailBody = $@"
+            <div style=""max-width: 800px;"">
             <h1>Masz nowe zamówienie!</h1>
             <h3>Numer zamówienia:</h3>
             <p> {order.OrderId} </p>
@@ -200,15 +214,40 @@ namespace MiodOdStaniula.Services
             </table>
             <br>
             <p><strong>Łączny kwota zamówienia: {order.TotalPrice:C} </strong></p>
-            <p>Informacje o kliencie:</p>
-            <ul>
-                <li>{user.Name} {user.Surname}</li>
-                <li>{user.Email}</li>
-                <li>{user.PhoneNumber}</li>
-                <li>{user.City} {user.PostalCode}, {user.Street} {user.Address}</li>
-            </ul>
+            <p><strong>Metoda dostawy: {deliveryMethod} </strong></p>
             <hr>
-            <p>Zaloguj się do panelu administracyjnego sklepu w celu dalszej realizacji zamówienia.</p>";
+            <h2>Klient:</h2>
+            <table style=""width: 100%; max-width: 500px; border-collapse: collapse;"">
+                <tbody>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Imię i Nazwisko</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.Name} {user.Surname} </td>
+                    </tr>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Miasto</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.City} </td>
+                    </tr>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Ulica</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.Street} </td>
+                    </tr>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Numer domu</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.Address} </td>
+                    </tr>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Telefon</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.PhoneNumber} </td>
+                    </tr>
+                    <tr>
+                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Email</th>
+                        <td style=""border: 1px solid #ddd; padding: 8px;""> {user.Email} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <p>Zaloguj się do panelu administracyjnego sklepu w celu dalszej realizacji zamówienia.</p>
+            </div>";
 
         await SendEmail(ownerEmail, subject, emailBody);
     }

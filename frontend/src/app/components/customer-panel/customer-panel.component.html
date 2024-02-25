@@ -216,6 +216,7 @@
                                     <tr>
                                         <th>Numer Zamówienia</th>
                                         <th>Data</th>
+                                        <th>Odbiór osobisty</th>
                                         <th>Wartość</th>
                                         <th>Status</th>
                                     </tr>
@@ -227,6 +228,10 @@
                                         [class.table-danger]="order.status === 'Anulowane'" style="cursor: pointer;">
                                         <td>{{ order.shortOrderId }}</td>
                                         <td>{{ order.orderDate | date:'medium' }}</td>
+                                        <td>
+                                            <span *ngIf="order.isPickupInStore; else no">{{ 'Tak' }}</span>
+                                            <ng-template #no>{{ 'Nie' }}</ng-template>
+                                        </td>
                                         <td>{{ order.totalPrice | currency:'PLN' }}</td>
                                         <td>
                                             <i *ngIf="order.status === 'Zrealizowane'"

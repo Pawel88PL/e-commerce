@@ -16,8 +16,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  createOrder(cartId: string, userId: string): Observable<any> {
-    const payload = { cartId: cartId, userId: userId };
+  createOrder(cartId: string, userId: string, isPickupInStore: boolean): Observable<any> {
+    const payload = { cartId: cartId, userId: userId, isPickupInStore: isPickupInStore};
     return this.http.post(`${this.orderUrl}`, payload)
       .pipe(catchError(this.handleError));
   }

@@ -15,6 +15,7 @@ namespace MiodOdStaniula.Models
         [Column(TypeName = "decimal(8, 2)")]
         public decimal TotalPrice { get; set; }
         public string? Status { get; set; }
+        public bool IsPickupInStore { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 
@@ -25,6 +26,7 @@ namespace MiodOdStaniula.Models
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } = string.Empty;
+        public bool IsPickupInStore { get; set; }
         public string UserId { get; set; } = string.Empty;
         public List<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
     }
@@ -63,6 +65,7 @@ namespace MiodOdStaniula.Models
         public string OrderId { get; set; } = string.Empty;
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
+        public bool IsPickupInStore { get; set; }
         public string Status { get; set; } = string.Empty;
     }
 }

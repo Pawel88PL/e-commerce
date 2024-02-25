@@ -10,7 +10,7 @@ namespace MiodOdStaniula.Services
         private readonly DbStoreContext _context;
         private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
-        private readonly decimal _shippingCost;
+        private decimal _shippingCost;
 
         public OrderService(DbStoreContext context, IEmailService emailService, IConfiguration configuration)
         {
@@ -21,7 +21,7 @@ namespace MiodOdStaniula.Services
 
         }
 
-        public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId)
+        public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId, bool isPickupInStore)
         {
             var cart = await _context.ShopingCarts!
                 .Include(c => c.CartItems)
@@ -33,11 +33,17 @@ namespace MiodOdStaniula.Services
                 return null;
             }
 
+            if (isPickupInStore)
+            {
+                _shippingCost = 0;
+            }
+
             var order = new Order
             {
                 UserId = userId,
                 OrderDate = DateTime.Now,
                 Status = "Oczekuje na płatność",
+                IsPickupInStore = isPickupInStore,
                 TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + _shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                 {
@@ -81,6 +87,7 @@ namespace MiodOdStaniula.Services
             {
                 OrderId = order.OrderId,
                 ShortOrderId = order.OrderId.ToString()[..8],
+                IsPickupInStore = order.IsPickupInStore,
                 OrderDate = order.OrderDate,
                 TotalPrice = order.TotalPrice,
                 Status = order.Status!,
@@ -107,6 +114,7 @@ namespace MiodOdStaniula.Services
                 {
                     OrderId = order.OrderId.ToString(),
                     OrderDate = order.OrderDate,
+                    IsPickupInStore = order.IsPickupInStore,
                     TotalPrice = order.TotalPrice,
                     Status = order.Status!
                 })

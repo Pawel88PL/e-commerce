@@ -14,6 +14,7 @@ export class OrderDetailsComponent {
   orderId: string | null = null;
   order: Order = new Order();
   shippingCost = SHIPPING_COST;
+  orderDeliveryMethod: string = '';
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
@@ -28,6 +29,12 @@ export class OrderDetailsComponent {
     if (this.orderId) {
       this.orderService.getOrderDetails(this.orderId).subscribe({
         next: (details) => {
+          if (details.isPickupInStore){
+            this.shippingCost = 0;
+            this.orderDeliveryMethod = 'Odbiór osobisty';
+          } else {
+            this.orderDeliveryMethod = 'Kurier';
+          }
           this.order = details;
         },
         error: (error) => {

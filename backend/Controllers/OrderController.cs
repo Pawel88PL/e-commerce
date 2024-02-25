@@ -25,7 +25,7 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var order = await _orderService.CreateOrderFromCart(request.CartId, request.UserId);
+            var order = await _orderService.CreateOrderFromCart(request.CartId, request.UserId, request.IsPickupInStore);
             if (order == null)
             {
                 return BadRequest("Nie udało się utworzyć zamówienia. Koszyk może być pusty lub nie istnieć.");
@@ -65,6 +65,7 @@ namespace MiodOdStaniula.Controllers
         {
             public Guid CartId { get; set; }
             public string UserId { get; set; } = string.Empty;
+            public bool IsPickupInStore { get; set; }
         }
     }
 }

@@ -8,6 +8,7 @@ export class Order {
     customer: Customer = new Customer();
     orderDate: Date = new Date();
     totalPrice: number = 0;
+    isPickupInStore: boolean = false;
     status: string = '';
     orderDetails: OrderDetails[] = [];
 }

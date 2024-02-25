@@ -15,24 +15,13 @@ export class OrderConfirmationComponent implements OnInit {
   shortOrderId: string | null = null;
   orderDetails: Order | null = null;
   shippingCost: number = SHIPPING_COST;
+  deliveryMethod: string = '';
   
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.orderId = this.route.snapshot.queryParamMap.get('orderId');
-
-    if (this.orderId) {
-      this.orderService.getOrderDetails(this.orderId).subscribe({
-        next: (details) => {
-          this.orderDetails = details;
-          this.shortOrderId = details.shortOrderId;
-        },
-        error: (error) => {
-          console.error('Wystąpił błąd podczas pobierania szczegółów zamówienia.', error);
-        }
-      });
-        
-    }
+    this.loadOrderDetails();
 
     gsap.from('.order-confirm', {
       duration: 1,
@@ -60,5 +49,25 @@ export class OrderConfirmationComponent implements OnInit {
       delay: 1.5,
       ease: "power1.out"
     });
+  }
+
+  loadOrderDetails() {
+    if (this.orderId) {
+      this.orderService.getOrderDetails(this.orderId).subscribe({
+        next: (details) => {
+          if (details.isPickupInStore) {
+            this.shippingCost = 0;
+            this.deliveryMethod = 'Odbiór osobisty';
+          } else {
+            this.deliveryMethod = 'Kurier';
+          }
+          this.orderDetails = details;
+          this.shortOrderId = details.shortOrderId;
+        },
+        error: (error) => {
+          console.error('Wystąpił błąd podczas pobierania szczegółów zamówienia.', error);
+        }
+      });
+    }
   }
 }

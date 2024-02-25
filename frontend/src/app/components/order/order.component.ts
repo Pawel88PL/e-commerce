@@ -26,6 +26,7 @@ export class OrderComponent implements OnInit {
   customer: Customer = {};
   items: CartItem[] = [];
   isLoading = false;
+  isPickupInStore: boolean = false;
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
@@ -100,11 +101,18 @@ export class OrderComponent implements OnInit {
   calculateCosts() {
     if (Array.isArray(this.items)) {
       this.productCost = this.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      this.totalCost = this.productCost + this.shippingCost;
+      if (this.isPickupInStore) {
+        this.shippingCost = 0;
+        this.totalCost = this.productCost;
+      } else {
+        this.shippingCost = SHIPPING_COST;
+        this.totalCost = this.productCost + this.shippingCost;
+      }
     } else {
       console.error('this.items nie jest tablicą');
     }
   }
+
 
   placeOrder() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -117,7 +125,7 @@ export class OrderComponent implements OnInit {
           disableClose: true
         });
 
-        this.orderService.createOrder(this.cartId, this.userId).subscribe({
+        this.orderService.createOrder(this.cartId, this.userId, this.isPickupInStore).subscribe({
           next: (order) => {
             console.log('Zamówienie zostało złożone', order);
             localStorage.removeItem('cartId');

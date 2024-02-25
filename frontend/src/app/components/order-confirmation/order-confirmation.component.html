@@ -64,7 +64,8 @@
                 <mat-card class="mb-3 order-details">
                     <mat-card-header>
                         <mat-card-title>Szczegóły zamówienia</mat-card-title>
-                        <mat-card-subtitle>Numer zamówienia: {{ shortOrderId }}</mat-card-subtitle>
+                        <mat-card-subtitle>Numer zamówienia: <strong>{{ shortOrderId }}</strong></mat-card-subtitle>
+                        <mat-card-subtitle>Sposób dostawy: <strong>{{ deliveryMethod }}</strong></mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                         <div *ngIf="orderDetails" class="table-responsive mt-4">

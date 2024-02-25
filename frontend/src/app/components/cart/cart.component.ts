@@ -18,13 +18,14 @@ export class CartComponent implements OnInit {
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
+  cardId: string = localStorage.getItem('cartId') || '';
   userId: string = localStorage.getItem('userId') || '';
 
   constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loadCartItems();
-    
+
     gsap.from('.container', {
       duration: 1,
       x: '-100%',
@@ -36,15 +37,17 @@ export class CartComponent implements OnInit {
   }
 
   loadCartItems() {
-    this.cartService.getItems().subscribe(
-      (response: any) => {
-        this.items = response.cartItems;
-        this.calculateCosts();
-      },
-      error => {
-        console.error('Wystąpił błąd podczas próby załadowania danych z koszyka', error);
-      }
-    );
+    if (this.cardId) {
+      this.cartService.getItems().subscribe(
+        (response: any) => {
+          this.items = response.cartItems;
+          this.calculateCosts();
+        },
+        error => {
+          console.error('Wystąpił błąd podczas próby załadowania danych z koszyka', error);
+        }
+      );
+    }
   }
 
   calculateCosts() {

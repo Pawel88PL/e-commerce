@@ -60,6 +60,15 @@ export class OrderComponent implements OnInit {
       delay: 0.5,
       ease: "power1.out"
     });
+
+    gsap.from('.logo', {
+      duration: 1,
+      y: '100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 2,
+      ease: "power1.out"
+    });
   }
 
   loadCartItems() {

@@ -6,8 +6,7 @@
                 <div class="row mb-4" *ngFor="let item of items">
                     <div class="col-2">
                         <a [routerLink]="['/product', item.productId]">
-                            <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name"
-                                class="w-100 rounded-3" />
+                            <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name" class="w-100 rounded-3" />
                         </a>
                     </div>
                     <div class="col-6">
@@ -72,5 +71,17 @@
 </div>
 
 <ng-template #emptyCart>
-    <p>Koszyk jest pusty.</p>
+    <div class="empty-cart">
+        <div class="row">
+            <div class="col-md-7 mb-3">
+                <h3>Twój koszyk na zakupy jest jeszcze pusty</h3>
+                <p>Nie wiesz od czego zacząć?</p>
+                <p>Sprawdź nasze produkty z własnej pasieki!</p>
+                <button mat-raised-button routerLink="/products" class="my-3">Zobacz produkty</button>
+            </div>
+            <div class="col-md-5 mb-3">
+                <img src="../../../assets/images/logo.jpeg" alt="logo" class="w-100">
+            </div>
+        </div>
+    </div>
 </ng-template>

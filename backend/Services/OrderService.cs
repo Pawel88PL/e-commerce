@@ -74,9 +74,29 @@ namespace MiodOdStaniula.Services
             return order.OrderId;
         }
 
+        public async Task<List<AdminOrderDTO>> GetAllOrders()
+        {
+            var orders = await _context.Orders!
+                .Include(u => u.User)
+                .Select(order => new AdminOrderDTO
+                {
+                    OrderId = order.OrderId,
+                    OrderDate = order.OrderDate,
+                    IsPickupInStore = order.IsPickupInStore,
+                    TotalPrice = order.TotalPrice,
+                    Status = order.Status ?? string.Empty,
+                    CustomerName = order.User.Name + " " + order.User.Surname ?? string.Empty
+                })
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            return orders;
+        }
+
         public async Task<OrderDTO?> GetOrderDetails(Guid orderId)
         {
             var order = await _context.Orders!
+                .Include(u => u.User)
                 .Include(o => o.OrderDetails!)
                 .ThenInclude(od => od.Product)
                 .SingleOrDefaultAsync(o => o.OrderId == orderId);
@@ -91,7 +111,18 @@ namespace MiodOdStaniula.Services
                 OrderDate = order.OrderDate,
                 TotalPrice = order.TotalPrice,
                 Status = order.Status!,
-                UserId = order.UserId,
+                
+                Customer = order.User! != null ? new UserDto
+                {
+                    Name = order.User.Name,
+                    Email = order.User.Email ?? string.Empty,
+                    Surname = order.User.Surname,
+                    City = order.User.City,
+                    Street = order.User.Street,
+                    Address = order.User.Address,
+                    PostalCode = order.User.PostalCode,
+                    PhoneNumber = order.User.PhoneNumber ?? string.Empty
+                } : null!,
                 OrderDetails = order.OrderDetails!.Select(od => new OrderDetailDTO
                 {
                     OrderDetailId = od.OrderDetailId,

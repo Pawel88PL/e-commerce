@@ -35,6 +35,10 @@ export class CustomerPanelComponent implements OnInit {
     this.loadCustomerData();
     this.loadOrdersHistory();
     this.initializeChangePasswordForm();
+
+    if (this.authService.isAdmin()) {
+      this.activeSection = 'accountInfo';
+    }
   }
 
   initializeCustomerDataForm() {

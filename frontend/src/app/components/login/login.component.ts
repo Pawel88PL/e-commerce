@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           } else {
             const roles = this.authService.getRoles();
             if (roles.includes('Admin')) {
-              this.router.navigate(['/warehouse']);
+              this.router.navigate(['/adminPanel']);
             } else {
               this.router.navigate(['/products']);
             }

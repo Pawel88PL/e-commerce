@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MiodOdStaniula.Models;
 
 namespace MiodOdStaniula.Models
 {
@@ -26,8 +27,8 @@ namespace MiodOdStaniula.Models
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } = string.Empty;
-        public bool IsPickupInStore { get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public bool IsPickupInStore { get; set; }        
+        public virtual UserDto Customer { get; set; } = null!;
         public List<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
     }
 
@@ -60,6 +61,16 @@ namespace MiodOdStaniula.Models
         public string ProductName { get; set; } = string.Empty;
     }
 
+    public class AdminOrderDTO
+    {
+        public Guid OrderId { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public DateTime OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public bool IsPickupInStore { get; set; }
+    }
+
     public class OrderHistoryDTO
     {
         public string OrderId { get; set; } = string.Empty;
@@ -67,5 +78,6 @@ namespace MiodOdStaniula.Models
         public decimal TotalPrice { get; set; }
         public bool IsPickupInStore { get; set; }
         public string Status { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
     }
 }

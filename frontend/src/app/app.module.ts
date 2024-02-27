@@ -47,7 +47,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OrderProcessingDialogComponent } from './components/order-processing-dialog/order-processing-dialog.component';
-import { OrderDetailsComponent } from './components/order-details/order-details.component'
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component'
 
 registerLocaleData(localePl);
 
@@ -77,6 +78,7 @@ registerLocaleData(localePl);
     WaitingForActivationComponent,
     OrderProcessingDialogComponent,
     OrderDetailsComponent,
+    AdminPanelComponent,
   ],
   imports: [
     AppRoutingModule,

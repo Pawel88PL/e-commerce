@@ -34,6 +34,15 @@ namespace MiodOdStaniula.Controllers
             return Ok(order);
         }
 
+        [HttpGet("allOrders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+
+            var orders = await _orderService.GetAllOrders();
+
+            return Ok(orders ?? new List<AdminOrderDTO>());
+        }
+
         [HttpGet("{orderId}")]
         public async Task<IActionResult> GetOrderDetails(Guid orderId)
         {

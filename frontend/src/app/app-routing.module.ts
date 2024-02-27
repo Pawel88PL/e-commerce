@@ -2,6 +2,7 @@ import { NgModule, inject } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'addproduct', component: ProductAddComponent, canActivate: [adminGuard] },
+  { path: 'adminPanel', component: AdminPanelComponent, canActivate: [adminGuard] },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'customerPanel', component: CustomerPanelComponent, canActivate: [authGuard] },

@@ -22,6 +22,11 @@ export class OrderService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.orderUrl}/allOrders`)
+      .pipe(catchError(this.handleError));
+  }
+
   getOrderDetails(orderId: string): Observable<Order> {
     return this.http.get<Order>(`${this.orderUrl}/${orderId}`)
       .pipe(catchError(this.handleError));

@@ -10,10 +10,27 @@
             <mat-card-subtitle>Data zamówienia: {{ order.orderDate | date:'medium' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="mb-5">
-            <div class="mb-3">
-                <p>Status zamówienia: <strong>{{ order.status }}</strong></p>
-                <p>Sposób dostawy: <strong> {{ orderDeliveryMethod }}</strong></p>
-                <p>Łączna wartość zamówienia: <strong>{{ order.totalPrice | currency:'PLN' }}</strong></p>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="mb-3">
+                        <p>Status zamówienia: <strong>{{ order.status }}</strong></p>
+                        <p>Sposób dostawy: <strong> {{ orderDeliveryMethod }}</strong></p>
+                        <p>Łączna wartość zamówienia: <strong>{{ order.totalPrice | currency:'PLN' }}</strong></p>
+                    </div>
+                </div>
+                <div class="col-sm-5" *ngIf="authService.isAdmin()">
+                    <form>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Wybierz nowy status zamówienia</mat-label>
+                            <mat-select [(value)]="selectedStatus"
+                                (selectionChange)="changeOrderStatus(order.orderId, $event.value)">
+                                <mat-option *ngFor="let status of orderStatuses" [value]="status.value">
+                                    {{ status.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                </div>
             </div>
 
             <div *ngIf="order.orderDetails && order.orderDetails.length > 0">
@@ -51,7 +68,7 @@
             </button>
         </mat-card-actions>
     </mat-card>
-    
+
     <mat-card *ngIf="!isLoading && authService.isAdmin()">
         <mat-card-content>
             <table class="table table-hover">
@@ -64,7 +81,8 @@
                 <tbody>
                     <tr>
                         <td colspan="2">
-                            <strong>Imię i nazwisko:</strong> {{ order.customer.name + " " + order.customer.surname }}<br>
+                            <strong>Imię i nazwisko:</strong> {{ order.customer.name + " " + order.customer.surname
+                            }}<br>
                             <strong>Telefon:</strong> {{ order.customer.phoneNumber }}<br>
                             <strong>Email:</strong> {{ order.customer.email }}
                         </td>

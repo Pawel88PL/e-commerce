@@ -8,15 +8,17 @@ namespace MiodOdStaniula.Services
     public class OrderService : IOrderService
     {
         private readonly DbStoreContext _context;
-        private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<OrderService> _logger;
         private decimal _shippingCost;
 
-        public OrderService(DbStoreContext context, IEmailService emailService, IConfiguration configuration)
+        public OrderService(DbStoreContext context, IEmailService emailService, IConfiguration configuration, ILogger<OrderService> logger)
         {
             _context = context;
-            _emailService = emailService;
             _configuration = configuration;
+            _emailService = emailService;
+            _logger = logger;
             _shippingCost = decimal.Parse(_configuration["ApplicationSettings:ShippingCost"]!, CultureInfo.InvariantCulture);
 
         }
@@ -153,6 +155,29 @@ namespace MiodOdStaniula.Services
                 .ToListAsync();
 
             return orders;
+        }
+
+        public async Task<bool> UpdateOrderStatus(Guid orderId, string newStatus)
+        {
+            var order = await _context.Orders!.FindAsync(orderId);
+            if (order == null)
+            {
+                return false;
+            }
+
+            order.Status = newStatus;
+
+            try
+            {
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while updating the order status. OrderId: {OrderId}, NewStatus: {NewStatus}", orderId, newStatus);
+                throw;
+            }
         }
     }
 }

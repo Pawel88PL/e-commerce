@@ -4,6 +4,7 @@ import { Order } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 import { SHIPPING_COST } from 'src/app/config/config';
 import { AuthService } from 'src/app/services/auth.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-order-details',
@@ -15,7 +16,17 @@ export class OrderDetailsComponent {
   orderId: string | null = null;
   order: Order = new Order();
   shippingCost = SHIPPING_COST;
+  selectedStatus: string = '';
   orderDeliveryMethod: string = '';
+  orderStatuses = [
+    { value: 'Oczekuje na płatność', viewValue: 'Oczekuje na płatność' },
+    { value: 'Opłacone', viewValue: 'Opłacone' },
+    { value: 'W trakcie realizacji', viewValue: 'W trakcie realizacji' },
+    { value: 'Wysłane', viewValue: 'Wysłane' },
+    { value: 'Zrealizowane', viewValue: 'Zrealizowane' },
+    { value: 'Anulowane', viewValue: 'Anulowane' }
+  ];
+
 
   constructor(private route: ActivatedRoute, public authService: AuthService, private orderService: OrderService) { }
 
@@ -47,6 +58,25 @@ export class OrderDetailsComponent {
       });
     } else {
       console.error('Brak orderId');
+    }
+  }
+
+  changeOrderStatus(orderId: string, newStatus: string): void {
+    if (orderId) {
+      this.isLoading = true;
+      this.orderService.updateOrderStatus(orderId, newStatus).pipe(
+        finalize(() => this.isLoading = false)
+      ).subscribe({
+        next: () => {
+          console.log('Status zamówienia został zaktualizowany');
+          this.loadOrderDetails();
+        },
+        error: (error) => {
+          console.error('Wystąpił błąd podczas aktualizacji statusu zamówienia', error);
+        }
+      });
+    } else {
+      console.error('Brak numeru ID zamówienia');
     }
   }
 }

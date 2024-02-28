@@ -10,11 +10,13 @@ namespace MiodOdStaniula.Controllers
     [Route("order")]
     public class OrderController : ControllerBase
     {
+        private readonly ILogger<OrderController> _logger;
         private readonly IOrderService _orderService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, ILogger<OrderController> logger)
         {
             _orderService = orderService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -69,12 +71,44 @@ namespace MiodOdStaniula.Controllers
             return Ok(ordersHistory ?? new List<OrderHistoryDTO>());
         }
 
+        [HttpPost("updateOrderStatus/{orderId}")]
+        public async Task<IActionResult> UpdateOrderStatus(Guid orderId, [FromBody] NewOrderStatus newStatus)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _orderService.UpdateOrderStatus(orderId, newStatus.Status);
+                if (result)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound($"Order with ID {orderId} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error while updating order status: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
 
         public class CreateOrderRequest
         {
             public Guid CartId { get; set; }
             public string UserId { get; set; } = string.Empty;
             public bool IsPickupInStore { get; set; }
+        }
+
+        public class NewOrderStatus{
+            public string Status { get; set; } = string.Empty;
         }
     }
 }

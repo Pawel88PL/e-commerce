@@ -17,7 +17,7 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   createOrder(cartId: string, userId: string, isPickupInStore: boolean): Observable<any> {
-    const payload = { cartId: cartId, userId: userId, isPickupInStore: isPickupInStore};
+    const payload = { cartId: cartId, userId: userId, isPickupInStore: isPickupInStore };
     return this.http.post(`${this.orderUrl}`, payload)
       .pipe(catchError(this.handleError));
   }
@@ -34,6 +34,12 @@ export class OrderService {
 
   getOrdersHistory(userId: string): Observable<OrderHistory[]> {
     return this.http.get<OrderHistory[]>(`${this.orderUrl}/history/${userId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateOrderStatus(orderId: string, status: string): Observable<Order> {
+    const payload = { status: status };
+    return this.http.post<Order>(`${this.orderUrl}/updateOrderStatus/${orderId}`, payload)
       .pipe(catchError(this.handleError));
   }
 

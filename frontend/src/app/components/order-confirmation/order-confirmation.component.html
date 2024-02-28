@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="order-confirmation">
+        <div class="row">
+            <div class="col-md-8">
+                <mat-card class="mb-3 order-confirm">
+                    <mat-card-header>
+                        <mat-card-title>Dziękujemy za założenie zamówienia!</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>Twoje zamówienie zostało złożone pomyślnie i wkrótce otrzymasz potwierdzenie na podany adres
+                            e-mail.</p>
+                        <p><strong>Abyśmy mogli zrealizować Twoje zamówienie, wykonaj przelew na poniższy numer rachunku
+                                bankowego:</strong></p>
+
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Numer rachunku:</th>
+                                    <td>37 1050 1171 1000 0091 1468 3544</td>
+                                </tr>
+                                <tr>
+                                    <th>Bank:</th>
+                                    <td>ING Bank Śląski S.A.</td>
+                                </tr>
+                                <tr>
+                                    <th>Odbiorca:</th>
+                                    <td>STANIUL PIOTR JAKUB</td>
+                                </tr>
+                                <tr>
+                                    <th>Adres:</th>
+                                    <td>BORA KOMOROWSKIEGO 21, 46-200 KLUCZBORK</td>
+                                </tr>
+                                <tr>
+                                    <th>Tytuł przelewu:</th>
+                                    <td>Zamówienie nr: {{ shortOrderId }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kwota:</th>
+                                    <td><strong>{{ orderDetails?.totalPrice | currency:'PLN' }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <div class="row">
+                                    <p><strong>Lub wykonaj przelew BLIK na numer telefonu:</strong></p>
+                                    <div class="col-sm-3">
+                                        <img src="../../../assets/images/blik.svg" alt="Blik logo" class="img-fluid">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h2 class="fw-bold">570 436 579</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-center align-items-center mb-3">
+                                <button mat-raised-button routerLink="/customerPanel">Historia zamówień</button>
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mb-3 order-details">
+                    <mat-card-header>
+                        <mat-card-title>Szczegóły zamówienia</mat-card-title>
+                        <mat-card-subtitle>Numer zamówienia: <strong>{{ shortOrderId }}</strong></mat-card-subtitle>
+                        <mat-card-subtitle>Sposób dostawy: <strong>{{ deliveryMethod }}</strong></mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div *ngIf="orderDetails" class="table-responsive mt-4">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nazwa produktu</th>
+                                        <th>Ilość</th>
+                                        <th>Cena jednostkowa</th>
+                                        <th>Łączna cena</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of orderDetails.orderDetails">
+                                        <td>{{ item.productName }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.unitPrice | currency:'PLN' }}</td>
+                                        <td>{{ (item.unitPrice * item.quantity) | currency:'PLN' }}</td>
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td colspan="3">Dostawa</td>
+                                        <td>{{ shippingCost | currency:'PLN' }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <th colspan="3">Łączna kwota do zapłaty</th>
+                                        <th>{{ orderDetails.totalPrice | currency:'PLN' }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-4">
+                <mat-card class="mb-3 logo">
+                    <mat-card-content>
+                        <img src="../../../assets/images/logo.jpeg" alt="Logo" class="img-fluid">
+                        <div class="text-center">
+                            <p>W razie problemów skontaktuj się z nami:</p>
+                            <p class="fw-bold">+48 570 436 579</p>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

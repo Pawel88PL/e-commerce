@@ -101,7 +101,6 @@ namespace MiodOdStaniula.Controllers
             }
         }
 
-
         [HttpPost("{cartId}/delete/{productId}")]
         public async Task<IActionResult> DeleteItemFromCart(Guid cartId, [FromBody] DeleteItemFromCartModel model)
         {
@@ -118,27 +117,6 @@ namespace MiodOdStaniula.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Błąd podczas usuwania produktu z koszyka.");
-                return StatusCode(500, "Wystąpił błąd serwera.");
-            }
-        }
-
-
-        [HttpDelete("{cartId}/clear")]
-        public async Task<IActionResult> ClearCart(Guid cartId)
-        {
-            try
-            {
-                var result = await _cartService.ClearCartAsync(cartId);
-                if (!result)
-                {
-                    return NotFound("Koszyk nie został znaleziony.");
-                }
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Błąd podczas czyszczenia koszyka.");
                 return StatusCode(500, "Wystąpił błąd serwera.");
             }
         }

@@ -18,12 +18,14 @@ export class CartComponent implements OnInit {
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
+  cardId: string = localStorage.getItem('cartId') || '';
+  userId: string = localStorage.getItem('userId') || '';
 
   constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loadCartItems();
-    
+
     gsap.from('.container', {
       duration: 1,
       x: '-100%',
@@ -35,15 +37,17 @@ export class CartComponent implements OnInit {
   }
 
   loadCartItems() {
-    this.cartService.getItems().subscribe(
-      (response: any) => {
-        this.items = response.cartItems;
-        this.calculateCosts();
-      },
-      error => {
-        console.error('Błąd podczas ładowania danych koszyka!', error);
-      }
-    );
+    if (this.cardId) {
+      this.cartService.getItems().subscribe(
+        (response: any) => {
+          this.items = response.cartItems;
+          this.calculateCosts();
+        },
+        error => {
+          console.error('Wystąpił błąd podczas próby załadowania danych z koszyka', error);
+        }
+      );
+    }
   }
 
   calculateCosts() {
@@ -70,7 +74,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeFromCart(productId: number) {
+  removeItemFromCart(productId: number) {
     if (this.cartService.cartId) {
       this.cartService.removeItem(this.cartService.cartId, productId).subscribe(
         () => {
@@ -83,26 +87,15 @@ export class CartComponent implements OnInit {
     }
   }
 
-  clearCart() {
-    this.cartService.clearCart().subscribe(
-      () => {
-        this.items = [];
-        this.totalCost = 0;
-        alert('Koszyk został opróżniony.');
-      },
-      error => console.error('Błąd podczas opróżniania koszyka!', error)
-    );
-  }
-
   maxQuantity(amountAvailable: number): number[] {
     const max = Math.min(10, amountAvailable);
     return Array.from({ length: max }, (_, i) => i + 1);
   }
 
-
   proceedToCheckout() {
     this.authService.setInCheckoutProcess();
     if (this.authService.isLoggedIn()) {
+      this.cartService.assignCartToUser(this.userId).subscribe();
       this.router.navigate(['/order']);
     } else {
       this.router.navigate(['/checkout']);

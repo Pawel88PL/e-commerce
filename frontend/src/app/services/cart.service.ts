@@ -27,6 +27,10 @@ export class CartService {
   }
 
   private addItemToCart(product: Product): Observable<any> {
+    if (product.amountAvailable < 1) {
+      return throwError(() => new Error('Produkt jest niedostępny.'));
+    }
+    
     return this.http.post(this.cartItemUrl, {
       cartId: this.cartId,
       productId: product.productId,
@@ -44,7 +48,7 @@ export class CartService {
 
   getItems(): Observable<CartItem[]> {
     if (!this.cartId) {
-      return throwError(() => new Error('Brak identyfikatora koszyka'));
+      return throwError(() => new Error('Koszyk nie został jeszcze utworzony.'));
     }
 
     return this.http.get<CartItem[]>(`${this.cartUrl}/${this.cartId}/items`).pipe(
@@ -66,18 +70,8 @@ export class CartService {
     );
   }
 
-  clearCart(): Observable<any> {
-    if (!this.cartId) {
-      return throwError(() => new Error('Brak identyfikatora koszyka'));
-    }
-
-    return this.http.delete(`${this.cartUrl}/${this.cartId}`).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   private handleError(error: any) {
     console.error('Wystąpił błąd!', error);
-    return throwError(() => new Error('Błąd serwera'));
+    return throwError(() => new Error('Błąd ze strony serwera'));
   }
 }

@@ -1,0 +1,105 @@
+<div *ngIf="order.orderDetails" class="order-details-container">
+    <mat-card *ngIf="isLoading">
+        <div class="spinner-container">
+            <mat-spinner></mat-spinner>
+        </div>
+    </mat-card>
+    <mat-card *ngIf="!isLoading">
+        <mat-card-header class="mb-3">
+            <mat-card-title>Szczegóły zamówienia: {{ order.shortOrderId }}</mat-card-title>
+            <mat-card-subtitle>Data zamówienia: {{ order.orderDate | date:'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="mb-5">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="mb-3">
+                        <p>Status zamówienia: <strong>{{ order.status }}</strong></p>
+                        <p>Sposób dostawy: <strong> {{ orderDeliveryMethod }}</strong></p>
+                        <p>Łączna wartość zamówienia: <strong>{{ order.totalPrice | currency:'PLN' }}</strong></p>
+                    </div>
+                </div>
+                <div class="col-sm-5" *ngIf="authService.isAdmin()">
+                    <form>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Wybierz nowy status zamówienia</mat-label>
+                            <mat-select [(value)]="selectedStatus"
+                                (selectionChange)="changeOrderStatus(order.orderId, $event.value)">
+                                <mat-option *ngFor="let status of orderStatuses" [value]="status.value">
+                                    {{ status.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="order.orderDetails && order.orderDetails.length > 0">
+                <h3>Zamówione produkty:</h3>
+                <table class="table table-responsive">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Nazwa produktu</th>
+                            <th>Ilość</th>
+                            <th>Cena jednostkowa</th>
+                            <th>Łączna cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of order.orderDetails">
+                            <td>{{ item.productName }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.unitPrice | currency:'PLN' }}</td>
+                            <td>{{ (item.unitPrice * item.quantity) | currency:'PLN' }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Koszt dostawy:</td>
+                            <td>{{ shippingCost | currency:'PLN' }}</td>
+                        <tr class="table-secondary">
+                            <td colspan="3" class="text-right"><strong>Łączna wartość zamówienia:</strong></td>
+                            <td><strong>{{ order.totalPrice | currency:'PLN' }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [routerLink]="authService.isAdmin() ? '/adminPanel' : '/customerPanel'">
+                Powrót do {{ authService.isAdmin() ? 'listy zamówień' : 'historii zamówień' }}
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="!isLoading && authService.isAdmin()">
+        <mat-card-content>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="2">Dane odbiorcy</th>
+                        <th scope="col" colspan="2">Dane kontaktowe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <strong>Imię i nazwisko:</strong> {{ order.customer.name + " " + order.customer.surname
+                            }}<br>
+                            <strong>Telefon:</strong> {{ order.customer.phoneNumber }}<br>
+                            <strong>Email:</strong> {{ order.customer.email }}
+                        </td>
+                        <td colspan="2">
+                            <strong>Miasto:</strong> {{ order.customer.city + ", " + order.customer.postalCode }}<br>
+                            <strong>Adres:</strong> {{ order.customer.street + " " + order.customer.address }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div *ngIf="!order.orderDetails" class="no-order-details">
+    <mat-card>
+        <mat-card-content>
+            <p>Nie znaleziono szczegółów zamówienia.</p>
+        </mat-card-content>
+    </mat-card>
+</div>

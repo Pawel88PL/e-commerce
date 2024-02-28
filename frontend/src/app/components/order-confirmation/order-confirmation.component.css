@@ -1,0 +1,14 @@
+.order-confirmation{
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .order-confirmation{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+}

@@ -1,72 +1,130 @@
 <div class="container">
-
-
     <div class="order">
         <div class="row">
-            <div class="col-md-7">
-                <h1>Twoje dane:</h1>
-                <p>Imię: {{ customer.name }}</p>
-                <p>Nazwisko: {{ customer.surname }}</p>
-                <p>Email: {{ customer.email }}</p>
-                <!-- Dodaj więcej danych klienta zgodnie z potrzebami -->
-                <button mat-button routerLink="/customer-panel" class="btn btn-primary">Edytuj dane</button>
+            <div class="col-md-7 personal-data">
+                <mat-card class="m-1">
+                    <mat-card-header class="custom-card-header mb-2">
+                        <mat-card-title>Twoje dane:</mat-card-title>
+                        <button mat-button routerLink="/customerPanel" class="edit-button"><i class="bi bi-pencil"></i>
+                            Edytuj</button>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="customer-data">
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Imię</mat-label>
+                                        <input matInput [value]="customer.name" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Nazwisko</mat-label>
+                                        <input matInput [value]="customer.surname" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Email</mat-label>
+                                        <input matInput [value]="customer.email" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Numer telefonu</mat-label>
+                                        <input matInput [value]="customer.phoneNumber" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Miasto</mat-label>
+                                        <input matInput [value]="customer.city" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Ulica</mat-label>
+                                        <input matInput [value]="customer.street" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Numer domu / mieszkania</mat-label>
+                                        <input matInput [value]="customer.address" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="fill" class="w-100 mb-2" disabled>
+                                        <mat-label>Kod pocztowy</mat-label>
+                                        <input matInput [value]="customer.postalCode" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="m-1 my-5">
+                    <mat-checkbox [(ngModel)]="isPickupInStore" (change)="calculateCosts()">Odbiór osobisty</mat-checkbox>
+                </mat-card>
             </div>
 
             <div class="col-md-5">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h1>Podsumowanie</h1>
-                    </div>
-                    <div class="col-sm-4">
-                        <button mat-button routerLink="/cart" class="w-100"><i class="bi bi-pencil"></i> Edytuj</button>
-                    </div>
-                </div>
-                <br>
-                <div *ngIf="items && items.length">
-                    <div class="row mb-4" *ngFor="let item of items">
-                        <div class="col-4">
-                            <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name"
-                                class="product-image rounded-3" />
+                <mat-card class="cart m-1">
+                    <mat-card-header class="custom-card-header mb-2">
+                        <mat-card-title>Podsumowanie</mat-card-title>
+                        <button mat-button routerLink="/cart" class="edit-button"><i class="bi bi-pencil"></i>
+                            Edytuj</button>
+                    </mat-card-header>
+                    <mat-card-content *ngIf="items && items.length">
+                        <div class="row mb-4" *ngFor="let item of items">
+                            <div class="col-4">
+                                <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name"
+                                    class="product-image rounded-3" />
+                            </div>
+                            <div class="col-8">
+                                <h3>{{ item.name }}</h3>
+                                <h3>{{ item.quantity }} * {{ item.price }} = {{ (item.price * item.quantity) | currency:
+                                    'PLN':
+                                    'symbol' }}</h3>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <h3>{{ item.name }}</h3>
-                            <h3>{{ item.quantity }} * {{ item.price }} = {{ (item.price * item.quantity) | currency: 'PLN': 'symbol' }}</h3>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between">
+                                <p>Produkty:</p>
+                                <p>{{ productCost | currency: 'PLN': 'symbol' }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Koszt wysyłki:</p>
+                                <p>{{ shippingCost | currency: 'PLN': 'symbol' }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h4>Suma:</h4>
+                                <h4>{{ totalCost | currency: 'PLN': 'symbol' }}</h4>
+                            </div>
                         </div>
-                    </div>
-                    <hr />
-                </div>
-
-                <br>
-                <div class="row mt-1">
-                    <div class="col-7">
-                        <p>Produkty:</p>
-                        <p>Koszt wysyłki:</p>
-                    </div>
-                    <div class="col-5 d-flex flex-column align-items-end">
-                        <div>
-                            <p>{{ productCost | currency: 'PLN': 'symbol' }}</p>
-                        </div>
-                        <div>
-                            <p>{{ shippingCost | currency: 'PLN': 'symbol' }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row">
-                    <div class="col-7">
-                        <h4>Suma:</h4>
-                    </div>
-                    <div class="col-5 d-flex flex-column align-items-end">
-                        <h4>{{ totalCost | currency: 'PLN': 'symbol' }}</h4>
-                    </div>
-                </div>
-                <hr>
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-lg btn-dark mt-2 w-100" [disabled]="!items.length"
-                        (click)="placeOrder()">
-                        Złóż zamówienie
-                    </button>
+                    </mat-card-actions>
+                    <mat-card-actions align="end">
+                        <button type="button" class="btn btn-lg btn-dark mt-2 w-100" [disabled]="!items.length"
+                            (click)="placeOrder()">
+                            Załóż zamówienie
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+                <div class="col-8 m-auto logo">
+                    <mat-card class="my-3">
+                        <mat-card-content>
+                            <img src="../../../assets/images/logo.jpeg" alt="logo" class="w-100">
+                        </mat-card-content>
+                    </mat-card>
                 </div>
             </div>
         </div>

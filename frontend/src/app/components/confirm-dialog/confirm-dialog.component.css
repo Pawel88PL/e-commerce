@@ -1,0 +1,13 @@
+mat-dialog-content {
+    margin-top: 20px;
+}
+
+mat-dialog-actions {
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    button{
+        width: 100%;
+    }
+}

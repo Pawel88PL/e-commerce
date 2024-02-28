@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Czy potwierdzasz chęć złożenia zamówienia?</h2>
+<mat-dialog-content class="mat-typography">
+    <p>Przejdź dalej, aby potwierdzić swoje zamówienie z obowiązkiem zapłaty.</p>
+    <p>Łączna kwota do zapłaty: <strong>{{ data.totalCost | currency: 'PLN' }}</strong></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" class="m-1">Tak, składam zamówienie</button>
+    <button mat-raised-button color="warn" mat-dialog-close class="m-1">Anuluj</button>
+</mat-dialog-actions>

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MiodOdStaniula.Migrations;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
 

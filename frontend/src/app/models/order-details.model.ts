@@ -1,12 +1,11 @@
-import { Product } from "./product.model";
 import { Order } from "./order.model";
 
-export class OrderDetail {
-    orderDetailId?: number;
-    orderId?: number;
-    order?: Order;
-    productId?: number;
-    product?: Product;
-    quantity?: number;
-    unitPric?: number;
+export class OrderDetails {
+    orderDetailId: number = 0;
+    orderId: string = '';
+    order: Order = new Order();
+    productId: number = 0;
+    quantity: number = 0;
+    unitPrice: number = 0;
+    productName: string = '';
 }

@@ -2,8 +2,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { OrderService } from 'src/app/services/order.service';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OrderHistory } from 'src/app/models/order-history.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-panel',
@@ -11,19 +14,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./customer-panel.component.css']
 })
 export class CustomerPanelComponent implements OnInit {
-  activeSection: 'accountInfo' | 'addresses' | 'changePassword' | 'orderHistory' = 'accountInfo';
+  activeSection: 'accountInfo' | 'addresses' | 'changePassword' | 'orderHistory' = 'orderHistory';
   customer: Customer = {};
   changePasswordForm!: FormGroup;
   customerDataForm!: FormGroup;
-  orders: any[] = [];
   customerFirstName: string = '';
+  isLoading = true;
+  orders: OrderHistory[] = [];
 
-  constructor(public authService: AuthService, private customerService: CustomerService, private fb: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(
+    public authService: AuthService,
+    private customerService: CustomerService,
+    private fb: FormBuilder,
+    private orderService: OrderService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initializeCustomerDataForm();
     this.loadCustomerData();
+    this.loadOrdersHistory();
     this.initializeChangePasswordForm();
+
+    if (this.authService.isAdmin()) {
+      this.activeSection = 'accountInfo';
+    }
   }
 
   initializeCustomerDataForm() {
@@ -95,6 +110,29 @@ export class CustomerPanelComponent implements OnInit {
     }
   }
 
+  loadOrdersHistory() {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.isLoading = true;
+      this.orderService.getOrdersHistory(userId).subscribe({
+        next: (orders) => {
+          this.orders = orders.map(order => ({
+            ...order,
+            shortOrderId: order.orderId.slice(0, 8)
+          }));
+          this.isLoading = false;
+          if (orders.length === 0) {
+            console.log('Nie znaleziono historii zamówień.');
+          }
+        },
+        error: (error) => {
+          console.error('Wystąpił błąd podczas pobierania historii zamówień.', error);
+          this.isLoading = false;
+        }
+      });
+    }
+  }
+
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -143,5 +181,9 @@ export class CustomerPanelComponent implements OnInit {
         duration: 5000,
       });
     }
+  }
+
+  viewOrderDetails(orderId: string) {
+    this.router.navigate(['/order-details', orderId]);
   }
 }

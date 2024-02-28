@@ -1,8 +1,8 @@
 
 
-# Miód od Staniula
+# e-commerce
 
-Opis projektu: Aplikacja `Miód od Staniula` to proste narzędzie e-commerce dla sklepu internetowego oferującego podstawowy zakres produktów. Aplikacja umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz realizację zamówień. Dzięki responsywnemu interfejsowi użytkownika, aplikacja zapewnia płynne i intuicyjne doświadczenie zakupowe na różnych urządzeniach.
+Opis projektu: Aplikacja `e-commerce` to prosty silnik dla sklepu internetowego oferującego podstawowy zakres produktów. Aplikacja umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz realizację zamówień. Dzięki responsywnemu interfejsowi użytkownika, aplikacja zapewnia płynne i intuicyjne doświadczenie zakupowe na różnych urządzeniach.
 
 ![Strona główna](screenShots/mainpage.png)
 

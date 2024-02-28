@@ -33,6 +33,16 @@ export class ProductListComponent implements OnInit {
       delay: 0.5,
       ease: "power1.out"
     });
+
+    gsap.from('.logo', {
+      duration: 1,
+      x: '-100%',
+      opacity: 0,
+      scale: 0.5,
+      delay: 1.5,
+      ease: "power1.out"
+    });
+
     this.loadProducts();
   }
 

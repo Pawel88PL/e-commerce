@@ -14,7 +14,6 @@ namespace MiodOdStaniula
         public DbSet<ProductImage>? ProductImages { get; set; }
         public DbSet<Category>? Categories { get; set; }
         public DbSet<ShopingCart>? ShopingCarts { get; set; }
-        public DbSet<Customer>? Customers { get; set; }
         public DbSet<CartItem>? CartItem { get; set; }
         public DbSet<Order>? Orders { get; set; }
         public DbSet<OrderDetail>? OrderDetails{ get; set; }
@@ -24,12 +23,6 @@ namespace MiodOdStaniula
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            // Relacja między Order a Customer
-            builder.Entity<Order>()
-                .HasOne(o => o.Customer)
-                .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.CustomerId);
 
             // Relacja między OrderDetail a Order
             builder.Entity<OrderDetail>()

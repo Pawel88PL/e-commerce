@@ -1,4 +1,3 @@
-import { AdminGuard } from './guards/admin.guard';
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl'
 import { LOCALE_ID } from '@angular/core';
@@ -17,11 +16,14 @@ import { CartComponent } from './components/cart/cart.component';
 import { CartItemDialogComponent } from './components/cart-item-dialog/cart-item-dialog.component';
 import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrderComponent } from './components/order/order.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -32,17 +34,21 @@ import { WarehouseComponent } from './components/warehouse/warehouse.component';
 import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { OrderProcessingDialogComponent } from './components/order-processing-dialog/order-processing-dialog.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component'
 
 registerLocaleData(localePl);
 
@@ -52,11 +58,16 @@ registerLocaleData(localePl);
     AppComponent,
     CartComponent,
     CartItemDialogComponent,
+    CheckoutComponent,
+    ConfirmDialogComponent,
     CookieConsentComponent,
+    CustomerPanelComponent,
     FooterComponent,
     HomeComponent,
     LoginComponent,
     NavbarComponent,
+    OrderComponent,
+    OrderConfirmationComponent,
     ProductAddComponent,
     ProductListComponent,
     ProductCardComponent,
@@ -64,10 +75,10 @@ registerLocaleData(localePl);
     ProductUpdateComponent,
     RegisterComponent,
     WarehouseComponent,
-    CheckoutComponent,
-    OrderComponent,
     WaitingForActivationComponent,
-    CustomerPanelComponent,
+    OrderProcessingDialogComponent,
+    OrderDetailsComponent,
+    AdminPanelComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -76,6 +87,8 @@ registerLocaleData(localePl);
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
@@ -89,7 +102,6 @@ registerLocaleData(localePl);
     ReactiveFormsModule,
   ],
   providers: [
-    AdminGuard,
     { provide: LOCALE_ID, useValue: 'pl' }
   ],
   bootstrap: [AppComponent]

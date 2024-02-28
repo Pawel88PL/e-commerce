@@ -1,20 +1,16 @@
-// admin.guard.ts
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root' // Zapewnia, że guard jest dostępny globalnie
-})
-export class AdminGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) { }
+export const adminGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-  canActivate(): boolean {
-    if (this.authService.isLoggedIn() && this.authService.isAdmin()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+  if (authService.isLoggedIn() && authService.isAdmin()) {
+    return true;
+  } else {
+    router.navigate(['/login'], { queryParams: { returnUrl: router.url } });
+    return false;
   }
-}
+};

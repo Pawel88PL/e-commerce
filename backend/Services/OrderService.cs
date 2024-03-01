@@ -72,7 +72,6 @@ namespace MiodOdStaniula.Services
                 await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
             }
 
-
             return order.OrderId;
         }
 
@@ -113,7 +112,7 @@ namespace MiodOdStaniula.Services
                 OrderDate = order.OrderDate,
                 TotalPrice = order.TotalPrice,
                 Status = order.Status!,
-                
+
                 Customer = order.User! != null ? new UserDto
                 {
                     Name = order.User.Name,
@@ -169,8 +168,21 @@ namespace MiodOdStaniula.Services
 
             try
             {
-                _context.Orders.Update(order);
                 await _context.SaveChangesAsync();
+
+                if (newStatus != "Zrealizowane")
+                {
+                    var userId = order.UserId;
+                    var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == userId);
+                    var orderDetails = await GetOrderDetails(order.OrderId);
+                    if (user != null && orderDetails != null)
+                    {
+                        string userEmail = user.Email ?? "";
+                        string name = user.Name ?? "";
+
+                        await _emailService.SendOrderStatusChangeEmail(userEmail, name, orderDetails);
+                    }
+                }
                 return true;
             }
             catch (Exception ex)
@@ -179,5 +191,6 @@ namespace MiodOdStaniula.Services
                 throw;
             }
         }
+
     }
 }

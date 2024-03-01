@@ -170,18 +170,18 @@ namespace MiodOdStaniula.Services
             </div>";
 
             await SendEmail(email, "Potwierdzenie zamówienia", emailBody);
-    }
+        }
 
-    public async Task SendNewOrderNotificationToOwner(OrderDTO order, UserModel user)
-    {
-        
-        var deliveryMethod = order.IsPickupInStore ? "Odbiór osobisty" : "Kurier";
-        
-        var emailSettings = _configuration.GetSection("EmailSettings");
-        string ownerEmail = emailSettings["OwnerEmail"] ?? " ";
-        string subject = "Nowe zamówienie w sklepie Miód Od Staniula";
+        public async Task SendNewOrderNotificationToOwner(OrderDTO order, UserModel user)
+        {
 
-        string emailBody = $@"
+            var deliveryMethod = order.IsPickupInStore ? "Odbiór osobisty" : "Kurier";
+
+            var emailSettings = _configuration.GetSection("EmailSettings");
+            string ownerEmail = emailSettings["OwnerEmail"] ?? " ";
+            string subject = "Nowe zamówienie w sklepie Miód Od Staniula";
+
+            string emailBody = $@"
             <div style=""max-width: 800px;"">
             <h1>Masz nowe zamówienie!</h1>
             <h3>Numer zamówienia:</h3>
@@ -198,18 +198,18 @@ namespace MiodOdStaniula.Services
                 </thead>
                 <tbody>";
 
-        foreach (var detail in order.OrderDetails)
-        {
-            emailBody += $@"
+            foreach (var detail in order.OrderDetails)
+            {
+                emailBody += $@"
                 <tr>
                     <td style=""border: 1px solid #ddd; padding: 8px;"">{detail.ProductName}</td>
                     <td style=""border: 1px solid #ddd; padding: 8px; text-align: right;"">{detail.Quantity}</td>
                     <td style=""border: 1px solid #ddd; padding: 8px; text-align: right;"">{detail.UnitPrice:C}</td>
                     <td style=""border: 1px solid #ddd; padding: 8px; text-align: right;"">{detail.UnitPrice * detail.Quantity:C}</td>
                 </tr>";
-        }
+            }
 
-        emailBody += $@"
+            emailBody += $@"
                 </tbody>
             </table>
             <br>
@@ -249,41 +249,56 @@ namespace MiodOdStaniula.Services
             <p>Zaloguj się do panelu administracyjnego sklepu w celu dalszej realizacji zamówienia.</p>
             </div>";
 
-        await SendEmail(ownerEmail, subject, emailBody);
-    }
-
-    private async Task SendEmail(string to, string subject, string body)
-    {
-        var emailSettings = _configuration.GetSection("EmailSettings");
-        var smtpServer = emailSettings["SmtpServer"];
-        var smtpPort = Convert.ToInt32(emailSettings["SmtpPort"]);
-        var smtpUsername = emailSettings["SmtpUsername"];
-        var smtpPassword = emailSettings["SmtpPassword"];
-
-        var mailMessage = new MailMessage()
-        {
-            From = new MailAddress(smtpUsername ?? string.Empty),
-            Subject = subject,
-            Body = body,
-            IsBodyHtml = true,
-        };
-        mailMessage.To.Add(to);
-
-        var smtpClient = new SmtpClient(smtpServer)
-        {
-            Port = smtpPort,
-            Credentials = new NetworkCredential(smtpUsername, smtpPassword),
-            EnableSsl = true,
-        };
-
-        try
-        {
-            await smtpClient.SendMailAsync(mailMessage);
+            await SendEmail(ownerEmail, subject, emailBody);
         }
-        catch (Exception ex)
+
+        public async Task SendOrderStatusChangeEmail(string email, string name, OrderDTO order)
         {
-            _logger.LogError(ex, $"Wystąpił błąd przy wysyłaniu emaila: {subject}.");
+            string emailBody = $@"
+            <h1>Witaj {name}!</h1>
+            <p>Status Twojego zamówienia o numerze: <strong>{order.ShortOrderId}</strong> został zmieniony na: <strong>{order.Status}</strong></p>
+            <p>W razie pytań lub wątpliwości prosimy o kontakt pod numerem telefonu: </p>
+            <p><strong>+48 570 436 579</strong></p>
+            <p>lub e-mail: kontakt@miododstaniula.pl</p>
+            <hr>
+            <p>Pozdrawiamy,</p>
+            <p>Rodzina Staniul</p>";
+            
+            await SendEmail(email, "Zmiana statusu zamówienia", emailBody);
+        }
+
+        private async Task SendEmail(string to, string subject, string body)
+        {
+            var emailSettings = _configuration.GetSection("EmailSettings");
+            var smtpServer = emailSettings["SmtpServer"];
+            var smtpPort = Convert.ToInt32(emailSettings["SmtpPort"]);
+            var smtpUsername = emailSettings["SmtpUsername"];
+            var smtpPassword = emailSettings["SmtpPassword"];
+
+            var mailMessage = new MailMessage()
+            {
+                From = new MailAddress(smtpUsername ?? string.Empty),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(to);
+
+            var smtpClient = new SmtpClient(smtpServer)
+            {
+                Port = smtpPort,
+                Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+                EnableSsl = true,
+            };
+
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Wystąpił błąd przy wysyłaniu emaila: {subject}.");
+            }
         }
     }
-}
 }

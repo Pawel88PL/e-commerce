@@ -73,15 +73,17 @@ export class OrderComponent implements OnInit {
   }
 
   loadCartItems() {
-    this.cartService.getItems().subscribe(
-      (response: any) => {
-        this.items = response.cartItems;
-        this.calculateCosts();
-      },
-      error => {
-        console.error('Błąd podczas ładowania danych koszyka!', error);
-      }
-    );
+    if (this.cartId) {
+      this.cartService.getItems().subscribe(
+        (response: any) => {
+          this.items = response.cartItems;
+          this.calculateCosts();
+        },
+        error => {
+          console.error('Błąd podczas ładowania danych koszyka!', error);
+        }
+      );
+    }
   }
 
   loadCustomerData() {
@@ -129,7 +131,7 @@ export class OrderComponent implements OnInit {
           next: (order) => {
             console.log('Zamówienie zostało złożone', order);
             localStorage.removeItem('cartId');
-            this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order }});
+            this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order } });
             processingDialogRef.close();
           },
           error: (error) => {

@@ -213,7 +213,7 @@ namespace MiodOdStaniula.Services
                 </tbody>
             </table>
             <br>
-            <p><strong>Łączny kwota zamówienia: {order.TotalPrice:C} </strong></p>
+            <p><strong>Łączna kwota zamówienia: {order.TotalPrice:C} </strong></p>
             <p><strong>Metoda dostawy: {deliveryMethod} </strong></p>
             <hr>
             <h2>Klient:</h2>

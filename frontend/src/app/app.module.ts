@@ -48,7 +48,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OrderProcessingDialogComponent } from './components/order-processing-dialog/order-processing-dialog.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
-import { AdminPanelComponent } from './components/admin-panel/admin-panel.component'
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component'
 
 registerLocaleData(localePl);
 
@@ -79,6 +80,7 @@ registerLocaleData(localePl);
     OrderProcessingDialogComponent,
     OrderDetailsComponent,
     AdminPanelComponent,
+    TermsAndConditionsComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -3,7 +3,7 @@
         <mat-spinner></mat-spinner>
     </div>
     <div *ngIf="!isLoading" class="login">
-        <h2>Formularz logowania</h2>
+        <h2>Wprowadź swoje dane</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit, AfterViewInit {
   loginForm!: FormGroup;
+  isLoading: boolean = false;
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   constructor(
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-
+      this.isLoading = true;
       this.authService.login(loginData.email, loginData.password).subscribe(
         success => {
           if (this.authService.getInCheckoutProcess()) {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           }
         },
         error => {
+          this.isLoading = false;
           this.snackBar.open(error.message, 'Zamknij', {
             duration: 5000,
           });

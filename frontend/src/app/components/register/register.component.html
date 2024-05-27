@@ -1,7 +1,7 @@
 <div class="container">
     <div class="loginForm text-center shadow bg-white rounded-3">
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <h2>Formularz rejestracji</h2>
+            <h2>Załóż konto w kilku krokach!</h2>
             <div class="row">
                 <div class="col-sm-6">
                     <mat-form-field appearance="fill">
@@ -128,6 +128,19 @@
             </div>
 
             <div class="mt-2">
+                <div class="termsAccepted">
+                    <mat-checkbox formControlName="termsAccepted">
+                        Rejestrując się, akceptuję <a routerLink="/termsAndConditions">regulamin</a> sklepu oraz wyrażam zgodę
+                        na przetwarzanie
+                        moich danych osobowych zgodnie z <a routerLink="/privacyPolicy">polityką prywatności</a> w celu
+                        realizacji usług
+                        oferowanych przez sklep.
+                    </mat-checkbox>
+                    <mat-error *ngIf="registerForm.controls['termsAccepted'].hasError('required')">* Akceptacja
+                        regulaminu jest
+                        wymagana</mat-error>
+                </div>
+
                 <button mat-raised-button color="primary" class="btn m-2" type="submit" [disabled]="loading"><i
                         class="bi bi-box-arrow-in-left"></i>
                     Zarejestruj się

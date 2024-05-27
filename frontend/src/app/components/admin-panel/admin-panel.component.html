@@ -12,8 +12,8 @@
                     <table class="table table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
-                                <th>Numer Zamówienia</th>
-                                <th>Data</th>
+                                <th class="smallScreenDisplayNone">Numer Zamówienia</th>
+                                <th class="smallScreenDisplayNone">Data</th>
                                 <th>Klient</th>
                                 <th>Odbiór osobisty</th>
                                 <th>Wartość</th>
@@ -22,11 +22,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let order of orders" (click)="viewOrderDetails(order.orderId)"
-                                [class.table-success]="order.status === 'Zrealizowane'"
                                 [class.table-warning]="order.status === 'Oczekuje na płatność'"
+                                [class.table-success]="order.status === 'Opłacone'"
+                                [class.table-light]="order.status === 'W trakcie realizacji'"
+                                [class.table-info]="order.status === 'Wysłane'"
+                                [class.table-secondary]="order.status === 'Zrealizowane'"
                                 [class.table-danger]="order.status === 'Anulowane'" style="cursor: pointer;">
-                                <td>{{ order.shortOrderId }}</td>
-                                <td>{{ order.orderDate | date:'medium' }}</td>
+                                <td class="smallScreenDisplayNone">{{ order.shortOrderId }}</td>
+                                <td class="smallScreenDisplayNone">{{ order.orderDate | date:'medium' }}</td>
                                 <td>{{ order.customerName }}</td>
                                 <td>
                                     <span *ngIf="order.isPickupInStore; else no">{{ 'Tak' }}</span>
@@ -34,15 +37,19 @@
                                 </td>
                                 <td>{{ order.totalPrice | currency:'PLN' }}</td>
                                 <td>
-                                    <i *ngIf="order.status === 'Zrealizowane'"
-                                        class="fas fa-check-circle text-success"></i>
+                                    <i *ngIf="order.status === 'Oczekuje na płatność'"
+                                        class="bi bi-clock-fill text-primary"></i>
+                                    <i *ngIf="order.status === 'Opłacone'" class="bi bi-cash-stack text-success"></i>
                                     <i *ngIf="order.status === 'W trakcie realizacji'"
-                                        class="fas fa-sync-alt text-warning"></i>
-                                    <i *ngIf="order.status === 'Anulowane'" class="fas fa-times-circle text-danger"></i>
+                                        class="bi bi-hammer text-warning"></i>
+                                    <i *ngIf="order.status === 'Wysłane'" class="bi bi-truck text-info"></i>
+                                    <i *ngIf="order.status === 'Zrealizowane'"
+                                        class="bi bi-check-circle-fill text-success"></i>
+                                    <i *ngIf="order.status === 'Anulowane'" class="bi bi-x-circle-fill text-danger"></i>
                                     {{ order.status }}
                                 </td>
-
                             </tr>
+
                         </tbody>
                     </table>
                 </div>

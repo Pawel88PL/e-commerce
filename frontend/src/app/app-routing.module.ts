@@ -11,11 +11,13 @@ import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { WaitingForActivationComponent } from './components/waiting-for-activation/waiting-for-activation.component';
 import { WarehouseComponent } from './components/warehouse/warehouse.component';
 
@@ -36,10 +38,12 @@ const routes: Routes = [
   { path: 'order', component: OrderComponent, canActivate: [authGuard]},
   { path: 'orderConfirmation', component: OrderConfirmationComponent, canActivate: [authGuard] },
   { path: 'order-details/:orderId', component: OrderDetailsComponent, canActivate: [authGuard] },
+  { path: 'privacyPolicy', component: PrivacyPolicyComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'update/:id', component: ProductUpdateComponent, canActivate: [adminGuard] },
   { path: 'register', component: RegisterComponent },
+  { path: 'termsAndConditions', component: TermsAndConditionsComponent },
   { path: 'waitingForActivation', component: WaitingForActivationComponent },
   { path: 'warehouse', component: WarehouseComponent, canActivate: [adminGuard] }
 ];

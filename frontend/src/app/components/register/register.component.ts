@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar
   ) { }
 
+  loading: boolean = false;
   registerForm!: FormGroup;
 
   ngOnInit(): void {
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       address: ['', [Validators.required, Validators.maxLength(50)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      termsAccepted: [false, Validators.requiredTrue]
     }, { validator: this.passwordMatchValidator });
   }
 
@@ -62,7 +64,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  loading = false;
 
   onSubmit() {
     if (this.registerForm.valid) {
@@ -75,7 +76,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         },
         error => {
           this.loading = false;
-          console.error(error);
           let errorMsg = 'Wystąpił błąd podczas próby rejestracji!';
           if (error.error && typeof error.error === 'string') {
             errorMsg = error.error;
@@ -83,6 +83,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           this.snackBar.open(errorMsg, 'Zamknij', { duration: 3000 });
         }
       );
+    } else {
+      this.snackBar.open('Uzupełnij dane formularza', 'Zamknij', { duration: 3000 });
     }
   }
 }

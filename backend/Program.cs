@@ -35,7 +35,7 @@ namespace MiodOdStaniula
 
             builder.Services.AddDbContext<DbStoreContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("miodOdStaniula"));
             });
 
 

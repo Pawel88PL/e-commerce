@@ -10,5 +10,6 @@ export class Customer {
     street?: string;
     address?: string;
     postalCode?: string;
+    registrationDate?: Date;
     orders?: Order[];
 }

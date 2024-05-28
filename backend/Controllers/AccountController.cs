@@ -104,7 +104,8 @@ namespace MiodOdStaniula.Controllers
                 PostalCode = userRegisterData.PostalCode,
                 Street = userRegisterData.Street,
                 Address = userRegisterData.Address,
-                PhoneNumber = userRegisterData.PhoneNumber
+                PhoneNumber = userRegisterData.PhoneNumber,
+                RegistrationDate = DateOnly.FromDateTime(DateTime.Now)
             };
 
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);

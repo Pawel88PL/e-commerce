@@ -28,6 +28,8 @@ namespace MiodOdStaniula.Models
         [Required(ErrorMessage = "Podaj kod pocztowy")]
         [RegularExpression(@"^\d{2}-\d{3}$", ErrorMessage = "Niepoprawny format kodu pocztowego.")]
         public string PostalCode { get; set; } = string.Empty;
+
+        public DateOnly RegistrationDate { get; set; }
     }
 
     public class UserDto
@@ -40,6 +42,7 @@ namespace MiodOdStaniula.Models
         public string Address { get; set; } = string.Empty;
         public string PostalCode { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
+        public DateOnly RegistrationDate { get; set; }
     }
 
     public class ChangePasswordModel

@@ -131,6 +131,7 @@ export class OrderComponent implements OnInit {
           next: (order) => {
             console.log('Zamówienie zostało złożone', order);
             localStorage.removeItem('cartId');
+            this.authService.removeInCheckoutProcess();
             this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order } });
             processingDialogRef.close();
           },

@@ -17,6 +17,10 @@ export class CustomerService {
     return this.http.post(`${this.apiBaseUrl}/customer/${customerId}/change-password`, passwordChangeRequest);
   }
 
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${this.apiBaseUrl}/customer/get-all`);
+  }
+
   getCustomer(customerId: string): Observable<Customer> {
     return this.http.get<Customer>(`${this.apiBaseUrl}/customer/${customerId}`);
   }

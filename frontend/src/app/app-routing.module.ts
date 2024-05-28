@@ -5,6 +5,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CustomersComponent } from './components/customers/customers.component';
 import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'adminPanel', component: AdminPanelComponent, canActivate: [adminGuard] },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'customers', component: CustomersComponent, canActivate: [adminGuard] },
   { path: 'customerPanel', component: CustomerPanelComponent, canActivate: [authGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },

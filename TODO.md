@@ -36,7 +36,7 @@
     - przeglądanie swoich zamówień --> ZROBIONE
 
 8. Utworzyć moduł do zarządzania zamówieniami przez Admina --> ZROBIONE.
-9. Usunąć 'inCheckoutProcess' po pomyślnym złożeniu zamówienia. 
+9. Usunąć 'inCheckoutProcess' po pomyślnym złożeniu zamówienia --> ZROBIONE
 10. Umożliwić zmianę hasła dla użytkownika, który zapomniał swojego hasła.
 11. Umożliwić złożenie zamówienia jako gość.
 12. W formularzu logowania przenieść pole 'Hasło' obok pola 'Potwierdź hasło'

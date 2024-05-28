@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
@@ -8,12 +9,42 @@ namespace MiodOdStaniula.Services
     {
         private readonly DbStoreContext _context;
         private readonly ILogger<CustomerService> _logger;
+        private readonly UserManager<UserModel> _userManager;
 
-        public CustomerService(DbStoreContext context, ILogger<CustomerService> logger)
+        public CustomerService(DbStoreContext context, ILogger<CustomerService> logger, UserManager<UserModel> userManager)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
+
+        public async Task<List<UserDto>> GetAllUsersAsync()
+        {
+            try
+            {
+                return await _userManager.Users
+                .Select(u => new UserDto
+                {
+                    Email = u.Email ?? string.Empty,
+                    Name = u.Name ?? string.Empty,
+                    Surname = u.Surname ?? string.Empty,
+                    City = u.City ?? string.Empty,
+                    Street = u.Street ?? string.Empty,
+                    Address = u.Address ?? string.Empty,
+                    PostalCode = u.PostalCode ?? string.Empty,
+                    PhoneNumber = u.PhoneNumber ?? string.Empty,
+                    RegistrationDate = u.RegistrationDate
+                })
+                .OrderBy(u => u.RegistrationDate)
+                .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching all users");
+                return new List<UserDto>();
+            }
+        }
+
 
         public async Task<UserDto?> GetUserAsync(string userId)
         {
@@ -39,7 +70,7 @@ namespace MiodOdStaniula.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error fetching user with ID {userId}");
-                return null;
+                throw;
             }
         }
 

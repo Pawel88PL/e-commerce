@@ -62,6 +62,27 @@ namespace MiodOdStaniula.Controllers
             return Ok(user);
         }
 
+
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetUsers()
+        {
+            try
+            {
+                var users = await _customerService.GetAllUsersAsync();
+                if (users == null || users.Count == 0)
+                {
+                    return NotFound("Nie znaleziono żadnych użytkowników.");
+                }
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Wystąpił błąd podczas pobierania użytkowników.");
+                return StatusCode(500, "Wystąpił błąd podczas pobierania użytkowników.");
+            }
+        }
+
+
         [HttpPost("{userId}")]
         public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserDto userDto)
         {

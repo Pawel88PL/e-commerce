@@ -128,7 +128,7 @@ namespace MiodOdStaniula.Services
                 var query = _context.Products!
                     .Include(p => p.Category)
                     .Include(p => p.ProductImages)
-                    .OrderBy(p => p.ProductId);
+                    .OrderBy(p => p.Priority);
 
                 var totalItems = await query.CountAsync();
                 var products = await query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToListAsync();

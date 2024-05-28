@@ -55,19 +55,6 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Hasło</mat-label>
-                        <input matInput type="password" formControlName="password">
-                        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Hasło jest
-                            wymagane</mat-error>
-                        <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Hasło musi zawierać
-                            co
-                            najmniej 6
-                            znaków</mat-error>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-sm-6">
-                    <mat-form-field appearance="fill">
                         <mat-label>Miasto</mat-label>
                         <input matInput type="city" formControlName="city">
                         <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Miasto jest
@@ -82,6 +69,9 @@
                             zawierać tylko
                             litery</mat-error>
                     </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
 
                     <mat-form-field appearance="fill">
                         <mat-label>Kod pocztowy</mat-label>
@@ -114,6 +104,17 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
+                        <mat-label>Hasło</mat-label>
+                        <input matInput type="password" formControlName="password">
+                        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Hasło jest
+                            wymagane</mat-error>
+                        <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Hasło musi zawierać
+                            co
+                            najmniej 6
+                            znaków</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
                         <mat-label>Potwierdź hasło</mat-label>
                         <input matInput type="password" formControlName="confirmPassword">
                         <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required')">
@@ -130,7 +131,8 @@
             <div class="mt-2">
                 <div class="termsAccepted">
                     <mat-checkbox formControlName="termsAccepted">
-                        Rejestrując się, akceptuję <a routerLink="/termsAndConditions">regulamin</a> sklepu oraz wyrażam zgodę
+                        Rejestrując się, akceptuję <a routerLink="/termsAndConditions">regulamin</a> sklepu oraz wyrażam
+                        zgodę
                         na przetwarzanie
                         moich danych osobowych zgodnie z <a routerLink="/privacyPolicy">polityką prywatności</a> w celu
                         realizacji usług

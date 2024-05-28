@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://miododstaniula.azurewebsites.net'
+    apiUrl: 'https://backend.miododstaniula.pl'
 };

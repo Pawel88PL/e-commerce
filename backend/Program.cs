@@ -83,6 +83,7 @@ namespace MiodOdStaniula
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins(
+                        "https://victorious-beach-0d045ed03.5.azurestaticapps.net/",
                         "https://www.miododstaniula.pl",
                         "https://miododstaniula.pl",
                         "https://www.angular.miododstaniula.pl",

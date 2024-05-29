@@ -35,7 +35,7 @@ namespace MiodOdStaniula
 
             builder.Services.AddDbContext<DbStoreContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("miodOdStaniula"));
             });
 
 
@@ -88,7 +88,8 @@ namespace MiodOdStaniula
                         "https://miododstaniula.pl",
                         "https://www.angular.miododstaniula.pl",
                         "https://angular.miododstaniula.pl",
-                        "http://localhost:4200")
+                        "http://localhost:4200",
+                        "https://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -102,7 +103,6 @@ namespace MiodOdStaniula
                 var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
                 try
                 {
-                    // Wywołanie metody do inicjalizacji ról
                     await RoleInitializer.CreateRoles(serviceProvider);
                 }
                 catch (Exception ex)
@@ -123,6 +123,10 @@ namespace MiodOdStaniula
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+
             app.UseCookiePolicy(new CookiePolicyOptions
             {
                 MinimumSameSitePolicy = SameSiteMode.Strict,
@@ -134,10 +138,7 @@ namespace MiodOdStaniula
                 app.UseRequestLocalization(locOptions.Value);
             }
 
-            app.UseRouting();
             app.UseCors("AllowSpecificOrigin");
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

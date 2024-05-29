@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  private apiBaseUrl = environment.apiUrl;
+  private Url = environment.apiUrl;
+  private apiBaseUrl = `${this.Url}/account`;
 
   constructor(private cartService: CartService, private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 

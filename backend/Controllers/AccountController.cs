@@ -118,7 +118,7 @@ namespace MiodOdStaniula.Controllers
                 await _userManager.AddToRoleAsync(newUser, "Client");
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
                 await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
-                return Ok();
+                return Ok(new { UserId = newUser.Id });
             }
             else
             {

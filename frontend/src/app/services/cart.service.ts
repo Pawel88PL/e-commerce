@@ -71,7 +71,7 @@ export class CartService {
   }
 
   private handleError(error: any) {
-    console.error('Wystąpił błąd!', error);
+    console.error('Wystąpił błąd ze strony serwisu koszyka', error);
     return throwError(() => new Error('Błąd ze strony serwera'));
   }
 }

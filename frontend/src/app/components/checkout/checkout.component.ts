@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -8,10 +9,12 @@ import { Router } from '@angular/router';
 })
 
 export class CheckoutComponent { 
-  constructor(private router: Router) { }
+  constructor( private authService: AuthService, private router: Router) { }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']);
+  navigateToGuestOrder() {
+    this.authService.setInCheckoutProcessAsGuest();
+    
+    this.router.navigate(['/guestOrder']);
   }
 
   navigateToLogin() {

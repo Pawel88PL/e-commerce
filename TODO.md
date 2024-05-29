@@ -39,6 +39,7 @@
 9. Usunąć 'inCheckoutProcess' po pomyślnym złożeniu zamówienia --> ZROBIONE
 10. Umożliwić zmianę hasła dla użytkownika, który zapomniał swojego hasła.
 11. Umożliwić złożenie zamówienia jako gość.
-12. W formularzu logowania przenieść pole 'Hasło' obok pola 'Potwierdź hasło'
-13. Dodać datę rejestracji użytkownika w bazie danych.
-14. Umożliwić administratorowi wgląd w bazę zarejestrowanych użytkowników.
+12. W formularzu logowania przenieść pole 'Hasło' obok pola 'Potwierdź hasło' --> ZROBIONE
+13. Dodać datę rejestracji użytkownika w bazie danych --> ZROBIONE
+14. Umożliwić administratorowi wgląd w bazę zarejestrowanych użytkowników --> ZROBIONE
+15. Dodać formatowanie pola 'Telefon' i 'Mail' w formularzu rejestracji --> ZROBIONE

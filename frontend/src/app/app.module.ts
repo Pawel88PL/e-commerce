@@ -51,7 +51,8 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
-import { CustomersComponent } from './components/customers/customers.component'
+import { CustomersComponent } from './components/customers/customers.component';
+import { GuestOrderComponent } from './components/guest-order/guest-order.component'
 
 registerLocaleData(localePl);
 
@@ -85,6 +86,7 @@ registerLocaleData(localePl);
     TermsAndConditionsComponent,
     PrivacyPolicyComponent,
     CustomersComponent,
+    GuestOrderComponent,
   ],
   imports: [
     AppRoutingModule,

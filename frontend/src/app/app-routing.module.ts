@@ -8,6 +8,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { CustomerPanelComponent } from './components/customer-panel/customer-panel.component';
 import { HomeComponent } from './components/home/home.component';
+import { GuestOrderComponent } from './components/guest-order/guest-order.component';
 import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
@@ -36,9 +37,10 @@ const routes: Routes = [
   { path: 'customers', component: CustomersComponent, canActivate: [adminGuard] },
   { path: 'customerPanel', component: CustomerPanelComponent, canActivate: [authGuard] },
   { path: 'home', component: HomeComponent },
+  { path: 'guestOrder', component: GuestOrderComponent },
   { path: 'login', component: LoginComponent },
   { path: 'order', component: OrderComponent, canActivate: [authGuard]},
-  { path: 'orderConfirmation', component: OrderConfirmationComponent, canActivate: [authGuard] },
+  { path: 'orderConfirmation', component: OrderConfirmationComponent },
   { path: 'order-details/:orderId', component: OrderDetailsComponent, canActivate: [authGuard] },
   { path: 'privacyPolicy', component: PrivacyPolicyComponent },
   { path: 'products', component: ProductListComponent },

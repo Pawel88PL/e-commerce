@@ -40,9 +40,22 @@ export class AuthService {
     );
   }
 
-  getInCheckoutProcess(): boolean {
-    const inCheckoutProcess = localStorage.getItem('inCheckoutProcess');
-    return inCheckoutProcess ? true : false;
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiBaseUrl}/register`, user).pipe(
+      tap(res => {
+        localStorage.setItem('userId', res.userId);
+        if (this.cartService.cartId) {
+          this.cartService.assignCartToUser(res.userId).subscribe();
+        }
+      }),
+      catchError(error => {
+        let message = 'Wystąpił błąd podczas rejestracji';
+        if (error.status === 400) {
+          message = error.error;
+        }
+        return throwError(() => new Error(message));
+      })
+    );
   }
 
   getName(): string | null {
@@ -75,14 +88,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  register(user: any): Observable<any> {
-    return this.http.post(`${this.apiBaseUrl}/register`, user);
-  }
-
-  removeInCheckoutProcess() {
-    localStorage.removeItem('inCheckoutProcess');
-  }
-
   setName(name: string) {
     localStorage.setItem('name', name);
   }
@@ -97,5 +102,19 @@ export class AuthService {
 
   setInCheckoutProcess() {
     localStorage.setItem('inCheckoutProcess', 'true');
+  }
+
+  setInCheckoutProcessAsGuest() {
+    localStorage.setItem('inCheckoutProcessAsGuest', 'true');
+  }
+
+  getInCheckoutProcess(): boolean {
+    const inCheckoutProcess = localStorage.getItem('inCheckoutProcess');
+    return inCheckoutProcess ? true : false;
+  }
+
+  removeInCheckoutProcess() {
+    localStorage.removeItem('inCheckoutProcess');
+    localStorage.removeItem('inCheckoutProcessAsGuest');
   }
 }

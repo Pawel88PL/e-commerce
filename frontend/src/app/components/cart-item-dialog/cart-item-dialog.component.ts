@@ -1,4 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -10,16 +11,20 @@ import { Router } from '@angular/router';
 })
 export class CartItemDialogComponent {
 
+  userId: string = localStorage.getItem('userId') || '';
+  
   constructor(
     public dialogRef: MatDialogRef<CartItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private authService: AuthService,
+    private cartService: CartService,
     private router: Router
   ) { }
 
   onCheckout(): void {
     this.authService.setInCheckoutProcess();
     if (this.authService.isLoggedIn()) {
+      this.cartService.assignCartToUser(this.userId).subscribe();
       this.router.navigate(['/order']);
     } else {
       this.router.navigate(['/checkout']);

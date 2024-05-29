@@ -1,0 +1,233 @@
+<div class="container">
+    <div class="order">
+        <div class="row">
+            <div class="col-md-7 personal-data">
+                <mat-card class="m-1">
+                    <mat-card-content>
+                        <form [formGroup]="registerForm" (ngSubmit)="placeOrder()">
+                            <h3 class="text-center">Kto zamawia</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Imię</mat-label>
+                                        <input matInput type="text" formControlName="name" #nameInput #autoFocusInput>
+                                        <mat-error *ngIf="registerForm.controls['name'].hasError('required')">Imię
+                                            jest
+                                            wymagane</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['name'].hasError('minlength')">Imię
+                                            jest za
+                                            krótkie</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['name'].hasError('maxlength')">Imię
+                                            może zawierać
+                                            maksymalnie 50
+                                            znaków</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['name'].hasError('lettersOnly')">Imię
+                                            może
+                                            zawierać
+                                            tylko
+                                            litery</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Nazwisko</mat-label>
+                                        <input matInput type="text" formControlName="surname" #surnameInput>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['surname'].hasError('required')">Nazwisko
+                                            jest
+                                            wymagane</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['surname'].hasError('minlength')">Nazwisko
+                                            jest za
+                                            krótkie</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['surname'].hasError('maxlength')">Nazwisko
+                                            może zawierać
+                                            maksymalnie
+                                            50 znaków</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['surname'].hasError('lettersOnly')">Nazwisko
+                                            może
+                                            zawierać tylko
+                                            litery</mat-error>
+                                    </mat-form-field>
+
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput type="email" formControlName="email">
+                                        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Twój
+                                            adres email jest
+                                            wymagany do złożenia zamówienia</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['email'].hasError('email')">Nieprawidłowy
+                                            format adresu
+                                            email</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Numer telefonu</mat-label>
+                                        <input matInput type="text" formControlName="phoneNumber" #phoneNumberInput>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Numer
+                                            telefonu jest
+                                            wymagany</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['phoneNumber'].hasError('pattern')">Nieprawidłowy
+                                            format
+                                            numeru
+                                            telefonu</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <h3 class="text-center">Gdzie mamy wysłać</h3>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Miasto</mat-label>
+                                        <input matInput type="text" formControlName="city" #cityInput>
+                                        <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Miasto
+                                            jest
+                                            wymagane</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['city'].hasError('minlength')">Nazwa
+                                            miasta jest za
+                                            krótka</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['city'].hasError('maxlength')">Nazwa
+                                            miasta może
+                                            zawierać
+                                            maksymalnie 50
+                                            znaków</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['city'].hasError('lettersOnly')">Nazwa
+                                            miasta może
+                                            zawierać tylko
+                                            litery</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Kod pocztowy</mat-label>
+                                        <input matInput type="text" formControlName="postalCode" #postalCodeInput>
+                                        <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Kod
+                                            pocztowy jest
+                                            wymagany</mat-error>
+                                        <mat-error
+                                            *ngIf="registerForm.controls['postalCode'].hasError('pattern')">Nieprawidłowy
+                                            format
+                                            kodu
+                                            pocztowego</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Ulica</mat-label>
+                                        <input matInput type="text" formControlName="street" #streetInput>
+                                        <mat-error *ngIf="registerForm.controls['street'].hasError('required')">Ulica
+                                            jest
+                                            wymagana</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['street'].hasError('maxlength')">Ulica
+                                            może
+                                            zawierać
+                                            maksymalnie 50
+                                            znaków</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Adres (nr domu/mieszkania)</mat-label>
+                                        <input matInput type="text" formControlName="address">
+                                        <mat-error *ngIf="registerForm.controls['address'].hasError('required')">Numer
+                                            domu/mieszkania
+                                            jest
+                                            wymagany</mat-error>
+                                        <mat-error *ngIf="registerForm.controls['address'].hasError('maxLength')">Zbyt
+                                            długi
+                                            adres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="mt-2">
+                                <div class="termsAccepted">
+                                    <mat-checkbox formControlName="termsAccepted">
+                                        Składając zamówienie akceptuję <a routerLink="/termsAndConditions">regulamin</a>
+                                        sklepu oraz wyrażam
+                                        zgodę
+                                        na przetwarzanie
+                                        moich danych osobowych zgodnie z <a routerLink="/privacyPolicy">polityką
+                                            prywatności</a> w celu
+                                        realizacji usług
+                                        oferowanych przez sklep.
+                                    </mat-checkbox>
+                                    <mat-error *ngIf="registerForm.controls['termsAccepted'].hasError('required')">*
+                                        Akceptacja
+                                        regulaminu jest
+                                        wymagana</mat-error>
+                                </div>
+                            </div>
+                            <mat-card-actions align="end">
+                                <button type="submit" class="btn btn-lg btn-dark mt-2 w-100"
+                                    [disabled]="registerForm.invalid">
+                                    Załóż zamówienie
+                                </button>
+                            </mat-card-actions>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="m-1 my-5">
+                    <mat-checkbox [(ngModel)]="isPickupInStore" (change)="toggleAddressFields(); calculateCosts()">Odbiór
+                        osobisty</mat-checkbox>
+                </mat-card>
+            </div>
+
+            <div class="col-md-5">
+                <mat-card class="cart m-1">
+                    <mat-card-header class="custom-card-header mb-2">
+                        <mat-card-title>Podsumowanie</mat-card-title>
+                        <button mat-button routerLink="/cart" class="edit-button"><i class="bi bi-pencil"></i>
+                            Edytuj</button>
+                    </mat-card-header>
+                    <mat-card-content *ngIf="items && items.length">
+                        <div class="row mb-4" *ngFor="let item of items">
+                            <div class="col-4">
+                                <img [src]="apiBaseUrl + item.imagePaths![0]" [alt]="item.name"
+                                    class="product-image rounded-3" />
+                            </div>
+                            <div class="col-8">
+                                <h3>{{ item.name }}</h3>
+                                <h3>{{ item.quantity }} * {{ item.price }} = {{ (item.price * item.quantity) | currency:
+                                    'PLN':
+                                    'symbol' }}</h3>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between">
+                                <p>Produkty:</p>
+                                <p>{{ productCost | currency: 'PLN': 'symbol' }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Koszt wysyłki:</p>
+                                <p>{{ shippingCost | currency: 'PLN': 'symbol' }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h4>Suma:</h4>
+                                <h4>{{ totalCost | currency: 'PLN': 'symbol' }}</h4>
+                            </div>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+                <div class="col-8 m-auto logo">
+                    <mat-card class="my-3">
+                        <mat-card-content>
+                            <img src="../../../assets/images/logo.jpeg" alt="logo" class="w-100">
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

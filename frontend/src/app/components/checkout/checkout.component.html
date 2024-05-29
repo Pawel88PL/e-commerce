@@ -1,22 +1,21 @@
-
 <div class="checkout-options">
     <h1>Aby kontynuować proces składania zamówienia wybierz jedną z poniższych opcji</h1>
     <br>
     <div class="row rounded-3 pt-4 shadow-lg">
         <div class="col-sm-6 mb-4">
-            <p>Jeśli nie masz jeszcze założonego konta, kliknij w przycisk poniżej</p>
+            <p>Jednorazowe zamówienie</p>
             <br>
-            <button type="button" class="btn btn-dark btn-lg my-3 w-100" (click)="navigateToRegister()">
-                Zarejestruj się
+            <button type="button" class="btn btn-dark btn-lg my-3 w-100" (click)="navigateToGuestOrder()">
+                Kup jako gość
             </button>
 
         </div>
         <div class="col-sm-6 mb-4">
-            <p>Jeśli jesteś naszym stałym klientem, zaloguj się do swojego konta</p>
+            <p>Mam założone konto</p>
             <br>
             <button type="button" class="btn btn-dark btn-lg my-3 w-100" (click)="navigateToLogin()">
                 Zaloguj się
             </button>
         </div>
-    </div>    
+    </div>
 </div>

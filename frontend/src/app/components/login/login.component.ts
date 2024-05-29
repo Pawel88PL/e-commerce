@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         success => {
           if (this.authService.getInCheckoutProcess()) {
             this.router.navigate(['/order']);
-            this.authService.removeInCheckoutProcess();
-          } else {
+          }
+          else {
             const roles = this.authService.getRoles();
             if (roles.includes('Admin')) {
               this.router.navigate(['/adminPanel']);

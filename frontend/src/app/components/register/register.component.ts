@@ -12,6 +12,13 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit, AfterViewInit {
 
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
+  @ViewChild('postalCodeInput') postalCodeInput!: ElementRef;
+  @ViewChild('phoneNumberInput') phoneNumberInput!: ElementRef;
+  @ViewChild('nameInput') nameInput!: ElementRef;
+  @ViewChild('surnameInput') surnameInput!: ElementRef;
+  @ViewChild('cityInput') cityInput!: ElementRef;
+  @ViewChild('streetInput') streetInput!: ElementRef;
+
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -42,6 +49,45 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.autoFocusInput.nativeElement.focus();
     });
+
+    this.postalCodeInput.nativeElement.addEventListener('input', this.onPostalCodeInputChange.bind(this));
+    this.phoneNumberInput.nativeElement.addEventListener('input', this.onPhoneNumberInputChange.bind(this));
+    this.nameInput.nativeElement.addEventListener('input', (event: Event) => this.changeFirstLettertoUpperInInputs(event, 'name'));
+    this.surnameInput.nativeElement.addEventListener('input', (event: Event) => this.changeFirstLettertoUpperInInputs(event, 'surname'));
+    this.cityInput.nativeElement.addEventListener('input', (event: Event) => this.changeFirstLettertoUpperInInputs(event, 'city'));
+    this.streetInput.nativeElement.addEventListener('input', (event: Event) => this.changeFirstLettertoUpperInInputs(event, 'street'));
+  }
+
+  onPostalCodeInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, '');
+
+    if (value.length > 2) {
+      value = value.substring(0, 2) + '-' + value.substring(2, 5);
+    }
+
+    input.value = value;
+    this.registerForm.controls['postalCode'].setValue(value, { emitEvent: false });
+  }
+
+  onPhoneNumberInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, '');
+
+    if (value.length > 6) {
+      value = value.substring(0, 3) + '-' + value.substring(3, 6) + '-' + value.substring(6, 9);
+    } else if (value.length > 3) {
+      value = value.substring(0, 3) + '-' + value.substring(3, 6);
+    }
+
+    input.value = value;
+    this.registerForm.controls['phoneNumber'].setValue(value, { emitEvent: false });
+  }
+
+  changeFirstLettertoUpperInInputs(event: Event, controlName: string): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.charAt(0).toUpperCase() + input.value.slice(1).toLowerCase();
+    this.registerForm.controls[controlName].setValue(input.value, { emitEvent: false });
   }
 
   lettersOnly(control: AbstractControl): ValidationErrors | null {
@@ -63,7 +109,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       return null;
     }
   }
-
 
   onSubmit() {
     if (this.registerForm.valid) {

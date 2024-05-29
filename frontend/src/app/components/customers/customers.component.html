@@ -13,6 +13,7 @@
                         <th>Telefon</th>
                         <th>Miasto</th>
                         <th>Data rejestracji</th>
+                        <th>Konto potwierdzone</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,7 @@
                         <td>{{ customer.phoneNumber }}</td>
                         <td>{{ customer.city }}</td>
                         <td>{{ customer.registrationDate }}</td>
+                        <td>{{ customer.emailConfirmed ? 'Tak' : 'Nie' }}</td>
                     </tr>
                 </tbody>
             </table>

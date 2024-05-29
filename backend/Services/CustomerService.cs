@@ -33,9 +33,10 @@ namespace MiodOdStaniula.Services
                     Address = u.Address ?? string.Empty,
                     PostalCode = u.PostalCode ?? string.Empty,
                     PhoneNumber = u.PhoneNumber ?? string.Empty,
-                    RegistrationDate = u.RegistrationDate
+                    RegistrationDate = u.RegistrationDate,
+                    EmailConfirmed = u.EmailConfirmed
                 })
-                .OrderBy(u => u.RegistrationDate)
+                .OrderByDescending(u => u.RegistrationDate)
                 .ToListAsync();
             }
             catch (Exception ex)

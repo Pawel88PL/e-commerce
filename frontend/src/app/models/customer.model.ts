@@ -11,5 +11,6 @@ export class Customer {
     address?: string;
     postalCode?: string;
     registrationDate?: Date;
+    emailConfirmed?: boolean;
     orders?: Order[];
 }

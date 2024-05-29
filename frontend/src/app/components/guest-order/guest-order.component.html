@@ -5,7 +5,7 @@
                 <mat-card class="m-1">
                     <mat-card-content>
                         <form [formGroup]="registerForm" (ngSubmit)="placeOrder()">
-                            <h3 class="text-center">Kto zamawia</h3>
+                            <h3 class="text-center">Twoje dane</h3>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field appearance="fill">
@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="row">
-                                <h3 class="text-center">Gdzie mamy wysłać</h3>
+                                <h3 class="text-center">Wysyłamy czy odbiór osobisty?</h3>
                                 <div class="col-sm-6">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Miasto</mat-label>
@@ -157,8 +157,7 @@
                                         na przetwarzanie
                                         moich danych osobowych zgodnie z <a routerLink="/privacyPolicy">polityką
                                             prywatności</a> w celu
-                                        realizacji usług
-                                        oferowanych przez sklep.
+                                        złożenia zamówienia.
                                     </mat-checkbox>
                                     <mat-error *ngIf="registerForm.controls['termsAccepted'].hasError('required')">*
                                         Akceptacja
@@ -177,7 +176,8 @@
                 </mat-card>
 
                 <mat-card class="m-1 my-5">
-                    <mat-checkbox [(ngModel)]="isPickupInStore" (change)="toggleAddressFields(); calculateCosts()">Odbiór
+                    <mat-checkbox [(ngModel)]="isPickupInStore"
+                        (change)="toggleAddressFields(); calculateCosts()">Odbiór
                         osobisty</mat-checkbox>
                 </mat-card>
             </div>

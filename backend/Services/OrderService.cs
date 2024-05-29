@@ -118,10 +118,10 @@ namespace MiodOdStaniula.Services
                     Name = order.User.Name,
                     Email = order.User.Email ?? string.Empty,
                     Surname = order.User.Surname,
-                    City = order.User.City,
-                    Street = order.User.Street,
-                    Address = order.User.Address,
-                    PostalCode = order.User.PostalCode,
+                    City = order.User.City ?? string.Empty,
+                    Street = order.User.Street ?? string.Empty,
+                    Address = order.User.Address ?? string.Empty,
+                    PostalCode = order.User.PostalCode ?? string.Empty,
                     PhoneNumber = order.User.PhoneNumber ?? string.Empty
                 } : null!,
                 OrderDetails = order.OrderDetails!.Select(od => new OrderDetailDTO

@@ -58,6 +58,10 @@ export class AuthService {
     );
   }
 
+  checkUserExists(email: string): Observable<any> {
+    return this.http.post(`${this.apiBaseUrl}/checkUserExists`, { email: email });
+  }
+
   getName(): string | null {
     return localStorage.getItem('name');
   }

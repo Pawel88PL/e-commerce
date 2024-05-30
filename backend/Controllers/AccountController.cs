@@ -20,13 +20,20 @@ namespace MiodOdStaniula.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
+        private readonly ICustomerService _customerService;
         private readonly IEmailService _emailService;
 
-        public AccountController(IConfiguration configuration, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager, IEmailService emailService)
+        public AccountController(
+            IConfiguration configuration,
+            UserManager<UserModel> userManager,
+            SignInManager<UserModel> signInManager,
+            ICustomerService customerService,
+            IEmailService emailService)
         {
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
+            _customerService = customerService;
             _emailService = emailService;
         }
 
@@ -92,44 +99,80 @@ namespace MiodOdStaniula.Controllers
             }
 
             var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
-            if (existingUser != null)
+
+            if (existingUser != null && userRegisterData.IsGuestClient == true)
+            {
+                var updateGuestUserAsync = await _customerService.UpdateGuestUserAsync(existingUser.Id, userRegisterData);
+                if (updateGuestUserAsync == true)
+                {
+                    return Ok(new { UserId = existingUser.Id });
+                }
+                else
+                {
+                    return BadRequest("Nie udało się zaktualizować danych klienta składającego zamówienie jako gość.");
+                }
+            }
+
+            if (existingUser != null && existingUser.IsGuestClient == true)
+            {
+                var registerGuestUser = await _customerService.UpdateGuestUserAsync(existingUser.Id, userRegisterData);
+                if (registerGuestUser == true)
+                {
+                    await _userManager.AddToRoleAsync(existingUser, "Client");
+                    if (existingUser.Email != null)
+                    {
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(existingUser);
+                        await _emailService.SendActivationEmail(existingUser.Email, existingUser.Id, existingUser.Name, token);
+                        return Ok(new { UserId = existingUser.Id });
+                    }
+                }
+                else
+                {
+                    return BadRequest("Nie udało się zmienić konta klienta.");
+                }
+            }
+
+            if (existingUser != null && userRegisterData.IsGuestClient == false)
             {
                 return BadRequest("Podany adres email jest już zarejestrowany.");
             }
-
-            var newUser = new UserModel
-            {
-                UserName = userRegisterData.Email,
-                Email = userRegisterData.Email,
-                Name = userRegisterData.Name,
-                Surname = userRegisterData.Surname,
-                City = userRegisterData.City,
-                PostalCode = userRegisterData.PostalCode,
-                Street = userRegisterData.Street,
-                Address = userRegisterData.Address,
-                PhoneNumber = userRegisterData.PhoneNumber,
-                RegistrationDate = DateOnly.FromDateTime(DateTime.Now),
-                IsGuestClient = userRegisterData.IsGuestClient,
-                TermsAccepted = userRegisterData.TermsAccepted
-            };
-
-            var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
-
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(newUser, "Client");
-                if (newUser.IsGuestClient == false)
-                {
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-                    await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
-                }
-                return Ok(new { UserId = newUser.Id });
-            }
             else
             {
-                return BadRequest(result.Errors);
+                var newUser = new UserModel
+                {
+                    UserName = userRegisterData.Email,
+                    Email = userRegisterData.Email,
+                    Name = userRegisterData.Name,
+                    Surname = userRegisterData.Surname,
+                    City = userRegisterData.City,
+                    PostalCode = userRegisterData.PostalCode,
+                    Street = userRegisterData.Street,
+                    Address = userRegisterData.Address,
+                    PhoneNumber = userRegisterData.PhoneNumber,
+                    RegistrationDate = DateOnly.FromDateTime(DateTime.Now),
+                    IsGuestClient = userRegisterData.IsGuestClient,
+                    TermsAccepted = userRegisterData.TermsAccepted
+                };
+
+                var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(newUser, "Client");
+                    if (newUser.IsGuestClient == false)
+                    {
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                        await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
+                    }
+                    return Ok(new { UserId = newUser.Id });
+                }
+                else
+                {
+                    return BadRequest(result.Errors);
+                }
             }
         }
+
 
         private string GenerateJwtTokenForUser(string userName)
         {

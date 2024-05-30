@@ -101,5 +101,43 @@ namespace MiodOdStaniula.Services
                 return false;
             }
         }
+
+        public async Task<bool> UpdateGuestUserAsync(string userId, Register registerData)
+        {
+            try
+            {
+                var user = await _context.Users.FindAsync(userId);
+                if (user == null) return false;
+
+                user.Name = registerData.Name;
+                user.Surname = registerData.Surname;
+                user.PhoneNumber = registerData.PhoneNumber;
+                user.City = registerData.City;
+                user.Street = registerData.Street;
+                user.Address = registerData.Address;
+                user.PostalCode = registerData.PostalCode;
+                user.IsGuestClient = registerData.IsGuestClient;
+
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, "temporaryPassword", registerData.Password);
+                if (!changePasswordResult.Succeeded)
+                {
+                    var incorrectPasswordError = changePasswordResult.Errors.FirstOrDefault(e => e.Code == "PasswordMismatch");
+                    if (incorrectPasswordError != null)
+                    {
+                        return false;
+                    }
+
+                    return false;
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating user with ID {userId}");
+                return false;
+            }
+        }
     }
 }

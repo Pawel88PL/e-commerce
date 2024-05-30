@@ -24,6 +24,9 @@ namespace MiodOdStaniula.Models
         public string? PostalCode { get; set; }
 
         public DateOnly RegistrationDate { get; set; }
+
+        public bool IsGuestClient { get; set; }
+        public bool TermsAccepted { get; set; }
     }
 
     public class UserDto
@@ -38,6 +41,8 @@ namespace MiodOdStaniula.Models
         public string PhoneNumber { get; set; } = string.Empty;
         public DateOnly RegistrationDate { get; set; }
         public bool EmailConfirmed { get; set; }
+        public bool IsGuestClient { get; set; }
+        public bool TermsAccepted { get; set; }
     }
 
     public class ChangePasswordModel

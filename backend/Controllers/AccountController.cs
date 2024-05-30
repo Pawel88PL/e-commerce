@@ -42,7 +42,7 @@ namespace MiodOdStaniula.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                return Redirect("https://miododstaniula.pl/");
+                return Redirect("https://miododstaniula.pl/cart");
             }
             else
             {
@@ -108,7 +108,9 @@ namespace MiodOdStaniula.Controllers
                 Street = userRegisterData.Street,
                 Address = userRegisterData.Address,
                 PhoneNumber = userRegisterData.PhoneNumber,
-                RegistrationDate = DateOnly.FromDateTime(DateTime.Now)
+                RegistrationDate = DateOnly.FromDateTime(DateTime.Now),
+                IsGuestClient = userRegisterData.IsGuestClient,
+                TermsAccepted = userRegisterData.TermsAccepted
             };
 
             var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
@@ -116,8 +118,11 @@ namespace MiodOdStaniula.Controllers
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, "Client");
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-                await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
+                if (newUser.IsGuestClient == false)
+                {
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                    await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
+                }
                 return Ok(new { UserId = newUser.Id });
             }
             else

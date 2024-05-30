@@ -54,7 +54,8 @@
                                 </div>
                             </div>
                             <div class="col-md-4 d-flex justify-content-center align-items-center mb-3">
-                                <button mat-raised-button routerLink="/customerPanel">Historia zamówień</button>
+                                <button mat-raised-button routerLink="/customerPanel" [disabled]="!authService.isLoggedIn()">Historia
+                                    zamówień</button>
                             </div>
                         </div>
 

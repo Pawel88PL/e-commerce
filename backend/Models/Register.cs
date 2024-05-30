@@ -28,6 +28,9 @@ namespace MiodOdStaniula.Models
         [StringLength(15)]
         public string? PhoneNumber { get; set; }
 
+        public bool IsGuestClient { get; set; }
+        public bool TermsAccepted { get; set; }
+
         [StringLength(100)]
         public string Password { get; set; } = string.Empty;
     }

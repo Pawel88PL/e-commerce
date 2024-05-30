@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiodOdStaniula;
 
@@ -11,9 +12,11 @@ using MiodOdStaniula;
 namespace MiodOdStaniula.Migrations
 {
     [DbContext(typeof(DbStoreContext))]
-    partial class DbStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240530060137_IsGuestClient")]
+    partial class IsGuestClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -423,9 +426,6 @@ namespace MiodOdStaniula.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("TermsAccepted")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

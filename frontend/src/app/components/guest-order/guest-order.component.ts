@@ -96,7 +96,8 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
       address: ['', [Validators.required, Validators.maxLength(50)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/)]],
       password: ['temporaryPassword'],
-      termsAccepted: [false, Validators.requiredTrue]
+      termsAccepted: [false, Validators.requiredTrue],
+      isGuestClient: [true]
     });
   }
 
@@ -149,6 +150,7 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
     const letters = /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/;
     return letters.test(control.value) ? null : { 'lettersOnly': true };
   }
+
   toggleAddressFields(): void {
     if (this.isPickupInStore) {
       this.registerForm.get('city')?.disable();

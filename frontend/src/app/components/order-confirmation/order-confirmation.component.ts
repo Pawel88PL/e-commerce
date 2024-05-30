@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from 'src/app/models/order.model';
@@ -16,8 +17,11 @@ export class OrderConfirmationComponent implements OnInit {
   orderDetails: Order | null = null;
   shippingCost: number = SHIPPING_COST;
   deliveryMethod: string = '';
-  
-  constructor(private route: ActivatedRoute, private orderService: OrderService) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    public authService: AuthService,
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.orderId = this.route.snapshot.queryParamMap.get('orderId');

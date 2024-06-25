@@ -25,7 +25,7 @@ namespace MiodOdStaniula.Services
         public async Task SendActivationEmail(string email, string userId, string name, string token)
         {
             var encodedToken = WebUtility.UrlEncode(token);
-            var activationLink = $"{_baseUrl}/activate?userId={userId}&token={encodedToken}";
+            var activationLink = $"{_baseUrl}/account/activate?userId={userId}&token={encodedToken}";
 
             string emailBody = $@"
             

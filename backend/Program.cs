@@ -9,6 +9,8 @@ using MiodOdStaniula.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using backend.Interfaces;
+using backend.Services;
 
 
 namespace MiodOdStaniula
@@ -26,6 +28,7 @@ namespace MiodOdStaniula
 
             builder.Services.AddControllers();
 
+            builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICustomerService, CustomerService>();

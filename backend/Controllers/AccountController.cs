@@ -1,38 +1,24 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Identity;
+﻿using backend.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using MiodOdStaniula.Models;
 using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Controllers
+namespace backend.Controllers
 {
     [ApiController]
     [Route("account")]
     public class AccountController : Controller
     {
-        private readonly IConfiguration _configuration;
-        private readonly UserManager<UserModel> _userManager;
-        private readonly SignInManager<UserModel> _signInManager;
+        private readonly IAccountService _accountService;
         private readonly ICustomerService _customerService;
         private readonly IEmailService _emailService;
 
         public AccountController(
-            IConfiguration configuration,
-            UserManager<UserModel> userManager,
-            SignInManager<UserModel> signInManager,
+            IAccountService accountService,
             ICustomerService customerService,
             IEmailService emailService)
         {
-            _configuration = configuration;
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _accountService = accountService;
             _customerService = customerService;
             _emailService = emailService;
         }
@@ -40,13 +26,13 @@ namespace MiodOdStaniula.Controllers
         [HttpGet("activate")]
         public async Task<IActionResult> ActivateAccount(string userId, string token)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _accountService.FindByIdAsync(userId);
             if (user == null)
             {
                 return NotFound("Nie znaleziono użytkownika.");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _accountService.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
                 return Redirect("https://miododstaniula.pl/cart");
@@ -57,7 +43,6 @@ namespace MiodOdStaniula.Controllers
             }
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login userLoginData)
         {
@@ -66,30 +51,23 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(userLoginData.Email!, userLoginData.Password!, isPersistent: true, lockoutOnFailure: false);
+            var result = await _accountService.PasswordSignInAsync(userLoginData.Email!, userLoginData.Password!);
 
-            if (!result.Succeeded)
+            if (!result)
             {
                 return Unauthorized("Podany email lub hasło są nieprawidłowe.");
             }
 
-            if (string.IsNullOrEmpty(userLoginData.Email))
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = await _userManager.FindByEmailAsync(userLoginData.Email);
+            var user = await _accountService.FindByEmailAsync(userLoginData.Email);
             if (user == null || !user.EmailConfirmed)
             {
                 return Unauthorized("Konto nie zostało aktywowane.");
             }
 
-            var token = GenerateJwtTokenForUser(user);
+            var token = _accountService.GenerateJwtTokenForUser(user);
 
             return Ok(new { Token = token });
         }
-
-
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] Register userRegisterData)
@@ -99,7 +77,7 @@ namespace MiodOdStaniula.Controllers
                 return BadRequest(ModelState);
             }
 
-            var existingUser = await _userManager.FindByEmailAsync(userRegisterData.Email);
+            var existingUser = await _accountService.FindByEmailAsync(userRegisterData.Email);
 
             if (existingUser != null && userRegisterData.IsGuestClient == true)
             {
@@ -119,10 +97,10 @@ namespace MiodOdStaniula.Controllers
                 var registerGuestUser = await _customerService.UpdateGuestUserAsync(existingUser.Id, userRegisterData);
                 if (registerGuestUser == true)
                 {
-                    await _userManager.AddToRoleAsync(existingUser, "Client");
+                    await _accountService.AddToRoleAsync(existingUser, "Client");
                     if (existingUser.Email != null)
                     {
-                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(existingUser);
+                        var token = await _accountService.GenerateEmailConfirmationTokenAsync(existingUser);
                         await _emailService.SendActivationEmail(existingUser.Email, existingUser.Id, existingUser.Name, token);
                         return Ok(new { UserId = existingUser.Id });
                     }
@@ -155,14 +133,14 @@ namespace MiodOdStaniula.Controllers
                     TermsAccepted = userRegisterData.TermsAccepted
                 };
 
-                var result = await _userManager.CreateAsync(newUser, userRegisterData.Password!);
+                var result = await _accountService.CreateAsync(newUser, userRegisterData.Password!);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(newUser, "Client");
+                    await _accountService.AddToRoleAsync(newUser, "Client");
                     if (newUser.IsGuestClient == false)
                     {
-                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                        var token = await _accountService.GenerateEmailConfirmationTokenAsync(newUser);
                         await _emailService.SendActivationEmail(newUser.Email, newUser.Id, newUser.Name, token);
                     }
                     return Ok(new { UserId = newUser.Id });
@@ -172,39 +150,6 @@ namespace MiodOdStaniula.Controllers
                     return BadRequest(result.Errors);
                 }
             }
-        }
-
-
-        private string GenerateJwtTokenForUser(UserModel user)
-        {
-            var jwtKey = _configuration["Jwt:Key"];
-            if (string.IsNullOrEmpty(jwtKey))
-            {
-                throw new InvalidOperationException("JWT Key is not set in the configuration.");
-            }
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new List<Claim>
-            {
-                new (JwtRegisteredClaimNames.Sub, user.UserName ?? string.Empty),
-                new (ClaimTypes.NameIdentifier, user.Id),
-                new (ClaimTypes.Name, user.Name ?? string.Empty),
-                new (ClaimTypes.Email, user.Email ?? string.Empty)
-            };
-
-            var roles = _userManager.GetRolesAsync(user).Result;
-            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(60),
-                signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
     }

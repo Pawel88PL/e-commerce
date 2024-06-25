@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
   cardId: string = localStorage.getItem('cartId') || '';
-  userId: string = localStorage.getItem('userId') || '';
+  userId: string = this.authService.getUserId() || '';
 
   constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
 

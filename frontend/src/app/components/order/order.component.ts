@@ -22,7 +22,7 @@ import { query } from '@angular/animations';
 export class OrderComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
   cartId: string = localStorage.getItem('cartId') || '';
-  userId: string = localStorage.getItem('userId') || '';
+  userId: string = this.authService.getUserId() || '';
   customer: Customer = {};
   items: CartItem[] = [];
   isLoading = false;
@@ -87,7 +87,7 @@ export class OrderComponent implements OnInit {
   }
 
   loadCustomerData() {
-    const userId = localStorage.getItem('userId');
+    const userId = this.authService.getUserId();
     if (userId) {
       this.customerService.getCustomer(userId).subscribe(
         (customer: Customer) => {

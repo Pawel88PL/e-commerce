@@ -66,7 +66,7 @@ export class CustomerPanelComponent implements OnInit {
 
   changePassword() {
     if (this.changePasswordForm.valid) {
-      const userId = localStorage.getItem('userId');
+      const userId = this.authService.getUserId();
       const passwordChangeRequest = this.changePasswordForm.value;
       if (userId) {
         this.customerService.changePassword(userId, passwordChangeRequest).subscribe({
@@ -96,7 +96,7 @@ export class CustomerPanelComponent implements OnInit {
   }
 
   loadCustomerData() {
-    const userId = localStorage.getItem('userId');
+    const userId = this.authService.getUserId();
     if (userId) {
       this.customerService.getCustomer(userId).subscribe(
         customer => {
@@ -111,7 +111,7 @@ export class CustomerPanelComponent implements OnInit {
   }
 
   loadOrdersHistory() {
-    const userId = localStorage.getItem('userId');
+    const userId = this.authService.getUserId();
     if (userId) {
       this.isLoading = true;
       this.orderService.getOrdersHistory(userId).subscribe({
@@ -156,7 +156,7 @@ export class CustomerPanelComponent implements OnInit {
 
   updateCustomerData() {
     if (this.customerDataForm.valid) {
-      const userId = localStorage.getItem('userId');
+      const userId = this.authService.getUserId();
       if (userId) {
         this.customerService.updateCustomer(userId, this.customerDataForm.value).subscribe({
           next: () => {

@@ -1,33 +1,35 @@
-import { CartService } from './cart.service';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, observeOn, tap, catchError, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap, catchError, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { CartService } from './cart.service';
+import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
 
   private Url = environment.apiUrl;
   private apiBaseUrl = `${this.Url}/account`;
 
-  constructor(private cartService: CartService, private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private cartService: CartService,
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private jwtService: JwtService
+  ) { }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiBaseUrl}/login`, { email, password }).pipe(
       tap(res => {
         this.setToken(res.token);
-        this.setRoles(res.roles);
-        if (res.name) {
-          this.setName(res.name);
-        };
-        localStorage.setItem('userId', res.userId);
+        const decodedToken = this.jwtService.decodeToken(res.token);
         if (this.cartService.cartId) {
-          this.cartService.assignCartToUser(res.userId).subscribe();
+          this.cartService.assignCartToUser(decodedToken.nameid).subscribe();
         }
       }),
       catchError(error => {
@@ -40,12 +42,14 @@ export class AuthService {
     );
   }
 
+
   register(user: any): Observable<any> {
     return this.http.post<any>(`${this.apiBaseUrl}/register`, user).pipe(
       tap(res => {
-        localStorage.setItem('userId', res.userId);
+        this.setToken(res.token);
+        const decodedToken = this.jwtService.decodeToken(res.token);
         if (this.cartService.cartId) {
-          this.cartService.assignCartToUser(res.userId).subscribe();
+          this.cartService.assignCartToUser(decodedToken.nameid).subscribe();
         }
       }),
       catchError(error => {
@@ -62,13 +66,29 @@ export class AuthService {
     return this.http.post(`${this.apiBaseUrl}/checkUserExists`, { email: email });
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   getName(): string | null {
-    return localStorage.getItem('name');
+    const token = this.getToken();
+    if (!token) return null;
+    const decodedToken = this.jwtService.decodeToken(token);
+    return decodedToken.unique_name;
   }
 
   getRoles(): string[] {
-    const roles = localStorage.getItem('roles');
-    return roles ? JSON.parse(roles) : [];
+    const token = this.getToken();
+    if (!token) return [];
+    const decodedToken = this.jwtService.decodeToken(token);
+    return Array.isArray(decodedToken.role) ? decodedToken.role : [decodedToken.role];
+  }
+
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+    const decodedToken = this.jwtService.decodeToken(token);
+    return decodedToken.nameid;
   }
 
   isAdmin(): boolean {
@@ -82,33 +102,24 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    const token = this.getToken();
+    return !!token && !this.jwtService.isTokenExpired(token);
   }
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    localStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
 
-  setName(name: string) {
-    localStorage.setItem('name', name);
-  }
-
-  setRoles(roles: string[]) {
-    localStorage.setItem('roles', JSON.stringify(roles));
-  }
-
-  setToken(token: string) {
+  setToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  setInCheckoutProcess() {
+  setInCheckoutProcess(): void {
     localStorage.setItem('inCheckoutProcess', 'true');
   }
 
-  setInCheckoutProcessAsGuest() {
+  setInCheckoutProcessAsGuest(): void {
     localStorage.setItem('inCheckoutProcessAsGuest', 'true');
   }
 
@@ -117,7 +128,7 @@ export class AuthService {
     return inCheckoutProcess ? true : false;
   }
 
-  removeInCheckoutProcess() {
+  removeInCheckoutProcess(): void {
     localStorage.removeItem('inCheckoutProcess');
     localStorage.removeItem('inCheckoutProcessAsGuest');
   }

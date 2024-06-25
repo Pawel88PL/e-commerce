@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CartItemDialogComponent {
 
-  userId: string = localStorage.getItem('userId') || '';
+  userId: string = this.authService.getUserId() || '';
   
   constructor(
     public dialogRef: MatDialogRef<CartItemDialogComponent>,

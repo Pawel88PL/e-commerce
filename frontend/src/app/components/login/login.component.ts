@@ -41,12 +41,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.isLoading = true;
       this.authService.login(loginData.email, loginData.password).subscribe(
         success => {
+          this.isLoading = false;
           if (this.authService.getInCheckoutProcess()) {
             this.router.navigate(['/order']);
-          }
-          else {
-            const roles = this.authService.getRoles();
-            if (roles.includes('Admin')) {
+          } else {
+            if (this.authService.isAdmin()) {
               this.router.navigate(['/adminPanel']);
             } else {
               this.router.navigate(['/products']);

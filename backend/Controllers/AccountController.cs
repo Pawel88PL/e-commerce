@@ -83,11 +83,12 @@ namespace MiodOdStaniula.Controllers
             {
                 return Unauthorized("Konto nie zostało aktywowane.");
             }
-            var roles = await _userManager.GetRolesAsync(user!);
-            var token = GenerateJwtTokenForUser(userLoginData.Email);
 
-            return Ok(new { Token = token, Roles = roles, user!.Name, UserId = user.Id });
+            var token = GenerateJwtTokenForUser(user);
+
+            return Ok(new { Token = token });
         }
+
 
 
         [HttpPost("register")]
@@ -174,7 +175,7 @@ namespace MiodOdStaniula.Controllers
         }
 
 
-        private string GenerateJwtTokenForUser(string userName)
+        private string GenerateJwtTokenForUser(UserModel user)
         {
             var jwtKey = _configuration["Jwt:Key"];
             if (string.IsNullOrEmpty(jwtKey))
@@ -187,17 +188,24 @@ namespace MiodOdStaniula.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userName),
+                new (JwtRegisteredClaimNames.Sub, user.UserName ?? string.Empty),
+                new (ClaimTypes.NameIdentifier, user.Id),
+                new (ClaimTypes.Name, user.Name ?? string.Empty),
+                new (ClaimTypes.Email, user.Email ?? string.Empty)
             };
+
+            var roles = _userManager.GetRolesAsync(user).Result;
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(120),
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

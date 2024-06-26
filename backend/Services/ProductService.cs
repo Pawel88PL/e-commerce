@@ -98,13 +98,14 @@ namespace MiodOdStaniula.Services
             }
         }
 
+        
+        // Funkcja zwraca listę wszystkich produktów, którą admin wyświetla w swoim magazynie.
         public async Task<ServiceResult<IEnumerable<ProductDto>>> GetAllProductsAsync()
         {
             try
             {
                 var products = await _context.Products!
                     .Include(p => p.Category)
-                    .Include(p => p.ProductImages)
                     .ToListAsync();
 
                 var productDtos = products.Select(MapToProductDto).ToList();
@@ -121,6 +122,8 @@ namespace MiodOdStaniula.Services
             }
         }
 
+        // Funkcja zwraca listę produktów, które mają wartość AmountAvailable > 0.
+        // Lista ta jest wyświetlana na stronie głównej sklepu.
         public async Task<ServiceResult<PaginatedList<ProductDto>>> GetAllProductsAsync(int page, int itemsPerPage)
         {
             try
@@ -128,6 +131,7 @@ namespace MiodOdStaniula.Services
                 var query = _context.Products!
                     .Include(p => p.Category)
                     .Include(p => p.ProductImages)
+                    .Where(p => p.AmountAvailable > 0)
                     .OrderBy(p => p.Priority);
 
                 var totalItems = await query.CountAsync();

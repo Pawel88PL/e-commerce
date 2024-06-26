@@ -50,6 +50,11 @@ namespace backend.Services
             return result.Succeeded;
         }
 
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         public async Task<string> GenerateEmailConfirmationTokenAsync(UserModel user)
         {
             return await _userManager.GenerateEmailConfirmationTokenAsync(user);

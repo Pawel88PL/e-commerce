@@ -152,5 +152,12 @@ namespace backend.Controllers
             }
         }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountService.SignOutAsync();
+            return Ok();
+        }
+
     }
 }

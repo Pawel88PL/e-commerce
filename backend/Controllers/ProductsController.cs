@@ -15,6 +15,7 @@ namespace MiodOdStaniula.Controllers
             _productService = productService;
         }
 
+        // Endpoint zwracający listę wszystkich produktów, które admin wyświetla w module magazynu
         [HttpGet("all")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -26,6 +27,7 @@ namespace MiodOdStaniula.Controllers
             return NotFound(new { message = result.ErrorMessage });
         }
 
+        // Endpoint zwracający listę dostępnych produktów, które klient wyświetla w sklepie
         [HttpGet]
         public async Task<IActionResult> GetAllProductsByPage([FromQuery] int page, [FromQuery] int itemsPerPage)
         {
@@ -65,6 +67,7 @@ namespace MiodOdStaniula.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = result.Data!.ProductId }, result.Data);
         }
 
+
         [HttpPost("delete/{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
@@ -75,6 +78,7 @@ namespace MiodOdStaniula.Controllers
             }
             return NoContent();
         }
+
 
         [HttpPost("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)

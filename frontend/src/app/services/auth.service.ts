@@ -107,8 +107,18 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    this.http.post(`${this.apiBaseUrl}/logout`, {}).subscribe({
+      next: () => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Error during logout:', error);
+        this.snackBar.open('Wystąpił błąd podczas wylogowywania.', 'Zamknij', {
+          duration: 5000,
+        });
+      }
+    });
   }
 
   setToken(token: string): void {

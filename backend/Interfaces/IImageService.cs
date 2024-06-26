@@ -1,6 +1,6 @@
-using MiodOdStaniula.Models;
+using backend.Services;
 
-namespace MiodOdStaniula.Services.Interfaces
+namespace backend.Interfaces
 {
     public interface IImageService
     {

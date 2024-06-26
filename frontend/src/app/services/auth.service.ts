@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -107,19 +107,27 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.post(`${this.apiBaseUrl}/logout`, {}).subscribe({
-      next: () => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Error during logout:', error);
-        this.snackBar.open('Wystąpił błąd podczas wylogowywania.', 'Zamknij', {
-          duration: 5000,
-        });
-      }
-    });
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.http.post(`${this.apiBaseUrl}/logout`, {}, { headers }).subscribe({
+        next: () => {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Error during logout:', error);
+          this.snackBar.open('Wystąpił błąd podczas wylogowywania.', 'Zamknij', {
+            duration: 5000,
+          });
+        }
+      });
+    } else {
+      // Jeśli token nie istnieje, od razu przejdź do strony logowania
+      this.router.navigate(['/login']);
+    }
   }
+
 
   setToken(token: string): void {
     localStorage.setItem('token', token);

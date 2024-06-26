@@ -1,6 +1,6 @@
-using MiodOdStaniula.Models;
+using backend.Models;
 
-namespace MiodOdStaniula.Services.Interfaces
+namespace backend.Interfaces
 {
     public interface IOrderService
     {

@@ -1,14 +1,14 @@
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
+using backend.Data;
+using backend.Interfaces;
 
-namespace MiodOdStaniula.Services
+namespace backend.Services
 {
     public class ImageService : IImageService
     {
-        private readonly DbStoreContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ImageService(DbStoreContext context, IWebHostEnvironment webHostEnvironment)
+        public ImageService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;

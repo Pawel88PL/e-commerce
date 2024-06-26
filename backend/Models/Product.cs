@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class Product
     {

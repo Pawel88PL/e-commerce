@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services;
-using MiodOdStaniula.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using backend.Interfaces;
 using backend.Services;
+using backend.Data;
+using backend.Middleware;
+using backend.Models;
 
 
-namespace MiodOdStaniula
+namespace backend
 {
     public class Program
     {
@@ -35,8 +35,9 @@ namespace MiodOdStaniula
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
-            builder.Services.AddDbContext<DbStoreContext>(options =>
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("miodOdStaniula"));
             });
@@ -50,7 +51,7 @@ namespace MiodOdStaniula
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
 
-            }).AddEntityFrameworkStores<DbStoreContext>()
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
             var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
@@ -144,6 +145,7 @@ namespace MiodOdStaniula
             app.UseCors("AllowSpecificOrigin");
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<TokenValidationMiddleware>();
             app.MapControllers();
 
             app.Run();

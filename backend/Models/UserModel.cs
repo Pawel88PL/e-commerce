@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class UserModel: IdentityUser
     {

@@ -1,7 +1,7 @@
+using backend.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Controllers
+namespace backend.Controllers
 {
     [ApiController]
     [Route("media")]

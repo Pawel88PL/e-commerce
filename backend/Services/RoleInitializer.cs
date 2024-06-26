@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace MiodOdStaniula.Services{
+namespace backend.Services
+{
 
     public class RoleInitializer
     {

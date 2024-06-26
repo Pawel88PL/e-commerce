@@ -1,4 +1,5 @@
-namespace MiodOdStaniula.Models{
+namespace backend.Models
+{
     public class PaginatedList<T>
     {
         public List<T> Items { get; private set; }
@@ -6,6 +7,7 @@ namespace MiodOdStaniula.Models{
         public int TotalPages { get; private set; }
         public int TotalItems { get; private set; }
         public int ItemsPerPage { get; private set; }
+        
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {

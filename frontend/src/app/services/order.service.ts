@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -23,7 +23,17 @@ export class OrderService {
   }
 
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.orderUrl}/allOrders`)
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError('Token not found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    
+    return this.http.get<Order[]>(`${this.orderUrl}/allOrders`, { headers })
       .pipe(catchError(this.handleError));
   }
 

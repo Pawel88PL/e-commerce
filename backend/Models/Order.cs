@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MiodOdStaniula.Models;
 
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class Order
     {

@@ -1,15 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
+﻿using backend.Data;
+using backend.Interfaces;
+using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace MiodOdStaniula.Services
+
+namespace backend.Services
 {
     public class ProductService : IProductService
     {
-        private readonly DbStoreContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<ProductService> _logger;
 
-        public ProductService(DbStoreContext context, ILogger<ProductService> logger)
+        public ProductService(ApplicationDbContext context, ILogger<ProductService> logger)
         {
             _context = context;
             _logger = logger;

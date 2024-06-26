@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class ProductImageDto
     {

@@ -1,5 +1,5 @@
+using backend.Models;
 using Microsoft.AspNetCore.Identity;
-using MiodOdStaniula.Models;
 
 namespace backend.Interfaces
 {

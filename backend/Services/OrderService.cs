@@ -1,19 +1,20 @@
 using System.Globalization;
+using backend.Data;
+using backend.Interfaces;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Services
+namespace backend.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly DbStoreContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
         private readonly ILogger<OrderService> _logger;
         private decimal _shippingCost;
 
-        public OrderService(DbStoreContext context, IEmailService emailService, IConfiguration configuration, ILogger<OrderService> logger)
+        public OrderService(ApplicationDbContext context, IEmailService emailService, IConfiguration configuration, ILogger<OrderService> logger)
         {
             _context = context;
             _configuration = configuration;

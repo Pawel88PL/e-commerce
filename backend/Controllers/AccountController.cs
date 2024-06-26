@@ -1,7 +1,7 @@
 ﻿using backend.Interfaces;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
+
 
 namespace backend.Controllers
 {
@@ -12,15 +12,18 @@ namespace backend.Controllers
         private readonly IAccountService _accountService;
         private readonly ICustomerService _customerService;
         private readonly IEmailService _emailService;
+        private readonly ITokenService _tokenService;
 
         public AccountController(
             IAccountService accountService,
             ICustomerService customerService,
-            IEmailService emailService)
+            IEmailService emailService,
+            ITokenService tokenService)
         {
             _accountService = accountService;
             _customerService = customerService;
             _emailService = emailService;
+            _tokenService = tokenService;
         }
 
         [HttpGet("activate")]
@@ -155,9 +158,10 @@ namespace backend.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            await _tokenService.RevokeTokenAsync(token);
             await _accountService.SignOutAsync();
             return Ok();
         }
-
     }
 }

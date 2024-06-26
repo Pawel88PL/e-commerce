@@ -1,4 +1,4 @@
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class ProductDto
     {

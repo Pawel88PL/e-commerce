@@ -1,17 +1,19 @@
+using backend.Data;
+using backend.Interfaces;
+using backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Services
+
+namespace backend.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly DbStoreContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<CustomerService> _logger;
         private readonly UserManager<UserModel> _userManager;
 
-        public CustomerService(DbStoreContext context, ILogger<CustomerService> logger, UserManager<UserModel> userManager)
+        public CustomerService(ApplicationDbContext context, ILogger<CustomerService> logger, UserManager<UserModel> userManager)
         {
             _context = context;
             _logger = logger;

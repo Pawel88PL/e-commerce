@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using backend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MiodOdStaniula.Models;
-using System.Reflection.Emit;
 
-namespace MiodOdStaniula
+namespace backend.Data
 {
-    public class DbStoreContext : IdentityDbContext<UserModel>
+    public class ApplicationDbContext : IdentityDbContext<UserModel>
     {
-        public DbStoreContext(DbContextOptions<DbStoreContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         
         public DbSet<Product>? Products { get; set; }
@@ -17,6 +16,7 @@ namespace MiodOdStaniula
         public DbSet<CartItem>? CartItem { get; set; }
         public DbSet<Order>? Orders { get; set; }
         public DbSet<OrderDetail>? OrderDetails{ get; set; }
+        public DbSet<RevokedToken> RevokedTokens { get; set; }
 
 
 

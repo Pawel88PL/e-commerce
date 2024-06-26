@@ -1,4 +1,5 @@
-namespace MiodOdStaniula{
+namespace backend.Models
+{
     public class JwtSettings
     {
         public string? Key { get; set; }
@@ -6,5 +7,4 @@ namespace MiodOdStaniula{
         public string? Audience { get; set; }
         public int ExpireMinutes { get; set; }
     }
-
 }

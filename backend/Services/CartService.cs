@@ -1,16 +1,16 @@
+using backend.Data;
+using backend.Interfaces;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Services
+namespace backend.Services
 {
     public class CartService : ICartService
     {
-        private readonly DbStoreContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<CartService> _logger;
 
-        public CartService(DbStoreContext context, ILogger<CartService> logger)
+        public CartService(ApplicationDbContext context, ILogger<CartService> logger)
         {
             _context = context;
             _logger = logger;

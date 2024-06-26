@@ -1,6 +1,7 @@
-using MiodOdStaniula.Models;
+using backend.Models;
 
-namespace MiodOdStaniula.Services.Interfaces{
+namespace backend.Interfaces
+{
     public interface IEmailService
     {
         Task SendActivationEmail(string email, string userId, string name, string token);

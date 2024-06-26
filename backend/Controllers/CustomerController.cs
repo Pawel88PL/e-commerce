@@ -1,9 +1,9 @@
+using backend.Interfaces;
+using backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MiodOdStaniula.Models;
-using MiodOdStaniula.Services.Interfaces;
 
-namespace MiodOdStaniula.Controllers
+namespace backend.Controllers
 {
     [ApiController]
     [Route("customer")]

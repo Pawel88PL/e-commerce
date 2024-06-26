@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MiodOdStaniula.Models
+namespace backend.Models
 {
     public class Login
     {

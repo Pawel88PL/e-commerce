@@ -1,6 +1,7 @@
-﻿using MiodOdStaniula.Models;
+﻿using backend.Models;
+using backend.Services;
 
-namespace MiodOdStaniula.Services.Interfaces
+namespace backend.Interfaces
 {
     public interface IProductService
     {

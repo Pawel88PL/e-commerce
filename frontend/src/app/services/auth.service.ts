@@ -46,10 +46,9 @@ export class AuthService {
   register(user: any): Observable<any> {
     return this.http.post<any>(`${this.apiBaseUrl}/register`, user).pipe(
       tap(res => {
-        this.setToken(res.token);
-        const decodedToken = this.jwtService.decodeToken(res.token);
+        const userId = res.userId;
         if (this.cartService.cartId) {
-          this.cartService.assignCartToUser(decodedToken.nameid).subscribe();
+          this.cartService.assignCartToUser(userId).subscribe();
         }
       }),
       catchError(error => {

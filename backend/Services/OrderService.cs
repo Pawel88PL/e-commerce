@@ -1,7 +1,9 @@
 using System.Globalization;
+using System.Web;
 using backend.Data;
 using backend.Interfaces;
 using backend.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services
@@ -11,42 +13,57 @@ namespace backend.Services
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<OrderService> _logger;
+        private readonly IPaymentService _paymentService;
         private decimal _shippingCost;
 
-        public OrderService(ApplicationDbContext context, IEmailService emailService, IConfiguration configuration, ILogger<OrderService> logger)
+        public OrderService(
+            ApplicationDbContext context,
+            IEmailService emailService,
+            IConfiguration configuration,
+            IHttpContextAccessor httpContextAccessor,
+            ILogger<OrderService> logger,
+            IPaymentService paymentService)
         {
             _context = context;
             _configuration = configuration;
             _emailService = emailService;
+            _httpContextAccessor = httpContextAccessor;
             _logger = logger;
+            _paymentService = paymentService;
             _shippingCost = decimal.Parse(_configuration["ApplicationSettings:ShippingCost"]!, CultureInfo.InvariantCulture);
 
         }
 
-        public async Task<Guid?> CreateOrderFromCart(Guid cartId, string userId, bool isPickupInStore)
+        public async Task<string?> CreateOrderFromCart(CreateOrder createOrder)
         {
             var cart = await _context.ShopingCarts!
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
-                .SingleOrDefaultAsync(c => c.ShopingCartId == cartId);
+                .SingleOrDefaultAsync(c => c.ShopingCartId == createOrder.CartId);
 
             if (cart == null || !cart.CartItems.Any())
             {
                 return null;
             }
 
-            if (isPickupInStore)
+            if (createOrder.IsPickupInStore)
             {
                 _shippingCost = 0;
             }
 
+            if (createOrder.UserId == null)
+            {
+                return null;
+            }
+
             var order = new Order
             {
-                UserId = userId,
+                UserId = createOrder.UserId,
                 OrderDate = DateTime.Now,
                 Status = "Oczekuje na płatność",
-                IsPickupInStore = isPickupInStore,
+                IsPickupInStore = createOrder.IsPickupInStore,
                 TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Price) + _shippingCost,
                 OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                 {
@@ -63,18 +80,32 @@ namespace backend.Services
             await _context.SaveChangesAsync();
 
             var orderDetails = await GetOrderDetails(order.OrderId);
-            var user = await _context.Users!.SingleOrDefaultAsync(u => u.Id == userId);
-            if (user != null && orderDetails != null)
-            {
-                string userEmail = user.Email ?? "";
-                string name = user.Name ?? "";
 
-                await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
-                await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
-            }
 
-            return order.OrderId;
+            // if (!paymentResult)
+            // {
+            //     return null;
+            // }
+
+            // var user = await _context.Users!.SingleOrDefaultAsync(u => u.Id == userId);
+            // if (user != null && orderDetails != null)
+            // {
+            //     string userEmail = user.Email ?? "";
+            //     string name = user.Name ?? "";
+
+            //     await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
+            //     await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
+            // }
+
+            var serviceRequest = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
+
+            // Generowanie formularza HTML i wysyłanie go na stronę płatności
+            var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
+            return redirectUrl;
+
         }
+
+
 
         public async Task<List<AdminOrderDTO>> GetAllOrders()
         {

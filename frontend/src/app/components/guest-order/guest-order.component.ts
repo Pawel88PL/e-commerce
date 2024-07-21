@@ -210,11 +210,17 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
             const userId = response.userId;
             this.cartService.assignCartToUser(userId);
             this.orderService.createOrder(this.cartId, userId, this.isPickupInStore).subscribe({
-              next: (order) => {
-                console.log('Zamówienie zostało złożone', order);
+              next: (response) => {
+                console.log(response);
                 localStorage.removeItem('cartId');
                 this.authService.removeInCheckoutProcess();
-                this.router.navigate(['/orderConfirmation'], { queryParams: { orderId: order } });
+
+                const newWindow = window.open();
+                if (newWindow) {
+                  newWindow.document.write(response);
+                  newWindow.document.close();
+                }
+
                 processingDialogRef.close();
               },
               error: (error) => {

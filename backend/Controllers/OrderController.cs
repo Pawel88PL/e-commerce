@@ -19,21 +19,22 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrder createOrder)
         {
-            if (request == null || request.CartId == Guid.Empty || string.IsNullOrEmpty(request.UserId))
+            if (createOrder == null || createOrder.CartId == Guid.Empty || string.IsNullOrEmpty(createOrder.UserId))
             {
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var order = await _orderService.CreateOrderFromCart(request.CartId, request.UserId, request.IsPickupInStore);
-            if (order == null)
+            var redirectUrl = await _orderService.CreateOrderFromCart(createOrder);
+            if (redirectUrl == null)
             {
                 return BadRequest("Nie udało się utworzyć zamówienia. Koszyk może być pusty lub nie istnieć.");
             }
 
-            return Ok(order);
+            return Content(redirectUrl, "text/html");
         }
+
 
         [HttpGet("allOrders")]
         public async Task<IActionResult> GetAllOrders()
@@ -43,6 +44,7 @@ namespace backend.Controllers
 
             return Ok(orders ?? new List<AdminOrderDTO>());
         }
+
 
         [HttpGet("{orderId}")]
         public async Task<IActionResult> GetOrderDetails(Guid orderId)
@@ -97,14 +99,6 @@ namespace backend.Controllers
             }
         }
 
-
-
-        public class CreateOrderRequest
-        {
-            public Guid CartId { get; set; }
-            public string UserId { get; set; } = string.Empty;
-            public bool IsPickupInStore { get; set; }
-        }
 
         public class NewOrderStatus{
             public string Status { get; set; } = string.Empty;

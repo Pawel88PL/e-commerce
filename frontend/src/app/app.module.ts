@@ -52,7 +52,8 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { CustomersComponent } from './components/customers/customers.component';
-import { GuestOrderComponent } from './components/guest-order/guest-order.component'
+import { GuestOrderComponent } from './components/guest-order/guest-order.component';
+import { PaymentRejectedComponent } from './components/payment-rejected/payment-rejected.component'
 
 registerLocaleData(localePl);
 
@@ -87,6 +88,7 @@ registerLocaleData(localePl);
     PrivacyPolicyComponent,
     CustomersComponent,
     GuestOrderComponent,
+    PaymentRejectedComponent,
   ],
   imports: [
     AppRoutingModule,

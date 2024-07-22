@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { PaymentRejectedComponent } from './components/payment-rejected/payment-rejected.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'order', component: OrderComponent, canActivate: [authGuard]},
   { path: 'orderConfirmation', component: OrderConfirmationComponent },
   { path: 'order-details/:orderId', component: OrderDetailsComponent, canActivate: [authGuard] },
+  { path: 'paymentRejected', component: PaymentRejectedComponent },
   { path: 'privacyPolicy', component: PrivacyPolicyComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'product/:id', component: ProductDetailsComponent },

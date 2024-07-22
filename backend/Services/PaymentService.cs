@@ -82,7 +82,7 @@ namespace backend.Services
                 Pos_id = pos_id,
                 Order_id = orderId.ToString(),
                 Session_id = Guid.NewGuid().ToString(),
-                Amount = ((int)(totalPrice * 100)).ToString(), // Amount should be in the smallest currency unit, e.g., cents
+                Amount = ((int)(totalPrice * 100)).ToString(),
                 Currency = currency,
                 Test = test,
                 Language = language,

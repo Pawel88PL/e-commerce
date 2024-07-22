@@ -43,7 +43,7 @@ namespace backend.Services
                 .ThenInclude(ci => ci.Product)
                 .SingleOrDefaultAsync(c => c.ShopingCartId == createOrder.CartId);
 
-            if (cart == null || !cart.CartItems.Any())
+            if (cart == null || !cart.CartItems.Any() || createOrder.UserId == null)
             {
                 return null;
             }
@@ -51,11 +51,6 @@ namespace backend.Services
             if (createOrder.IsPickupInStore)
             {
                 _shippingCost = 0;
-            }
-
-            if (createOrder.UserId == null)
-            {
-                return null;
             }
 
             var order = new Order
@@ -74,14 +69,20 @@ namespace backend.Services
             };
 
             _context.Orders!.Add(order);
-            await _context.SaveChangesAsync();
-
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            var orderDetails = await GetOrderDetails(order.OrderId);
+            var serviceRequest = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
+            var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
+            
+            return redirectUrl;
+        }
 
 
+        public void SendEmail()
+        {
+            
+            // var orderDetails = await GetOrderDetails(order.OrderId);
             // if (!paymentResult)
             // {
             //     return null;
@@ -96,12 +97,6 @@ namespace backend.Services
             //     await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
             //     await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
             // }
-
-            var serviceRequest = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
-
-            // Generowanie formularza HTML i wysyłanie go na stronę płatności
-            var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
-            return redirectUrl;
 
         }
 

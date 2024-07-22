@@ -129,13 +129,15 @@ export class OrderComponent implements OnInit {
 
         this.orderService.createOrder(this.cartId, this.userId, this.isPickupInStore).subscribe({
           next: (response) => {
-            console.log('Zamówienie zostało złożone', response);
+            console.log(response);
             localStorage.removeItem('cartId');
             this.authService.removeInCheckoutProcess();
 
-            document.open();
-            document.write(response);
-            document.close();
+            const newWindow = window.open();
+            if (newWindow) {
+              newWindow.document.write(response);
+              newWindow.document.close();
+            }
 
             processingDialogRef.close();
           },

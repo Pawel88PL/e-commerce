@@ -215,12 +215,8 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
                 localStorage.removeItem('cartId');
                 this.authService.removeInCheckoutProcess();
 
-                const newWindow = window.open();
-                if (newWindow) {
-                  newWindow.document.write(response);
-                  newWindow.document.close();
-                }
-
+                //window.location.href = response.RedirectUrl;
+                
                 processingDialogRef.close();
               },
               error: (error) => {

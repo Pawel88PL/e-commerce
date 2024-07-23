@@ -32,7 +32,7 @@ namespace backend.Controllers
                 return BadRequest("Nie udało się utworzyć zamówienia. Koszyk może być pusty lub nie istnieć.");
             }
 
-            return Content(redirectUrl, "text/html");
+            return Ok(new { RedirectUrl = redirectUrl });
         }
 
 
@@ -100,7 +100,8 @@ namespace backend.Controllers
         }
 
 
-        public class NewOrderStatus{
+        public class NewOrderStatus
+        {
             public string Status { get; set; } = string.Empty;
         }
     }

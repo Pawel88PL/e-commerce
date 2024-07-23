@@ -57,7 +57,7 @@ namespace backend.Services
         }
 
 
-        public ServiceRequest ProcessPayment(Guid orderId, decimal totalPrice, string userId)
+        public string ProcessPayment(Guid orderId, decimal totalPrice, string userId)
         {
             var pos_id = _configuration["PaymentService:Pos_id"]
                 ?? throw new Exception("PosId is not configured.");
@@ -100,7 +100,12 @@ namespace backend.Services
             string paramString = BuildParamString(serviceRequest);
             serviceRequest.ControlData = GenerateControlData(key, paramString);
 
-            return serviceRequest;
+            var destination = _configuration["PaymentService:eCommerce"]
+                ?? throw new Exception("Destination is not configured.");
+
+            // Build the URL
+            var paymentUrl = $"{destination}?{paramString}&controlData={serviceRequest.ControlData}";
+            return paymentUrl;
         }
 
         private string BuildParamString(ServiceRequest request)

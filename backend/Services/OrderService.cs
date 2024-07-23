@@ -72,8 +72,8 @@ namespace backend.Services
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            var serviceRequest = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
-            var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
+            var redirectUrl = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
+            //var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
             
             return redirectUrl;
         }

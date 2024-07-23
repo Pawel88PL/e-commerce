@@ -133,10 +133,14 @@ export class OrderComponent implements OnInit {
             localStorage.removeItem('cartId');
             this.authService.removeInCheckoutProcess();
 
-            const newWindow = window.open();
-            if (newWindow) {
-              newWindow.document.write(response);
-              newWindow.document.close();
+            // Logowanie odpowiedzi
+            console.log('RedirectUrl:', response.redirectUrl);
+
+            // Przekierowanie na URL płatności
+            if (response.redirectUrl) {
+              window.location.href = response.redirectUrl;
+            } else {
+              console.error('RedirectUrl is undefined');
             }
 
             processingDialogRef.close();

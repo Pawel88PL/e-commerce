@@ -26,13 +26,13 @@ namespace backend.Controllers
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var redirectUrl = await _orderService.CreateOrderFromCart(createOrder);
-            if (redirectUrl == null)
+            var formHtml = await _orderService.CreateOrderFromCart(createOrder);
+            if (string.IsNullOrEmpty(formHtml))
             {
                 return BadRequest("Nie udało się utworzyć zamówienia. Koszyk może być pusty lub nie istnieć.");
             }
 
-            return Ok(new { RedirectUrl = redirectUrl });
+            return Content(formHtml, "text/html");
         }
 
 

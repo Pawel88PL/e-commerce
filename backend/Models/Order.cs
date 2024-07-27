@@ -15,6 +15,8 @@ namespace backend.Models
         [Column(TypeName = "decimal(8, 2)")]
         public decimal TotalPrice { get; set; }
         public string? Status { get; set; }
+        public string? PaymentStatus { get; set; }
+        public string? TransactionId { get; set; }
         public bool IsPickupInStore { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
     }

@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { CartItem } from 'src/app/models/cart.model';
 import { SHIPPING_COST } from 'src/app/config/config';
 import { gsap } from 'gsap';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-guest-order',
@@ -32,6 +33,7 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
   productCost: number = 0;
   shippingCost: number = SHIPPING_COST;
   totalCost: number = 0;
+  errorMessage: string | null = null;
 
 
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
@@ -205,8 +207,8 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
           disableClose: true
         });
 
-        this.authService.register(this.registerForm.value).subscribe(
-          response => {
+        this.authService.register(this.registerForm.value).subscribe({
+          next: (response) => {
             const userId = response.userId;
             this.cartService.assignCartToUser(userId);
             this.orderService.createOrder(this.cartId, userId, this.isPickupInStore).subscribe({
@@ -215,24 +217,41 @@ export class GuestOrderComponent implements OnInit, AfterViewInit {
                 localStorage.removeItem('cartId');
                 this.authService.removeInCheckoutProcess();
 
-                //window.location.href = response.RedirectUrl;
-                
+                // Wstawienie zwróconego HTML do dokumentu
+                document.open();
+                document.write(response);
+                document.close();
+
                 processingDialogRef.close();
               },
               error: (error) => {
                 console.error('Wystąpił błąd przy tworzeniu zamówienia', error);
+                this.errorMessage = error.error.message;
+                this.errorAlert(this.errorMessage!);
                 processingDialogRef.close();
               }
             });
           },
-          error => {
-            console.error('Error registering user:', error);
+          error: (response) => {
+            this.errorMessage = response.message;
+            this.errorAlert(this.errorMessage!);
             processingDialogRef.close();
           }
-        );
+      });
       } else {
         console.log('Order cancelled.');
       }
+    });
+  }
+
+  async errorAlert(message: string): Promise<void> {
+    return Swal.fire({
+      icon: "info",
+      title: message,
+      showConfirmButton: true,
+      confirmButtonText: 'Rozumiem',
+    }).then(() => {
+      return;
     });
   }
 }

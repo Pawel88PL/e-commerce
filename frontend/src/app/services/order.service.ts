@@ -16,9 +16,9 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  createOrder(cartId: string, userId: string, isPickupInStore: boolean): Observable<{ redirectUrl: string}> {
+  createOrder(cartId: string, userId: string, isPickupInStore: boolean): Observable<string> {
     const payload = { cartId: cartId, userId: userId, isPickupInStore: isPickupInStore };
-    return this.http.post<{ redirectUrl: string }>(`${this.orderUrl}`, payload)
+    return this.http.post(`${this.orderUrl}`, payload, { responseType: 'text' })
       .pipe(catchError(this.handleError));
   }
 
@@ -57,4 +57,11 @@ export class OrderService {
     console.error('Wystąpił błąd!', error);
     return throwError(() => new Error('Błąd serwera'));
   }
+
+
+  testRedirect(): Observable<{ redirectUrl: string }> {
+    return this.http.get<{ redirectUrl: string }>(`${this.apiBaseUrl}/orderConfirmation`)
+      .pipe(catchError(this.handleError));
+  }
+
 }

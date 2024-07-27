@@ -17,7 +17,7 @@ namespace backend.Services
             _context = context;
         }
 
-        public string GeneratePaymentFormHtml(ServiceRequest request)
+        private string GeneratePaymentFormHtml(ServiceRequest request)
         {
             var destination = _configuration["PaymentService:eCommerce"]
                 ?? throw new Exception("Destination is not configured.");
@@ -25,7 +25,7 @@ namespace backend.Services
             var formHtml = $@"
             <html>
             <body onload='document.forms[0].submit()'>
-                <form action='{destination}' method='post' onSubmit='return disablesubmit(this);>
+                <form action='{destination}' method='post'>
                     <input type='hidden' name='pos_id' value='{request.Pos_id}'>
                     <input type='hidden' name='order_id' value='{request.Order_id}'>
                     <input type='hidden' name='session_id' value='{request.Session_id}'>
@@ -100,12 +100,10 @@ namespace backend.Services
             string paramString = BuildParamString(serviceRequest);
             serviceRequest.ControlData = GenerateControlData(key, paramString);
 
-            var destination = _configuration["PaymentService:eCommerce"]
-                ?? throw new Exception("Destination is not configured.");
+            // Generate HTML form
+            var formHtml = GeneratePaymentFormHtml(serviceRequest);
 
-            // Build the URL
-            var paymentUrl = $"{destination}?{paramString}&controlData={serviceRequest.ControlData}";
-            return paymentUrl;
+            return formHtml;
         }
 
         private string BuildParamString(ServiceRequest request)

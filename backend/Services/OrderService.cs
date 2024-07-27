@@ -72,34 +72,57 @@ namespace backend.Services
             _context.CartItem!.RemoveRange(cart.CartItems);
             await _context.SaveChangesAsync();
 
-            var redirectUrl = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
-            //var redirectUrl = _paymentService.GeneratePaymentFormHtml(serviceRequest);
-            
+            var formHtml = _paymentService.ProcessPayment(order.OrderId, order.TotalPrice, order.UserId);
+            return formHtml;
+        }
+
+        public async Task<bool> OrderConfirmation(ServiceResponse serviceResponse)
+        {
+            if (serviceResponse == null || serviceResponse.Order_id == null)
+            {
+                _logger.LogError("Invalid request data. ServiceResponse: {ServiceResponse}", serviceResponse);
+                return false;
+            }
+
+            var order = await _context.Orders!.FindAsync(Guid.Parse(serviceResponse.Order_id));
+
+            if (order == null)
+            {
+                _logger.LogError("Order not found. OrderId: {OrderId}", serviceResponse.Order_id);
+                return false;
+            }
+
+            order.TransactionId = serviceResponse.Transaction_id;
+
+            if (serviceResponse.Response_code == 20)
+            {
+                order.PaymentStatus = "Transakcja zainicjowana";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 30)
+            {
+                order.PaymentStatus = "Transakcja zautoryzowana, zakończona";
+                order.Status = "Płatność oczekuje na zatwierdzenie do rozliczenia";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 35)
+            {
+                order.PaymentStatus = "Transakcja zautoryzowana i zatwierdzona do rozliczenia";
+                order.Status = "Opłacone";
+                await _context.SaveChangesAsync();
+            }
+
+            await SendEmail(order.UserId, order.OrderId);
+
+            return true;
+        }
+
+        public string OrderConfirmationTest()
+        {
+            var redirectUrl = "https://miododstaniula.pl/orderConfirmation";
+
             return redirectUrl;
         }
-
-
-        public void SendEmail()
-        {
-            
-            // var orderDetails = await GetOrderDetails(order.OrderId);
-            // if (!paymentResult)
-            // {
-            //     return null;
-            // }
-
-            // var user = await _context.Users!.SingleOrDefaultAsync(u => u.Id == userId);
-            // if (user != null && orderDetails != null)
-            // {
-            //     string userEmail = user.Email ?? "";
-            //     string name = user.Name ?? "";
-
-            //     await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
-            //     await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
-            // }
-
-        }
-
 
 
         public async Task<List<AdminOrderDTO>> GetAllOrders()
@@ -181,6 +204,23 @@ namespace backend.Services
                 .ToListAsync();
 
             return orders;
+        }
+
+        private async Task SendEmail(string userId, Guid orderId)
+        {
+
+            var orderDetails = await GetOrderDetails(orderId);
+
+            var user = await _context.Users!.SingleOrDefaultAsync(u => u.Id == userId);
+            if (user != null && orderDetails != null)
+            {
+                string userEmail = user.Email ?? "";
+                string name = user.Name ?? "";
+
+                await _emailService.SendOrderConfirmationEmail(userEmail, name, orderDetails);
+                //await _emailService.SendNewOrderNotificationToOwner(orderDetails, user);
+            }
+
         }
 
         public async Task<bool> UpdateOrderStatus(Guid orderId, string newStatus)

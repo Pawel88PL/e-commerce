@@ -82,6 +82,11 @@ namespace backend.Controllers
 
             var existingUser = await _accountService.FindByEmailAsync(userRegisterData.Email);
 
+            if (existingUser != null && existingUser.IsGuestClient == false && userRegisterData.IsGuestClient == true)
+            {
+                return BadRequest("Podany adres email jest już zarejestrowany. Zaloguj się do swojego konta, aby złożyć zamówienie.");
+            }
+
             if (existingUser != null && userRegisterData.IsGuestClient == true)
             {
                 var updateGuestUserAsync = await _customerService.UpdateGuestUserAsync(existingUser.Id, userRegisterData);

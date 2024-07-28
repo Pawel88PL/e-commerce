@@ -10,7 +10,6 @@ namespace backend.Interfaces
         Task<OrderDTO?> GetOrderDetails(Guid orderId);
         Task<List<OrderHistoryDTO>> GetOrdersHistory(string userId);
         Task<bool> OrderConfirmation(ServiceResponse serviceResponse);
-        string OrderConfirmationTest();
         Task<bool> UpdateOrderStatus(Guid orderId, string newStatus);
     }
 }

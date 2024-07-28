@@ -84,8 +84,9 @@ namespace backend.Services
 
             string emailBody = $@"
             <div style=""max-width: 800px;"">
-            <h1>{name} dziękujemy za zakupy z naszej rodzinnej pasieki!</h1>
-            <p>Nr zamówienia: <strong> {order.ShortOrderId} </strong></p>
+            <h1>{name} dziękujemy za zakupy z naszej pasieki!</h1>
+            <h2>Jesteśmy wdzięczni za zaufanie i wspieranie lokalnego, rodzinnego biznesu.</h2>
+            <p>Nr twojego zamówienia: <strong> {order.ShortOrderId} </strong></p>
             <p>Wybrany sposób dostawy: <strong> {deliveryMethod} </strong></p>
             <h2>Szczegóły zamówionych produktów</h2>
             <table style=""width: 100%; border-collapse: collapse;"">
@@ -122,44 +123,6 @@ namespace backend.Services
             </tbody>
             </table>
             <br>
-
-            <h2>Informacje o płatności</h2>
-            <p>Abyśmy mogli przystąpić do realizacji Twojego zamówienia, prosimy o dokonanie płatności w jednej z poniższych form:</p>
-            
-            <table style=""width: 100%; border-collapse: collapse;"">
-                <tbody>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Numer rachunku:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;"">37 1050 1171 1000 0091 1468 3544</td>
-                    </tr>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Bank:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;"">ING Bank Śląski S.A.</td>
-                    </tr>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Odbiorca:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;"">STANIUL PIOTR JAKUB</td>
-                    </tr>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Adres:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;"">BORA KOMOROWSKIEGO 21, 46-200 KLUCZBORK</td>
-                    </tr>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Tytuł przelewu:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;"">Zamówienie nr: {order.ShortOrderId}</td>
-                    </tr>
-                    <tr>
-                        <th style=""text-align: left; border: 1px solid #ddd; padding: 8px;"">Kwota:</th>
-                        <td style=""border: 1px solid #ddd; padding: 8px;""><strong>{order.TotalPrice:C}</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-            <br >
-
-            <h3> Lub wykonaj przelew BLIK na numer telefonu:</h3>
-            <h2>570 436 579</h2>
-            <br>
-            <p>Twoje zamówienie zostanie przekazane do realizacji niezwłocznie po zaksięgowaniu wpłaty na naszym koncie.</p>
             <p>W razie pytań lub wątpliwości prosimy o kontakt pod numerem telefonu: </p>
             <p><strong>+48 570 436 579</strong></p>
             <p>lub e-mail:</p>

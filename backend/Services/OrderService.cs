@@ -76,55 +76,6 @@ namespace backend.Services
             return formHtml;
         }
 
-        public async Task<bool> OrderConfirmation(ServiceResponse serviceResponse)
-        {
-            if (serviceResponse == null || serviceResponse.Order_id == null)
-            {
-                _logger.LogError("Invalid request data. ServiceResponse: {ServiceResponse}", serviceResponse);
-                return false;
-            }
-
-            var order = await _context.Orders!.FindAsync(Guid.Parse(serviceResponse.Order_id));
-
-            if (order == null)
-            {
-                _logger.LogError("Order not found. OrderId: {OrderId}", serviceResponse.Order_id);
-                return false;
-            }
-
-            order.TransactionId = serviceResponse.Transaction_id;
-
-            if (serviceResponse.Response_code == 20)
-            {
-                order.PaymentStatus = "Transakcja zainicjowana";
-                await _context.SaveChangesAsync();
-            }
-            else if (serviceResponse.Response_code == 30)
-            {
-                order.PaymentStatus = "Transakcja zautoryzowana, zakończona";
-                order.Status = "Płatność oczekuje na zatwierdzenie do rozliczenia";
-                await _context.SaveChangesAsync();
-            }
-            else if (serviceResponse.Response_code == 35)
-            {
-                order.PaymentStatus = "Transakcja zautoryzowana i zatwierdzona do rozliczenia";
-                order.Status = "Opłacone";
-                await _context.SaveChangesAsync();
-            }
-
-            await SendEmail(order.UserId, order.OrderId);
-
-            return true;
-        }
-
-        public string OrderConfirmationTest()
-        {
-            var redirectUrl = "https://miododstaniula.pl/orderConfirmation";
-
-            return redirectUrl;
-        }
-
-
         public async Task<List<AdminOrderDTO>> GetAllOrders()
         {
             var orders = await _context.Orders!
@@ -204,6 +155,66 @@ namespace backend.Services
                 .ToListAsync();
 
             return orders;
+        }
+
+        public async Task<bool> OrderConfirmation(ServiceResponse serviceResponse)
+        {
+            if (serviceResponse == null || serviceResponse.Order_id == null)
+            {
+                _logger.LogError("Invalid request data. ServiceResponse: {ServiceResponse}", serviceResponse);
+                return false;
+            }
+
+            var order = await _context.Orders!.FindAsync(Guid.Parse(serviceResponse.Order_id));
+
+            if (order == null)
+            {
+                _logger.LogError("Order not found. OrderId: {OrderId}", serviceResponse.Order_id);
+                return false;
+            }
+
+            order.TransactionId = serviceResponse.Transaction_id;
+
+            if (serviceResponse.Response_code == 20)
+            {
+                order.PaymentStatus = "Transakcja zainicjowana";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 30)
+            {
+                order.PaymentStatus = "Transakcja zautoryzowana, zakończona";
+                order.Status = "Płatność oczekuje na zatwierdzenie do rozliczenia";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 35)
+            {
+                order.PaymentStatus = "Transakcja zautoryzowana i zatwierdzona do rozliczenia";
+                order.Status = "Opłacone";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 40)
+            {
+                order.PaymentStatus = "Transakcja odrzucona przez system autoryzacyjny";
+                order.Status = "Odrzucone";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 21)
+            {
+                order.PaymentStatus = "Podczas autoryzacji wystąpił błąd techniczny";
+                order.Status = "Odrzucone";
+                await _context.SaveChangesAsync();
+            }
+            else if (serviceResponse.Response_code == 25)
+            {
+                order.PaymentStatus = "Weryfikacja nieudana";
+                order.Status = "Odrzucone";
+                await _context.SaveChangesAsync();
+            }
+
+
+            await SendEmail(order.UserId, order.OrderId);
+
+            return true;
         }
 
         private async Task SendEmail(string userId, Guid orderId)

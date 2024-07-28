@@ -96,7 +96,7 @@ namespace backend
                         "https://angular.miododstaniula.pl",
                         "http://localhost:4200",
                         "https://localhost:4200",
-                        "http://localhost:63015")
+                        "http://localhost:63185")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

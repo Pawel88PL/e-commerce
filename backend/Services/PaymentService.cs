@@ -10,11 +10,13 @@ namespace backend.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PaymentService(ApplicationDbContext context, IConfiguration configuration)
+        public PaymentService(ApplicationDbContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         private string GeneratePaymentFormHtml(ServiceRequest request)
@@ -56,6 +58,19 @@ namespace backend.Services
             return formHtml;
         }
 
+        private string GetClientIpAddress()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            var ipAddress = httpContext?.Connection?.RemoteIpAddress?.ToString();
+
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = "IP not available";
+            }
+
+            return ipAddress;
+        }
+
 
         public string ProcessPayment(Guid orderId, decimal totalPrice, string userId)
         {
@@ -86,7 +101,7 @@ namespace backend.Services
                 Currency = currency,
                 Test = test,
                 Language = language,
-                Client_ip = "77.65.109.228",
+                Client_ip = GetClientIpAddress(),
                 Street = user.Street,
                 Street_n1 = user.Address,
                 City = user.City,
@@ -100,7 +115,6 @@ namespace backend.Services
             string paramString = BuildParamString(serviceRequest);
             serviceRequest.ControlData = GenerateControlData(key, paramString);
 
-            // Generate HTML form
             var formHtml = GeneratePaymentFormHtml(serviceRequest);
 
             return formHtml;
@@ -169,7 +183,5 @@ namespace backend.Services
                 return builder.ToString();
             }
         }
-
-
     }
 }

@@ -6,7 +6,7 @@ namespace backend.Models
         public string? Order_id { get; set; }
         public string? Session_id { get; set; }
         public string? Amount { get; set; }
-        public int? Response_code { get; set; }
+        public int Response_code { get; set; }
         public string? Transaction_id { get; set; }
         public string? Cc_number_hash { get; set; }
         public string? Bin { get; set; }

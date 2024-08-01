@@ -9,7 +9,6 @@ namespace backend.Interfaces
         Task<List<AdminOrderDTO>> GetAllOrders();
         Task<OrderDTO?> GetOrderDetails(Guid orderId);
         Task<List<OrderHistoryDTO>> GetOrdersHistory(string userId);
-        Task<bool> OrderConfirmation(ServiceResponse serviceResponse);
         Task<bool> UpdateOrderStatus(Guid orderId, string newStatus);
     }
 }

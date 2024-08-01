@@ -7,45 +7,46 @@ namespace backend.Controllers
     [ApiController]
     public class OrderConfirmationController : Controller
     {
-        private readonly IOrderService _orderService;
 
-        public OrderConfirmationController(IOrderService orderService)
+        private readonly IOrderConfirmationService _orderConfirmationService;
+
+        public OrderConfirmationController(IOrderConfirmationService orderConfirmationService)
         {
-            _orderService = orderService;
+            _orderConfirmationService = orderConfirmationService;
         }
 
         [HttpPost("orderConfirmation")]
-        public async Task<IActionResult> OrderConfirmation([FromForm] ServiceResponse serviceResponse)
+        public IActionResult OrderConfirmationRedirect([FromForm] ServiceResponse serviceResponse)
         {
             if (serviceResponse == null || serviceResponse.Order_id == string.Empty)
             {
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var isConfirmed = await _orderService.OrderConfirmation(serviceResponse);
-            if (!isConfirmed)
+            var redirectUrl = _orderConfirmationService.GenerateOrderConfirmationURL(serviceResponse.Response_code);
+            if (redirectUrl == string.Empty)
             {
-                return BadRequest("Wystąpił błąd podczas potwierdzania zamówienia.");
+                return BadRequest("Wystąpił błąd podczas generowania formularza.");
             }
 
-            return Ok();
+            return Content(redirectUrl, "text/html");
         }
 
         [HttpPost("paymentRejected")]
-        public async Task<IActionResult> PaymentRejected([FromForm] ServiceResponse serviceResponse)
+        public IActionResult PaymentRejected([FromForm] ServiceResponse serviceResponse)
         {
             if (serviceResponse == null || serviceResponse.Order_id == string.Empty)
             {
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var isConfirmed = await _orderService.OrderConfirmation(serviceResponse);
-            if (!isConfirmed)
+            var redirectUrl = _orderConfirmationService.GenerateOrderConfirmationURL(serviceResponse.Response_code);
+            if (redirectUrl == string.Empty)
             {
-                return BadRequest("Wystąpił błąd podczas potwierdzania zamówienia.");
+                return BadRequest("Wystąpił błąd podczas generowania formularza.");
             }
 
-            return Ok();
+            return Content(redirectUrl, "text/html");
         }
 
         [HttpPost("orderNotification")]
@@ -56,7 +57,7 @@ namespace backend.Controllers
                 return BadRequest("Nieprawidłowe dane żądania.");
             }
 
-            var isConfirmed = await _orderService.OrderConfirmation(serviceResponse);
+            var isConfirmed = await _orderConfirmationService.OrderConfirmation(serviceResponse);
             if (!isConfirmed)
             {
                 return BadRequest("Wystąpił błąd podczas potwierdzania zamówienia.");

@@ -35,6 +35,7 @@ namespace backend
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderConfirmationService, OrderConfirmationService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
@@ -92,11 +93,9 @@ namespace backend
                         "https://victorious-beach-0d045ed03.5.azurestaticapps.net",
                         "https://www.miododstaniula.pl",
                         "https://miododstaniula.pl",
-                        "https://www.angular.miododstaniula.pl",
-                        "https://angular.miododstaniula.pl",
+                        "https://test.miododstaniula.pl",
                         "http://localhost:4200",
-                        "https://localhost:4200",
-                        "http://localhost:63185")
+                        "https://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -130,7 +129,7 @@ namespace backend
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
 
